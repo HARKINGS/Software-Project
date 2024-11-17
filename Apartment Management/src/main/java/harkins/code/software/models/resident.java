@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-public class resident {
+public class Resident {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "resident_id")
@@ -27,7 +27,7 @@ public class resident {
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "household_id")
-    private household Household_resident;
+    private Household Household_resident;
 
     public int getResidentId() {
         return residentId;
@@ -69,11 +69,11 @@ public class resident {
         this.temporary = temporary;
     }
 
-    public household getHousehold_resident() {
+    public Household getHousehold_resident() {
         return Household_resident;
     }
 
-    public void setHousehold_resident(household household_resident) {
+    public void setHousehold_resident(Household household_resident) {
         Household_resident = household_resident;
     }
 }

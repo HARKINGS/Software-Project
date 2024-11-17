@@ -1,14 +1,13 @@
 package harkins.code.software.services;
 
-import harkins.code.software.models.household;
-import org.springframework.http.ResponseEntity;
+import harkins.code.software.models.Household;
 
 import java.util.List;
 
 public interface HouseholdService {
-    public List<household> getAllHouseholds();
-    public household getHouseholdById(int id);
-    public household createHousehold(household Household);
-    public household updateHousehold(int id, household Household);
+    public List<Household> getAllHouseholds();
+    public Household getHouseholdById(int id);
+    public Household createHousehold(Household Household);
+    public Household updateHousehold(int id, Household Household);
     public void deleteHousehold(int id);
 }

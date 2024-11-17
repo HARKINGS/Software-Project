@@ -2,7 +2,7 @@ package harkins.code.software.services;
 
 import harkins.code.software.exception.ConflictException;
 import harkins.code.software.exception.ResourceNotFoundException;
-import harkins.code.software.models.household;
+import harkins.code.software.models.Household;
 import harkins.code.software.repository.HouseholdRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,19 +21,19 @@ public class HouseholdServiceImpl implements HouseholdService{
     }
 
     @Override
-    public List<household> getAllHouseholds() {
+    public List<Household> getAllHouseholds() {
         return householdRepository.findAll();
     }
 
     @Override
-    public household getHouseholdById(int id) {
+    public Household getHouseholdById(int id) {
         return householdRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Không tìm thấy hộ khẩu có id: "+id));
     }
 
     @Override
-    public household createHousehold(household Household) {
-        Optional<household> findHousehold = householdRepository.findByHouseholdNumber(Household.getHouseholdNumber());
+    public Household createHousehold(Household Household) {
+        Optional<Household> findHousehold = householdRepository.findByHouseholdNumber(Household.getHouseholdNumber());
         if(findHousehold.isPresent()) {
             throw new ConflictException("Số nhà đã tồn tại");
         }else {
@@ -42,10 +42,10 @@ public class HouseholdServiceImpl implements HouseholdService{
     }
 
     @Override
-    public household updateHousehold(int id, household Household) {
-        Optional<household> findHousehold = householdRepository.findById(id);
+    public Household updateHousehold(int id, Household Household) {
+        Optional<Household> findHousehold = householdRepository.findById(id);
         if(findHousehold.isPresent()) {
-            household householdToUpdate = findHousehold.get();
+            Household householdToUpdate = findHousehold.get();
             householdToUpdate.setHouseholdNumber(Household.getHouseholdNumber());
             householdToUpdate.setOwnerName(Household.getOwnerName());
             householdToUpdate.setPhoneNumber(Household.getPhoneNumber());
@@ -59,7 +59,7 @@ public class HouseholdServiceImpl implements HouseholdService{
     @Override
     @Transactional
     public void deleteHousehold(int id) {
-        Optional<household> findHousehold = householdRepository.findById(id);
+        Optional<Household> findHousehold = householdRepository.findById(id);
         if (findHousehold.isPresent()) {
             householdRepository.deleteById(id);
         } else {

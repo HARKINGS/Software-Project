@@ -3,14 +3,13 @@ package harkins.code.software.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import java.util.List;
 
 
 @Entity
-public class household {
+public class Household {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "household_id")
@@ -34,7 +33,7 @@ public class household {
 
     @JsonIgnore
     @OneToMany(mappedBy = "Household_resident", cascade = CascadeType.ALL)
-    private List<resident> Residents;
+    private List<Resident> Residents;
 
     public int getHouseholdId() {
         return householdId;
@@ -76,11 +75,11 @@ public class household {
         this.apartmentSize = apartmentSize;
     }
 
-    public List<resident> getResidents() {
+    public List<Resident> getResidents() {
         return Residents;
     }
 
-    public void setResidents(List<resident> residents) {
+    public void setResidents(List<Resident> residents) {
         Residents = residents;
     }
 }

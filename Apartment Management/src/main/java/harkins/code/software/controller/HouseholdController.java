@@ -1,6 +1,6 @@
 package harkins.code.software.controller;
 
-import harkins.code.software.models.household;
+import harkins.code.software.models.Household;
 import harkins.code.software.services.HouseholdServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,25 +21,25 @@ public class HouseholdController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<household> getAllHouseholds() {
+    public List<Household> getAllHouseholds() {
         return householdService.getAllHouseholds();
     }
 
     @GetMapping("/search/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public household getHouseholdById(@PathVariable int id) {
+    public Household getHouseholdById(@PathVariable int id) {
         return householdService.getHouseholdById(id);
     }
 
-    @PostMapping("/createHoKhau")
+    @PostMapping(value = "/createHoKhau", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public household createHousehold(@RequestBody @Valid household Household) {
-        return householdService.createHousehold(Household);
+    public Household createHousehold(@RequestBody @Valid Household household) {
+        return householdService.createHousehold(household);
     }
 
     @PutMapping("/updateHoKhau/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public household updateHouseHold(@PathVariable int id, @RequestBody @Valid household Household) {
+    public Household updateHouseHold(@PathVariable int id, @RequestBody @Valid Household Household) {
         return householdService.updateHousehold(id, Household);
     }
 
