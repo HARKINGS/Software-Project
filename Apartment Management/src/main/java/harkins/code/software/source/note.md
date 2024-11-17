@@ -1,1 +1,0 @@
-View login, logout, các icon
