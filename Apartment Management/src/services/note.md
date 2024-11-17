@@ -1,1 +1,0 @@
-Tổng hợp các hành động mà đối tượng có thể thực hiện
