@@ -1,6 +1,6 @@
 package com.example.QuanLyChungcu.Controller;
 
-import com.example.QuanLyChungcu.Model.Household;
+import com.example.QuanLyChungcu.DTO.HouseholdDTO;
 import com.example.QuanLyChungcu.Service.HouseholdServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/household")
 public class HouseholdController {
-    HouseholdServiceImpl householdService;
+    private final HouseholdServiceImpl householdService;
 
     @Autowired
     public HouseholdController(HouseholdServiceImpl householdService) {
@@ -21,31 +21,31 @@ public class HouseholdController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Household> getAllHouseholds() {
+    public List<HouseholdDTO> getAllHouseholds() {
         return householdService.getAllHouseholds();
     }
 
-    @GetMapping("/search/{id}")
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Household getHouseholdById(@PathVariable int id) {
+    public HouseholdDTO getHouseholdById(@PathVariable Long id) {
         return householdService.getHouseholdById(id);
     }
 
-    @PostMapping("/createHoKhau")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Household createHousehold(@RequestBody @Valid Household household) {
-        return householdService.createHousehold(household);
+    public HouseholdDTO createHousehold(@RequestBody @Valid HouseholdDTO householdDTO) {
+        return householdService.createHousehold(householdDTO);
     }
 
-    @PutMapping("/updateHoKhau/{id}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Household updateHouseHold(@PathVariable int id, @RequestBody @Valid Household Household) {
-        return householdService.updateHousehold(id, Household);
+    public HouseholdDTO updateHouseHold(@PathVariable Long id, @RequestBody @Valid HouseholdDTO householdDTO) {
+        return householdService.updateHousehold(id, householdDTO);
     }
 
-    @DeleteMapping("deleteNhanKhau/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteHouseHold(@PathVariable int id) {
+    public void deleteHouseHold(@PathVariable Long id) {
         householdService.deleteHousehold(id);
     }
 }

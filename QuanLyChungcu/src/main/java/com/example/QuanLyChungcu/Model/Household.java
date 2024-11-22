@@ -2,22 +2,24 @@ package com.example.QuanLyChungcu.Model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+
+import java.util.List;
 
 @Entity
 public class Household {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "household_id")
-    private int householdId; // Id
+    private Long householdId; // Id
+
+    @Column(name = "owner_name",nullable = false, length = 30)
+    private String tenChuHo;// Tên chủ hộ
 
     @NotBlank(message = "Số nhà không được trống")
     @Column(name = "household_number",nullable = false, length = 50)
     private String householdNumber; // Số nhà
-
-    @NotBlank(message = "Tên chủ hộ không được trống")
-    @Column(name = "owner_name",nullable = false, length = 30)
-    private String ownerName;// Tên chủ hộ
 
     @NotBlank(message = "Số điện thoại không được trống")
     @Column(name = "phone_number", nullable = false, length = 20)
@@ -27,12 +29,33 @@ public class Household {
     @Column(name = "apartment_size", nullable = false)
     private double apartmentSize; // Diện tích
 
-    public int getHouseholdId() {
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "owner_id", referencedColumnName = "resident_id", nullable = true)
+    private Resident chuHo;
+
+    @OneToMany(mappedBy = "Household_resident", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Resident> residents;
+
+    @OneToMany(mappedBy = "Household_contribution", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Contribution> contributions;
+
+    @OneToMany(mappedBy = "Household_fee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Fee> fees;
+
+    public Long getHouseholdId() {
         return householdId;
     }
 
-    public void setHouseholdId(int householdId) {
+    public void setHouseholdId(Long householdId) {
         this.householdId = householdId;
+    }
+
+    public String getTenChuHo() {
+        return tenChuHo;
+    }
+
+    public void setTenChuHo(String tenChuHo) {
+        this.tenChuHo = tenChuHo;
     }
 
     public String getHouseholdNumber() {
@@ -41,14 +64,6 @@ public class Household {
 
     public void setHouseholdNumber(String householdNumber) {
         this.householdNumber = householdNumber;
-    }
-
-    public String getOwnerName() {
-        return ownerName;
-    }
-
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
     }
 
     public String getPhoneNumber() {
@@ -65,5 +80,13 @@ public class Household {
 
     public void setApartmentSize(double apartmentSize) {
         this.apartmentSize = apartmentSize;
+    }
+
+    public Resident getChuHo() {
+        return chuHo;
+    }
+
+    public void setChuHo(Resident chuHo) {
+        this.chuHo = chuHo;
     }
 }
