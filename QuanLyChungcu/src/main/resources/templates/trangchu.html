@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /  >
+  <meta name = "viewport" content= "width = device_width initial-scale = 1.0">
+  <link rel="stylesheet" type="text/css" href="/css/styleMain.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+  <title>Trang chủ</title>
+</head>
+<body>
+  <div class ="fullscreen">
+    <div class="nav_bar">
+      <div class = "nav_bar_option_container">
+        <div class = "nav_bar_option">
+          <div class = "icon_wrapper"><i class="fas fa-home fa-fw fa-align-center"></i></div>
+          <span>Dashboard</span>
+        </div>
+        <div class = "nav_bar_option">
+          <div class = "icon_wrapper"><i class="fas fa-users fa-fw fa-align-center"></i></div>
+          <span>Thông tin dân cư</span>
+        </div>
+        <div class = "nav_bar_option">
+          <div class = "icon_wrapper"><i class="fas fa-receipt fa-fw fa-align-center"></i></div>
+          <span>Thông tin thu phí</span>
+        </div>
+        <div class = "nav_bar_option">
+          <div class = "icon_wrapper"><i class="fas fa-comment-dots fa-fw fa-align-center"></i></div>
+          <span>Message</span>
+        </div>
+        <div class = "nav_bar_option">
+          <div class = "icon_wrapper"><i class="fas fa-file-invoice-dollar fa-fw fa-align-center"></i></div>
+          <span>Đóng góp tình nguyện</span>
+        </div>
+        <div class = "nav_bar_option">
+          <div class = "icon_wrapper"><i class="fas fa-cog fa-fw fa-align-center"></i></div>
+          <span>Settings</span>
+        </div>
+        <div class = "nav_bar_footer">
+          <span><i class="fas fa-question-circle"></i>Help</span>
+        </div>
+      </div>
+    </div>
+    <div class="main_layout">
+      <div class ="main_header_container">
+        <div class ="search_container">
+          <form>
+            <div class ="search_bar">
+              <button type="submit"><i class="fa fa-search"></i></button>
+              <input type="text" placeholder="Search.." name="search">
+            </div>
+          </form>
+        </div>
+        <div class ="noti_and_id">
+          <div id="noti_btn">
+            <button><i class="fas fa-bell fa-fw fa-align-center"></i></button>
+          </div>
+          <div id="id_btn">
+            <button><i class="fas fa-user-circle fa-fw fa-align-center"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class ="title_and_filter_container">
+        <div id="title">
+          <span>Danh sách dân cư</span>
+        </div>
+        <div id="filter_container">
+          <div class ="filter">
+            <div class="filter_title">
+              <span>Tên dân cư</span>
+            </div>
+            <form>
+              <input type="text" placeholder="Nhập tên dân cư" name="dancu">
+            </form>
+          </div>
+          <div class ="filter">
+            <div class="filter_title">
+              <span>Số CCCD</span>
+            </div>
+            <form>
+              <input type="text" placeholder="Nhập mã CCCD" name="cccd">
+            </form>
+          </div>
+          <div class ="filter">
+            <div class="filter_title">
+              <span>Số hộ khẩu</span>
+            </div>
+            <form>
+              <input type="text" placeholder="Nhập số hộ khẩu" name="hokhau">
+            </form>
+          </div>
+          <div class ="filter">
+            <div class="filter_title">
+              <span>Số phòng</span>
+            </div>
+            <form>
+              <input type="text" placeholder="Nhập số phòng" name="sophong">
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+</body>
+</html>
