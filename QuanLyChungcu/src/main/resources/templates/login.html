@@ -16,16 +16,16 @@
         <div class="img">
         </div>
         <div class="login">
-            <form id ="userInfo" action ="dangnhap" method = "post" modelAttribute="loginRequest">
+            <form id ="userInfo" action ="/loginForm" method = "post" >
               <h1>WELCOME BACK !</h1>
               <span>Login to continue</span>
               <div id = "input_with_icon">
                 <i class="fa fa-user" aria-hidden="true"></i>
-                <input type = "text" placeholder = "Username" id ="usr" path="username"></input>
+                <input type = "text" placeholder = "Username" id ="usr" name = "username"></input>
               </div> 
               <div id = "input_with_icon">
                 <i class="fa fa-lock" aria-hidden="true"></i>
-                <input id = "pwd" type = "password" placeholder = "Password" path="password"></input>
+                <input id = "pwd" type = "password" placeholder = "Password" name = "password"></input>
               </div> 
               <button type ="submit">Login</button>
               <span class = "pwd_forgot"><a href="">Forgot your password?</a></span>
