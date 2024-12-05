@@ -8,8 +8,10 @@
   <link rel="stylesheet" type="text/css" href="/css/styleMain.css">
   <link rel="stylesheet" type="text/css" href="/css/residentUser.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-  <script type="text/javascript" src="/js/tableScript.js"></script>
+  <script type="text/javascript" src="/js/getWeb.js"></script>
+  <script type="text/javascript" src="/js/residentUser.js"></script>
   <title>Thông tin cá nhân</title>
+
 </head>
 <body>
 <div class ="fullscreen">
@@ -19,15 +21,15 @@
         <div class = "icon_wrapper"><i class="fas fa-user-alt fa-fw fa-align-center"></i></div>
         <span>Thông tin cá nhân</span>
         </div>
-        <div class = "nav_bar_option" id ="household" onclick="">
+        <div class = "nav_bar_option" id ="household" onclick="getHousehold()">
           <div class = "icon_wrapper"><i class="fas fa-users fa-fw fa-align-center"></i></div>
           <span>Thông tin hộ khẩu</span>
         </div>
-        <div class = "nav_bar_option" id = "fee" onclick="">
+        <div class = "nav_bar_option" id = "fee" onclick="getFee()">
           <div class = "icon_wrapper"><i class="fas fa-receipt fa-fw fa-align-center"></i></div>
           <span>Thông tin thu phí</span>
         </div>
-        <div class = "nav_bar_option" id = "contribution" onclick="">
+        <div class = "nav_bar_option" id = "contribution" onclick="getContribution()">
           <div class = "icon_wrapper"><i class="fas fa-file-invoice-dollar fa-fw fa-align-center"></i></div>
           <span>Đóng góp tình nguyện</span>
         </div>
@@ -42,8 +44,8 @@
           <span>Thông tin cá nhân</span>
         </div>
         <div class ="noti_and_id">
-          <div id="id_btn">
-            <button><i class="fas fa-sign-out-alt fa-fw fa-align-center"></i></button>
+          <div id="id_btn" onclick="userLogout()">
+            <button><i class="fas fa-sign-out-alt fa-fw fa-align-center" ></i></button>
           </div>
         </div>
       </div>
@@ -98,7 +100,7 @@
                 </div>
 
                 <div class = "btn" id = "changeInfoBtn">
-                  <button onclick = "changeInfo()">Đổi mật khẩu</button>
+                  <button onclick = "changePassword()">Đổi mật khẩu</button>
                 </div>
             </div>
       </div>
@@ -107,7 +109,7 @@
 
   <div id = "wrapper_1">
       <div id = "exit_wrapper_1">
-        <button onclick = "exitChangeInfo()">Quay lai</button>
+        <button onclick = "exitChangePassword()">Quay lại</button>
       </div>
       <div id = "changeInfoForm">
         <form id ="userInfo">
@@ -129,50 +131,4 @@
       </div>
   </div>
 </body>
-  <script>
-
-    var residentInfo = {
-      name:"Nam",
-      birthday:"20/10/2004",
-      gender:"Nữ",
-      ID:"034303006768",
-      phone:"0974187143",
-      role:"Dân cư",
-      username:"namnu@gmail.com",
-      password:"namnu123",
-      household:"HK0123",
-      relation:"Bố chủ hộ"
-    };
-
-    function fillInfo(){
-      document.getElementById('residentName').innerHTML= residentInfo.name;
-      document.getElementById('residentDate').innerHTML= residentInfo.birthday;
-      document.getElementById('residentGender').innerHTML= residentInfo.gender;
-      document.getElementById('residentID').innerHTML= residentInfo.ID;
-      document.getElementById('residentPhone').innerHTML= residentInfo.phone;
-      document.getElementById('residentRole').innerHTML= residentInfo.role;
-      document.getElementById('residentUsername').innerHTML= residentInfo.username;
-      document.getElementById('residentPassword').innerHTML= residentInfo.password;
-      document.getElementById('residentHousehold').innerHTML= residentInfo.household;
-      document.getElementById('residentRelation').innerHTML= residentInfo.relation;
-    }
-
-    window.onload = () => fillInfo();
-
-    function changeInfo(){
-      document.getElementById("wrapper_1").style.display = "block";
-    }
-
-    function exitChangeInfo(){
-      document.getElementById("wrapper_1").style.display = "none";
-    }
-
-    function changeAccount(){
-      document.getElementById("wrapper_2").style.display = "block";
-    }
-
-    function exitChangeAccount(){
-      document.getElementById("wrapper_2").style.display = "none";
-    }
-  </script>
 </html>

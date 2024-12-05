@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /  >
+  <meta name = "viewport" content= "width = device_width initial-scale = 1.0">
+  <link rel="stylesheet" type="text/css" href="/css/styleMain.css">
+  <link rel="stylesheet" type="text/css" href="/css/fee.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+  <script type="text/javascript" src="/js/getWeb.js"></script>
+  <script type="text/javascript" src="/js/feeUser.js"></script>
+  <title>Thông tin thu phí</title>
+</head>
+<body>
+  <div class ="fullscreen">
+    <div class="nav_bar">
+      <div class = "nav_bar_option_container">
+        <div class = "nav_bar_option" id = "user" onclick ="getResident()">
+          <div class = "icon_wrapper"><i class="fas fa-user-alt fa-fw fa-align-center" ></i></div>
+          <span>Thông tin cá nhân</span>
+        </div>
+        <div class = "nav_bar_option" id ="household" onclick="getHousehold()">
+          <div class = "icon_wrapper"><i class="fas fa-users fa-fw fa-align-center"></i></div>
+          <span>Thông tin hộ khẩu</span>
+        </div>
+        <div class = "nav_bar_option" id ="fee">
+          <div class = "icon_wrapper"><i class="fas fa-receipt fa-fw fa-align-center"></i></div>
+          <span>Thông tin thu phí</span>
+        </div>
+        <div class = "nav_bar_option" id ="contribution" onclick="getContribution()">
+          <div class = "icon_wrapper"><i class="fas fa-file-invoice-dollar fa-fw fa-align-center" ></i></div>
+          <span>Đóng góp tình nguyện</span>
+        </div>
+        <div class = "nav_bar_footer">
+          <span><i class="fas fa-question-circle"></i>Help</span>
+        </div>
+      </div>
+    </div>
+    <div class="main_layout">
+      <div class ="main_header_container">
+        <div class ="title">
+          <span>Thông tin thu phí</span>
+        </div>
+        <div class ="noti_and_id">
+          <div id="id_btn" onclick="userLogout()">
+            <button><i class="fas fa-sign-out-alt fa-fw fa-align-center"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class ="main_container">
+        <div class="table_container">
+          <table id="feeTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Số hộ khẩu</th>                
+                <th>Loại phí</th>
+                <th>Số tiền</th>
+                <th>Hạn nộp</th>
+                <th>Trạng thái</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+
+          <div id="pagination">
+            <button class="pageButton" id="prevPage" onclick="changePage(-1)">
+              Prev
+            </button>
+            <span id="pageNumber">Page 1</span>
+            <button class="pageButton" id="nextPage" onclick="changePage(1)">
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script>
+      
+    </script>
+</body>
+</html>
