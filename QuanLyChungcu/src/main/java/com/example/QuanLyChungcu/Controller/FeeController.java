@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/admin/fee")
+@RequestMapping(path = "/fee")
 public class FeeController {
     private final FeeServiceImpl feeService;
 

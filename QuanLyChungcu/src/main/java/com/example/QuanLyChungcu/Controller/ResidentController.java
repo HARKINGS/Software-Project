@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/admin/resident")
+@RequestMapping(path = "/resident")
 public class ResidentController {
     private final ResidentServiceImpl residentService;
 

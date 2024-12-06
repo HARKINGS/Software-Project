@@ -22,7 +22,7 @@
 }
 
 .img {
-    width: 40%;
+    width: 40%; 
     background: url("/img/3.png");
     background-size:100% 100%;
     overflow:hidden;
@@ -81,7 +81,7 @@
 
 #input_with_icon i{
     top: 17px;
-    left: 15px;
+    left: 15px;    
     position:absolute;
     font-size: 1.8em;
 }
@@ -104,7 +104,7 @@
 .footer {
     text-align:center;
     position: absolute;
-    width: 100%;
+    width: 100%;    
     bottom:10%;
 }
 

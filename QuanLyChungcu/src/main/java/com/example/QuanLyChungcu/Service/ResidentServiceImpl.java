@@ -64,7 +64,7 @@ public class ResidentServiceImpl implements ResidentService {
             residentToUpdate.setName(resident.getName());
             residentToUpdate.setDateOfBirth(resident.getDateOfBirth());
             residentToUpdate.setIdCard(resident.getIdCard());
-            residentToUpdate.setTemporary(resident.getTemporary());
+            residentToUpdate.setTemporary(resident.isTemporary());
             residentToUpdate.setHousehold_resident(resident.getHousehold_resident());
             residentRepository.save(residentToUpdate);
             // Thiết lập lại liên kết

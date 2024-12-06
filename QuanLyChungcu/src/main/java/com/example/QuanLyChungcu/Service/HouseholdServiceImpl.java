@@ -63,8 +63,6 @@ public class HouseholdServiceImpl implements HouseholdService{
             owner.setName(householdDTO.getChuHo().getName());
             owner.setDateOfBirth(householdDTO.getChuHo().getDateOfBirth());
             owner.setIdCard(householdDTO.getChuHo().getIdCard());
-            owner.setGender(householdDTO.getChuHo().getGender());
-            owner.setPhone_number(householdDTO.getPhoneNumber());
             owner.setTemporary(householdDTO.getChuHo().getTemporary());
         }
 
