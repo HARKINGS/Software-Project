@@ -7,10 +7,11 @@
     <link rel="stylesheet" type="text/css" href="/css/styleMain.css" />
     <link rel="stylesheet" type="text/css" href="/css/residentUser.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
-    <script type="text/javascript" src="/js/tableScript.js"></script>
+    <script type="text/javascript" src="/js/getWeb.js"></script>
+    <script type="text/javascript" src="/js/residentUser.js"></script>
     <title>Thông tin cá nhân</title>
 </head>
-<body>
+<body onload="fillInfo()">
 <div class="fullscreen">
     <div class="nav_bar">
         <div class="nav_bar_option_container">
@@ -18,20 +19,17 @@
                 <div class="icon_wrapper"><i class="fas fa-user-alt fa-fw fa-align-center"></i></div>
                 <span>Thông tin cá nhân</span>
             </div>
-            <div class="nav_bar_option" id="household">
+            <div class="nav_bar_option" id="household" onclick="getHousehold()">
                 <div class="icon_wrapper"><i class="fas fa-users fa-fw fa-align-center"></i></div>
                 <span>Thông tin hộ khẩu</span>
             </div>
-            <div class="nav_bar_option" id="fee">
+            <div class="nav_bar_option" id="fee" onclick="getFee()">
                 <div class="icon_wrapper"><i class="fas fa-receipt fa-fw fa-align-center"></i></div>
                 <span>Thông tin thu phí</span>
             </div>
-            <div class="nav_bar_option" id="contribution">
+            <div class="nav_bar_option" id="contribution" onclick="getContribution()">
                 <div class="icon_wrapper"><i class="fas fa-file-invoice-dollar fa-fw fa-align-center"></i></div>
                 <span>Đóng góp tình nguyện</span>
-            </div>
-            <div class="nav_bar_footer">
-                <span><i class="fas fa-question-circle"></i>Help</span>
             </div>
         </div>
     </div>
@@ -77,10 +75,6 @@
 
                 <div class="account-details">
                     <div class="detail-row">
-                        <span class="label">Vai trò:</span>
-                        <span class="value" id="residentRole"></span>
-                    </div>
-                    <div class="detail-row">
                         <span class="label">Tên đăng nhập:</span>
                         <span class="value" id="residentUsername"></span>
                     </div>
@@ -95,7 +89,7 @@
                 </div>
 
                 <div class="btn" id="changeInfoBtn">
-                    <button onclick="changeInfo()">Đổi mật khẩu</button>
+                    <button onclick="changePassword()">Đổi mật khẩu</button>
                 </div>
             </div>
         </div>
@@ -104,20 +98,20 @@
 
 <div id="wrapper_1">
     <div id="exit_wrapper_1">
-        <button onclick="exitChangeInfo()">Quay lại</button>
+        <button onclick="exitChangePassword()">Quay lại</button>
     </div>
     <div id="changeInfoForm">
         <form id="userInfo">
             <span id="form_wrapper_1_title">Thay đổi mật khẩu</span>
-            <div class="input_field_wrapper">
+            <div class="input_field_wrapper_1">
                 <span>Mật khẩu cũ</span>
                 <input type="password" placeholder="Nhập mật khẩu cũ" />
             </div>
-            <div class="input_field_wrapper">
+            <div class="input_field_wrapper_1">
                 <span>Mật khẩu mới</span>
                 <input type="password" placeholder="Nhập mật khẩu mới" />
             </div>
-            <div class="input_field_wrapper">
+            <div class="input_field_wrapper_1">
                 <span>Nhập lại mật khẩu mới</span>
                 <input type="password" placeholder="Xác nhận mật khẩu mới" />
             </div>
@@ -126,31 +120,4 @@
     </div>
 </div>
 </body>
-<script>
-    var residentInfo = {
-        name: "Nam",
-        birthday: "20/10/2004",
-        gender: "Nữ",
-        ID: "034303006768",
-        phone: "0974187143",
-        role: "Dân cư",
-        username: "namnu@gmail.com",
-        household: "HK0123",
-        relation: "Bố chủ hộ"
-    };
-
-    function fillInfo() {
-        document.getElementById('residentName').innerHTML = residentInfo.name;
-        document.getElementById('residentDate').innerHTML = residentInfo.birthday;
-        document.getElementById('residentGender').innerHTML = residentInfo.gender;
-        document.getElementById('residentID').innerHTML = residentInfo.ID;
-        document.getElementById('residentPhone').innerHTML = residentInfo.phone;
-        document.getElementById('residentRole').innerHTML = residentInfo.role;
-        document.getElementById('residentUsername').innerHTML = residentInfo.username;
-        document.getElementById('residentHousehold').innerHTML = residentInfo.household;
-        document.getElementById('residentRelation').innerHTML = residentInfo.relation;
-    }
-
-    fillInfo();
-</script>
 </html>

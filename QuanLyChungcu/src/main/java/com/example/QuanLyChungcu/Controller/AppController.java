@@ -17,6 +17,6 @@ public class AppController {
 
     @GetMapping("/user")
     public String user() {
-        return "residentUser";   // Trả về trang user.html
+        return "redirect:/user/residentUser";   // Trả về trang user.html
     }
 }

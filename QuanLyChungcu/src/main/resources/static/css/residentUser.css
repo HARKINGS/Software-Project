@@ -157,13 +157,13 @@
   padding-bottom:50px;
 }
 
-#input_field_wrapper_1{
+.input_field_wrapper_1{
 /*  background-color:red;*/
   margin:10px;
   display: flex;
 }
 
-#input_field_wrapper_1 input{
+.input_field_wrapper_1 input{
     background-color: #eee;
     border: none;
     outline: none;
@@ -172,7 +172,7 @@
     font-size:17px;
 }
 
-#input_field_wrapper_1 span{
+.input_field_wrapper_1 span{
   font-size: 20px;
   width:30%;
   align-self: center;

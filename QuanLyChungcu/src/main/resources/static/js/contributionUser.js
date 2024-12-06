@@ -1,31 +1,27 @@
 // Dữ liệu mẫu về khoản thu
       const contributions = [
         {
-          id:"01",
+          date:"21/10/2024",
           household:"HK12345",
           type:"Mua ghế đá",
-          amount:"100000",
-          date:"21/10/2024",
+          amount:"100.000 NDT",
         },
         {
-          id:"37",
           household:"HK12345",
           type:"Xây vỉa hè",
-          amount:"100000",
+          amount:"100.000 NDT",
           date:"19/04/2024",
         },
         {
-          id:"69",
           household:"HK12345",
           type:"Độ bô xe cứu thương",
-          amount:"500000",
+          amount:"500.000 NDT",
           date:"27/02/2025",
         },
         {
-          id:"223",
           household:"HK12345",
           type:"Quỹ khuyến học",
-          amount:"10000",
+          amount:"10.000 NDT",
           date:"11/11/2024",
         },
       ];
@@ -42,11 +38,10 @@
 
         contributions.forEach((contribution) => {
           const row = tableBody.insertRow();
-          row.insertCell(0).textContent = contribution.id;
+          row.insertCell(0).textContent = contribution.date;
           row.insertCell(1).textContent = contribution.household;
-          row.insertCell(2).textContent = contribution.date;
-          row.insertCell(3).textContent = contribution.type; 
-          row.insertCell(4).textContent = contribution.amount;
+          row.insertCell(2).textContent = contribution.type; 
+          row.insertCell(3).textContent = contribution.amount;
         });
       }
 

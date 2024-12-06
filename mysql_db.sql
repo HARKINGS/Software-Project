@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 04, 2024 lúc 03:13 PM
+-- Thời gian đã tạo: Th10 16, 2024 lúc 02:57 PM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 8.1.6
 
@@ -68,27 +68,6 @@ CREATE TABLE `household` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `mysql_db_table`
---
-
-CREATE TABLE `mysql_db_table` (
-  `id` int(11) NOT NULL,
-  `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `mail` varchar(30) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `mysql_db_table`
---
-
-INSERT INTO `mysql_db_table` (`id`, `name`, `password`, `mail`) VALUES
-(2, 'khánh', '3107', 'khanh@mail.com'),
-(3, 'dung', '0302', 'dung@mail.com');
-
--- --------------------------------------------------------
-
---
 -- Cấu trúc bảng cho bảng `parking`
 --
 
@@ -121,14 +100,40 @@ CREATE TABLE `resident` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `role`
+--
+
+CREATE TABLE `role` (
+  `group_id` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `last_updated_stamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  `create_stamp` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `users`
 --
 
 CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL COMMENT 'ID người dùng',
-  `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Tên đăng nhập',
+  `username` varchar(60) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Tên đăng nhập',
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Mật khẩu đã mã hóa',
-  `role` tinyint(1) NOT NULL COMMENT 'Vai trò (admin(true) hoặc user(false))'
+  `resident_id` int(11) NOT NULL COMMENT 'Mã dân cư',
+  `create_stamp` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'Ngày tạo tài khoản',
+  `last_updated_stamp` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'Thời gian update ms nhất'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `user_role`
+--
+
+CREATE TABLE `user_role` (
+  `username` varchar(60) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Tên đăng nhập',
+  `group_id` varchar(60) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Vai trò',
+  `create_stamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  `last_updated_stamp` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -156,12 +161,6 @@ ALTER TABLE `household`
   ADD PRIMARY KEY (`household_id`);
 
 --
--- Chỉ mục cho bảng `mysql_db_table`
---
-ALTER TABLE `mysql_db_table`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Chỉ mục cho bảng `parking`
 --
 ALTER TABLE `parking`
@@ -177,10 +176,24 @@ ALTER TABLE `resident`
   ADD KEY `Mã căn hộ` (`household_id`);
 
 --
+-- Chỉ mục cho bảng `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`group_id`);
+
+--
 -- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`username`),
+  ADD KEY `mã dân cư 2` (`resident_id`);
+
+--
+-- Chỉ mục cho bảng `user_role`
+--
+ALTER TABLE `user_role`
+  ADD PRIMARY KEY (`username`,`group_id`),
+  ADD KEY `pk_group_id` (`group_id`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -205,12 +218,6 @@ ALTER TABLE `household`
   MODIFY `household_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `mysql_db_table`
---
-ALTER TABLE `mysql_db_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT cho bảng `parking`
 --
 ALTER TABLE `parking`
@@ -221,12 +228,6 @@ ALTER TABLE `parking`
 --
 ALTER TABLE `resident`
   MODIFY `resident_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID của nhân khẩu (Primary Key)';
-
---
--- AUTO_INCREMENT cho bảng `users`
---
-ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID người dùng';
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -256,6 +257,19 @@ ALTER TABLE `parking`
 --
 ALTER TABLE `resident`
   ADD CONSTRAINT `Mã căn hộ` FOREIGN KEY (`household_id`) REFERENCES `household` (`household_id`);
+
+--
+-- Các ràng buộc cho bảng `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `mã dân cư 2` FOREIGN KEY (`resident_id`) REFERENCES `resident` (`resident_id`);
+
+--
+-- Các ràng buộc cho bảng `user_role`
+--
+ALTER TABLE `user_role`
+  ADD CONSTRAINT `pk_group_id` FOREIGN KEY (`group_id`) REFERENCES `role` (`group_id`),
+  ADD CONSTRAINT `pk_username` FOREIGN KEY (`username`) REFERENCES `users` (`username`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

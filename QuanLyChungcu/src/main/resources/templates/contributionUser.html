@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name = "viewport" content= "width = device_width initial-scale = 1.0">
   <link rel="stylesheet" type="text/css" href="/css/styleMain.css">
-  <link rel="stylesheet" type="text/css" href="/css/contribution.css">
+  <link rel="stylesheet" type="text/css" href="/css/contributionUser.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
   <script type="text/javascript" src="/js/getWeb.js"></script>
   <script type="text/javascript" src="/js/contributionUser.js"></script>  
@@ -31,9 +31,6 @@
           <div class = "icon_wrapper"><i class="fas fa-file-invoice-dollar fa-fw fa-align-center"></i></div>
           <span>Đóng góp tình nguyện</span>
         </div>
-        <div class = "nav_bar_footer">
-          <span><i class="fas fa-question-circle"></i>Help</span>
-        </div>
       </div>
     </div>
     <div class="main_layout">
@@ -43,7 +40,9 @@
         </div>
         <div class ="noti_and_id">
           <div id="id_btn" onclick="userLogout()">
-            <button><i class="fas fa-sign-out-alt fa-fw fa-align-center"></i></button>
+            <form action="/logout" method="post" id="logoutForm" style="display: inline;">
+                <button type="submit"><i class="fas fa-sign-out-alt fa-fw fa-align-center"></i></button>
+            </form>
           </div>
         </div>
       </div>
@@ -52,11 +51,10 @@
           <table id="contributionTable">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Số hộ khẩu</th>                
-                <th>Ngày</th>
-                <th>Loại phí</th>
-                <th>Số tiền</th>
+                <th>Ngày thu</th>
+                <th>Mã hộ dân</th>                
+                <th>Tên khoản thu</th>
+                <th>Số tiền đóng góp</th>
               </tr>
             </thead>
             <tbody>
@@ -77,8 +75,5 @@
       </div>
     </div>
   </div>
-    <script>
-      
-    </script>
 </body>
 </html>

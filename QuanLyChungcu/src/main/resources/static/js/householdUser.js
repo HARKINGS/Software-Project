@@ -75,7 +75,7 @@
       ];
 
       let currentPage = 1;
-      const itemsPerPage = 5; // Hiển thị 6 dân cư mỗi trang
+      const itemsPerPage = 6; // Hiển thị 6 dân cư mỗi trang
 
       // Hàm cập nhật bảng dân cư
       function updateResidentTable(residents) {

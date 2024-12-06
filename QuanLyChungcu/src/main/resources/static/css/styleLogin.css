@@ -22,7 +22,7 @@
 }
 
 .img {
-    width: 40%;
+    width: 40%; 
     background: url("/img/3.png");
     background-size:100% 100%;
     overflow:hidden;
@@ -45,12 +45,15 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     overflow:hidden;
 }
+
 .login h1{
     margin:20px 0 5px;
 }
+
 .login span{
     margin:0px 0 20px;
 }
+
 .login form{
     background-color: #fff;
     display: flex;
@@ -77,11 +80,9 @@
     font-size:17px;
 }
 
-
-
 #input_with_icon i{
     top: 17px;
-    left: 15px;
+    left: 15px;    
     position:absolute;
     font-size: 1.8em;
 }
@@ -101,10 +102,11 @@
     margin-top: 10px;
     cursor: pointer;
 }
+
 .footer {
     text-align:center;
     position: absolute;
-    width: 100%;
+    width: 100%;    
     bottom:10%;
 }
 
@@ -126,9 +128,11 @@
     text-decoration:none;
     color:#512da8;
 }
+
 .login a:hover{
     text-decoration:underline;
 }
+
 .login a:active{
     text-decoration:underline;
     color:#1b0f38;

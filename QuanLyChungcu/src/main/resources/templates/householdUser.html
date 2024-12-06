@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name = "viewport" content= "width = device_width initial-scale = 1.0">
   <link rel="stylesheet" type="text/css" href="/css/styleMain.css">
-  <link rel="stylesheet" type="text/css" href="/css/household.css">
+  <link rel="stylesheet" type="text/css" href="/css/householdUser.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
   <script type="text/javascript" src="/js/getWeb.js"></script>
   <script type="text/javascript" src="/js/householdUser.js"></script>
@@ -15,8 +15,8 @@
   <div class ="fullscreen">
     <div class="nav_bar">
       <div class = "nav_bar_option_container">
-        <div class = "nav_bar_option" id = "user">
-          <div class = "icon_wrapper"><i class="fas fa-user-alt fa-fw fa-align-center" onclick ="getResident()"></i></div>
+        <div class = "nav_bar_option" id = "user" onclick ="getResident()">
+          <div class = "icon_wrapper"><i class="fas fa-user-alt fa-fw fa-align-center" ></i></div>
           <span>Thông tin cá nhân</span>
         </div>
         <div class = "nav_bar_option" id ="household">
@@ -31,10 +31,6 @@
           <div class = "icon_wrapper"><i class="fas fa-file-invoice-dollar fa-fw fa-align-center" ></i></div>
           <span>Đóng góp tình nguyện</span>
         </div>
-        
-        <div class = "nav_bar_footer">
-          <span><i class="fas fa-question-circle"></i>Help</span>
-        </div>
       </div>
     </div>
     <div class="main_layout">
@@ -43,8 +39,10 @@
           <span>Thông tin hộ khẩu</span>
         </div>
         <div class ="noti_and_id">
-          <div id="id_btn" onclick="userLogout()">
-            <button><i class="fas fa-sign-out-alt fa-fw fa-align-center"></i></button>
+          <div id="id_btn">
+            <form action="/logout" method="post" id="logoutForm" style="display: inline;">
+                <button type="submit"><i class="fas fa-sign-out-alt fa-fw fa-align-center"></i></button>
+            </form>          
           </div>
         </div>
       </div>

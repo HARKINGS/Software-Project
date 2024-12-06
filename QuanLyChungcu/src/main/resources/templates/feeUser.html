@@ -5,13 +5,13 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name = "viewport" content= "width = device_width initial-scale = 1.0">
   <link rel="stylesheet" type="text/css" href="/css/styleMain.css">
-  <link rel="stylesheet" type="text/css" href="/css/fee.css">
+  <link rel="stylesheet" type="text/css" href="/css/feeUser.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
   <script type="text/javascript" src="/js/getWeb.js"></script>
   <script type="text/javascript" src="/js/feeUser.js"></script>
   <title>Thông tin thu phí</title>
 </head>
-<body>
+<body onload ="init()">
   <div class ="fullscreen">
     <div class="nav_bar">
       <div class = "nav_bar_option_container">
@@ -31,9 +31,6 @@
           <div class = "icon_wrapper"><i class="fas fa-file-invoice-dollar fa-fw fa-align-center" ></i></div>
           <span>Đóng góp tình nguyện</span>
         </div>
-        <div class = "nav_bar_footer">
-          <span><i class="fas fa-question-circle"></i>Help</span>
-        </div>
       </div>
     </div>
     <div class="main_layout">
@@ -43,7 +40,9 @@
         </div>
         <div class ="noti_and_id">
           <div id="id_btn" onclick="userLogout()">
-            <button><i class="fas fa-sign-out-alt fa-fw fa-align-center"></i></button>
+            <form action="/logout" method="post" id="logoutForm" style="display: inline;">
+                <button type="submit"><i class="fas fa-sign-out-alt fa-fw fa-align-center"></i></button>
+            </form>            
           </div>
         </div>
       </div>
@@ -52,12 +51,12 @@
           <table id="feeTable">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Số hộ khẩu</th>                
-                <th>Loại phí</th>
-                <th>Số tiền</th>
-                <th>Hạn nộp</th>
-                <th>Trạng thái</th>
+                <th>Hạn thu</th>
+                <th>Mã hộ dân</th>
+                <th>Tên khoản thu</th>
+                <th>Tiền cần thu</th>
+                <th>Tiền đã thu</th>
+                <th>Trạng thái</th>
               </tr>
             </thead>
             <tbody>

@@ -1,36 +1,20 @@
 // Dữ liệu mẫu về khoản thu
       const fees = [
         {
-          id:"01",
+          date:"21/10/2024",
           household:"HK12345",
           type:"Mua ghế đá",
-          amount:"100000",
-          date:"21/10/2024",
-          status:"Chưa thanh toán",
+          total:"100.000 VND",
+          paid:"100.000 VND",
+          status:"Hoàn tất",
         },
         {
-          id:"37",
+          date:"13/4/2026",
           household:"HK12345",
-          type:"Xây vỉa hè",
-          amount:"100000",
-          date:"19/04/2024",
+          type:"Buôn người",
+          total:"100.000.000 VND",
+          paid:"0 VND",
           status:"Chưa thanh toán",
-        },
-        {
-          id:"69",
-          household:"HK12345",
-          type:"Độ bô xe cứu thương",
-          amount:"500000",
-          date:"27/02/2025",
-          status:"Chưa thanh toán",
-        },
-        {
-          id:"122",
-          household:"HK12345",
-          type:"Quỹ khuyến học",
-          amount:"10000",
-          date:"11/11/2024",
-          status:"Đã thanh toán",
         },
       ];
 
@@ -46,11 +30,11 @@
 
         fees.forEach((fee) => {
           const row = tableBody.insertRow();
-          row.insertCell(0).textContent = fee.id;
+          row.insertCell(0).textContent = fee.date;
           row.insertCell(1).textContent = fee.household;
           row.insertCell(2).textContent = fee.type; 
-          row.insertCell(3).textContent = fee.amount;
-          row.insertCell(4).textContent = fee.date;
+          row.insertCell(3).textContent = fee.total;
+          row.insertCell(4).textContent = fee.paid;
           row.insertCell(5).textContent = fee.status;
         });
       }
@@ -84,5 +68,6 @@
           currentPage === totalPages;
       }
 
-      // Hiển thị trang đầu tiên khi tải trang
-      window.onload = () => changePage(0);
+      function init(){
+        changePage(0);
+      }
