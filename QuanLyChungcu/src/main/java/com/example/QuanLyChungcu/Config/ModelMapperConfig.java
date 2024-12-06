@@ -11,7 +11,6 @@ import com.example.QuanLyChungcu.Model.Household;
 import com.example.QuanLyChungcu.Model.Resident;
 import com.example.QuanLyChungcu.Repository.HouseholdRepository;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -105,14 +104,6 @@ public class ModelMapperConfig {
         Mapper.typeMap(HouseholdDTO.class, Household.class)
                 .addMappings(mapper -> {
                     mapper.skip(Household::setHouseholdId);
-                    mapper.map(src -> src.getChuHo().getName(),
-                            Household::setTenChuHo);
-                });
-
-        Mapper.typeMap(Household.class, HouseholdDTO.class)
-                .addMappings(mapper -> {
-                    mapper.map(src -> src.getTenChuHo(),
-                            HouseholdDTO::setOwnerName);
                 });
 
         return Mapper;

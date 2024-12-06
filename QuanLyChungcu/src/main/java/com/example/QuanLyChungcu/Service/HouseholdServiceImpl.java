@@ -63,15 +63,15 @@ public class HouseholdServiceImpl implements HouseholdService{
             owner.setName(householdDTO.getChuHo().getName());
             owner.setDateOfBirth(householdDTO.getChuHo().getDateOfBirth());
             owner.setIdCard(householdDTO.getChuHo().getIdCard());
+            owner.setGender(householdDTO.getChuHo().getGender());
+            owner.setPhoneNumber(householdDTO.getChuHo().getPhoneNumber());
+            owner.setRelationship("Chủ hộ");
             owner.setTemporary(householdDTO.getChuHo().getTemporary());
         }
 
         owner.setHousehold_resident(householdToSave);
         householdToSave.setChuHo(owner);
-
-        householdToSave.setTenChuHo(owner.getName());
         householdToSave.setHouseholdNumber(householdDTO.getHouseholdNumber());
-        householdToSave.setPhoneNumber(householdDTO.getPhoneNumber());
         householdToSave.setApartmentSize(householdDTO.getApartmentSize());
 
         residentRepository.save(owner);
@@ -87,9 +87,7 @@ public class HouseholdServiceImpl implements HouseholdService{
         Optional<Household> findHousehold = householdRepository.findById(id);
         if(findHousehold.isPresent()) {
             Household householdToUpdate = findHousehold.get();
-            householdToUpdate.setTenChuHo(householdDTO.getChuHo().getName());
             householdToUpdate.setHouseholdNumber(householdDTO.getHouseholdNumber());
-            householdToUpdate.setPhoneNumber(householdDTO.getPhoneNumber());
             householdToUpdate.setApartmentSize(householdDTO.getApartmentSize());
 
             Optional<Resident> findResident = residentRepository.findByIdCard(householdDTO.getChuHo().getIdCard());
@@ -98,6 +96,9 @@ public class HouseholdServiceImpl implements HouseholdService{
                 residentToSave.setName(householdDTO.getChuHo().getName());
                 residentToSave.setDateOfBirth(householdDTO.getChuHo().getDateOfBirth());
                 residentToSave.setIdCard(householdDTO.getChuHo().getIdCard());
+                residentToSave.setGender(householdDTO.getChuHo().getGender());
+                residentToSave.setPhoneNumber(householdDTO.getChuHo().getPhoneNumber());
+                residentToSave.setRelationship("Chủ hộ");
                 residentToSave.setTemporary(householdDTO.getChuHo().getTemporary());
                 residentToSave.setHousehold_resident(householdToUpdate);
                 residentRepository.save(residentToSave);
@@ -108,6 +109,9 @@ public class HouseholdServiceImpl implements HouseholdService{
                 residentToUpdate.setName(householdDTO.getChuHo().getName());
                 residentToUpdate.setDateOfBirth(householdDTO.getChuHo().getDateOfBirth());
                 residentToUpdate.setIdCard(householdDTO.getChuHo().getIdCard());
+                residentToUpdate.setGender(householdDTO.getChuHo().getGender());
+                residentToUpdate.setPhoneNumber(householdDTO.getChuHo().getPhoneNumber());
+                residentToUpdate.setRelationship("Chủ hộ");
                 residentToUpdate.setTemporary(householdDTO.getChuHo().getTemporary());
                 residentToUpdate.setHousehold_resident(householdToUpdate);
                 residentRepository.save(residentToUpdate);

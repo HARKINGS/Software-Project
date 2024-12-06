@@ -8,13 +8,8 @@ public class HouseholdDTO {
 
     private Long householdId;
 
-    private String ownerName;
-
     @NotBlank(message = "Số nhà không được trống")
     private String householdNumber;
-
-    @NotBlank(message = "Số điện thoại không được trống")
-    private String phoneNumber;
 
     @Positive(message = "Diện tích căn hộ không được trống và phải lớn hơn 0")
     private double apartmentSize;
@@ -38,14 +33,6 @@ public class HouseholdDTO {
         this.householdNumber = householdNumber;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public double getApartmentSize() {
         return apartmentSize;
     }
@@ -60,13 +47,5 @@ public class HouseholdDTO {
 
     public void setChuHo(OtherResidentDTO chuHo) {
         this.chuHo = chuHo;
-    }
-
-    public String getOwnerName() {
-        return ownerName;
-    }
-
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
     }
 }

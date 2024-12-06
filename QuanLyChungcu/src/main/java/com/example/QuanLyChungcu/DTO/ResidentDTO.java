@@ -1,21 +1,34 @@
 package com.example.QuanLyChungcu.DTO;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
 public class ResidentDTO {
+
     private Long residentId;
+
     @NotBlank(message = "Tên không được để trống")
     private String name;
+
     @NotNull(message = "Ngày sinh không được để trống")
     private LocalDate dateOfBirth;
+
     @NotBlank(message = "Số CCCD không được để trống")
     private String idCard;
+
+    @NotBlank(message = "Giới tính không được trống")
+    private String gender;
+
+    private String phoneNumber;
+
+    @NotBlank(message = "Phải có quan hệ với chủ hộ")
+    private String relationship;
+
     @NotNull(message = "Phải khai báo thường trú hay tạm trú")
-    private Boolean temporary;
+    private String temporary;
+
     @NotNull(message = "Id hộ khẩu không được để trống")
     private Long householdId;
 
@@ -51,11 +64,35 @@ public class ResidentDTO {
         this.idCard = idCard;
     }
 
-    public boolean isTemporary() {
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getRelationship() {
+        return relationship;
+    }
+
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
+    }
+
+    public String getTemporary() {
         return temporary;
     }
 
-    public void setTemporary(boolean temporary) {
+    public void setTemporary(String temporary) {
         this.temporary = temporary;
     }
 

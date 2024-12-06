@@ -12,11 +12,11 @@ public class AppController {
 
     @GetMapping("/admin")
     public String admin() {
-        return "admin";  // Trả về trang admin.html
+        return "Home";  // Trả về trang admin.html
     }
 
     @GetMapping("/user")
     public String user() {
-        return "user";   // Trả về trang user.html
+        return "residentUser";   // Trả về trang user.html
     }
 }

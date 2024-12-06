@@ -20,7 +20,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         // Phân quyền theo URL
-                        .requestMatchers("/login", "/static/**", "/js/**", "/css/**").permitAll() // Không yêu cầu đăng nhập
+                        .requestMatchers("/login", "/img/**", "/js/**", "/css/**").permitAll() // Không yêu cầu đăng nhập
                         .requestMatchers("/admin/**").hasRole("ADMIN") // Chỉ ADMIN được phép
                         .requestMatchers("/user/**").hasRole("USER")   // Chỉ USER được phép
                         .anyRequest().authenticated() // Các URL còn lại yêu cầu đăng nhập

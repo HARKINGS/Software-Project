@@ -64,7 +64,10 @@ public class ResidentServiceImpl implements ResidentService {
             residentToUpdate.setName(resident.getName());
             residentToUpdate.setDateOfBirth(resident.getDateOfBirth());
             residentToUpdate.setIdCard(resident.getIdCard());
-            residentToUpdate.setTemporary(resident.isTemporary());
+            residentToUpdate.setGender(resident.getGender());
+            residentToUpdate.setPhoneNumber(resident.getPhoneNumber());
+            residentToUpdate.setRelationship(resident.getRelationship());
+            residentToUpdate.setTemporary(resident.getTemporary());
             residentToUpdate.setHousehold_resident(resident.getHousehold_resident());
             residentRepository.save(residentToUpdate);
             // Thiết lập lại liên kết
@@ -81,10 +84,13 @@ public class ResidentServiceImpl implements ResidentService {
     public void deleteResident(Long id) {
         Optional<Resident> findResident = residentRepository.findById(id);
         if(findResident.isPresent()) {
-            Household household = findResident.get().getHousehold_resident();
-            household.setChuHo(null);
+            Resident resident = findResident.get();
+            if(isChuHo(id, resident.getHousehold_resident().getHouseholdId())) {
+                Household household = resident.getHousehold_resident();
+                household.setChuHo(null);
+                householdRepository.deleteById(household.getHouseholdId());
+            }
             residentRepository.deleteById(id);
-            householdRepository.deleteById(household.getHouseholdId());
         }else {
             throw new ResourceNotFoundException("Không tồn tại nhân khẩu có id: "+id);
         }

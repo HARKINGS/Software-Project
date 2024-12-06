@@ -1,6 +1,5 @@
 package com.example.QuanLyChungcu.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -22,13 +21,24 @@ public class Resident {
     @Column(name = "date_of_birth", nullable = false)
     private LocalDate dateOfBirth;
 
+    @NotBlank(message = "Giới tính không được trống")
+    @Column(name = "sex", nullable = false)
+    private String gender;
+
+    @Column(name = "phone", nullable = true)
+    private String phoneNumber;
+
     @NotBlank(message = "Số CCCD không được để trống")
     @Column(name = "id_card", nullable = false, length = 20)
     private String idCard;
 
+    @NotBlank(message = "Phải có quan hệ với chủ hộ")
+    @Column(name = "Quan he voi chu ho", nullable = false)
+    private String relationship;
+
     @NotNull(message = "Phải khai báo thường trú hay tạm trú")
     @Column(name = "temporary", nullable = false)
-    private Boolean temporary;
+    private String temporary;
 
     @ManyToOne
     @JoinColumn(name = "household_id")
@@ -66,11 +76,35 @@ public class Resident {
         this.idCard = idCard;
     }
 
-    public boolean isTemporary() {
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getRelationship() {
+        return relationship;
+    }
+
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
+    }
+
+    public String getTemporary() {
         return temporary;
     }
 
-    public void setTemporary(boolean temporary) {
+    public void setTemporary(String temporary) {
         this.temporary = temporary;
     }
 
