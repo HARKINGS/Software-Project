@@ -1,7 +1,6 @@
 package com.example.QuanLyChungcu.Service;
 
 import com.example.QuanLyChungcu.DTO.ResidentDTO;
-import com.example.QuanLyChungcu.Model.Resident;
 
 import java.util.List;
 

@@ -7,14 +7,21 @@ import java.time.LocalDate;
 
 public class OtherResidentDTO {
     private Long residentId;
+
     @NotBlank(message = "Tên không được để trống")
     private String name;
+
     @NotNull(message = "Ngày sinh không được để trống")
     private LocalDate dateOfBirth;
+
     @NotBlank(message = "Số CCCD không được để trống")
     private String idCard;
+
+    @NotBlank(message = "Giới tính không được để trống")
+    private String gender;
+
     @NotNull(message = "Phải khai báo thường trú hay tạm trú")
-    private Boolean temporary;
+    private String temporary;
 
     public Long getResidentId() {
         return residentId;
@@ -48,11 +55,19 @@ public class OtherResidentDTO {
         this.idCard = idCard;
     }
 
-    public Boolean getTemporary() {
+    public String getTemporary() {
         return temporary;
     }
 
-    public void setTemporary(Boolean temporary) {
+    public void setTemporary(String temporary) {
         this.temporary = temporary;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

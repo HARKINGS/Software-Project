@@ -1,6 +1,5 @@
 package com.example.QuanLyChungcu.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -26,13 +25,24 @@ public class Resident {
     @Column(name = "id_card", nullable = false, length = 20)
     private String idCard;
 
+    @NotBlank(message = "Giới tính không được để trống")
+    @Column(name = "Sex", nullable = false, length = 20)
+    private String gender;
+
+    @NotBlank(message = "Sdt không được để trống")
+    @Column(name = "Phone", nullable = false, length = 20)
+    private String phone_number;
+
     @NotNull(message = "Phải khai báo thường trú hay tạm trú")
     @Column(name = "temporary", nullable = false)
-    private Boolean temporary;
+    private String temporary;
 
     @ManyToOne
     @JoinColumn(name = "household_id")
     private Household Household_resident;
+
+    @OneToOne(mappedBy = "userOfResident", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Users user;
 
     public Long getResidentId() {
         return residentId;
@@ -66,11 +76,11 @@ public class Resident {
         this.idCard = idCard;
     }
 
-    public boolean isTemporary() {
+    public String getTemporary() {
         return temporary;
     }
 
-    public void setTemporary(boolean temporary) {
+    public void setTemporary(String temporary) {
         this.temporary = temporary;
     }
 
@@ -80,5 +90,21 @@ public class Resident {
 
     public void setHousehold_resident(Household household_resident) {
         Household_resident = household_resident;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 }
