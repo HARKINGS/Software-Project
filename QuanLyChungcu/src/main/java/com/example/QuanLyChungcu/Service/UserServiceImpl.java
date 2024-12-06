@@ -1,9 +1,11 @@
 package com.example.QuanLyChungcu.Service;
 
+import com.example.QuanLyChungcu.DTO.HouseholdDTO;
 import com.example.QuanLyChungcu.DTO.ResidentDTO;
 import com.example.QuanLyChungcu.DTO.UserDTO;
 import com.example.QuanLyChungcu.Exception.ConflictException;
 import com.example.QuanLyChungcu.Exception.ResourceNotFoundException;
+import com.example.QuanLyChungcu.Model.Resident;
 import com.example.QuanLyChungcu.Model.Users;
 import com.example.QuanLyChungcu.Repository.*;
 import org.modelmapper.ModelMapper;
@@ -13,7 +15,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -60,6 +64,35 @@ public class UserServiceImpl implements UserService{
         if(findUser.isPresent()) {
             Users users = findUser.get();
             return modelMapper.map(users.getUserOfResident(), ResidentDTO.class);
+        }else {
+            throw new ResourceNotFoundException("User khong ton tai");
+        }
+    }
+
+    @Override
+    public HouseholdDTO getInfoHousehold() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<Users> findUser = userRepository.findByUsername(authentication.getName());
+        if(findUser.isPresent()) {
+            Users users = findUser.get();
+            return modelMapper.map(users.getUserOfResident().getHousehold_resident(), HouseholdDTO.class);
+        }else {
+            throw new ResourceNotFoundException("User khong ton tai");
+        }
+    }
+
+    @Override
+    public List<ResidentDTO> getListResident() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<Users> findUser = userRepository.findByUsername(authentication.getName());
+        if(findUser.isPresent()) {
+            Users users = findUser.get();
+            Long id = users.getUserOfResident().getHousehold_resident().getHouseholdId();
+            List<Resident> residents = residentRepository.findResidentsByHouseholdId(id);
+
+            return residents.stream()
+                    .map(resident -> modelMapper.map(resident, ResidentDTO.class))
+                    .collect(Collectors.toList());
         }else {
             throw new ResourceNotFoundException("User khong ton tai");
         }
