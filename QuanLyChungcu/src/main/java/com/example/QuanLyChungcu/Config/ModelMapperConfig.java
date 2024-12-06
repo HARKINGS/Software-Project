@@ -1,27 +1,26 @@
 package com.example.QuanLyChungcu.Config;
 
-import com.example.QuanLyChungcu.DTO.ContributionDTO;
-import com.example.QuanLyChungcu.DTO.FeeDTO;
-import com.example.QuanLyChungcu.DTO.HouseholdDTO;
-import com.example.QuanLyChungcu.DTO.ResidentDTO;
+import com.example.QuanLyChungcu.DTO.*;
 import com.example.QuanLyChungcu.Exception.ResourceNotFoundException;
-import com.example.QuanLyChungcu.Model.Contribution;
-import com.example.QuanLyChungcu.Model.Fee;
-import com.example.QuanLyChungcu.Model.Household;
-import com.example.QuanLyChungcu.Model.Resident;
+import com.example.QuanLyChungcu.Model.*;
 import com.example.QuanLyChungcu.Repository.HouseholdRepository;
+import com.example.QuanLyChungcu.Repository.ResidentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Map;
+
 @Configuration
 public class ModelMapperConfig {
     private final HouseholdRepository householdRepository;
+    private final ResidentRepository residentRepository;
 
     @Autowired
-    public ModelMapperConfig(HouseholdRepository householdRepository) {
+    public ModelMapperConfig(HouseholdRepository householdRepository, ResidentRepository residentRepository) {
         this.householdRepository = householdRepository;
+        this.residentRepository = residentRepository;
     }
 
     @Bean
@@ -106,6 +105,30 @@ public class ModelMapperConfig {
                     mapper.skip(Household::setHouseholdId);
                 });
 
+        // ModelMapper cho Users
+        Mapper.typeMap(UserDTO.class, Users.class)
+                .addMappings(mapper -> {
+                    mapper.skip(Users::setUserOfResident);
+                })
+                .setPostConverter(context -> {
+                    UserDTO source = context.getSource();
+                    Users destination = context.getDestination();
+
+                    if(source.getResidnetId() != null) {
+                        Resident resident = residentRepository.findById(source.getResidnetId())
+                                .orElseThrow(() -> new ResourceNotFoundException("Khong ton tai nhan khau co id nay"));
+
+                        destination.setUserOfResident(resident);
+                    }
+
+                    return destination;
+                });
+
+        Mapper.typeMap(Users.class, UserDTO.class)
+                .addMappings(mapper -> {
+                    mapper.map(src -> src.getUserOfResident().getResidentId(),
+                            UserDTO::setResidnetId);
+                });
         return Mapper;
     }
 }

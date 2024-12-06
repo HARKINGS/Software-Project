@@ -1,5 +1,6 @@
 package com.example.QuanLyChungcu.Controller;
 
+import com.example.QuanLyChungcu.DTO.ResidentDTO;
 import com.example.QuanLyChungcu.DTO.UserDTO;
 import com.example.QuanLyChungcu.Service.UserServiceImpl;
 import jakarta.validation.Valid;
@@ -28,5 +29,11 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public UserDTO updateUser(String password) {
         return userService.updateUser(password);
+    }
+
+    @GetMapping("/user/getInfo")
+    @ResponseStatus(HttpStatus.OK)
+    public ResidentDTO getInfoUser() {
+        return userService.getInfoUser();
     }
 }
