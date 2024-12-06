@@ -13,7 +13,7 @@
     padding:20px 10px;
     height:100%;
     width:100%;
-    overflow:hidden;    
+    overflow:hidden;
 }
 
   /* Information Admin */
@@ -30,7 +30,7 @@
     position: relative;
     top: 25px;
   }
-  
+
   /* Profile Avatar */
   .profile-avatar {
     width: 280px;
@@ -45,31 +45,31 @@
     flex-direction: column;
     gap: 15px;
   }
-  
+
   /* Detail Row */
   .detail-row {
     display: flex;
     gap: 10px;
     font-size: 16px;
   }
-  
+
   .label {
     color: #db4646;
     font-weight: 600;
     min-width: 120px;
   }
-  
+
   .value {
     color: black;
     font-weight: 400;
   }
-  
+
   .btn{
     background-color:black;
     position:absolute;
     border: none;
     border-radius:8px;
-  } 
+  }
 
   .btn button{
     border-style: double;
@@ -117,7 +117,7 @@
     top: 15%;
     left:15%;
     font-size:17px;
-    height:70%;    
+    height:70%;
     width: 70%;
     color: black;
     border-radius:25px;
@@ -132,7 +132,7 @@
     flex-direction: column;
     padding: 10px 40px;
     height: 100%;
-} 
+}
 #changeInfoForm button{
     position:absolute;
     bottom:20px;
@@ -159,7 +159,7 @@
 
 #input_field_wrapper_1{
 /*  background-color:red;*/
-  margin:10px;  
+  margin:10px;
   display: flex;
 }
 
