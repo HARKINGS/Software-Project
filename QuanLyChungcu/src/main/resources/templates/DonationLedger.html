@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/global.css" />
+    <link rel="stylesheet" href="../static/css/DonationLedger.css" />
+    <title>Quản lý Khoản thu</title>
+  </head>
+  <body>
+    <div class="fullscreen">
+      <div class="Dashboard">
+        <a style="color: #4081f1" href="Home.html">Chung cư BlueMoon</a>
+        <div class="Dashboard__elements">
+          <a href="List_Resident.html">Thông tin dân cư</a>
+        </div>
+        <div class="Dashboard__elements">
+          <a href="List_House_Hold.html">Thông tin hộ khẩu</a>
+        </div>
+        <div class="Dashboard__elements">
+          <a href="List_Fee.html">Thông tin thu phí</a>
+        </div>
+        <div class="Dashboard__elements">
+          <a href="DonationLedger.html">Đóng góp tình nguyện</a>
+        </div>
+        <div class="Dashboard__elements">
+          <a href="List_Account.html">Quản lý tài khoản</a>
+        </div>
+        <div class="Dashboard__elements">
+          <a href="Settings_ADMIN.html">Cài đặt</a>
+        </div>
+      </div>
+      <div class="Main">
+        <h1>Danh sách khoản thu</h1>
+        <div class="Search-Fee">
+          <div class="Search-Fee-Item">
+            <label for="nameFee" class="label">Tên khoản thu:</label>
+            <input
+              id="nameFee"
+              list="nameFeeSuggestions"
+              class="input"
+              placeholder="Nhập/Chọn tên khoản thu"
+              oninput="filterData()"
+            />
+            <datalist id="nameFeeSuggestions"></datalist>
+          </div>
+          <div class="Search-Fee-Item">
+            <label for="id-house-hold" class="label">Mã hộ dân:</label>
+            <input
+              id="id-house-hold"
+              class="input"
+              placeholder="Nhập mã hộ dân"
+              oninput="filterData()"
+            />
+          </div>
+          <div class="Search-Fee-Item">
+            <label for="from-date" class="label">Từ ngày:</label>
+            <input
+              id="from-date"
+              class="input"
+              type="date"
+              oninput="filterData()"
+            />
+          </div>
+          <div class="Search-Fee-Item">
+            <label for="to-date" class="label">Đến ngày:</label>
+            <input
+              id="to-date"
+              class="input"
+              type="date"
+              oninput="filterData()"
+            />
+          </div>
+        </div>
+
+        <table id="FeeTable">
+          <thead>
+            <tr>
+              <th>Ngày thu</th>
+              <th>Mã hộ dân</th>
+              <th>Tên khoản thu</th>
+              <th>Số tiền đóng góp</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="add-row">
+              <td><input type="date" id="addDate" class="input" /></td>
+              <td><input type="text" id="addHousehold" class="input" /></td>
+              <td><input type="text" id="addFeeName" class="input" /></td>
+              <td><input type="number" id="addAmount" class="input" /></td>
+              <td>
+                <button onclick="addRow()">Thêm</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div id="pagination">
+          <button class="pageButton" id="prevPage" onclick="changePage(-1)">
+            Prev
+          </button>
+          <span id="pageNumber">Page 1</span>
+          <button class="pageButton" id="nextPage" onclick="changePage(1)">
+            Next
+          </button>
+        </div>
+      </div>
+
+      <script>
+        const data = [
+          {
+            date: "2024-12-01",
+            household: "H001",
+            feeName: "Quỹ Bảo trì",
+            amount: 500000,
+          },
+          {
+            date: "2024-12-02",
+            household: "H002",
+            feeName: "Quỹ PCCC",
+            amount: 300000,
+          },
+        ];
+        let filteredData = [...data];
+        let currentPage = 1;
+        const rowsPerPage = 10;
+
+        function renderTable(page) {
+          const tableBody = document.querySelector("#FeeTable tbody");
+          const startIndex = (page - 1) * rowsPerPage;
+          const endIndex = page * rowsPerPage;
+
+          tableBody.innerHTML = `<tr class="add-row">${
+            document.querySelector(".add-row").innerHTML
+          }</tr>`;
+          filteredData.slice(startIndex, endIndex).forEach((item, index) => {
+            const row = document.createElement("tr");
+            row.setAttribute("data-index", startIndex + index);
+            row.innerHTML = `
+              <td>${item.date}</td>
+              <td>${item.household}</td>
+              <td>${item.feeName}</td>
+              <td>${item.amount.toLocaleString()}</td>
+              <td><button onclick="deleteRow(this)">Xóa</button></td>
+            `;
+            tableBody.appendChild(row);
+          });
+
+          document.getElementById(
+            "pageNumber"
+          ).textContent = `Page ${currentPage}`;
+        }
+
+        function filterData() {
+          const nameFee = document
+            .getElementById("nameFee")
+            .value.toLowerCase();
+          const household = document
+            .getElementById("id-house-hold")
+            .value.toLowerCase();
+          const fromDate = document.getElementById("from-date").value;
+          const toDate = document.getElementById("to-date").value;
+
+          filteredData = data.filter((item) => {
+            return (
+              (!nameFee || item.feeName.toLowerCase().includes(nameFee)) &&
+              (!household ||
+                item.household.toLowerCase().includes(household)) &&
+              (!fromDate || item.date >= fromDate) &&
+              (!toDate || item.date <= toDate)
+            );
+          });
+
+          currentPage = 1;
+          renderTable(currentPage);
+        }
+
+        function addRow() {
+          const date = document.getElementById("addDate").value;
+          const household = document.getElementById("addHousehold").value;
+          const feeName = document.getElementById("addFeeName").value;
+          const amount = document.getElementById("addAmount").value;
+
+          if (date && household && feeName && amount) {
+            data.push({ date, household, feeName, amount: parseFloat(amount) });
+            filterData();
+          } else {
+            alert("Vui lòng nhập đầy đủ thông tin!");
+          }
+        }
+
+        function changePage(offset) {
+          const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+          const newPage = currentPage + offset;
+          if (newPage > 0 && newPage <= totalPages) {
+            currentPage = newPage;
+            renderTable(currentPage);
+          }
+        }
+
+        function deleteRow(button) {
+          const row = button.closest("tr");
+          const dataIndex = parseInt(row.getAttribute("data-index"), 10);
+          data.splice(dataIndex, 1);
+          filterData();
+        }
+
+        renderTable(currentPage);
+      </script>
+    </div>
+  </body>
+</html>

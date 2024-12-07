@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/global.css" />
+    <link rel="stylesheet" href="../static/css/List_house.css" />
+    <title>Thông tin hộ khẩu</title>
+  </head>
+  <body>
+    <div class="fullscreen">
+      <div class="Dashboard">
+        <a style="color: #4081f1" href="Home.html">Chung cư BlueMoon</a>
+        <div class="Dashboard__elements">
+          <a href="List_Resident.html">Thông tin dân cư</a>
+        </div>
+        <div class="Dashboard__elements">
+          <a href="List_House_Hold.html">Thông tin hộ khẩu</a>
+        </div>
+        <div class="Dashboard__elements">
+          <a href="List_Fee.html">Thông tin thu phí</a>
+        </div>
+        <div class="Dashboard__elements">
+          <a href="DonationLedger.html">Đóng góp tình nguyện</a>
+        </div>
+        <div class="Dashboard__elements"><a href="List_Account.html">Quản lý tài khoản</a></div>
+        <div class="Dashboard__elements"><a href="Settings_ADMIN.html">Cài đặt</a></div>
+      </div>
+      <div class="Main">
+        <h1>Thông tin hộ khẩu</h1>
+        <!-- Thanh tìm kiếm, lọc thông tin -->
+        <div class="search">
+          <label for="ma-ho-khau">Mã hộ khẩu:</label>
+          <input
+            type="text"
+            id="ma-ho-khau"
+            placeholder="Nhập mã hộ khẩu"
+            oninput="searchData()"
+          />
+
+          <label for="chu-ho">Tên chủ hộ:</label>
+          <input
+            type="text"
+            id="chu-ho"
+            placeholder="Nhập tên chủ hộ"
+            oninput="searchData()"
+          />
+
+          <label for="so-can-ho">Số căn hộ:</label>
+          <input
+            type="text"
+            id="so-can-ho"
+            placeholder="Nhập số căn hộ"
+            oninput="searchData()"
+          />
+        </div>
+
+        <!-- Bảng thông tin -->
+        <table>
+          <thead>
+            <tr>
+              <th>Mã hộ khẩu</th>
+              <th>Tên chủ hộ</th>
+              <th>Số căn hộ</th>
+              <th>Số điện thoại</th>
+              <th>Diện tích hộ ở</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <!-- Dữ liệu sẽ được thêm vào đây qua JavaScript -->
+          </tbody>
+        </table>
+
+        <!-- Phần phân trang -->
+        <div id="pagination">
+          <button class="pageButton" id="prevBtn">Prev</button>
+          <span id="pageNumber">Page 1</span>
+          <button class="pageButton" id="nextBtn">Next</button>
+        </div>
+
+        <!-- Các nút hành động -->
+        <div class="action-buttons">
+          <button class="Buttons add" onclick="">
+            <div class="Buttons-items">Thêm hộ khẩu</div>
+          </button>
+          <button class="Buttons split" onclick="">
+            <div class="Buttons-items">Tách hộ khẩu</div>
+          </button>
+          <button class="Buttons move" onclick="showMoveForm()">
+            <div class="Buttons-items">Di chuyển hộ khẩu</div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form chuyển hộ khẩu -->
+    <div class="moveHouseHold" style="display: none;">
+      <h1>Chuyển hộ khẩu</h1>
+      <form>
+        <div class="form-items-row">
+          <div class="form-items">
+            <label for="id-house">Mã hộ khẩu cần chuyển:</label>
+            <input
+              type="text"
+              id="id-house"
+              placeholder="Nhập mã hộ khẩu cần chuyển"
+            />
+          </div>
+          <div class="form-items">
+            <label for="name-host">Tên của chủ hộ:</label>
+            <input type="text" id="name-host" placeholder="Tên của chủ hộ" />
+          </div>
+        </div>
+        <div class="form-items-row">
+          <div class="form-items">
+            <label for="addr-now">Số căn hộ hiện tại:</label>
+            <input
+              type="text"
+              id="addr-now"
+              placeholder="Nhập số căn hộ hiện tại"
+            />
+          </div>
+          <div class="form-items">
+            <label for="cccd">Số CCCD của chủ hộ:</label>
+            <input type="text" id="cccd" placeholder="Số CCCD của chủ hộ" />
+          </div>
+        </div>
+
+        <div class="form-items">
+          <label for="addr-new">Số căn hộ chuyển đến:</label>
+          <input
+            type="text"
+            id="addr-new"
+            placeholder="Nhập số căn hộ chuyển đến"
+          />
+        </div>
+        <div class="form-items">
+          <label for="ly-do">Lý do:</label>
+          <textarea id="ly-do" placeholder="Nhập lý do"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Lưu thông tin</button>
+        <button type="button" class="cancel-btn" onclick="hideMoveForm()">Hủy</button>
+      </form>
+    </div>
+
+    <!-- Form TÁCH hộ khẩu -->
+    <div class = "TachHokhau">
+      <form>
+        <div class = "inputField">
+          <div class ="inputElement">
+            <span>Mã hộ khẩu</span>
+            <input type ="text" id ="oldHousehold"disabled></input>
+          </div>
+
+          <div class ="inputElement">
+            <span>Mã hộ khẩu mới</span>
+            <input type ="text" id = "newHH" placeholder="Nhập mã hộ khẩu mới" onchange="addNewHouseHold()"></input>
+          </div>
+
+          <div class ="inputElement">
+            <span>ID chủ hộ</span>
+            <input type ="text" id = "oldHouseholdOwnerID" ></input>
+          </div>
+
+          <div class ="inputElement">
+            <span>ID chủ hộ mới</span>
+            <input type ="text" id = "newID" disabled></input>
+          </div>
+
+          <div class ="inputElement">
+            <span>Địa chỉ</span>
+            <input type ="text" id= "oldAdd" disabled></input>
+          </div>
+          
+          <div class ="inputElement">
+            <span>Địa chỉ hộ khẩu mới</span>
+            <input type ="text" placeholder="Nhập địa chỉ hộ khẩu mới"></input>
+          </div>
+        </div>
+
+        <div class = "changeList">
+          <span>Danh sách chuyển người sang hộ khẩu mới</span>
+          <div class ="tableZone">
+          <div class = "table_container" id ="table1">
+            <table id="initHousehold">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Tên dân cư</th>
+                  <th>Chuyển đi</th>
+                </tr>
+              </thead>
+              <tbody>
+              
+              </tbody>
+            </table>
+          </div>
+          <div class = "table_container" id ="table2">
+            <table id="newHousehold">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Tên dân cư</th>
+                  <th>Ho khau moi</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+              </tbody>
+            </table>
+          </div>
+          </div>
+        </div>
+        <button class ="submit">Xác nhận</button> 
+      </form>
+    </div>
+
+    <!-- Form THÊM hộ khẩu -->
+
+    <script>
+      const data = [
+        // Dữ liệu mẫu
+        {
+          code: "HK001",
+          name: "Nguyễn Văn A",
+          apartment: "101",
+          phone: "0912345678",
+          area: "60m²"
+        },
+        {
+          code: "HK002",
+          name: "Trần Thị B",
+          apartment: "102",
+          phone: "0987654321",
+          area: "72m²"
+        },
+        // Thêm dữ liệu nếu cần
+      ];
+
+      let currentPage = 1;
+      const rowsPerPage = 7;
+
+      function searchData() {
+        const maHoKhau = document.getElementById("ma-ho-khau").value.toLowerCase();
+        const chuHo = document.getElementById("chu-ho").value.toLowerCase();
+        const soCanHo = document.getElementById("so-can-ho").value.toLowerCase();
+
+        const filteredData = data.filter((item) => {
+          return (
+            item.code.toLowerCase().includes(maHoKhau) &&
+            item.name.toLowerCase().includes(chuHo) &&
+            item.apartment.toLowerCase().includes(soCanHo)
+          );
+        });
+
+        displayData(filteredData);
+      }
+
+      function displayData(filteredData) {
+        const tableBody = document.getElementById("table-body");
+        tableBody.innerHTML = "";
+
+        const start = (currentPage - 1) * rowsPerPage;
+        const end = currentPage * rowsPerPage;
+        const currentData = filteredData.slice(start, end);
+
+        currentData.forEach((item) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${item.code}</td>
+            <td>${item.name}</td>
+            <td>${item.apartment}</td>
+            <td>${item.phone}</td>
+            <td>${item.area}</td>
+            <td><button class="action-btn">Xem chi tiết</button></td>
+          `;
+          tableBody.appendChild(row);
+        });
+
+        updatePagination(filteredData.length);
+      }
+
+      function updatePagination(filteredDataLength) {
+        const totalPages = Math.ceil(filteredDataLength / rowsPerPage);
+        document.getElementById("pageNumber").innerText = `Page ${currentPage} of ${totalPages}`;
+        document.getElementById("prevBtn").disabled = currentPage === 1;
+        document.getElementById("nextBtn").disabled = currentPage === totalPages;
+      }
+
+      function showMoveForm() {
+        document.querySelector(".moveHouseHold").style.display = "block";
+      }
+
+      function hideMoveForm() {
+        document.querySelector(".moveHouseHold").style.display = "none";
+      }
+
+      document.getElementById("prevBtn").addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage--;
+          searchData();
+        }
+      });
+
+      document.getElementById("nextBtn").addEventListener("click", () => {
+        const totalPages = Math.ceil(data.length / rowsPerPage);
+        if (currentPage < totalPages) {
+          currentPage++;
+          searchData();
+        }
+      });
+
+      searchData();
+    </script>
+  </body>
+</html>
