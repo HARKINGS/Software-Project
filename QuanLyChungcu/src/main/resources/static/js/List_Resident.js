@@ -20,6 +20,7 @@ function toggleLayerVisibility(show) {
   }
 }
 
+
 // Hiển thị layer khi nhấn vào nút "Thêm dân cư"
 addResButton.addEventListener("click", () => toggleLayerVisibility(true));
 
