@@ -1,0 +1,369 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[fontsize=13pt]{scrextend}
+\usepackage[paperheight=29.7cm, paperwidth=21cm, right=2cm, left=3cm, top=2cm, bottom=2.5cm]{geometry}
+\usepackage{mathptmx}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{indentfirst} % Thư viện thụt đầu dòng
+\usepackage{setspace}
+\renewcommand{\baselinestretch}{1.2} % Dãn dòng
+\setlength{\parskip}{6pt}
+% \setlength{\parindent}{1cm}
+\usepackage{titlesec} % Thư viện set up các kiểu chữ
+\usepackage{tcolorbox}
+\usepackage{tocloft} % Gói để tuỳ chỉnh mục lục
+\usepackage{changepage} % Gói adjustwidth
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage[table]{xcolor}
+
+\usepackage{fancyhdr} % Import gói fancyhdr
+\setcounter{secnumdepth}{4}
+\usepackage{enumitem}
+
+\renewcommand{\headrulewidth}{0.4pt}       % Đường kẻ header
+\renewcommand{\footrulewidth}{0.4pt}       % Đường kẻ footer
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} % Thêm dấu chấm trong mục lục
+
+\pagestyle{fancy}
+\fancyhf{} % Xóa header và footer mặc định
+\fancyhead[L]{\textbf{IT3180 - Nhập môn công nghệ phần mềm}} % Header góc trái
+\fancyfoot[L]{Nhóm 1} % Footer góc trái
+\fancyfoot[R]{\thepage} % Footer góc phải
+
+\titlespacing*{\section}{0pt}{0pt}{30pt} % Heading 1
+\titleformat*{\section}{\fontsize{16pt}{0pt}\selectfont \bfseries \centering}
+
+\titlespacing*{\subsection}{0pt}{10pt}{0pt} % Heading 2
+\titleformat*{\subsection}{\fontsize{14pt}{0pt}\selectfont \bfseries}
+
+\titlespacing*{\subsubsection}{0pt}{10pt}{0pt} % Heading 3
+\titleformat*{\subsubsection}{\fontsize{13pt}{0pt}\selectfont \bfseries \itshape}
+
+\titlespacing*{\paragraph}{0pt}{10pt}{0pt} % Heading 4
+\titleformat*{\paragraph}{\fontsize{13pt}{0pt}\selectfont \itshape}
+
+\input{border}
+\input{getPackage}
+\input{describeTable}
+\input{describeTableRow}
+
+\makeatletter
+\let\ps@plain\ps@fancy
+\makeatother
+
+\begin{document}
+% Bìa ---------------------------------------------------------------------------
+\begin{titlepage}
+\begin{Border}
+    \begin{center}
+        \vspace{-12pt} TRƯỜNG ĐẠI HỌC BÁCH KHOA HÀ NỘI \\
+        \textbf{VIỆN CÔNG NGHỆ THÔNG TIN VÀ TRUYỀN THÔNG} \\
+        \rule{0.8\textwidth}{0.5pt} \\[1cm]
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1.53cm, height = 2.26cm]{image/Logo_Bách_Khoa.png}
+        \end{figure}
+        
+        \textbf{\fontsize{24pt}{0pt}\selectfont BÀI TẬP LỚN} \\[0.5cm]
+        \textbf{\fontsize{14pt}{0pt}\selectfont MÔN: NHẬP MÔN CÔNG NGHỆ PHẦN MỀM} \\[1cm]
+        
+        {\fontsize{20pt}{0pt} \selectfont \textbf{Quản lý thu phí, đóng góp}} \\[1cm]
+        
+        \begin{tabular}{ll}
+        \textbf{\fontsize{14pt}{0pt}\selectfont Nhóm} & \fontsize{14pt}{0pt}\selectfont : 1 \\
+        \textbf{\fontsize{14pt}{0pt}\selectfont Mã lớp học} & \fontsize{14pt}{0pt}\selectfont : 154019 \\
+        \textbf{\fontsize{14pt}{0pt}\selectfont Giáo viên hướng dẫn} & \fontsize{14pt}{0pt}\selectfont : ThS. Nguyễn Mạnh Tuấn \\
+        \end{tabular} \\[1.5cm]
+        
+        \textbf{\fontsize{14pt}{0pt}\selectfont Danh sách sinh viên thực hiện:} \\[1cm]
+        
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            \textbf{STT} & \textbf{Họ tên} & \textbf{Mã sinh viên} & \textbf{Email} & \textbf{Lớp} \\ 
+            \hline
+            1 & Trương Minh Ngọc & 20220038 & ngoc.tm220038 & KTMT-01 \\ 
+            \hline
+            2 & Nguyễn Tùng Dương & 20224968 & duong.nt224968 & KTMT-01 \\ 
+            \hline
+            3 & Lê Huy Dũng & 20224960 & dung.lh224960 & KTMT-01 \\
+            \hline
+            4 & Nguyễn Khánh Huyền & 20225016 & huyen.nk225016 & KTMT-06 \\ 
+            \hline
+            5 & Đỗ Minh Phúc & 20225064 & phuc.dm225064 & KTMT-06 \\
+            \hline
+        \end{tabular}  
+
+        \vspace{1.5cm}
+        \fontsize{14pt}{0pt}\selectfont \textbf{Hà Nội, tháng 12 năm 2024}
+    \end{center}
+\end{Border}
+\end{titlepage}
+\newpage
+
+% Trang mục lục ---------------------------------------------------------------------------
+\renewcommand{\contentsname}{\textbf{MỤC LỤC}} % Đặt tên mục lục
+\renewcommand{\cfttoctitlefont}{\hfill\fontsize{16pt}{0pt}\selectfont\bfseries} % Căn giữa và đổi font chữ
+\renewcommand{\cftaftertoctitle}{\hfill} % Giữ căn giữa sau tiêu đề
+\addcontentsline{toc}{section}{MỤC LỤC} % Thêm mục lục vào bảng mục lục
+\tableofcontents % tạo mục lục tự động
+\cleardoublepage
+
+% Lời nói đầu ---------------------------------------------------------------------------
+\section*{LỜI NÓI ĐẦU}
+\addcontentsline{toc}{section}{LỜI NÓI ĐẦU}
+Quản lý thu chi là việc mà bất cứ khu phố, tổ dân phố,… đều phải giải quyết để
+giúp minh bạch thông tin, công khai các khoản thu, ghi chép và lưu trữ lại những
+thông tin nộp phí. Để giải quyết vấn đề này cần một phần mềm có thể thay thế hoàn
+toàn những cuốn sổ ghi tay để giúp ghi lại thông tin nộp phí từ người dân, tính toán
+khoản thu. Đề tài sẽ mô tả chi tiết về những bước xây dựng lên 1 phần mềm hỗ trợ
+quản lý thu phí 
+
+Để tiếp cận và hoàn thiện đề tài, nhóm em sử dụng HTML và CSS, Java Spring 
+Boot để xây dựng phần mềm UI trên Desktop hỗ trợ việc quản lý thu phí. Để quản lý thu phí được hiệu quả phần mềm cần hỗ trợ việc quản lý nhân khẩu, hộ khẩu và các khoản thu. Phần
+mềm xây dựng giúp thống kê các khoản nộp tiền, quản lý thông tin nhân khẩu, hộ khẩu, khoản thu và các khoản nộp.
+\newpage
+
+% Trang 2-----------------------------------------------------------
+
+\section*{PHÂN CÔNG THÀNH VIÊN TRONG NHÓM}
+\addcontentsline{toc}{section}{PHÂN CÔNG THÀNH VIÊN TRONG NHÓM}
+\begin{adjustwidth}{0cm}{1cm} % Lùi vào trái và phải 1cm
+\resizebox{\textwidth}{!}
+{ % Đặt bảng vừa chiều rộng văn bản
+\begin{tabular}{|p{2.5cm}|p{3.5cm}|p{3cm}|p{4.5cm}|p{2.5cm}|}
+\hline
+\textbf{Họ và tên} & \textbf{Email} & \textbf{Điện thoại} & \textbf{Công việc thực hiện} & \textbf{Đánh giá} \\ 
+\hline
+Trương Minh Ngọc & ngoc.tm220038 & \textbf{0866137678} & Thiết kế cơ sở dữ liệu, Hỗ trợ, đóng góp xây dựng ý tưởng và tham gia làm báo cáo & Hoàn thành \\ 
+\hline
+Nguyễn Tùng Dương & duong.nt224968 & \textbf{0357981704} & Làm backend, tham gia làm báo cáo & Hoàn thành \\ 
+\hline
+Nguyễn Khánh Huyền & huyen.nk225016 & \textbf{0972950285} & Tham gia làm báo cáo & Hoàn thành \\ 
+\hline
+Lê Huy Dũng & dung.lh224960 & \textbf{0974187142} & Làm frontend, tham gia làm báo cáo & Hoàn thành \\ 
+\hline
+Đỗ Minh Phúc & phuc.dm225064 & \textbf{0963908468} & Làm frontend, tham gia làm báo cáo & Hoàn thành \\ 
+\hline
+\end{tabular}
+}
+\end{adjustwidth}
+\newpage
+
+% Trang 3 --------------------------------------------------------------------------
+\section*{CHƯƠNG 1. KHẢO SÁT BÀI TOÁN}
+\addcontentsline{toc}{section}{CHƯƠNG 1. KHẢO SÁT BÀI TOÁN}
+\setcounter{section}{1}
+\subsection{Mô tả yêu cầu bài toán}
+Bài toán quản lý thu phí, đóng góp (yêu cầu nghiệp vụ số 2)
+\begin{itemize}[leftmargin = 1.5cm]
+    \item Hàng năm tổ dân phố thực hiện thu một số khoản phí và đóng góp của các hộ gia đình, công việc này do cán bộ kế toán phụ trách. Khoản phí vệ sinh là bắt buộc với tất cả các hộ gia đình, mỗi năm thu 1 lần với định mức 6.000 VNĐ / 1 tháng / 1 nhân khẩu.
+    \item Cán bộ kế toán sẽ lập danh sách các hộ gia đình và số nhân khẩu tương ứng, sau đó đến từng nhà thu phí và ghi nhận số tiền nộp. Đối với các khoản đóng góp thì không quy định số tiền mà phụ thuộc vào từng hộ, các khoản đóng góp này được thu theo từng đợt của các cuộc vận động như: “Ủng hộ ngày thương binhliệt sỹ 27/07”, “Ủng hộ ngày tết thiếu nhi”, “Ủng hộ vì người nghèo”, Trợ giúp đồng bào bị ảnh hưởng bão lụt”,…
+    \item Cán bộ kế toán cũng cần thống kê tổng số tiền đã thu trong mỗi đợt, tổng số hộ đã nộp và có thể xem chi tiết mỗi hộ đã nộp những khoản tiền nào.
+\end{itemize}
+
+\subsection{Khảo sát bài toán}
+Một số mẫu quản lý thu phí có sẵn theo yêu cầu của bài toán được thu thập:
+
+\subsection{Xác định thông tin cơ bản cho nghiệp vụ của bài toán}
+Thông tin cơ bản cho nghiệp vụ bài toán:
+
+\subsection{Xây dựng biểu đồ mô tả nghiệp vụ và phân cấp chức năng}
+
+\subsection{Xây dựng kế hoạch dự án đơn giản}
+
+\newpage
+
+% Trang mới -----------------------------------------------------------------------
+\section*{CHƯƠNG 2. ĐẶC TẢ YÊU CẦU BÀI TOÁN}
+\addcontentsline{toc}{section}{CHƯƠNG 2. ĐẶC TẢ YÊU CẦU BÀI TOÁN}
+\setcounter{section}{2}
+\setcounter{subsection}{0}
+\subsection{Giới thiệu chung}
+Các tác nhân của hệ thống: 
+\begin{itemize}
+    \item[-] Người quản lý là người sử dụng hệ thống này, hệ thống được cung cấp thông tin từ nhân khẩu trong vùng quản lý
+    \item[-] Người quản lý sẽ duy trì và quản trị hệ thống 
+\end{itemize}
+
+Bảng liệt kê các tác nhân và mô tả thông tin cho các tác nhân
+
+\subsection{Biểu đồ use case} 
+\subsubsection{Biểu đồ use case tổng quan}
+\subsubsection{Biểu đồ use case phân rã mức 2}
+\subsection{Đặc tả use case}
+\subsection{Các yêu cầu phi chức năng}
+\newpage
+% ----------------------------------------------------------------------------
+\section*{CHƯƠNG 3. PHÂN TÍCH YÊU CẦU}
+\addcontentsline{toc}{section}{CHƯƠNG 3. PHÂN TÍCH YÊU CẦU}
+\setcounter{section}{3}
+\setcounter{subsection}{0}
+\subsection{Xác định các lớp phân tích}
+\subsection{Xây dựng biểu đồ trình tự}
+\subsection{Xây dựng biểu đồ lớp phân tích}
+\subsection{Xây dựng biểu đồ thực thể liên kết (ERD)}
+- Xác định các đối tượng dữ liệu: các đối tượng dữ liệu bao gồm nhân khẩu, hộ khẩu, các khoản phí cần nộp
+
+- Xác định các đặc tính của đối tượng dữ liệu:
+\begin{itemize}[leftmargin = 1.5cm]
+    \item Nhân khẩu: Định danh nhân khẩu, số CCCD, tuổi nhân khẩu, tên nhân khẩu, quan hệ với chủ hộ
+    \item Hộ khẩu: Mã hộ (Định danh hộ khẩu), số thành viên trong hộ khẩu, địa chỉ của hộ khẩu, thông tin về chủ hộ
+    \item Khoản phí: Mã khoản phí (định danh khoản phí), số tiền, loại khoản phí, tên khoản phí, thời gian nộp, trạng thái nộp đủ chưa
+\end{itemize}
+
+- Các mối quan hệ giữa các đối tượng dữ liệu : 
+\begin{itemize}[leftmargin = 1.5cm]
+    \item Hộ khẩu sẽ chứa nhiều nhân khẩu hay 1 nhân khẩu sẽ thuộc (nằm trong) 1 hộ khẩu.
+    \item Nhân khẩu là chủ hộ của hộ khẩu.
+    \item Khoản nộp là sự hợp thành từ 1 khoản thu và 1 hộ khẩu. 
+\end{itemize}
+
+- Biểu đồ ERD mô tả mối quan hệ giữa các đối tượng dữ liệu:
+\newpage 
+
+%---------------------------------------------------------------------
+\section*{CHƯƠNG 4. THIẾT KẾ CHƯƠNG TRÌNH}
+\addcontentsline{toc}{section}{CHƯƠNG 4. THIẾT KẾ CHƯƠNG TRÌNH}
+\setcounter{section}{4}
+\setcounter{subsection}{0}
+
+\subsection{Thiết kế kiến trúc}
+Viết kiến trúc vào đây
+
+\subsection{Thiết kế cơ sở dữ liệu}
+Sơ đồ quan hệ giữa các bảng:
+
+\describetable{Đặc tả dữ liệu cho bảng nhân khẩu:}
+{
+    \addRow\getRowWithColor{\textbf{\underline{ID}}}{int}{}{Khoá chính}{Số nguyên \newline dương}{}{white}
+    \addRow\getRowWithColor{username}{Varchar(60)}{60 ký tự}{not null}{Văn bản}{}{lightblue}
+    \addRow\getRowWithColor{\textbf{\underline{ID}}}{int}{}{Khoá chính}{Số nguyên \newline dương}{}{white}
+    \addRow\getRowWithColor{username}{Varchar(60)}{60 ký tự}{not null}{Văn bản}{}{lightblue}
+}
+
+\describetable{Đặc tả dữ liệu cho bảng tài khoản:}
+{
+    \addRow\getRowWithColor{\textbf{\underline{ID}}}{int}{}{Khoá chính}{Số nguyên \newline dương}{}{white}
+    \addRow\getRowWithColor{username}{Varchar(60)}{60 ký tự}{not null}{Văn bản}{}{lightblue}
+}
+
+\describetable{Đặc tả dữ liệu cho bảng tài khoản:}
+{
+    \addRow\getRowWithColor{\textbf{\underline{ID}}}{int}{}{Khoá chính}{Số nguyên \newline dương}{}{white}
+    \addRow\getRowWithColor{username}{Varchar(60)}{60 ký tự}{not null}{Văn bản}{}{lightblue}
+}
+
+\describetable{Đặc tả dữ liệu cho bảng tài khoản:}
+{
+    \addRow\getRowWithColor{\textbf{\underline{ID}}}{int}{}{Khoá chính}{Số nguyên \newline dương}{}{white}
+    \addRow\getRowWithColor{username}{Varchar(60)}{60 ký tự}{not null}{Văn bản}{}{lightblue}
+}
+
+\describetable{Đặc tả dữ liệu cho bảng tài khoản:}
+{
+    \addRow\getRowWithColor{\textbf{\underline{ID}}}{int}{}{Khoá chính}{Số nguyên \newline dương}{}{white}
+    \addRow\getRowWithColor{username}{Varchar(60)}{60 ký tự}{not null}{Văn bản}{}{lightblue}
+}
+\newpage
+
+%--------------------------------------------------------------------------
+
+\subsection{Thiết kế chi tiết các gói}
+
+\getpack{Biểu đồ package cho gói Controller:}{0.9}{image/Package/Controller.png}
+\getpack{Biểu đồ package cho gói Model:}{0.8}{image/Package/Model.png}
+\getpack{Biểu đồ package cho gói Service:}{0.9}{image/Package/Service.png}
+\getpack{Biểu đồ package cho gói Repository:}{0.8}{image/Package/Repository.png}
+\newpage
+\getpack{Biểu đồ package cho gói Exception:}{0.7}{image/Package/Exception.png}
+\getpack{Biểu đồ package cho gói DTO:}{0.7}{image/Package/DTO.png}
+\getpack{Biểu đồ package cho gói Config:}{0.7}{image/Package/Config.png}
+
+\subsection{Thiết kế chi tiết lớp}
+
+% \begin{tabular}{|l|l|}
+%     \hline
+%     \multicolumn{2}{c}{Class User}  \\
+%      Chứa các thông tin về nhân khẩu \newline 
+%       & 
+% \end{tabular}
+
+\subsection{Sơ đồ lớp chi tiết}
+\subsection{Thiết kế giao diện}
+
+\newpage
+
+%---------------------------------------------------------------------
+\section*{CHƯƠNG 5. XÂY DỰNG CHƯƠNG TRÌNH MINH HỌA}
+\addcontentsline{toc}{section}{CHƯƠNG 5. XÂY DỰNG CHƯƠNG TRÌNH MINH HỌA}
+\setcounter{section}{5}
+\setcounter{subsection}{0}
+\subsection{Thư viện và công cụ sử dụng}
+\begin{center}
+    \textbf{Danh sách thư viện và công cụ sử dụng} \\
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Mục đich} & \textbf{Công cụ} & \textbf{Địa chỉ URL} \\
+        \hline
+        IDE Lập trình &  & \\
+        \hline
+        Thư viện &  & \\
+        \hline
+    \end{tabular}
+\end{center}
+\subsection{Kết quả chương trình minh họa}
+\subsection{Giao diện minh hoạ các chức năng của chương trình}
+\newpage
+
+%---------------------------------------------------------------------
+\section*{CHƯƠNG 6. KIỂM THỬ CHƯƠNG TRÌNH}
+\addcontentsline{toc}{section}{CHƯƠNG 6. KIỂM THỬ CHƯƠNG TRÌNH}
+\setcounter{section}{6}
+\setcounter{subsection}{0}
+\subsection{Kiểm thử các chức năng đã thực hiện}
+\subsubsection{Kiểm thử cho chức năng quản lý nhân khẩu}
+\subsubsection{Kiểm thử cho chức năng quản lý hộ khẩu}
+\subsubsection{Kiểm thử cho chức năng quản lý khoản thu tự nguyện}
+\subsubsection{Kiểm thử cho chức năng quản lý khoản thu bắt buộc}
+\subsubsection{Kiểm thử yêu cầu phi chức năng}
+\newpage
+
+%---------------------------------------------------------------------
+\section*{CHƯƠNG 7. HƯỚNG DẪN CÀI ĐẶT VÀ SỬ DỤNG}
+\addcontentsline{toc}{section}{CHƯƠNG 7. HƯỚNG DẪN CÀI ĐẶT VÀ SỬ DỤNG}
+\setcounter{section}{7}
+\setcounter{subsection}{0}
+\subsection{Hướng dẫn cài đặt}
+\subsection{Đối tượng, phạm vi sử dụng}
+\subsection{Xác định các yêu cầu cài đặt}
+\subsection{Hướng dẫn chi tiết các bước cài đặt}
+\subsection{Hướng dẫn sử dụng phần mềm}
+\newpage
+
+%---------------------------------------------------------------------
+\section*{KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN}
+\addcontentsline{toc}{section}{KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN}
+Kết thúc quá trình phát triển phần mềm, đa số đã hoàn thành được những yêu cầu đã đặt ra trước đó của nhóm như là giúp xây dựng một phần mềm quản lý thu phí đơn giản, dễ sử dụng, công khai và minh bạch các khoản phí. Những chức năng quản lý nhân khẩu, hộ khẩu, khoản thu, nộp tiền đều hỗ trợ thêm, sửa, xóa, tìm kiếm thông tin, các chức năng đều dễ sử dụng.
+
+Tuy nhiên, do thời gian có hạn nên trong quá trình phát triển cũng còn 1 số phần mà chưa được hợp lý mà chưa thể sửa chữa ngay. Trong phần quản lý các khoản thu, các khoản thu là tự nguyện nhưng số tiền nộp vẫn bị thiết lập mặc định, chưa có thống kê chi tiết về số hộ nộp các khoản phí, số hộ chưa nộp để dễ dàng trong việc quản lý. Ngoài ra, còn một số lỗi nho nhỏ khác mà nhóm có thể chưa phát hiện ra.
+Phần mềm nếu hoạt động trên các cơ sở dữ liệu lớn thì sẽ bị chậm.
+
+Trong tương lai, nhóm chúng em sẽ cố gắng hoàn thiện phát triển phần mềm để mang lại một phần mềm có trải nghiệm tốt hơn, khắc phục được những nhược điểm bên trên. Nếu có điều kiện cho phép về thời gian, nhân lực nhóm có thể phát triển phần mềm thêm nhiều chức năng khác để giúp đơn giản hóa các công việc được thực hiện thủ công rất mệt mỏi và dễ bị nhầm lẫn.
+\newpage
+
+%---------------------------------------------------------------------
+\section*{TÀI LIỆU THAM KHẢO}
+\addcontentsline{toc}{section}{TÀI LIỆU THAM KHẢO}
+\newpage
+
+%---------------------------------------------------------------------
+\section*{PHỤ LỤC}
+\addcontentsline{toc}{section}{PHỤ LỤC}
+
+\end{document}
