@@ -19,7 +19,7 @@ public class Users {
     @Column(name = "Role")
     private String role;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "residentId", referencedColumnName = "resident_id", nullable = true)
     private Resident userOfResident;
 

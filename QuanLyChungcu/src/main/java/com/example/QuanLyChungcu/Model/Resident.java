@@ -44,6 +44,9 @@ public class Resident {
     @JoinColumn(name = "household_id")
     private Household Household_resident;
 
+    @OneToOne(mappedBy = "userOfResident", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private Users user;
+
     public Long getResidentId() {
         return residentId;
     }
@@ -114,5 +117,13 @@ public class Resident {
 
     public void setHousehold_resident(Household household_resident) {
         Household_resident = household_resident;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
     }
 }

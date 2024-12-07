@@ -42,6 +42,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public List<UserDTO> getListUser() {
+        List<Users> users = userRepository.findAll();
+        return users.stream()
+                .map(users1 -> modelMapper.map(users1, UserDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public UserDTO createUser(UserDTO userDTO) {
         Optional<Users> findUser = userRepository.findByUsername(userDTO.getUsername());
         if(findUser.isEmpty()) {
@@ -54,7 +62,38 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserDTO updateUser(String oldPassword, String newPassword) {
+    public UserDTO updateUser(Long id, UserDTO userDTO) {
+        Optional<Users> findUser = userRepository.findById(id);
+        if(findUser.isPresent()) {
+            Optional<Users> findUser1 = userRepository.findByUsername(userDTO.getUsername());
+            if(findUser1.isEmpty()) {
+                Users userToSave = findUser.get();
+                Users users = modelMapper.map(userDTO, Users.class);
+                userToSave.setUsername(users.getUsername());
+                userToSave.setPassword(passwordEncoder.encode(users.getPassword()));
+                userToSave.setUserOfResident(users.getUserOfResident());
+                return modelMapper.map(userRepository.save(userToSave), UserDTO.class);
+            }else {
+                throw new ConflictException("username da ton tai");
+            }
+        }else {
+            throw new ResourceNotFoundException("Khong ton tai user co id nay");
+        }
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        Optional<Users> findUser = userRepository.findById(id);
+        if(findUser.isPresent()) {
+            Users users = findUser.get();
+            userRepository.deleteById(id);
+        }else {
+            throw new ResourceNotFoundException("Khong ton tai user co id nay");
+        }
+    }
+
+    @Override
+    public UserDTO changePasswordUser(String oldPassword, String newPassword) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<Users> findUser = userRepository.findByUsername(authentication.getName());
         if(findUser.isPresent()) {
