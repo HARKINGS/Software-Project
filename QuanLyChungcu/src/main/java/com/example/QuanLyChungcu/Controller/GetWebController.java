@@ -8,8 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class GetWebController {
 
     @GetMapping("/user/{static_webpage}")
-    public String getWeb(@PathVariable("static_webpage") String webpage) {
+    public String getWebUser(@PathVariable("static_webpage") String webpage) {
        return webpage;
     }
 
+    @GetMapping("/admin/{static_webpage}")
+    public String getWebAmin(@PathVariable("static_webpage") String webpage) {
+       return webpage;
+    }
 }

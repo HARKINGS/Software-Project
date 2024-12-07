@@ -12,7 +12,7 @@ public class AppController {
 
     @GetMapping("/admin")
     public String admin() {
-        return "Home";  // Trả về trang admin.html
+        return "redirect:/admin/Home";
     }
 
     @GetMapping("/user")
