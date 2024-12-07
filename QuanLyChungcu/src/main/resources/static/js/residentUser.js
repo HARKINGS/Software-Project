@@ -1,15 +1,42 @@
 var residentInfo = {
-      name:"Nam",
-      birthday:"20/10/2004",
-      gender:"Nữ",
-      ID:"034303006768",
-      phone:"0974187143",
-      role:"Dân cư",
-      username:"namnu@gmail.com",
-      password:"namnu123",
-      household:"HK0123",
-      relation:"Bố chủ hộ"
-    };
+  name: "N/A",
+  birthday: "N/A",
+  gender: "N/A",
+  ID: "N/A",
+  phone: "N/A",
+  relation: "N/A"
+};
+
+    // Hàm lấy dữ liệu từ API và gán vào biến residentInfo
+    async function fetchResidentInfo() {
+      try {
+        const response = await fetch('/user/getInfo');
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+
+        // Gán dữ liệu vào biến residentInfo
+        residentInfo = {
+          name: data.name,
+          birthday: data.dateOfBirth,
+          gender: data.gender,
+          ID: data.idCard,
+          phone: data.phoneNumber,
+          relation: data.relationship
+        };
+
+        // Gọi hàm để hiển thị thông tin
+        fillInfo();
+      } catch (error) {
+        console.error('Error fetching resident info:', error);
+      }
+    }
+
+    // Gọi hàm fetch khi trang load
+    window.onload = fetchResidentInfo;
 
     function fillInfo(){
       document.getElementById('residentName').innerHTML= residentInfo.name;
@@ -17,8 +44,6 @@ var residentInfo = {
       document.getElementById('residentGender').innerHTML= residentInfo.gender;
       document.getElementById('residentID').innerHTML= residentInfo.ID;
       document.getElementById('residentPhone').innerHTML= residentInfo.phone;
-      document.getElementById('residentUsername').innerHTML= residentInfo.username;
-      document.getElementById('residentHousehold').innerHTML= residentInfo.household;
       document.getElementById('residentRelation').innerHTML= residentInfo.relation;
     }
 
