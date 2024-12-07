@@ -22,6 +22,9 @@ public class Fee {
     @Column(name = "amount", nullable = false)
     private double amount; // Số tiền cần thu
 
+    @Column(name = "collectAmount", nullable = false)
+    private double collectAmount;
+
     @NotNull(message = "Ngày hạn thanh toán không được để trống")
     @Column(name = "due_date", nullable = false)
     private LocalDate dueDate; // Ngày hạn thanh toán
@@ -56,6 +59,14 @@ public class Fee {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public double getCollectAmount() {
+        return collectAmount;
+    }
+
+    public void setCollectAmount(double collectAmount) {
+        this.collectAmount = collectAmount;
     }
 
     public LocalDate getDueDate() {

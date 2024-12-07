@@ -2,6 +2,7 @@ package com.example.QuanLyChungcu.Service;
 
 
 import com.example.QuanLyChungcu.DTO.HouseholdDTO;
+import com.example.QuanLyChungcu.DTO.ResidentDTO;
 import com.example.QuanLyChungcu.Exception.ConflictException;
 import com.example.QuanLyChungcu.Exception.ResourceNotFoundException;
 import com.example.QuanLyChungcu.Model.Household;
@@ -131,6 +132,29 @@ public class HouseholdServiceImpl implements HouseholdService{
             householdRepository.deleteById(id);
         } else {
             throw new ResourceNotFoundException("Không tồn tại hộ khẩu có id: "+id);
+        }
+    }
+
+    @Override
+    public List<ResidentDTO> getListResident(Long id) {
+        List<Resident> residents = residentRepository.findResidentsByHouseholdId(id);
+
+        return residents.stream()
+                .map(resident -> modelMapper.map(resident, ResidentDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public HouseholdDTO moveHousehold(Long id, String moveHouseholdNumber) {
+        Optional<Household> findHousehold = householdRepository.findByHouseholdNumber(moveHouseholdNumber);
+        if(findHousehold.isEmpty()) {
+            Household household = householdRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Không tồn tại hộ khẩu có id: "+id));
+            household.setHouseholdNumber(moveHouseholdNumber);
+
+            return modelMapper.map(householdRepository.save(household), HouseholdDTO.class);
+        }else {
+            throw new ConflictException("Số nhà đã có hộ khẩu");
         }
     }
 }

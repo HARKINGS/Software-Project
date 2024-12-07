@@ -1,8 +1,6 @@
 package com.example.QuanLyChungcu.Controller;
 
-import com.example.QuanLyChungcu.DTO.HouseholdDTO;
-import com.example.QuanLyChungcu.DTO.ResidentDTO;
-import com.example.QuanLyChungcu.DTO.UserDTO;
+import com.example.QuanLyChungcu.DTO.*;
 import com.example.QuanLyChungcu.Service.UserServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +25,11 @@ public class UserController {
         return userService.createUser(userDTO);
     }
 
-    // Đổi tên tài khoản hoặc mật khẩu (chỉ user mới được dùng
+    // Đổi mật khẩu (chỉ user mới được dùng)
     @PutMapping("/user/updateUser")
     @ResponseStatus(HttpStatus.OK)
-    public UserDTO updateUser(String password) {
-        return userService.updateUser(password);
+    public UserDTO updateUser(@RequestParam String oldPassword, @RequestParam String newPassword) {
+        return userService.updateUser(oldPassword, newPassword);
     }
 
     @GetMapping("/user/getInfo")
@@ -50,5 +48,17 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public List<ResidentDTO> getListResident() {
         return userService.getListResident();
+    }
+
+    @GetMapping("/user/getListFee")
+    @ResponseStatus(HttpStatus.OK)
+    public List<FeeDTO> getListFee(){
+        return userService.getListFee();
+    }
+
+    @GetMapping("/user/getListContribution")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ContributionDTO> getListContribution() {
+        return userService.getListContribution();
     }
 }

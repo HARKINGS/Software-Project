@@ -17,10 +17,11 @@ public class FeeDTO {
     @Positive(message = "Số tiền phải lớn hơn 0")
     private double amount;
 
+    private double collectAmount;
+
     @NotNull(message = "Ngày hạn thanh toán không được để trống")
     private LocalDate dueDate;
 
-    @NotNull(message = "Trạng thái thanh toán không được để trống")
     private Boolean paid;
 
     @NotNull(message = "Id hộ khẩu không được để trống")
@@ -72,5 +73,13 @@ public class FeeDTO {
 
     public void setHouseholdId(Long householdId) {
         this.householdId = householdId;
+    }
+
+    public double getCollectAmount() {
+        return collectAmount;
+    }
+
+    public void setCollectAmount(double collectAmount) {
+        this.collectAmount = collectAmount;
     }
 }

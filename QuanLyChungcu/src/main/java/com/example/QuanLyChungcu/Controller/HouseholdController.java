@@ -1,6 +1,7 @@
 package com.example.QuanLyChungcu.Controller;
 
 import com.example.QuanLyChungcu.DTO.HouseholdDTO;
+import com.example.QuanLyChungcu.DTO.ResidentDTO;
 import com.example.QuanLyChungcu.Service.HouseholdServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,17 @@ public class HouseholdController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteHouseHold(@PathVariable Long id) {
         householdService.deleteHousehold(id);
+    }
+
+    @GetMapping("/getListResident/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ResidentDTO> getListResident(@PathVariable Long id) {
+        return householdService.getListResident(id);
+    }
+
+    @PutMapping("/moveHousehold")
+    @ResponseStatus(HttpStatus.OK)
+    public HouseholdDTO moveHousehold(@RequestParam Long id, @RequestParam String moveHouseholdNumber) {
+        return householdService.moveHousehold(id, moveHouseholdNumber);
     }
 }

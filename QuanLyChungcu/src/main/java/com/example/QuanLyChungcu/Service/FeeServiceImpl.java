@@ -41,6 +41,8 @@ public class FeeServiceImpl implements FeeService{
     @Override
     public FeeDTO createFee(FeeDTO feeDTO) {
         Fee fee = modelMapper.map(feeDTO, Fee.class);
+        fee.setCollectAmount(0);
+        fee.setPaid(false);
         return modelMapper.map(feeRepository.save(fee), FeeDTO.class);
     }
 
@@ -52,8 +54,11 @@ public class FeeServiceImpl implements FeeService{
             Fee fee = modelMapper.map(feeDTO, Fee.class);
             feeToUpdate.setFeeType(fee.getFeeType());
             feeToUpdate.setAmount(fee.getAmount());
+            feeToUpdate.setCollectAmount(fee.getCollectAmount());
             feeToUpdate.setDueDate(fee.getDueDate());
-            feeToUpdate.setPaid(fee.isPaid());
+            if(fee.getAmount() == fee.getCollectAmount()) {
+                feeToUpdate.setPaid(true);
+            }
             feeToUpdate.setHousehold_fee(fee.getHousehold_fee());
             return modelMapper.map(feeRepository.save(feeToUpdate), FeeDTO.class);
         }else {

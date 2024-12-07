@@ -1,10 +1,11 @@
 package com.example.QuanLyChungcu.Service;
 
-import com.example.QuanLyChungcu.DTO.HouseholdDTO;
-import com.example.QuanLyChungcu.DTO.ResidentDTO;
-import com.example.QuanLyChungcu.DTO.UserDTO;
+import com.example.QuanLyChungcu.DTO.*;
+import com.example.QuanLyChungcu.Exception.BadRequestException;
 import com.example.QuanLyChungcu.Exception.ConflictException;
 import com.example.QuanLyChungcu.Exception.ResourceNotFoundException;
+import com.example.QuanLyChungcu.Model.Contribution;
+import com.example.QuanLyChungcu.Model.Fee;
 import com.example.QuanLyChungcu.Model.Resident;
 import com.example.QuanLyChungcu.Model.Users;
 import com.example.QuanLyChungcu.Repository.*;
@@ -53,8 +54,22 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserDTO updateUser(String password) {
-        return null;
+    public UserDTO updateUser(String oldPassword, String newPassword) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<Users> findUser = userRepository.findByUsername(authentication.getName());
+        if(findUser.isPresent()) {
+            Users users = findUser.get();
+            if(passwordEncoder.matches(oldPassword, users.getPassword())) {
+                users.setPassword(passwordEncoder.encode(newPassword));
+
+                return modelMapper.map(userRepository.save(users), UserDTO.class);
+            }else {
+                System.out.println(passwordEncoder.encode(oldPassword));
+                throw new BadRequestException("Sai mật khẩu cũ");
+            }
+        }else {
+            throw new ResourceNotFoundException("User khong ton tai");
+        }
     }
 
     @Override
@@ -92,6 +107,40 @@ public class UserServiceImpl implements UserService{
 
             return residents.stream()
                     .map(resident -> modelMapper.map(resident, ResidentDTO.class))
+                    .collect(Collectors.toList());
+        }else {
+            throw new ResourceNotFoundException("User khong ton tai");
+        }
+    }
+
+    @Override
+    public List<FeeDTO> getListFee() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<Users> findUser = userRepository.findByUsername(authentication.getName());
+        if(findUser.isPresent()) {
+            Users users = findUser.get();
+            Long id = users.getUserOfResident().getHousehold_resident().getHouseholdId();
+            List<Fee> fees = feeRepository.findFeesByHouseholdId(id);
+
+            return fees.stream()
+                    .map(fee -> modelMapper.map(fee, FeeDTO.class))
+                    .collect(Collectors.toList());
+        }else {
+            throw new ResourceNotFoundException("User khong ton tai");
+        }
+    }
+
+    @Override
+    public List<ContributionDTO> getListContribution() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<Users> findUser = userRepository.findByUsername(authentication.getName());
+        if(findUser.isPresent()) {
+            Users users = findUser.get();
+            Long id = users.getUserOfResident().getHousehold_resident().getHouseholdId();
+            List<Contribution> contributions = contributionRepository.findContributionsByHouseholdId(id);
+
+            return contributions.stream()
+                    .map(contribution -> modelMapper.map(contribution, ContributionDTO.class))
                     .collect(Collectors.toList());
         }else {
             throw new ResourceNotFoundException("User khong ton tai");
