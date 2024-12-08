@@ -99,10 +99,10 @@
 
         <!-- Các nút hành động -->
         <div class="action-buttons">
-          <button class="Buttons add" onclick="">
+          <button class="Buttons add" onclick="showAddHouse()">
             <div class="Buttons-items">Thêm hộ khẩu</div>
           </button>
-          <button class="Buttons split" onclick="">
+          <button class="Buttons split" onclick="showSplitForm()">
             <div class="Buttons-items">Tách hộ khẩu</div>
           </button>
           <button class="Buttons move" onclick="showMoveForm()">
@@ -112,7 +112,7 @@
       </div>
     </div>
 
-    <!-- Form chuyển hộ khẩu -->
+    <!-- CHUYỂN HỘ KHẨU -->
     <div class="moveHouseHold" style="display: none;">
       <h1>Chuyển hộ khẩu</h1>
       <form>
@@ -158,12 +158,12 @@
           <textarea id="ly-do" placeholder="Nhập lý do"></textarea>
         </div>
         <button type="submit" class="submit-btn">Lưu thông tin</button>
-        <button type="button" class="cancel-btn" onclick="hideMoveForm()">Hủy</button>
+        <button type="button" class="cancel-btn" onclick="exitMoveForm()">Hủy</button>
       </form>
     </div>
 
-    <!-- Form TÁCH hộ khẩu -->
-    <div class = "TachHokhau">
+    <!-- Form TÁCH HỘ KHẨU -->
+    <div class = "TachHoKhau" style="display: none;">
       <form>
         <div class = "inputField">
           <div class ="inputElement">
@@ -230,106 +230,62 @@
           </div>
           </div>
         </div>
-        <button class ="submit">Xác nhận</button> 
+        <button class ="submit">Xác nhận</button>
+        <button type="button" class="cancel-btn" onclick="exitSplitForm()">Hủy</button>
       </form>
     </div>
-
     <!-- Form THÊM hộ khẩu -->
-
-    <script>
-      const data = [
-        // Dữ liệu mẫu
-        {
-          code: "HK001",
-          name: "Nguyễn Văn A",
-          apartment: "101",
-          phone: "0912345678",
-          area: "60m²"
-        },
-        {
-          code: "HK002",
-          name: "Trần Thị B",
-          apartment: "102",
-          phone: "0987654321",
-          area: "72m²"
-        },
-        // Thêm dữ liệu nếu cần
-      ];
-
-      let currentPage = 1;
-      const rowsPerPage = 7;
-
-      function searchData() {
-        const maHoKhau = document.getElementById("ma-ho-khau").value.toLowerCase();
-        const chuHo = document.getElementById("chu-ho").value.toLowerCase();
-        const soCanHo = document.getElementById("so-can-ho").value.toLowerCase();
-
-        const filteredData = data.filter((item) => {
-          return (
-            item.code.toLowerCase().includes(maHoKhau) &&
-            item.name.toLowerCase().includes(chuHo) &&
-            item.apartment.toLowerCase().includes(soCanHo)
-          );
-        });
-
-        displayData(filteredData);
-      }
-
-      function displayData(filteredData) {
-        const tableBody = document.getElementById("table-body");
-        tableBody.innerHTML = "";
-
-        const start = (currentPage - 1) * rowsPerPage;
-        const end = currentPage * rowsPerPage;
-        const currentData = filteredData.slice(start, end);
-
-        currentData.forEach((item) => {
-          const row = document.createElement("tr");
-          row.innerHTML = `
-            <td>${item.code}</td>
-            <td>${item.name}</td>
-            <td>${item.apartment}</td>
-            <td>${item.phone}</td>
-            <td>${item.area}</td>
-            <td><button class="action-btn">Xem chi tiết</button></td>
-          `;
-          tableBody.appendChild(row);
-        });
-
-        updatePagination(filteredData.length);
-      }
-
-      function updatePagination(filteredDataLength) {
-        const totalPages = Math.ceil(filteredDataLength / rowsPerPage);
-        document.getElementById("pageNumber").innerText = `Page ${currentPage} of ${totalPages}`;
-        document.getElementById("prevBtn").disabled = currentPage === 1;
-        document.getElementById("nextBtn").disabled = currentPage === totalPages;
-      }
-
-      function showMoveForm() {
-        document.querySelector(".moveHouseHold").style.display = "block";
-      }
-
-      function hideMoveForm() {
-        document.querySelector(".moveHouseHold").style.display = "none";
-      }
-
-      document.getElementById("prevBtn").addEventListener("click", () => {
-        if (currentPage > 1) {
-          currentPage--;
-          searchData();
-        }
-      });
-
-      document.getElementById("nextBtn").addEventListener("click", () => {
-        const totalPages = Math.ceil(data.length / rowsPerPage);
-        if (currentPage < totalPages) {
-          currentPage++;
-          searchData();
-        }
-      });
-
-      searchData();
-    </script>
+    <div class="addHouse">
+      <h1>Thêm hộ khẩu</h1>
+          <!-- Form Section -->
+      <div class="form-section">
+          <form>
+              <div class="form-items">
+                  <label for="nameRes">Họ và tên chủ hộ:</label>
+                  <input type="text" id="nameHost" placeholder="Nhập vào họ và tên">
+                  </div>
+              <div class="form-items">
+                  <label for="birthday">Ngày sinh:</label>
+                  <input type="date" id="birthday">
+              </div>
+              <div class="form-items">
+                  <label for="gender">Giới tính:</label>
+                  <input type = text id="gender" placeholder="Nhập/chọn giới tính"></>
+              </div>
+              <div class="form-items">
+                  <label for="CCCD">Số CCCD:</label>
+                  <input type = text id="CCCD" placeholder="Nhập số CCCD"></>
+              </div>
+              <div class="form-items">
+                  <label for="SDT">Số điện thoại:</label>
+                  <input type = text id="SDT" placeholder="Nhập số điện thoại"></>
+              </div>
+          </form>
+          <form>
+            <div class="form-items">
+                <label for="IDHousehold">Số căn hộ:</label>
+                <input type="text" id="Addr" placeholder="Nhập vào số hộ khẩu">
+            </div>
+            <div class="form-items">
+                <label for="relation">Diện tích:</label>
+                <input type="number" id="Area" placeholder="Nhập vào diện tích căn hộ (m2)">
+            </div>
+          </form>
+      </div>
+      <button type="submit" class="submit-btn">Đăng ký</button>
+      <div id = "exit-layer">
+          <button onclick = "exitAddHouse()">Hủy</button>
+      </div>
+    </div>
+    <!-- Modal hiển thị thông tin dân cư -->
+    <div id="houseHoldModal" class="modal">
+      <div class="modal-content">
+        <!-- <span class="closeBtn" onclick="closeModal()">&times;</span> -->
+        <div id="modalDetails" class="information-household">
+          <!-- Nội dung sẽ được thêm động -->
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="/js/List_House_Hold.js"></script>
   </body>
 </html>

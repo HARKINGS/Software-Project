@@ -1,49 +1,6 @@
-// Lấy các phần tử
-const addResButton = document.querySelector(".Btn-addRes"); // Nút "Thêm dân cư"
-const layer = document.querySelector(".layer"); // Lớp "layer"
-const submitButton = document.querySelector(".submit-btn"); // Nút đăng ký (hoặc nút đóng tùy bạn)
+let currentPage = 1;
+const itemsPerPage = 5; // Hiển thị 5 dân cư mỗi trang
 
-function toggleLayerVisibility(show) {
-  if (show) {
-    // Hiện layer
-    layer.style.display = "block";
-    layer.style.position = "fixed";
-    layer.style.top = "50%";
-    layer.style.left = "50%";
-    layer.style.transform = "translate(-50%, -50%)";
-    layer.style.zIndex = "1000"; // Đảm bảo layer nổi trên các phần tử khác
-    layer.style.backgroundColor = "white"; // Đặt màu nền
-    layer.style.boxShadow = "0px 0px 10px rgba(0, 0, 0, 0.5)";
-  } else {
-    // Ẩn layer
-    layer.style.display = "none";
-  }
-}
-
-
-// Hiển thị layer khi nhấn vào nút "Thêm dân cư"
-addResButton.addEventListener("click", () => toggleLayerVisibility(true));
-
-// Ẩn layer khi nhấn nút đăng ký hoặc bên ngoài
-submitButton.addEventListener("click", () => toggleLayerVisibility(false));
-window.addEventListener("click", (event) => {
-  if (event.target === layer) {
-    toggleLayerVisibility(false);
-  }
-});
-
-function exitAddResident() {
-  const layer = document.querySelector(".layer");
-  layer.style.display = "none";
-
-  // Reset form về trạng thái ban đầu
-  const inputs = document.querySelectorAll(".layer input");
-  inputs.forEach((input) => {
-    input.value = "";
-  });
-}
-
-// Dữ liệu mẫu về dân cư
 const residents = [
   {
     residentID: "R001",
@@ -131,8 +88,76 @@ const residents = [
   },
 ];
 
-let currentPage = 1;
-const itemsPerPage = 5; // Hiển thị 5 dân cư mỗi trang
+// _____HÀM PHÂN TRANG_____
+function changePage(direction) {
+  const totalPages = Math.ceil(residents.length / itemsPerPage);
+  currentPage += direction;
+
+  if (currentPage < 1) {
+    currentPage = 1;
+  } else if (currentPage > totalPages) {
+    currentPage = totalPages;
+  }
+
+  const start = (currentPage - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  const pageResidents = residents.slice(start, end);
+
+  updateResidentTable(pageResidents);
+
+  // Cập nhật số trang
+  document.getElementById("pageNumber").textContent = `Page ${currentPage}`;
+
+  // Kiểm tra nút phân trang
+  document.getElementById("prevPage").disabled = currentPage === 1;
+  document.getElementById("nextPage").disabled = currentPage === totalPages;
+}
+
+// _______THÊM DÂN CƯ__________
+const addResButton = document.getElementById("Btn-addRes"); // Nút "Thêm dân cư"
+const layer = document.querySelector(".layer"); // Lớp "layer"
+const submitButton = document.querySelector(".submit-btn"); // Nút đăng ký (hoặc nút đóng tùy bạn)
+
+//hàm hiện form đăng ký
+function toggleLayerVisibility(show) {
+  if (show) {
+    // Hiện layer
+    layer.style.display = "block";
+    layer.style.position = "fixed";
+    layer.style.top = "50%";
+    layer.style.left = "50%";
+    layer.style.transform = "translate(-50%, -50%)";
+    layer.style.zIndex = "1000"; // Đảm bảo layer nổi trên các phần tử khác
+    layer.style.backgroundColor = "white"; // Đặt màu nền
+    layer.style.boxShadow = "0px 0px 10px rgba(0, 0, 0, 0.5)";
+  } else {
+    // Ẩn layer
+    layer.style.display = "none";
+  }
+}
+
+// Hiển thị layer khi nhấn vào nút "Thêm dân cư"
+addResButton.addEventListener("click", () => toggleLayerVisibility(true));
+
+// Ẩn layer khi nhấn nút đăng ký hoặc bên ngoài
+submitButton.addEventListener("click", () => toggleLayerVisibility(false));
+window.addEventListener("click", (event) => {
+  if (!layer.contains(event.target) && event.target !== addResButton) {
+    exitAddResident();
+  }
+});
+
+//hàm thoát đăng ký
+function exitAddResident() {
+  const layer = document.querySelector(".layer");
+  layer.style.display = "none";
+
+  // Reset form về trạng thái ban đầu
+  const inputs = document.querySelectorAll(".layer input");
+  inputs.forEach((input) => {
+    input.value = "";
+  });
+}
 
 // Hàm cập nhật bảng dân cư
 function updateResidentTable(residents) {
@@ -194,57 +219,6 @@ function deleteResident(residentID) {
   document.getElementById("nextPage").disabled = currentPage === totalPages;
 }
 
-// Hàm xóa cư dân (HỎI TRƯỚC KHI XÓA)
-// function deleteResident(residentID) {
-//   // Hiển thị hộp thoại xác nhận trước khi xóa
-//   const isConfirmed = confirm("Bạn có chắc chắn muốn xóa tài khoản này không?");
-//   if (!isConfirmed) {
-//     return; // Nếu người dùng không xác nhận, không thực hiện xóa
-//   }
-
-//   // Xóa cư dân khỏi danh sách
-//   const index = residents.findIndex((resident) => resident.residentID === residentID);
-//   if (index !== -1) {
-//     residents.splice(index, 1); // Xóa phần tử khỏi mảng
-//   }
-
-//   // Cập nhật lại bảng và phân trang
-//   const totalPages = Math.ceil(residents.length / itemsPerPage);
-//   if (currentPage > totalPages) currentPage = totalPages; // Điều chỉnh lại trang nếu số lượng trang thay đổi
-//   const start = (currentPage - 1) * itemsPerPage;
-//   const end = start + itemsPerPage;
-//   updateResidentTable(residents.slice(start, end));
-
-//   document.getElementById("pageNumber").textContent = `Page ${currentPage}`;
-//   document.getElementById("prevPage").disabled = currentPage === 1;
-//   document.getElementById("nextPage").disabled = currentPage === totalPages;
-// }
-
-// Hàm phân trang
-function changePage(direction) {
-  const totalPages = Math.ceil(residents.length / itemsPerPage);
-  currentPage += direction;
-
-  if (currentPage < 1) {
-    currentPage = 1;
-  } else if (currentPage > totalPages) {
-    currentPage = totalPages;
-  }
-
-  const start = (currentPage - 1) * itemsPerPage;
-  const end = start + itemsPerPage;
-  const pageResidents = residents.slice(start, end);
-
-  updateResidentTable(pageResidents);
-
-  // Cập nhật số trang
-  document.getElementById("pageNumber").textContent = `Page ${currentPage}`;
-
-  // Kiểm tra nút phân trang
-  document.getElementById("prevPage").disabled = currentPage === 1;
-  document.getElementById("nextPage").disabled = currentPage === totalPages;
-}
-
 // Hàm tìm kiếm theo tên
 function searchName() {
   const nameInput = document.getElementById("nameInput").value.toLowerCase();
@@ -282,7 +256,9 @@ function searchRoom() {
   );
   updateResidentTable(filteredResidents);
 }
-// Điều khiển bảng thông tin cá nhân
+
+let isModalOpen = false; // Biến kiểm tra trạng thái modal
+
 // Hiển thị modal với thông tin cư dân
 function showModal(resident) {
   const modal = document.getElementById("residentModal");
@@ -290,67 +266,70 @@ function showModal(resident) {
 
   // Cập nhật thông tin vào modal
   modalDetails.innerHTML = `
-        <div class = "box1">
-          <div class = "InformationUser">
-            <div class="basic-details">
-              <div class="detail-row">
-                <span class="label">Họ và tên:</span>
-                <input class="value" id="editName" value="${resident.name}" />
-              </div>
-              <div class="detail-row">
-                <span class="label">Ngày sinh:</span>
-                <input class="value" id="editBirthdate" value="Ngày sinh" /> <!-- Thay bằng dữ liệu thực -->
-              </div>
-              <div class="detail-row">
-                <span class="label">Giới tính:</span>
-                <input class="value" id="editGender" value="Giới tính" /> <!-- Thay bằng dữ liệu thực -->
-              </div>
-              <div class="detail-row">
-                <span class="label">Số CCCD:</span>
-                <input class="value" id="editCCCD" value="${resident.cccd}" />
-              </div>
-              <div class="detail-row">
-                <span class="label">Số điện thoại:</span>
-                <input class="value" id="editPhone" value="Số điện thoại" /> <!-- Thay bằng dữ liệu thực -->
-              </div>
-              <div class="detail-row">
-                <span class="label">Số hộ khẩu:</span>
-                <input class="value" id="editHousehold" value="${resident.household}" />
-              </div>
-            </div>
-
-            <div class="account-details">
-              <div class="detail-row">
-                <span class="label">Số phòng:</span>
-                <input class="value" id="editRoom" value="${resident.room}" />
-              </div>
-              <div class="detail-row">
-                <span class="label">Trạng thái:</span>
-                <input class="value" id="editState" value="Thường trú" />
-              </div>
-              <div class="detail-row">
-                <span class="label">Tên đăng nhập:</span>
-                <input class="value" id="editUsername" value="ngobakha@gmail.com" />
-              </div>
-              <div class="detail-row">
-                <span class="label">Mật khẩu:</span>
-                <input class="value" id="editPassword" type="password" value="********" />
-              </div>
-              <div class="detail-row">
-                <span class="label">Quan hệ với hộ:</span>
-                <input class="value" id="editRelation" value="Chủ hộ / Con chủ hộ" />
-              </div>
-            </div>
+    <div class = "box1">
+      <div class = "InformationUser">
+        <div class="basic-details">
+          <div class="detail-row">
+            <span class="label">Họ và tên:</span>
+            <input class="value" id="editName" value="${resident.name}" />
           </div>
-          <div class="modal-actions">
-              <button onclick="saveChanges()">Lưu</button>
-              <button onclick="closeModal()">Hủy</button>
-            </div>
-        </div>  
-        `;
+          <div class="detail-row">
+            <span class="label">Ngày sinh:</span>
+            <input class="value" id="editBirthdate" value="Ngày sinh" /> <!-- Thay bằng dữ liệu thực -->
+          </div>
+          <div class="detail-row">
+            <span class="label">Giới tính:</span>
+            <input class="value" id="editGender" value="Giới tính" /> <!-- Thay bằng dữ liệu thực -->
+          </div>
+          <div class="detail-row">
+            <span class="label">Số CCCD:</span>
+            <input class="value" id="editCCCD" value="${resident.cccd}" />
+          </div>
+          <div class="detail-row">
+            <span class="label">Số điện thoại:</span>
+            <input class="value" id="editPhone" value="Số điện thoại" /> <!-- Thay bằng dữ liệu thực -->
+          </div>
+          <div class="detail-row">
+            <span class="label">Số hộ khẩu:</span>
+            <input class="value" id="editHousehold" value="${resident.household}" />
+          </div>
+        </div>
+
+        <div class="account-details">
+          <div class="detail-row">
+            <span class="label">Số phòng:</span>
+            <input class="value" id="editRoom" value="${resident.room}" />
+          </div>
+          <div class="detail-row">
+            <span class="label">Trạng thái:</span>
+            <input class="value" id="editState" value="Thường trú" />
+          </div>
+          <div class="detail-row">
+            <span class="label">Tên đăng nhập:</span>
+            <input class="value" id="editUsername" value="ngobakha@gmail.com" />
+          </div>
+          <div class="detail-row">
+            <span class="label">Mật khẩu:</span>
+            <input class="value" id="editPassword" type="password" value="********" />
+          </div>
+          <div class="detail-row">
+            <span class="label">Quan hệ với hộ:</span>
+            <input class="value" id="editRelation" value="Chủ hộ / Con chủ hộ" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-actions">
+          <button onclick="saveChanges()">Lưu</button>
+          <button onclick="closeModal()">Hủy</button>
+        </div>
+    </div>  
+  `;
 
   // Hiển thị modal
   modal.style.display = "block";
+  isModalOpen = true; // Modal đã được mở
+
+  event.stopPropagation();
 }
 
 function saveChanges() {
@@ -390,10 +369,21 @@ function saveChanges() {
     });
 }
 
+// Lắng nghe sự kiện click trên toàn bộ window
+window.addEventListener("click", (event) => {
+  const modal = document.getElementById("residentModal");
+
+  // Chỉ đóng modal nếu nó đang hiển thị
+  if (isModalOpen && !modal.contains(event.target)) {
+    closeModal(); // Đóng modal
+  }
+});
+
 // Đóng modal
 function closeModal() {
   const modal = document.getElementById("residentModal");
   modal.style.display = "none";
+  isModalOpen = false; // Modal đã đóng
 }
 
 // Hiển thị trang đầu tiên khi tải trang
