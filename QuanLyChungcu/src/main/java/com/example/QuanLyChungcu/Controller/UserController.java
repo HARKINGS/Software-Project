@@ -33,17 +33,17 @@ public class UserController {
     }
 
     // Sửa thông tin user(chỉ admin mới được dùng)
-    @PutMapping("/admin/Users/{id}")
+    @PutMapping("/admin/Users/{residentId}")
     @ResponseStatus(HttpStatus.OK)
-    public UserDTO updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
-        return userService.updateUser(id, userDTO);
+    public UserDTO updateUser(@PathVariable Long residentId, @RequestBody UserDTO userDTO) {
+        return userService.updateUser(residentId, userDTO);
     }
 
     // Xóa user(Chỉ admin mới được dùng)
-    @DeleteMapping("/admin/Users/{id}")
+    @DeleteMapping("/admin/Users/{residentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+    public void deleteUser(@PathVariable Long residentId) {
+        userService.deleteUser(residentId);
     }
 
     // Đổi mật khẩu (chỉ user mới được dùng)

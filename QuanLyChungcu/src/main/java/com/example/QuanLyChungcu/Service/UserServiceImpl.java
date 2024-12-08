@@ -64,8 +64,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserDTO updateUser(Long id, UserDTO userDTO) {
-        Optional<Users> findUser = userRepository.findById(id);
+    public UserDTO updateUser(Long residentId, UserDTO userDTO) {
+        Optional<Users> findUser = userRepository.findUserByResidentId(residentId);
         if(findUser.isPresent()) {
             Optional<Users> findUser1 = userRepository.findByUsername(userDTO.getUsername());
             if(findUser1.isEmpty()) {
@@ -84,11 +84,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void deleteUser(Long id) {
-        Optional<Users> findUser = userRepository.findById(id);
+    public void deleteUser(Long residentId) {
+        Optional<Users> findUser = userRepository.findUserByResidentId(residentId);
         if(findUser.isPresent()) {
             Users users = findUser.get();
-            userRepository.deleteById(id);
+            users.getUserOfResident().setUser(null);
+            users.setUserOfResident(null);
+            userRepository.delete(users);
         }else {
             throw new ResourceNotFoundException("Khong ton tai user co id nay");
         }
