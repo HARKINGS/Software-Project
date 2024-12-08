@@ -23,7 +23,7 @@ var residentInfo = {
           name: data.name,
           birthday: data.dateOfBirth,
           gender: data.gender,
-          ID: data.idCard,
+          ID: data.cccd,
           phone: data.phoneNumber,
           relation: data.relationship
         };

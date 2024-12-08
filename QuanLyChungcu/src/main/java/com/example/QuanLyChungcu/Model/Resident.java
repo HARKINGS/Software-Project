@@ -29,8 +29,8 @@ public class Resident {
     private String phoneNumber;
 
     @NotBlank(message = "Số CCCD không được để trống")
-    @Column(name = "id_card", nullable = false, length = 20)
-    private String idCard;
+    @Column(name = "CCCD", nullable = false, length = 20)
+    private String cccd;
 
     @NotBlank(message = "Phải có quan hệ với chủ hộ")
     @Column(name = "Quan he voi chu ho", nullable = false)
@@ -71,12 +71,12 @@ public class Resident {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getIdCard() {
-        return idCard;
+    public String getCccd() {
+        return cccd;
     }
 
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
+    public void setCccd(String cccd) {
+        this.cccd = cccd;
     }
 
     public String getGender() {

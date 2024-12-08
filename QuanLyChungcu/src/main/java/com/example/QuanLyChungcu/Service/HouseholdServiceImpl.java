@@ -54,7 +54,7 @@ public class HouseholdServiceImpl implements HouseholdService{
             throw new ConflictException("Số nhà đã tồn tại");
         }
         Household householdToSave = new Household();
-        Optional<Resident> findResident = residentRepository.findByIdCard(householdDTO.getChuHo().getIdCard());
+        Optional<Resident> findResident = residentRepository.findByCccd(householdDTO.getChuHo().getCccd());
         Resident owner;
 
         if(findResident.isPresent()) {
@@ -63,7 +63,7 @@ public class HouseholdServiceImpl implements HouseholdService{
             owner = new Resident();
             owner.setName(householdDTO.getChuHo().getName());
             owner.setDateOfBirth(householdDTO.getChuHo().getDateOfBirth());
-            owner.setIdCard(householdDTO.getChuHo().getIdCard());
+            owner.setCccd(householdDTO.getChuHo().getCccd());
             owner.setGender(householdDTO.getChuHo().getGender());
             owner.setPhoneNumber(householdDTO.getChuHo().getPhoneNumber());
             owner.setRelationship("Chủ hộ");
@@ -91,12 +91,12 @@ public class HouseholdServiceImpl implements HouseholdService{
             householdToUpdate.setHouseholdNumber(householdDTO.getHouseholdNumber());
             householdToUpdate.setApartmentSize(householdDTO.getApartmentSize());
 
-            Optional<Resident> findResident = residentRepository.findByIdCard(householdDTO.getChuHo().getIdCard());
+            Optional<Resident> findResident = residentRepository.findByCccd(householdDTO.getChuHo().getCccd());
             if(findResident.isEmpty()) {
                 Resident residentToSave = new Resident();
                 residentToSave.setName(householdDTO.getChuHo().getName());
                 residentToSave.setDateOfBirth(householdDTO.getChuHo().getDateOfBirth());
-                residentToSave.setIdCard(householdDTO.getChuHo().getIdCard());
+                residentToSave.setCccd(householdDTO.getChuHo().getCccd());
                 residentToSave.setGender(householdDTO.getChuHo().getGender());
                 residentToSave.setPhoneNumber(householdDTO.getChuHo().getPhoneNumber());
                 residentToSave.setRelationship("Chủ hộ");
@@ -109,7 +109,7 @@ public class HouseholdServiceImpl implements HouseholdService{
                 Resident residentToUpdate = findResident.get();
                 residentToUpdate.setName(householdDTO.getChuHo().getName());
                 residentToUpdate.setDateOfBirth(householdDTO.getChuHo().getDateOfBirth());
-                residentToUpdate.setIdCard(householdDTO.getChuHo().getIdCard());
+                residentToUpdate.setCccd(householdDTO.getChuHo().getCccd());
                 residentToUpdate.setGender(householdDTO.getChuHo().getGender());
                 residentToUpdate.setPhoneNumber(householdDTO.getChuHo().getPhoneNumber());
                 residentToUpdate.setRelationship("Chủ hộ");
@@ -145,6 +145,7 @@ public class HouseholdServiceImpl implements HouseholdService{
     }
 
     @Override
+    @Transactional
     public HouseholdDTO moveHousehold(Long id, String moveHouseholdNumber) {
         Optional<Household> findHousehold = householdRepository.findByHouseholdNumber(moveHouseholdNumber);
         if(findHousehold.isEmpty()) {

@@ -7,6 +7,7 @@ import com.example.QuanLyChungcu.Model.Household;
 import com.example.QuanLyChungcu.Model.Resident;
 import com.example.QuanLyChungcu.Repository.HouseholdRepository;
 import com.example.QuanLyChungcu.Repository.ResidentRepository;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,7 @@ public class ResidentServiceImpl implements ResidentService {
 
     @Override
     public ResidentDTO createResident(ResidentDTO residentDTO) {
-        Optional<Resident> findResident = residentRepository.findByIdCard(residentDTO.getIdCard());
+        Optional<Resident> findResident = residentRepository.findByCccd(residentDTO.getCccd());
         if(findResident.isPresent()) {
             throw new ConflictException("Căn cước công dân đã tồn tại");
         }else {
@@ -55,6 +56,7 @@ public class ResidentServiceImpl implements ResidentService {
     }
 
     @Override
+    @Transactional
     public ResidentDTO updateResident(Long id, ResidentDTO residentDTO) {
         Optional<Resident> findResident = residentRepository.findById(id);
         if(findResident.isPresent()) {
@@ -63,7 +65,7 @@ public class ResidentServiceImpl implements ResidentService {
             // Update data
             residentToUpdate.setName(resident.getName());
             residentToUpdate.setDateOfBirth(resident.getDateOfBirth());
-            residentToUpdate.setIdCard(resident.getIdCard());
+            residentToUpdate.setCccd(resident.getCccd());
             residentToUpdate.setGender(resident.getGender());
             residentToUpdate.setPhoneNumber(resident.getPhoneNumber());
             residentToUpdate.setRelationship(resident.getRelationship());
@@ -81,6 +83,7 @@ public class ResidentServiceImpl implements ResidentService {
     }
 
     @Override
+    @Transactional
     public void deleteResident(Long id) {
         Optional<Resident> findResident = residentRepository.findById(id);
         if(findResident.isPresent()) {

@@ -114,8 +114,8 @@ public class ModelMapperConfig {
                     UserDTO source = context.getSource();
                     Users destination = context.getDestination();
 
-                    if(source.getResidnetId() != null) {
-                        Resident resident = residentRepository.findById(source.getResidnetId())
+                    if(source.getResidentId() != null) {
+                        Resident resident = residentRepository.findById(source.getResidentId())
                                 .orElseThrow(() -> new ResourceNotFoundException("Khong ton tai nhan khau co id nay"));
 
                         destination.setUserOfResident(resident);
@@ -127,7 +127,7 @@ public class ModelMapperConfig {
         Mapper.typeMap(Users.class, UserDTO.class)
                 .addMappings(mapper -> {
                     mapper.map(src -> src.getUserOfResident().getResidentId(),
-                            UserDTO::setResidnetId);
+                            UserDTO::setResidentId);
                 });
         return Mapper;
     }

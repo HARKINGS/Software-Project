@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface ResidentRepository extends JpaRepository<Resident, Long> {
-    Optional<Resident> findByIdCard(String idCard);
+    Optional<Resident> findByCccd(String cccd);
     @Query("SELECT r FROM Resident r WHERE r.Household_resident.householdId = :householdId")
     List<Resident> findResidentsByHouseholdId(Long householdId);
 }

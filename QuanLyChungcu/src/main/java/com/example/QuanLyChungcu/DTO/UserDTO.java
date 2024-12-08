@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class UserDTO {
+    private Long id;
+
     @NotBlank(message = "Tên tài khoản không được trống")
     private String username;
 
@@ -14,7 +16,15 @@ public class UserDTO {
     private String role;
 
     @NotNull(message = "Phải liên kết với resident thông qua residentId")
-    private Long residnetId;
+    private Long residentId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -40,11 +50,11 @@ public class UserDTO {
         this.role = role;
     }
 
-    public Long getResidnetId() {
-        return residnetId;
+    public Long getResidentId() {
+        return residentId;
     }
 
-    public void setResidnetId(Long residnetId) {
-        this.residnetId = residnetId;
+    public void setResidentId(Long residnetId) {
+        this.residentId = residnetId;
     }
 }

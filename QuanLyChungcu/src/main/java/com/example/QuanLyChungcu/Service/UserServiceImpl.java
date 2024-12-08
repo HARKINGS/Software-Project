@@ -9,6 +9,7 @@ import com.example.QuanLyChungcu.Model.Fee;
 import com.example.QuanLyChungcu.Model.Resident;
 import com.example.QuanLyChungcu.Model.Users;
 import com.example.QuanLyChungcu.Repository.*;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -50,6 +51,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public UserDTO createUser(UserDTO userDTO) {
         Optional<Users> findUser = userRepository.findByUsername(userDTO.getUsername());
         if(findUser.isEmpty()) {

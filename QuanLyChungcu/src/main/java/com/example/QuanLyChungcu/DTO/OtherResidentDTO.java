@@ -17,7 +17,7 @@ public class OtherResidentDTO {
     private LocalDate dateOfBirth;
 
     @NotBlank(message = "Số CCCD không được để trống")
-    private String idCard;
+    private String cccd;
 
     @NotBlank(message = "Giới tính không được trống")
     private String gender;
@@ -52,12 +52,12 @@ public class OtherResidentDTO {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getIdCard() {
-        return idCard;
+    public String getCccd() {
+        return cccd;
     }
 
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
+    public void setCccd(String cccd) {
+        this.cccd = cccd;
     }
 
     public String getGender() {
