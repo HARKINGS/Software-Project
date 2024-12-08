@@ -8,7 +8,6 @@
   display: flex;
   gap: 25px;
   /* justify-content: space-between; */
-  
 }
 
 .search label {
@@ -21,37 +20,6 @@
   margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-}
-
-/* Định dạng cho bảng thông tin */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-th,
-td {
-  padding: 12px 15px;
-  text-align: left;
-  font-size: 16px;
-  color: #333;
-}
-
-th {
-  background-color: #3498db;
-  color: white;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-tr:hover {
-  background-color: #e1e1e1;
 }
 
 button.delete {
@@ -139,12 +107,11 @@ button.delete:hover {
   word-wrap: break-word;
 }
 
-
 .action-buttons {
   padding: 20px 0px;
   position: absolute;
-  bottom: 0; 
-  right: 20px ; 
+  bottom: 0;
+  right: 20px;
   display: flex;
   gap: 20px;
 }
@@ -163,7 +130,7 @@ button.delete:hover {
   background: #2ecc71;
 }
 
-/* form chuyển hộ khẩu */
+/* CHUYỂN HỘ KHẨU */
 .moveHouseHold {
   display: none;
   position: fixed;
@@ -176,7 +143,7 @@ button.delete:hover {
   border-radius: 10px;
   z-index: 1000;
   min-width: 500px;
-  width: 40%; 
+  width: 40%;
 }
 
 .moveHouseHold h1 {
@@ -258,7 +225,7 @@ button.delete:hover {
 }
 
 .form-items-row .form-items {
-    width: 350px;
+  width: 350px;
 }
 
 .submit-btn {
@@ -277,95 +244,119 @@ button.delete:hover {
   background-color: #216fa3;
 }
 
-/* Tách hộ khẩu */
+/* _____TÁCH HỘ KHẨU_____ */
+.TachHoKhau {
+  display: none; /* Hiển thị khi cần */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  border-radius: 10px;
+  z-index: 1000;
+  min-width: 500px;
+  width: 70%;
+}
 
-.TachHokhau form{
+.TachHoKhau form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.TachHokhau form {
   display: none;
-  position:relative;
-  width:80%;
-  height:90vh;
+  position: relative;
+  width: 70%;
+  height: 90vh;
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  margin :8px 10%;
-  border-radius:25px;
+  margin: 8px 10%;
+  border-radius: 25px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-  overflow:hidden;
+  overflow: hidden;
 }
 
-.inputField{
-/*  background-color:yellow;*/
-margin-top:10px;
-margin-left :7%;
-width:90%;
-display: flex;
-flex-direction: row; 
-flex-wrap: wrap;
-}
-
-.inputElement{
-/*  background-color:pink;*/
-flex: 1 0 48%;
-margin: 7px;
-display:flex;
-flex-direction:column;
-}
-
-.inputElement span{
-color: #db4646;
-font-weight: 600;
-font-size:18px;
-min-width: 120px;
-}
-
-.inputElement input{
-background-color: #eee;
-outline: none;
-padding:5px 10px;
-width:70%;
-font-size:17px;
-margin:5px 30px;
-}
-
-.changeList{
-/*  background-color:cyan;*/
-margin-left:7%;
-margin-right:7%;
-height:45vh;
-}
-
-.changeList span{
-color: #db4646;
-font-weight: 600;
-font-size:16px;
-min-width: 120px;
-}
-
-.tableZone{
-/*    background-color:red;*/
-  height:100%;
-  width:100%;
-  overflow:hidden;   
+.inputField {
+  /*  background-color:yellow;*/
+  margin-top: 10px;
+  margin-left: 7%;
+  width: 90%;
   display: flex;
-  flex-direction: row;  
+  flex-direction: row;
+  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
-.table_container{
+.inputElement {
+  /*  background-color:pink;*/
+  flex: 1 0 48%;
+  margin: 7px;
+  display: flex;
+  flex-direction: column;
+}
 
-  position:relative;
-  height:100%;
-  padding:30px;
-  width:50%;
-  display:inline-block;
+.inputElement span {
+  font-weight: 600;
+  font-size: 1.6rem;
+  min-width: 120px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #34495e;
+}
+
+.inputElement input {
+  background-color: #eee;
+  outline: none;
+  padding: 5px 10px;
+  width: 70%;
+  font-size: 17px;
+  margin: 5px 30px;
+}
+
+.changeList {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.changeList span {
+  color: #db4646;
+  font-weight: 600;
+  font-size: 16px;
+  min-width: 120px;
+}
+
+.tableZone {
+  /*    background-color:red;*/
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+}
+
+.table_container {
+  position: relative;
+  height: 100%;
+  padding: 30px;
+  width: 50%;
+  display: inline-block;
 }
 
 .table_container table {
   width: 100%;
-  max-height:100%;
+  max-height: 100%;
   border-collapse: collapse;
   border-radius: 5px;
   overflow: hidden;
-  box-shadow:5px 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 table th,
@@ -379,23 +370,25 @@ table td {
 .tableZone table th {
   background-color: #3498db;
   color: white;
-  text-align:center;
+  text-align: center;
 }
-td:nth-child(1),th:nth-child(1){
-  width:20%;
+td:nth-child(1),
+th:nth-child(1) {
+  width: 20%;
 }
-td:nth-child(2),th:nth-child(2){
-  width:50%;
-}
-
-td:nth-child(1), td:nth-child(2){
-padding-left:5px;
+td:nth-child(2),
+th:nth-child(2) {
+  width: 50%;
 }
 
+td:nth-child(1),
+td:nth-child(2) {
+  padding-left: 5px;
+}
 
-.tableZone tr{
-  height:45px;
-  background-color:#e7e9eb;
+.tableZone tr {
+  height: 45px;
+  background-color: #e7e9eb;
 }
 
 .tableZone table tr:nth-child(even) {
@@ -406,29 +399,116 @@ padding-left:5px;
   background-color: #ddd;
 }
 
-
-.tableZone table td:nth-child(3){
-text-align:center;
+.tableZone table td:nth-child(3) {
+  text-align: center;
 }
 
-.submit{
-width:20%;
-position: absolute;
-bottom:5px;
-right:20px;
-background-color: #512da8;
-color: #fff;
-font-size: 14px;
-width:10%;
-padding:10px 5px;
-border: 1px solid transparent;
-border-radius: 8px;
-font-weight: 600;
-letter-spacing: 0.5px;
-text-transform: uppercase;
-margin-top: 10px;
-cursor: pointer;
+.submit {
+  width: 20%;
+  position: absolute;
+  bottom: 5px;
+  right: 20px;
+  background-color: #512da8;
+  color: #fff;
+  font-size: 14px;
+  width: 10%;
+  padding: 10px 5px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  cursor: pointer;
 }
 
+/* THÊM HỘ KHẨU */
+.addHouse {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1000;
+  min-width: 500px;
+  width: 40%;
+}
 
-/* _____________ */ 
+.form-section-btn {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+#exit-layer {
+  display: block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #f44336;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#exit-layer:hover {
+  background-color: #ba372d;
+  cursor: pointer;
+}
+
+/*____THÔNG TIN CHI TIẾT HỘ KHẨU____*/
+#houseHoldModal {
+  display: none; /* Ẩn modal khi chưa được mở */
+  position: fixed; /* Đảm bảo modal đứng trên trang */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Đặt modal ở giữa màn hình */
+  width: 80%; /* Kích thước modal */
+  max-width: 900px; /* Đảm bảo modal không quá rộng */
+  background-color: white; /* Màu nền của modal */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Tạo bóng cho modal */
+  z-index: 9999; /* Đảm bảo modal nổi bật hơn */
+  min-height: 350px;
+}
+
+.information-household {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.basic-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.basic-details .detail-row {
+  display: flex;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.label {
+  color: #db4646;
+  font-weight: 600;
+  min-width: 120px;
+}
+
+.value {
+  font-size: 1.6rem;
+  color: black;
+  font-weight: 400;
+  border: 1px solid #555;
+  height: 20px;
+  padding: 10px;
+  background-color: #fff;
+}

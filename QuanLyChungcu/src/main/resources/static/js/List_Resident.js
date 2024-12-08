@@ -257,6 +257,7 @@ function searchRoom() {
   updateResidentTable(filteredResidents);
 }
 
+//_____THÔNG TIN CHI TIẾT CƯ DÂN_____
 let isModalOpen = false; // Biến kiểm tra trạng thái modal
 
 // Hiển thị modal với thông tin cư dân
