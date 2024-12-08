@@ -49,8 +49,8 @@ public class UserController {
     // Đổi mật khẩu (chỉ user mới được dùng)
     @PutMapping("/user/changePassword")
     @ResponseStatus(HttpStatus.OK)
-    public UserDTO changePasswordUser(@RequestParam String oldPassword, @RequestParam String newPassword) {
-        return userService.changePasswordUser(oldPassword, newPassword);
+    public UserDTO changePasswordUser(@RequestBody @Valid changePasswordDTO changePasswordDTO) {
+        return userService.changePasswordUser(changePasswordDTO.getOldPassword(), changePasswordDTO.getNewPassword());
     }
 
     // Lấy thông tin cá nhân của user

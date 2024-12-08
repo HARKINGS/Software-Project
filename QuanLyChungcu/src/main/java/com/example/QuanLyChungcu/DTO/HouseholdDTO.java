@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
 public class HouseholdDTO {
-
     private Long householdId;
 
     @NotBlank(message = "Số nhà không được trống")

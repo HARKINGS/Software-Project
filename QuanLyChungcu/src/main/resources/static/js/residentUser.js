@@ -54,3 +54,49 @@ var residentInfo = {
     function exitChangePassword(){
       document.getElementById("wrapper_1").style.display = "none";
     }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const changeInfoForm = document.querySelector("#changeInfoForm");
+
+    changeInfoForm.addEventListener("submit", async function (event) {
+        event.preventDefault(); // Ngăn hành động mặc định của form
+
+        const oldPasswordInput = changeInfoForm.querySelector("input[placeholder='Nhập mật khẩu cũ']").value;
+        const newPasswordInput = changeInfoForm.querySelector("input[placeholder='Nhập mật khẩu mới']").value;
+        const confirmPasswordInput = changeInfoForm.querySelector("input[placeholder='Xác nhận mật khẩu mới']").value;
+
+        // Kiểm tra mật khẩu mới và xác nhận mật khẩu có khớp nhau không
+        if (newPasswordInput !== confirmPasswordInput) {
+            alert("Mật khẩu mới và xác nhận mật khẩu không khớp.");
+            return;
+        }
+
+        try {
+            const response = await fetch("/user/changePassword", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    oldPassword: oldPasswordInput,
+                    newPassword: newPasswordInput
+                })
+            });
+
+            if (!response.ok) {
+                // Nếu phản hồi không thành công
+                const errorData = await response.json();
+                alert(errorData.message || "Đã xảy ra lỗi khi đổi mật khẩu.");
+            } else {
+                // Nếu thành công
+                const responseData = await response.json();
+                alert("Đổi mật khẩu thành công! Hãy đăng nhập lại.");
+                // Điều hướng hoặc thực hiện thêm hành động khác nếu cần
+                window.location.href = "/logout";
+            }
+        } catch (error) {
+            console.error("Đã xảy ra lỗi khi gọi API:", error);
+            alert("Đã xảy ra lỗi trong quá trình xử lý.");
+        }
+    });
+});
