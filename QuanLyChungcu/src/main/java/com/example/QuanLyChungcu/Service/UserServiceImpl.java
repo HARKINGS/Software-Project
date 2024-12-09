@@ -64,11 +64,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserDTO updateUser(Long residentId, UserDTO userDTO) {
-        Optional<Users> findUser = userRepository.findUserByResidentId(residentId);
+    public UserDTO updateUser(Long id, UserDTO userDTO) {
+        Optional<Users> findUser = userRepository.findById(id);
         if(findUser.isPresent()) {
             Optional<Users> findUser1 = userRepository.findByUsername(userDTO.getUsername());
-            if(findUser1.isEmpty()) {
+            if(findUser1.isEmpty() || id == findUser1.get().getId()) {
                 Users userToSave = findUser.get();
                 Users users = modelMapper.map(userDTO, Users.class);
                 userToSave.setUsername(users.getUsername());
@@ -84,8 +84,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void deleteUser(Long residentId) {
-        Optional<Users> findUser = userRepository.findUserByResidentId(residentId);
+    public void deleteUser(Long id) {
+        Optional<Users> findUser = userRepository.findById(id);
         if(findUser.isPresent()) {
             Users users = findUser.get();
             users.getUserOfResident().setUser(null);

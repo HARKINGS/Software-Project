@@ -34,18 +34,18 @@ function renderTable(data) {
     `;
 
     data.forEach((account, index) => {
-        tbody.innerHTML += `
-            <tr>
-                <td>${account.username}</td>
-                <td>${account.password}</td>
-                <td>${account.residentId}</td>
-                <td>
-                    <button onclick="deleteRow(${index})">Xóa</button>
-                    <button onclick="editRow(${index})">Sửa</button>
-                </td>
-            </tr>
-        `;
-    });
+            tbody.innerHTML += `
+                <tr data-id="${account.id}">
+                    <td>${account.username}</td>
+                    <td>${account.password}</td>
+                    <td>${account.residentId}</td>
+                    <td>
+                        <button onclick="deleteRow(${index})">Xóa</button>
+                        <button onclick="editRow(${index})">Sửa</button>
+                    </td>
+                </tr>
+            `;
+        });
 }
 
 function addRow() {
@@ -89,16 +89,16 @@ async function createUser(user) {
 }
 
 async function deleteRow(index) {
-    const residentId = accounts[index].residentId;
-    console.log("Resident ID:", residentId);
+    const id = accounts[index].id;
+    console.log("ID:", id);
 
-    if (!residentId) {
-        alert("Resident ID không hợp lệ!");
+    if (!id) {
+        alert("ID không hợp lệ!");
         return;
     }
 
     try {
-        const response = await fetch(`/admin/Users/${residentId}`, {
+        const response = await fetch(`/admin/Users/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -147,7 +147,7 @@ async function saveRow(index) {
                 residentId: newResidentId,
             };
 
-            const response = await fetch(`/admin/Users/${accounts[index].residentId}`, {
+            const response = await fetch(`/admin/Users/${accounts[index].id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -183,11 +183,11 @@ function filterData() {
         .getElementById("userID")
         .value.toLowerCase();
 
-    const filteredData = accounts.filter(
-            (account) =>
-                (account.username?.toLowerCase().includes(nameFilter) || '') &&
-                (account.userID?.toLowerCase().includes(userIDFilter) || '')
-        );
+    const filteredData = accounts.filter((account) => {
+        const usernameMatch = nameFilter === '' || account.username?.toLowerCase().includes(nameFilter);
+        const residentIdMatch = userIDFilter === '' || account.residentId?.toLowerCase().includes(userIDFilter);
+        return usernameMatch && residentIdMatch;
+    });
 
     renderTable(filteredData);
 }

@@ -41,8 +41,6 @@ public class FeeServiceImpl implements FeeService{
     @Override
     public FeeDTO createFee(FeeDTO feeDTO) {
         Fee fee = modelMapper.map(feeDTO, Fee.class);
-        fee.setCollectAmount(0);
-        fee.setPaid(false);
         return modelMapper.map(feeRepository.save(fee), FeeDTO.class);
     }
 

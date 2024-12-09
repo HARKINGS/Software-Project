@@ -1,72 +1,81 @@
-const data = [
-  {
-    dueDate: "2023-12-15",
-    houseId: "H001",
-    name: "Phí vệ sinh",
-    total: 50000,
-    paid: 50000,
-  },
-  {
-    dueDate: "2023-12-20",
-    houseId: "H002",
-    name: "Phí bảo vệ",
-    total: 30000,
-    paid: 20000,
-  },
-];
+document.addEventListener("DOMContentLoaded", async () => {
+    try {
+        const response = await fetch("/admin/fee", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
 
-let filteredData = [...data];
-let currentPage = 1;
-const rowsPerPage = 10;
+        if (!response.ok) {
+            throw new Error("Không thể tải danh sách khoản thu. Vui lòng thử lại sau.");
+        }
 
-const tableBody = document.querySelector("#FeeTable tbody");
+        const fees = await response.json(); // Lấy dữ liệu JSON từ phản hồi
+        data = fees; // Cập nhật danh sách khoản thu
+        filteredData = data; // Cập nhật dữ liệu lọc
+        currentPage = 1; // Reset về trang đầu tiên sau khi tải lại dữ liệu
+        renderTable(currentPage); // Hiển thị bảng với phân trang
+    } catch (error) {
+        console.error("Đã xảy ra lỗi khi tải dữ liệu:", error);
+        alert("Không thể tải dữ liệu. Vui lòng thử lại sau.");
+    }
+});
+
+let data = []; // Dữ liệu ban đầu
+let filteredData = [...data]; // Dữ liệu đã lọc
+let currentPage = 1; // Trang hiện tại
+const rowsPerPage = 10; // Số dòng mỗi trang
+const tableBody = document.querySelector("#FeeTable tbody"); // Lấy phần thân bảng
 
 // Hàm hiển thị bảng với phân trang
+// Hàm hiển thị bảng với phân trang
 function renderTable(page) {
-  const start = (page - 1) * rowsPerPage;
-  const end = start + rowsPerPage;
-  const pageData = filteredData.slice(start, end);
-  const inputRow = document.getElementById("inputRow");
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    const pageData = filteredData.slice(start, end);
+    const inputRow = document.getElementById("inputRow");
 
-  tableBody.innerHTML = "";
-  tableBody.appendChild(inputRow);
+    tableBody.innerHTML = ""; // Xóa bảng hiện tại
+    tableBody.appendChild(inputRow); // Thêm dòng nhập liệu (nếu có)
 
-  pageData.forEach((row, index) => {
-    const status = row.paid >= row.total ? "Hoàn tất" : "Chưa hoàn tất";
-    const statusClass = row.paid >= row.total ? "completed" : "incomplete";
+    pageData.forEach((row, index) => {
+        const status = row.paid ? "Hoàn tất" : "Chưa hoàn tất";
+        const statusClass = row.paid ? "completed" : "incomplete";
 
-    const tr = document.createElement("tr");
-    tr.setAttribute("data-index", start + index);
-    tr.innerHTML = `
-      <td>${row.dueDate}</td>
-      <td>${row.houseId}</td>
-      <td>${row.name}</td>
-      <td>${row.total.toLocaleString()} VND</td>
-      <td>
-        <span>${row.paid.toLocaleString()} VND</span>
-        <input type="number" class="editPaidInput" style="display:none;" value="${
-          row.paid
-        }" />
-      </td>
-      <td><span class="status ${statusClass}">${status}</span></td>
-      <td>
-        <button onclick="editRow(this)">Sửa</button>
-        <button onclick="deleteRow(${start + index})">Xóa</button>
-      </td>
-    `;
-    tableBody.appendChild(tr);
-  });
+        const tr = document.createElement("tr");
+        tr.setAttribute("data-index", start + index);
+        tr.innerHTML = `
+            <td>${row.dueDate}</td>
+            <td>${row.householdId}</td>
+            <td>${row.feeType}</td>
+            <td>${row.amount.toLocaleString()} VND</td>
+            <td>
+                <span>${row.collectAmount.toLocaleString()} VND</span>
+                <input type="number" class="editPaidInput" style="display:none;" value="${row.collectAmount}" />
+            </td>
+            <td><span class="status ${statusClass}">${status}</span></td>
+            <td>
+                <button onclick="editRow(this)">Sửa</button>
+                <button onclick="deleteRow(${start + index})">Xóa</button>
+            </td>
+        `;
+        tableBody.appendChild(tr);
+    });
 
-  document.getElementById("pageNumber").textContent = `Page ${page}`;
-  updatePaginationButtons();
+    document.getElementById("pageNumber").textContent = `Page ${page}`; // Cập nhật số trang
+    updatePaginationButtons(); // Cập nhật trạng thái các nút phân trang
 }
 
 // Kiểm tra và cập nhật trạng thái nút phân trang
 function updatePaginationButtons() {
-  document.getElementById("prevPage").disabled = currentPage === 1;
-  document.getElementById("nextPage").disabled =
-    currentPage * rowsPerPage >= filteredData.length;
+    document.getElementById("prevPage").disabled = currentPage === 1;
+    document.getElementById("nextPage").disabled =
+        currentPage * rowsPerPage >= filteredData.length;
 }
+
+// Các hàm khác như `editRow`, `deleteRow`, `resetInputRow` cần đảm bảo đã được định nghĩa đúng.
+
 
 // Lọc kết quả theo các điều kiện nhập vào
 function filterResults() {
@@ -123,37 +132,90 @@ function addNewRow() {
     return;
   }
 
-  data.push({
-    dueDate: newDueDate,
-    houseId: newHouseId,
-    name: newName,
-    total: newTotal,
-    paid: newPaid,
-  });
+  const newFee = {
+      dueDate: newDueDate,
+      householdId: newHouseId,
+      feeType: newName,
+      amount: newTotal,
+      collectAmount: newPaid,
+      paid: newPaid >= newTotal
+    };
 
-  filteredData = [...data];
-  renderTable(currentPage);
-  resetInputRow();
+    console.log("Dữ liệu gửi đi:", JSON.stringify(newFee));
+
+    // Gửi yêu cầu POST để thêm dữ liệu mới vào server
+    fetch("/admin/fee", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newFee),
+    })
+      .then(response => {
+        if (response.status !== 201) {
+          throw new Error("Không thể thêm khoản thu. Vui lòng thử lại.");
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Cập nhật dữ liệu với phản hồi từ server
+        // Cập nhật filteredData và hiển thị lại bảng
+        newFee.feeId = data.feeId;
+        filteredData.push(newFee);
+        renderTable(currentPage); // Hiển thị lại bảng với dữ liệu mới
+        resetInputRow(); // Reset ô nhập liệu
+        alert("Thêm khoản thu thành công!");
+      })
+      .catch(error => {
+        console.error("Đã xảy ra lỗi khi thêm khoản thu:", error);
+        alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
+      });
 }
 
 // Xóa một dòng
 function deleteRow(index) {
-  if (confirm("Bạn có chắc muốn xóa khoản thu này không?")) {
-    data.splice(index, 1);
-    filteredData = [...data];
-    currentPage = Math.min(
-      currentPage,
-      Math.ceil(filteredData.length / rowsPerPage)
-    );
-    renderTable(currentPage);
-  }
+  const feeId = filteredData[index].feeId; // Lấy feeId từ đối tượng dữ liệu
+
+    if (confirm("Bạn có chắc muốn xóa khoản thu này không?")) {
+      // Gửi yêu cầu DELETE để xóa khoản thu
+      fetch(`/admin/fee/${feeId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => {
+        if (response.status !== 204) {
+          throw new Error("Không thể xóa khoản thu. Vui lòng thử lại.");
+        }
+      })
+      .then(() => {
+        // Xóa khoản thu khỏi dữ liệu trong filteredData
+        filteredData.splice(index, 1);
+        data = [...filteredData]; // Cập nhật lại dữ liệu gốc nếu cần
+
+        currentPage = Math.min(
+          currentPage,
+          Math.ceil(filteredData.length / rowsPerPage)
+        );
+
+        renderTable(currentPage); // Hiển thị lại bảng với dữ liệu sau khi xóa
+        alert("Xóa khoản thu thành công!");
+      })
+      .catch(error => {
+        console.error("Đã xảy ra lỗi khi xóa khoản thu:", error);
+        alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
+      });
+    }
 }
 
+// Hàm chỉnh sửa hàng dữ liệu
 // Hàm chỉnh sửa hàng dữ liệu
 function editRow(button) {
   const row = button.parentElement.parentElement;
   const index = row.getAttribute("data-index");
   const cells = row.querySelectorAll("td");
+  const feeId = filteredData[index].feeId; // Lấy feeId từ đối tượng dữ liệu
 
   if (button.textContent === "Sửa") {
     button.textContent = "Lưu";
@@ -163,14 +225,44 @@ function editRow(button) {
     button.textContent = "Sửa";
     const newPaid = parseInt(cells[4].querySelector("input").value, 10);
 
-    if (isNaN(newPaid) || newPaid < 0 || newPaid > data[index].total) {
+    if (isNaN(newPaid) || newPaid < 0 || newPaid > filteredData[index].amount) {
       alert("Số tiền không hợp lệ!");
       return;
     }
 
-    data[index].paid = newPaid;
-    filteredData = [...data];
-    renderTable(currentPage);
+    filteredData[index].paid = newPaid; // Cập nhật giá trị paid trong dữ liệu local
+
+    // Cập nhật dữ liệu trên server với PUT request
+    fetch(`/admin/fee/${feeId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        feeId: feeId, // Gửi feeId cùng với dữ liệu cập nhật
+        dueDate: filteredData[index].dueDate,
+        householdId: filteredData[index].householdId,
+        feeType: filteredData[index].feeType,
+        amount: filteredData[index].amount,
+        collectAmount: filteredData[index].paid,
+        paid: filteredData[index].paid >= filteredData[index].amount,
+      }),
+    })
+    .then(response => {
+      if (response.status !== 200) {
+        throw new Error("Không thể cập nhật khoản thu. Vui lòng thử lại.");
+      }
+      return response.json();
+    })
+    .then(updatedData => {
+      filteredData[index] = updatedData; // Cập nhật dữ liệu trả về từ server
+      renderTable(currentPage); // Hiển thị lại bảng
+      alert("Cập nhật khoản thu thành công!");
+    })
+    .catch(error => {
+      console.error("Đã xảy ra lỗi khi cập nhật khoản thu:", error);
+      alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
+    });
   }
 }
 
