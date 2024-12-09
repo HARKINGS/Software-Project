@@ -61,24 +61,27 @@ function renderTable(page) {
 }
 function filterData() {
   const nameFee = document.getElementById("nameFee").value.toLowerCase();
-  const household = document
-    .getElementById("id-house-hold")
-    .value.toLowerCase();
+  const household = document.getElementById("id-house-hold").value.toLowerCase();
   const fromDate = document.getElementById("from-date").value;
   const toDate = document.getElementById("to-date").value;
 
   filteredData = data.filter((item) => {
+    const dateMatch = 
+      (!fromDate || Date.parse(item.dateContributed) >= Date.parse(fromDate)) &&
+      (!toDate || Date.parse(item.dateContributed) <= Date.parse(toDate));
+
+    // Chuyển householdId thành chuỗi để so sánh
+    const householdMatch = !household || item.householdId.toString().toLowerCase().includes(household);
+
     return (
-      (!nameFee || item.feeName.toLowerCase().includes(nameFee)) &&
-      (!household || item.household.toLowerCase().includes(household)) &&
-      (!fromDate || item.date >= fromDate) &&
-      (!toDate || item.date <= toDate)
+      (!nameFee || item.contributionType.toLowerCase().includes(nameFee)) && householdMatch && dateMatch
     );
   });
 
-  currentPage = 1;
+  currentPage = 1;  // Reset trang về đầu sau khi lọc
   renderTable(currentPage);
 }
+
 
 function addRow() {
   const date = document.getElementById("addDate").value;

@@ -176,18 +176,20 @@ function cancelEdit() {
 }
 
 function filterData() {
-    const nameFilter = document
-        .getElementById("nameAccount")
-        .value.toLowerCase();
-    const userIDFilter = document
-        .getElementById("userID")
-        .value.toLowerCase();
-
+    const nameFilter = document.getElementById("nameAccount").value.toLowerCase();
+    const userIDFilter = document.getElementById("userID").value.toLowerCase();
+  
     const filteredData = accounts.filter((account) => {
-        const usernameMatch = nameFilter === '' || account.username?.toLowerCase().includes(nameFilter);
-        const residentIdMatch = userIDFilter === '' || account.residentId?.toLowerCase().includes(userIDFilter);
-        return usernameMatch && residentIdMatch;
+      const usernameMatch =
+        nameFilter === "" || account.username?.toLowerCase().includes(nameFilter);
+      
+      // Chuyển mã cư dân thành chuỗi trước khi gọi .toLowerCase()
+      const residentIdMatch =
+        userIDFilter === "" || String(account.residentId).toLowerCase().includes(userIDFilter);
+      
+      return usernameMatch && residentIdMatch;
     });
-
+  
     renderTable(filteredData);
 }
+  

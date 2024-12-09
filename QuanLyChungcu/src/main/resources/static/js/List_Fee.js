@@ -78,9 +78,16 @@ function updatePaginationButtons() {
 
 
 // Lọc kết quả theo các điều kiện nhập vào
+function updatePaginationButtons() {
+  document.getElementById("prevPage").disabled = currentPage === 1;
+  document.getElementById("nextPage").disabled =
+      currentPage * rowsPerPage >= filteredData.length;
+}
+
+// Lọc kết quả theo các điều kiện nhập vào
 function filterResults() {
   const nameFee = document.getElementById("nameFee").value.toLowerCase();
-  const houseId = document.getElementById("id-house-hold").value.toLowerCase();
+  const houseId = document.getElementById("id-house-hold").value;
   const fromDateValue = document.getElementById("from-date").value;
   const toDateValue = document.getElementById("to-date").value;
   const paymentStatus = document.getElementById("payment-status").value;
@@ -88,22 +95,27 @@ function filterResults() {
   const fromDate = fromDateValue ? new Date(fromDateValue) : null;
   const toDate = toDateValue ? new Date(toDateValue) : null;
 
+  // Lọc dữ liệu
   filteredData = data.filter((item) => {
     const dueDate = new Date(item.dueDate);
-    const matchesName = item.name.toLowerCase().includes(nameFee);
-    const matchesHouseId = item.houseId.toLowerCase().includes(houseId);
-    const matchesDate =
-      (!fromDate || dueDate >= fromDate) && (!toDate || dueDate <= toDate);
-    const matchesStatus =
-      !paymentStatus ||
-      (paymentStatus === "hoàn tất"
-        ? item.paid >= item.total
-        : item.paid < item.total);
+    // Kiểm tra mã hộ dân (giả sử item.householdId là kiểu số)
+    const matchesHouseId = houseId ? item.householdId.toString().includes(houseId) : true;
+    const matchesDate = (!fromDate || dueDate >= fromDate) && (!toDate || dueDate <= toDate);
 
-    return matchesName && matchesHouseId && matchesDate && matchesStatus;
+    let matchesStatus = true;
+    if (paymentStatus) {
+      if (paymentStatus === "hoàn tất") {
+        matchesStatus = item.paid === true; // Trạng thái hoàn tất (paid === true)
+      } else if (paymentStatus === "chưa hoàn tất") {
+        matchesStatus = item.paid === false; // Trạng thái chưa hoàn tất (paid === false)
+      }
+    }
+
+    return ( (!nameFee || item.feeType.toLowerCase().includes(nameFee)) && matchesHouseId && matchesDate && matchesStatus);
   });
 
-  currentPage = 1; // Reset về trang đầu tiên
+  // Reset về trang đầu tiên và hiển thị lại bảng
+  currentPage = 1;
   renderTable(currentPage);
 }
 
