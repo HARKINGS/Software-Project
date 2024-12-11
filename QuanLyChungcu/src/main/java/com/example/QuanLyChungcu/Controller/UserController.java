@@ -46,6 +46,12 @@ public class UserController {
         userService.deleteUser(id);
     }
 
+    @PutMapping("/admin/changePassword")
+    @ResponseStatus(HttpStatus.OK)
+    public UserDTO changePasswordAdmin(@RequestBody @Valid changePasswordDTO changePasswordDTO) {
+        return userService.changePasswordUser(changePasswordDTO.getOldPassword(), changePasswordDTO.getNewPassword());
+    }
+
     // Đổi mật khẩu (chỉ user mới được dùng)
     @PutMapping("/user/changePassword")
     @ResponseStatus(HttpStatus.OK)

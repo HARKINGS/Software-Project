@@ -42,9 +42,9 @@ public class ContributionController {
         return contributionService.updateContribution(id, contributionDTO);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{contributionId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteContribution(@PathVariable Long id) {
-        contributionService.deleteContribution(id);
+    public void deleteContribution(@PathVariable Long contributionId) {
+        contributionService.deleteContribution(contributionId);
     }
 }

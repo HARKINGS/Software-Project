@@ -49,24 +49,25 @@
           <h1>Đổi mật khẩu</h1>
         </div>
         <div id = "changeInfoForm">
-          <form id ="userInfo">
+          <form id ="userInfo" onsubmit="changePassword(event)">
                 <span id = "form_wrapper_1_title">Thay đổi mật khẩu</span>
-                <div id = "input_field_wrapper_1">
-                  <span>Mật khẩu cũ</span>
-                  <input type = "text" placeholder = "Nhập mật khẩu cũ" ></input>
-                </div> 
-                <div id = "input_field_wrapper_1">
-                  <span>Mật khẩu mới</span>
-                  <input type = "text" placeholder = "Nhập mật khẩu mới" ></input>
-                </div> 
-                <div id = "input_field_wrapper_1">
-                  <span>Nhập lại mật khẩu mới</span>
-                  <input type = "text" placeholder = "Xác nhận mật khẩu mới" ></input>
-                </div> 
+            <div id="input_field_wrapper_1">
+              <span>Mật khẩu cũ</span>
+              <input type="text" id="oldPassword" placeholder="Nhập mật khẩu cũ" />
+            </div>
+            <div id="input_field_wrapper_1">
+              <span>Mật khẩu mới</span>
+              <input type="text" id="newPassword" placeholder="Nhập mật khẩu mới" />
+            </div>
+            <div id="input_field_wrapper_1">
+              <span>Nhập lại mật khẩu mới</span>
+              <input type="text" id="confirmPassword" placeholder="Xác nhận mật khẩu mới" />
+            </div>
                 <button type ="submit">Hoan tat</button>
               </form>
         </div>
       </div>
   </div>
+    <script src="/js/Settings_ADMIN.js"></script>
   </body>
 </html>

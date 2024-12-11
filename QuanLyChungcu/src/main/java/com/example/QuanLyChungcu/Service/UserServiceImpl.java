@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService{
         Optional<Users> findUser = userRepository.findById(id);
         if(findUser.isPresent()) {
             Optional<Users> findUser1 = userRepository.findByUsername(userDTO.getUsername());
-            if(findUser1.isEmpty()) {
+            if(findUser1.isEmpty() || id == findUser1.get().getId()) {
                 Users userToSave = findUser.get();
                 Users users = modelMapper.map(userDTO, Users.class);
                 userToSave.setUsername(users.getUsername());
@@ -88,7 +88,9 @@ public class UserServiceImpl implements UserService{
         Optional<Users> findUser = userRepository.findById(id);
         if(findUser.isPresent()) {
             Users users = findUser.get();
-            userRepository.deleteById(id);
+            users.getUserOfResident().setUser(null);
+            users.setUserOfResident(null);
+            userRepository.delete(users);
         }else {
             throw new ResourceNotFoundException("Khong ton tai user co id nay");
         }
