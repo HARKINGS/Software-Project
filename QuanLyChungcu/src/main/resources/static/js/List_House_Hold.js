@@ -1,92 +1,6 @@
-const data = [
-  // Dữ liệu mẫu
-  {
-    code: "HK001",
-    name: "Nguyễn Văn A",
-    apartment: "101",
-    phone: "0912345678",
-    area: "60m²",
-    members: [
-      {
-        idRes: "CD101",
-        name: "Nguyễn Văn B",
-        birthdate: "1990-05-10",
-        idNumber: "123456789",
-        gender: "Nam",
-        relationship: "Con",
-        phone: "0912345678",
-        status: "Cư trú",
-      },
-      {
-        idRes: "CD102",
-        name: "Nguyễn Thị C",
-        birthdate: "1985-02-25",
-        idNumber: "987654321",
-        gender: "Nữ",
-        relationship: "Vợ",
-        phone: "0987654321",
-        status: "Cư trú",
-      },
-    ],
-  },
-  {
-    code: "HK002",
-    name: "Trần Thị C",
-    apartment: "102",
-    phone: "0987654321",
-    area: "72m²",
-  },
-  {
-    code: "HK004",
-    name: "Trần Thị B",
-    apartment: "105",
-    phone: "0987654321",
-    area: "72m²",
-  },
-  {
-    code: "HK003",
-    name: "Trần Thị D",
-    apartment: "102",
-    phone: "0987654321",
-    area: "72m²",
-  },
-  {
-    code: "HK003",
-    name: "Trần Thị E",
-    apartment: "102",
-    phone: "0987654311",
-    area: "72m²",
-  },
-  {
-    code: "HK003",
-    name: "Trần Thị F",
-    apartment: "102",
-    phone: "0987654321",
-    area: "72m²",
-  },
-  {
-    code: "HK003",
-    name: "Trần Thị G",
-    apartment: "102",
-    phone: "0987654321",
-    area: "72m²",
-  },
-  {
-    code: "HK003",
-    name: "Trần Thị H",
-    apartment: "102",
-    phone: "0987654321",
-    area: "72m²",
-  },
-  {
-    code: "HK003",
-    name: "Trần Thị I",
-    apartment: "102",
-    phone: "0987654321",
-    area: "72m²",
-  },
-  // Thêm dữ liệu nếu cần
-];
+let data = [];
+
+let listHousehold = []; 
 
 let currentPage = 1;
 const rowsPerPage = 5;
@@ -128,12 +42,34 @@ function displayData(filteredData) {
         <td><button class="delete-btn">Xóa</button></td>
       `;
     row.style.cursor = "pointer";
-    row.addEventListener("click", () => showModal(item));
+    row.addEventListener("click", () => showHouseholdDetail(item));
 
     const deleteButton = row.querySelector(".delete-btn");
-    deleteButton.addEventListener("click", (event) => {
-      event.stopPropagation(); // Ngừng sự kiện click của dòng (không mở modal)
-      deleteHousehold(item); // Gọi hàm xóa với đối tượng hộ khẩu
+    
+    //_____XOÁ HỘ KHẨU_____
+    deleteButton.addEventListener("click", async (event) => {
+      if (confirm("Bạn có chắc muốn xóa hộ khẩu này không?")) {
+      fetch("/admin/household/" + item.code, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => {
+        if (response.status !== 204) {
+          throw new Error("Không thể xóa hộ khẩu. Vui lòng thử lại.");
+        }
+      })
+      .then(() => {
+        alert("Xóa hộ khẩu thành công!");
+        readData();
+      })
+      .catch(error => {
+        console.error("Đã xảy ra lỗi khi xóa hộ khẩu:", error);
+        alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
+      });
+    }
+    if(event) { event.stopPropagation();  } 
     });
 
     tableBody.appendChild(row);
@@ -142,21 +78,41 @@ function displayData(filteredData) {
   updatePagination(filteredData.length);
 }
 
-// Xóa hộ khẩu
-function deleteHousehold(household) {
-  // Tìm chỉ mục của hộ khẩu trong mảng dữ liệu
-  const index = data.findIndex((item) => item.code === household.code);
-  if (index !== -1) {
-    // Xóa hộ khẩu khỏi mảng
-    data.splice(index, 1);
-
-    // Cập nhật lại hiển thị dữ liệu
-    searchData(); // Hoặc gọi displayData(filteredData) nếu bạn đã lọc dữ liệu
-  }
-}
-
 // ______THÔNG TIN CHI TIẾT HỘ KHẨU_________
 let isModalOpen = false; // Biến kiểm tra trạng thái modal
+
+
+async function showHouseholdDetail(household){
+  fetch("/admin/resident", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(response => {
+        if (response.status !== 200) {
+          throw new Error("Không thể get list resident");
+        }
+        return response.json();
+      })
+      .then( returnData =>{
+        let listResident = returnData;
+        household.members.length = 0;
+        for(var i = 0; i < listResident.length; i++){
+          if(listResident[i].householdId === household.code){
+            household.members.push(listResident[i]);
+          }
+        }
+      })
+      .then( () =>{
+        showModal(household);
+      })
+      .catch(error => {
+        console.error("Đã xảy ra lỗi khi hien thi", error);
+        alert("Đã xảy ra lỗi khi hien thi");
+      });
+}
+
 
 function showModal(household) {
   const modal = document.getElementById("houseHoldModal");
@@ -168,7 +124,7 @@ function showModal(household) {
         <div class="basic-details">
             <div class="detail-row">
               <span class="label">Mã hộ khẩu:</span>
-              <input class="value" value="${household.idhouse}" disabled/>
+              <input class="value" value="${household.code}" disabled/>
             </div>
             <div class="detail-row">
               <span class="label">Số căn hộ:</span>
@@ -202,14 +158,14 @@ function showModal(household) {
                   .map(
                     (member) => `
                   <tr>
-                    <td>${member.idRes}</td>
+                    <td>${member.residentId}</td>
                     <td>${member.name}</td>
-                    <td>${member.birthdate}</td>
-                    <td>${member.idNumber}</td>
+                    <td>${member.dateOfBirth}</td>
+                    <td>${member.cccd}</td>
                     <td>${member.gender}</td>
                     <td>${member.relationship}</td>
-                    <td>${member.phone}</td>
-                    <td>${member.status}</td>
+                    <td>${member.phoneNumber}</td>
+                    <td>${member.temporary}</td>
                   </tr>
                 `
                   )
@@ -224,7 +180,9 @@ function showModal(household) {
   modal.style.display = "block";
   isModalOpen = true; // Modal đã được mở
 
-  event.stopPropagation();
+  if (event) {
+    event.stopPropagation();
+  }
 }
 
 // Lắng nghe sự kiện click trên toàn bộ window
@@ -298,43 +256,6 @@ window.addEventListener("click", (event) => {
   }
 });
 
-const householdData = [
-  {
-    code: "HK001",
-    name: "Nguyễn Văn A",
-    apartment: "101",
-    phone: "0912345678",
-    area: "60m²",
-    cccd: "123456789012",
-  },
-  {
-    code: "HK002",
-    name: "Trần Thị C",
-    apartment: "102",
-    phone: "0987654321",
-    area: "72m²",
-    cccd: "234567890123",
-  },
-  // Thêm dữ liệu hộ khẩu khác nếu cần
-];
-
-// Hàm cập nhật thông tin dựa trên mã hộ khẩu
-function fillInfoBasedOnHousehold() {
-  const houseCode = document.getElementById("id-house").value;
-  const household = householdData.find((item) => item.code === houseCode);
-
-  if (household) {
-    document.getElementById("name-host").value = household.name;
-    document.getElementById("addr-now").value = household.apartment;
-    document.getElementById("cccd").value = household.cccd;
-  } else {
-    // Nếu không tìm thấy hộ khẩu, xóa thông tin cũ
-    document.getElementById("name-host").value = "";
-    document.getElementById("addr-now").value = "";
-    document.getElementById("cccd").value = "";
-  }
-}
-
 //_____THÊM HỘ KHẨU___________
 const showAddButton = document.getElementById("addBtn");
 const addHouse = document.querySelector(".addHouse");
@@ -361,7 +282,7 @@ window.addEventListener("click", (event) => {
   }
 });
 
-//_____TÁCH HỘ KHẨU__________
+// //_____TÁCH HỘ KHẨU__________
 const showSplitButton = document.getElementById("splitBtn");
 const splitHouse = document.getElementById("splitHouse");
 
@@ -389,3 +310,148 @@ window.addEventListener("click", (event) => {
 });
 
 searchData();
+
+//----------------------------------------------------------------//
+
+async function readData(){
+  fetch("/admin/household", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(response => {
+        if (response.status !== 200) {
+          throw new Error("Không thể get list houshold");
+        }
+        return response.json();
+      })
+      .then( returnData =>{
+        listHousehold = returnData;
+        data.length = 0;
+        for(var i = 0; i < listHousehold.length; i++){
+          let newHouseData ={
+            code: listHousehold[i].householdId,
+            name: listHousehold[i].chuHo.name,
+            apartment: listHousehold[i].householdNumber,
+            phone: listHousehold[i].chuHo.phoneNumber,
+            area: listHousehold[i].apartmentSize,
+            members:[],
+            numHouse : listHousehold[i].householdNumber,
+          }
+          data.push(newHouseData);
+        }
+        console.log("data is: ");
+        console.log(data);
+        displayData(data);
+      })
+      .catch(error => {
+        console.error("Đã xảy ra lỗi khi hien thi", error);
+        alert("Đã xảy ra lỗi khi hien thi");
+      });
+}
+
+
+document.addEventListener("DOMContentLoaded",async () => {
+  readData();
+
+  document.getElementById("addHouseholdForm").addEventListener('submit', async function (event) {
+        event.preventDefault(); // Ngăn hành động mặc định của form
+
+        const nameInput = document.getElementById('nameHost').value;
+        const dobInput = document.getElementById('birthday').value;
+        const genderInput = document.getElementById('gender').value;
+        const cccdInput = document.getElementById('CCCD').value;
+        const phoneNumInput = document.getElementById('SDT').value;
+        const addressInput = document.getElementById('Addr').value;
+        const tmpInput = document.getElementById('temp').value;
+        const areaInput = document.getElementById('Area').value;
+
+        // Kiểm tra dữ liệu hợp lệ
+        if (
+          !nameInput ||
+          !dobInput ||
+          !genderInput ||
+          !cccdInput ||
+          !phoneNumInput||
+          !addressInput||
+          !tmpInput||
+          !areaInput
+        ) {
+          alert("Vui lòng nhập đầy đủ và chính xác thông tin!");
+          return;
+        }
+
+        const newHousehold ={
+          householdNumber:addressInput,
+          apartmentSize: areaInput,
+          chuHo:{
+            name: nameInput,
+            dateOfBirth: dobInput,
+            cccd: cccdInput,
+            gender: genderInput,
+            phoneNumber: phoneNumInput,
+            temporary: tmpInput
+          }
+        };
+
+           console.log("Sending data to API:", newHousehold);
+
+          fetch("/admin/household", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify(newHousehold),
+            })
+              .then(response => {
+              if (response.status !== 201) {
+                throw new Error("Không thể thêm ");
+              }
+            })
+            .then(returnedData => {
+              readData();
+              alert("Thêm thành công!");
+            })
+            .catch(error => {
+              console.error("Đã xảy ra lỗi khi thêm ", error);
+              alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
+            });
+    });
+
+    document.getElementById("moveHouseholdForm").addEventListener('submit', async function (event) {
+        event.preventDefault(); // Ngăn hành động mặc định của form
+
+        const IdHouseInput = document.getElementById('id-house').value;
+        const newHHNumInput = document.getElementById('newHouseholdNumber').value;
+
+        // Kiểm tra dữ liệu hợp lệ
+        if (
+          !IdHouseInput ||
+          !newHHNumInput 
+        ) {
+          alert("Vui lòng nhập đầy đủ và chính xác thông tin!");
+          return;
+        }
+
+          fetch("/admin/household/moveHousehold?id=" + IdHouseInput + "&moveHouseholdNumber=" +  newHHNumInput, {
+              method: "PUT",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+            })
+              .then(response => {
+              if (response.status !== 200) {
+                throw new Error("Không thể chuyển hộ khẩu ");
+              }
+            })
+            .then(returnedData => {
+              readData();
+              alert("Chuyển thành công!");
+            })
+            .catch(error => {
+              console.error("Đã xảy ra lỗi khi chuyển ", error);
+              alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
+            });
+    });
+});

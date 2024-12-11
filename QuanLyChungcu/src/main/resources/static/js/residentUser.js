@@ -35,9 +35,6 @@ var residentInfo = {
       }
     }
 
-    // Gọi hàm fetch khi trang load
-    window.onload = fetchResidentInfo;
-
     function fillInfo(){
       document.getElementById('residentName').innerHTML= residentInfo.name;
       document.getElementById('residentDate').innerHTML= residentInfo.birthday;
@@ -54,6 +51,11 @@ var residentInfo = {
     function exitChangePassword(){
       document.getElementById("wrapper_1").style.display = "none";
     }
+
+    
+document.addEventListener("DOMContentLoaded", function () {
+    fetchResidentInfo();
+});
 
 document.addEventListener("DOMContentLoaded", function () {
     const changeInfoForm = document.querySelector("#changeInfoForm");

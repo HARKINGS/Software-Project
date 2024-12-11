@@ -1,45 +1,30 @@
-// Dữ liệu mẫu về khoản thu
-      const fees = [
-        {
-          date:"21/10/2024",
-          household:"HK12345",
-          type:"Mua ghế đá",
-          total:"100.000 VND",
-          paid:"100.000 VND",
-          status:"Hoàn tất",
-        },
-        {
-          date:"13/4/2026",
-          household:"HK12345",
-          type:"Buôn người",
-          total:"100.000.000 VND",
-          paid:"0 VND",
-          status:"Chưa thanh toán",
-        },
-      ];
+      let fees = [];
+      let infoHousehold;
 
       let currentPage = 1;
-      const itemsPerPage = 6; // Hiển thị 6 dân cư mỗi trang
+      const itemsPerPage = 5; 
+
+
+//-----------------------------------------------------------------------------------//
 
       // Hàm cập nhật bảng dân cư
       function updateFeesTable(fees) {
         const tableBody = document
           .getElementById("feeTable")
           .getElementsByTagName("tbody")[0];
-        tableBody.innerHTML = ""; // Xóa các dòng cũ trong bảng
+        tableBody.innerHTML = ""; 
 
         fees.forEach((fee) => {
           const row = tableBody.insertRow();
-          row.insertCell(0).textContent = fee.date;
-          row.insertCell(1).textContent = fee.household;
-          row.insertCell(2).textContent = fee.type; 
-          row.insertCell(3).textContent = fee.total;
-          row.insertCell(4).textContent = fee.paid;
-          row.insertCell(5).textContent = fee.status;
+          row.insertCell(0).textContent = fee.feeId;
+          row.insertCell(1).textContent = fee.feeType;
+          row.insertCell(2).textContent = fee.amount; 
+          row.insertCell(3).textContent = fee.collectAmount;
+          row.insertCell(4).textContent = fee.dueDate;
+          row.insertCell(5).textContent = (fee.paid) ? "Hoàn tất" : "Chưa thanh toán";
         });
       }
 
-      // Hàm phân trang
       function changePage(direction) {
         const totalPages = Math.ceil(fees.length / itemsPerPage);
         currentPage += direction;
@@ -57,17 +42,64 @@
 
         updateFeesTable(pageFees);
 
-        // Cập nhật số trang
         document.getElementById(
           "pageNumber"
-        ).textContent = `Page ${currentPage}`;
+        ).textContent = `Trang ${currentPage}`;
 
-        // Kiểm tra nút phân trang
         document.getElementById("prevPage").disabled = currentPage === 1;
         document.getElementById("nextPage").disabled =
           currentPage === totalPages;
       }
 
-      function init(){
-        changePage(0);
+      function showInfoHousehold(){
+        document.getElementById('householdNum').innerHTML= "Thông tin thu phí của căn hộ: " + infoHousehold.householdNumber;
       }
+//-----------------------------------------------------------------------------------//
+      async function fetchFeeList() {
+      try {
+        const response = await fetch('/user/getListFee');
+
+        if (!response.ok) {
+          throw new Error("Lỗi HTTP! Mã trạng thái: ${response.status}");
+        }
+
+        const data = await response.json();
+        fees = data; 
+
+        changePage(0); 
+
+      } catch (error) {
+        console.error('Lỗi khi tải thông tin dân cư:', error);
+      }
+    }
+
+      async function fetchInfoHousehold() {
+      try {
+        const response = await fetch('/user/getInfoHousehold');
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+
+        infoHousehold = data;
+        showInfoHousehold();
+
+      } catch (error) {
+        console.error('Error fetching resident info:', error);
+      }
+    }
+
+//-----------------------------------------------------------------------------------//
+
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("loading");
+    init();
+    console.log("done");
+});
+
+function init(){
+  fetchFeeList();
+  fetchInfoHousehold();
+}

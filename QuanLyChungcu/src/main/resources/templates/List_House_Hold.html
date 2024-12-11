@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/global.css" />
     <link rel="stylesheet" href="/css/List_house.css" />
+    <script type="text/javascript" src="/js/List_House_Hold.js" defer></script>
     <title>Thông tin hộ khẩu</title>
   </head>
   <body>
@@ -88,7 +89,7 @@
           <button id="addBtn" class="Buttons add">
             <div class="Buttons-items">Thêm hộ khẩu</div>
           </button>
-          <button id="splitBtn" class="Buttons split">
+          <button id="splitBtn" class="Buttons split" style ="display:none;">
             <div class="Buttons-items">Tách hộ khẩu</div>
           </button>
           <button id="moveBtn" class="Buttons move">
@@ -101,7 +102,7 @@
     <!-- CHUYỂN HỘ KHẨU -->
     <div class="moveHouseHold" style="display: none">
       <h1>Chuyển hộ khẩu</h1>
-      <form>
+      <form id ="moveHouseholdForm">
         <div class="form-items-row">
           <div class="form-items">
             <label for="id-house">Mã hộ khẩu cần chuyển:</label>
@@ -109,20 +110,18 @@
               type="text"
               id="id-house"
               placeholder="Nhập mã hộ khẩu cần chuyển"
-              oninput="fillInfoBasedOnHousehold()"
             />
           </div>
           <div class="form-items">
-            <label for="name-host">Tên của chủ hộ:</label>
+            <label for="newHouseholdNumber">Số căn hộ chuyển đến:</label>
             <input
               type="text"
-              id="name-host"
-              placeholder="Tên của chủ hộ"
-              disabled
+              id="newHouseholdNumber"
+              placeholder="Nhập số căn hộ chuyển đến"
             />
           </div>
         </div>
-        <div class="form-items-row">
+       <!--  <div class="form-items-row">
           <div class="form-items">
             <label for="addr-now">Số căn hộ hiện tại:</label>
             <input
@@ -154,7 +153,7 @@
         <div class="form-items">
           <label for="ly-do">Lý do:</label>
           <textarea id="ly-do" placeholder="Nhập lý do"></textarea>
-        </div>
+        </div> -->
         <button type="submit" class="submit-btn">Lưu thông tin</button>
         <button type="button" class="cancel-btn" onclick="exitMoveForm()">
           Hủy
@@ -242,7 +241,7 @@
       <h1>Thêm hộ khẩu</h1>
       <!-- Form Section -->
       <div class="form-section">
-        <form>
+        <form id = "addHouseholdForm">
           <div class="form-items">
             <label for="nameHost">Họ và tên chủ hộ:</label>
             <input type="text" id="nameHost" placeholder="Nhập vào họ và tên" />
@@ -260,11 +259,13 @@
             <input type="text" id="CCCD" placeholder="Nhập số CCCD" />
           </div>
           <div class="form-items">
-            <label for="SDT">Số điện thoại:</label>
+            <label for="SDT">Số điện thoại: </label>
             <input type="text" id="SDT" placeholder="Nhập số điện thoại" />
           </div>
-        </form>
-        <form>
+          <div class="form-items">
+            <label for="SDT">Thường trú / Tạm trú:</label>
+            <input type="text" id="temp" placeholder="Nhập trạng thái" />
+          </div>
           <div class="form-items">
             <label for="Addr">Số căn hộ:</label>
             <input type="text" id="Addr" placeholder="Nhập vào số hộ khẩu" />
@@ -277,12 +278,13 @@
               placeholder="Nhập vào diện tích căn hộ (m2)"
             />
           </div>
+          <div class="form-section-btn">
+            <button type="submitRegis" class="submit-btn">Đăng ký</button>
+            <button id="exit-layer" onclick="exitAddHouse()">Hủy</button>
+          </div>
         </form>
       </div>
-      <div class="form-section-btn">
-        <button type="submitRegis" class="submit-btn">Đăng ký</button>
-        <button id="exit-layer" onclick="exitAddHouse()">Hủy</button>
-      </div>
+      
     </div>
     <!-- Modal hiển thị thông tin dân cư -->
     <div id="houseHoldModal" class="modal">
@@ -293,6 +295,5 @@
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="/js/List_House_Hold.js"></script>
   </body>
 </html>

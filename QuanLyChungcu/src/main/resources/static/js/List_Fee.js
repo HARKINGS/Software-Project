@@ -190,7 +190,7 @@ function deleteRow(index) {
 
     if (confirm("Bạn có chắc muốn xóa khoản thu này không?")) {
       // Gửi yêu cầu DELETE để xóa khoản thu
-      fetch(`/admin/fee/${feeId}`, {
+      fetch("/admin/fee/" + feeId, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

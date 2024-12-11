@@ -1,92 +1,8 @@
 let currentPage = 1;
 const itemsPerPage = 5; // Hiển thị 5 dân cư mỗi trang
 
-const residents = [
-  {
-    residentID: "R001",
-    name: "Nguyễn Văn A",
-    cccd: "123456789012",
-    household: "HK12345",
-    room: "101",
-  },
-  {
-    residentID: "R002",
-    name: "Trần Thị B",
-    cccd: "987654321098",
-    household: "HK67890",
-    room: "102",
-  },
-  {
-    residentID: "R003",
-    name: "Lê Quang C",
-    cccd: "567890123456",
-    household: "HK54321",
-    room: "103",
-  },
-  {
-    residentID: "R004",
-    name: "Nguyễn Văn A",
-    cccd: "123456789012",
-    household: "HK12345",
-    room: "101",
-  },
-  {
-    residentID: "R005",
-    name: "Trần Thị B",
-    cccd: "987654321098",
-    household: "HK67890",
-    room: "102",
-  },
-  {
-    residentID: "R006",
-    name: "Lê Quang C",
-    cccd: "567890123456",
-    household: "HK54321",
-    room: "103",
-  },
-  {
-    residentID: "R007",
-    name: "Nguyễn Văn A",
-    cccd: "123456789012",
-    household: "HK12345",
-    room: "101",
-  },
-  {
-    residentID: "R007",
-    name: "Trần Thị B",
-    cccd: "987654321098",
-    household: "HK67890",
-    room: "102",
-  },
-  {
-    residentID: "R008",
-    name: "Lê Quang C",
-    cccd: "567890123456",
-    household: "HK54321",
-    room: "103",
-  },
-  {
-    residentID: "R009",
-    name: "Nguyễn Văn A",
-    cccd: "123456789012",
-    household: "HK12345",
-    room: "101",
-  },
-  {
-    residentID: "R010",
-    name: "Trần Thị B",
-    cccd: "987654321098",
-    household: "HK67890",
-    room: "102",
-  },
-  {
-    residentID: "R011",
-    name: "Lê Quang C",
-    cccd: "567890123456",
-    household: "HK54321",
-    room: "103",
-  },
-];
+let selectedResident;
+let residents = [];
 
 // _____HÀM PHÂN TRANG_____
 function changePage(direction) {
@@ -168,24 +84,23 @@ function updateResidentTable(residents) {
 
   residents.forEach((resident) => {
     const row = tableBody.insertRow();
-    row.insertCell(0).textContent = resident.residentID; // Mã cư dân
+    row.insertCell(0).textContent = resident.residentId; // Mã cư dân
     row.insertCell(1).textContent = resident.name;
-    row.insertCell(2).textContent = "Ngày sinh"; // Thay bằng giá trị thực tế
+    row.insertCell(2).textContent = resident.dateOfBirth; // Thay bằng giá trị thực tế
     row.insertCell(3).textContent = resident.cccd;
-    row.insertCell(4).textContent = "Giới tính"; // Thay bằng giá trị thực tế
-    row.insertCell(5).textContent = "Số điện thoại"; // Thay bằng giá trị thực tế
-    row.insertCell(6).textContent = resident.household;
-    row.insertCell(7).textContent = resident.room;
-    row.insertCell(8).textContent = "Trạng thái"; // Thay bằng giá trị thực tế
+    row.insertCell(4).textContent = resident.gender; // Thay bằng giá trị thực tế
+    row.insertCell(5).textContent = resident.phoneNumber; // Thay bằng giá trị thực tế
+    row.insertCell(6).textContent = resident.householdId;
+    row.insertCell(7).textContent = resident.temporary; // Thay bằng giá trị thực tế
 
     // Thêm ô chứa nút xóa vào cuối mỗi dòng
-    const deleteCell = row.insertCell(9);
+    const deleteCell = row.insertCell(8);
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Xóa";
     deleteButton.classList.add("delete-btn"); // Thêm lớp CSS cho nút xóa (nếu cần)
     deleteButton.addEventListener("click", (event) => {
       event.stopPropagation(); // Ngừng sự kiện click từ nút xóa
-      deleteResident(resident.residentID); // Thực hiện xóa
+      deleteResident(resident.residentId); // Thực hiện xóa
     });
 
     // Thêm nút xóa vào ô
@@ -199,24 +114,22 @@ function updateResidentTable(residents) {
 
 // Hàm xóa cư dân
 function deleteResident(residentID) {
-  // Xóa cư dân khỏi danh sách
-  const index = residents.findIndex(
-    (resident) => resident.residentID === residentID
-  );
-  if (index !== -1) {
-    residents.splice(index, 1); // Xóa phần tử khỏi mảng
-  }
-
-  // Cập nhật lại bảng và phân trang
-  const totalPages = Math.ceil(residents.length / itemsPerPage);
-  if (currentPage > totalPages) currentPage = totalPages; // Điều chỉnh lại trang nếu số lượng trang thay đổi
-  const start = (currentPage - 1) * itemsPerPage;
-  const end = start + itemsPerPage;
-  updateResidentTable(residents.slice(start, end));
-
-  document.getElementById("pageNumber").textContent = `Page ${currentPage}`;
-  document.getElementById("prevPage").disabled = currentPage === 1;
-  document.getElementById("nextPage").disabled = currentPage === totalPages;
+  fetch("/admin/resident/" + residentID, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.status === 204) {
+        alert("Xoá thành công!");
+        fetchListResident();
+        updateResidentTable(residents);
+        changePage(0);
+      } else {
+        alert("Xoá thất bại!");
+      }
+    });
 }
 
 // Hàm tìm kiếm theo tên
@@ -226,6 +139,7 @@ function searchName() {
     resident.name.toLowerCase().includes(nameInput)
   );
   updateResidentTable(filteredResidents);
+  changePage(0);
 }
 
 // Hàm tìm kiếm theo CCCD
@@ -235,6 +149,7 @@ function searchCCCD() {
     resident.cccd.includes(cccdInput)
   );
   updateResidentTable(filteredResidents);
+  changePage(0);
 }
 
 // Hàm tìm kiếm theo số hộ khẩu
@@ -246,6 +161,7 @@ function searchHousehold() {
     resident.household.includes(householdInput)
   );
   updateResidentTable(filteredResidents);
+  changePage(0);
 }
 
 // Hàm tìm kiếm theo số phòng
@@ -255,6 +171,7 @@ function searchRoom() {
     resident.room.includes(roomInput)
   );
   updateResidentTable(filteredResidents);
+  changePage(0);
 }
 
 //_____THÔNG TIN CHI TIẾT CƯ DÂN_____
@@ -276,11 +193,11 @@ function showModal(resident) {
           </div>
           <div class="detail-row">
             <span class="label">Ngày sinh:</span>
-            <input class="value" id="editBirthdate" value="Ngày sinh" /> <!-- Thay bằng dữ liệu thực -->
+            <input class="value" id="editBirthdate" value="${resident.dateOfBirth}" /> <!-- Thay bằng dữ liệu thực -->
           </div>
           <div class="detail-row">
             <span class="label">Giới tính:</span>
-            <input class="value" id="editGender" value="Giới tính" /> <!-- Thay bằng dữ liệu thực -->
+            <input class="value" id="editGender" value="${resident.gender}" /> <!-- Thay bằng dữ liệu thực -->
           </div>
           <div class="detail-row">
             <span class="label">Số CCCD:</span>
@@ -288,34 +205,22 @@ function showModal(resident) {
           </div>
           <div class="detail-row">
             <span class="label">Số điện thoại:</span>
-            <input class="value" id="editPhone" value="Số điện thoại" /> <!-- Thay bằng dữ liệu thực -->
+            <input class="value" id="editPhone" value="${resident.phoneNumber}" /> <!-- Thay bằng dữ liệu thực -->
           </div>
           <div class="detail-row">
             <span class="label">Số hộ khẩu:</span>
-            <input class="value" id="editHousehold" value="${resident.household}" />
+            <input class="value" id="editHousehold" value="${resident.householdId}" />
           </div>
         </div>
 
         <div class="account-details">
           <div class="detail-row">
-            <span class="label">Số phòng:</span>
-            <input class="value" id="editRoom" value="${resident.room}" />
-          </div>
-          <div class="detail-row">
             <span class="label">Trạng thái:</span>
-            <input class="value" id="editState" value="Thường trú" />
+            <input class="value" id="editState" value="${resident.temporary}" />
           </div>
           <div class="detail-row">
-            <span class="label">Tên đăng nhập:</span>
-            <input class="value" id="editUsername" value="ngobakha@gmail.com" />
-          </div>
-          <div class="detail-row">
-            <span class="label">Mật khẩu:</span>
-            <input class="value" id="editPassword" type="password" value="********" />
-          </div>
-          <div class="detail-row">
-            <span class="label">Quan hệ với hộ:</span>
-            <input class="value" id="editRelation" value="Chủ hộ / Con chủ hộ" />
+            <span class="label">Quan hệ với chủ hộ:</span>
+            <input class="value" id="editRelation" value="${resident.relationship}" />
           </div>
         </div>
       </div>
@@ -329,28 +234,25 @@ function showModal(resident) {
   // Hiển thị modal
   modal.style.display = "block";
   isModalOpen = true; // Modal đã được mở
-
+  selectedResident = resident;
   event.stopPropagation();
 }
 
 function saveChanges() {
   const updatedResident = {
     name: document.getElementById("editName").value,
-    birthdate: document.getElementById("editBirthdate").value,
+    dateOfBirth: document.getElementById("editBirthdate").value,
     gender: document.getElementById("editGender").value,
     cccd: document.getElementById("editCCCD").value,
-    phone: document.getElementById("editPhone").value,
-    household: document.getElementById("editHousehold").value,
-    room: document.getElementById("editRoom").value,
-    role: document.getElementById("editState").value,
-    username: document.getElementById("editUsername").value,
-    password: document.getElementById("editPassword").value,
-    relation: document.getElementById("editRelation").value,
+    phoneNumber: document.getElementById("editPhone").value,
+    relationship: document.getElementById("editRelation").value,
+    temporary: document.getElementById("editState").value,
+    householdId: document.getElementById("editHousehold").value,
   };
 
   // Gửi dữ liệu cập nhật đến backend
-  fetch("/api/update-resident", {
-    method: "POST",
+  fetch("/admin/resident/" + selectedResident.residentId, {
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
@@ -360,6 +262,9 @@ function saveChanges() {
       if (response.ok) {
         alert("Cập nhật thành công!");
         closeModal();
+        fetchListResident();
+        updateResidentTable(residents);
+        changePage(0);
       } else {
         alert("Cập nhật thất bại!");
       }
@@ -384,8 +289,104 @@ window.addEventListener("click", (event) => {
 function closeModal() {
   const modal = document.getElementById("residentModal");
   modal.style.display = "none";
+  selectedResident = null;
   isModalOpen = false; // Modal đã đóng
 }
 
-// Hiển thị trang đầu tiên khi tải trang
-window.onload = () => changePage(0);
+async function fetchListResident() {
+  console.log("fetching");
+  try {
+    const response = await fetch('/admin/resident');
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    console.log(data);
+    
+    residents = data; 
+    changePage(0);
+
+  } catch (error) {
+    console.error('Error fetching resident info:', error);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    fetchListResident();
+});
+
+document.addEventListener("DOMContentLoaded",  () => {
+
+    document.getElementById("addResForm").addEventListener('submit', async function (event) {
+        event.preventDefault(); // Ngăn hành động mặc định của form
+
+        const nameInput = document.getElementById('nameRes').value;
+        const dobInput = document.getElementById('birthday').value;
+        const genderInput = document.getElementById('gender').value;
+        const cccdInput = document.getElementById('CCCD').value;
+        const phoneNumInput = document.getElementById('SDT').value;
+        const householdIdInput = document.getElementById('IDHousehold').value;
+        const relationshipInput = document.getElementById('relation').value;
+        const statusInput = document.getElementById('status').value;
+
+        // Kiểm tra dữ liệu hợp lệ
+        if (
+          !nameInput ||
+          !dobInput ||
+          !genderInput ||
+          !cccdInput ||
+          !phoneNumInput
+        ) {
+          alert("Vui lòng nhập đầy đủ và chính xác thông tin!");
+          return;
+        }
+
+        const newResident ={
+          name: nameInput,
+          dateOfBirth: dobInput,
+          cccd: cccdInput,
+          gender: genderInput,
+          phoneNumber: phoneNumInput,
+          relationship: relationshipInput,
+          temporary: statusInput,
+          householdId: householdIdInput,
+        };
+
+           console.log("Sending data to API:", {
+                name: nameInput,
+                dateOfBirth: dobInput,
+                cccd: cccdInput,
+                gender: genderInput,
+                phoneNumber: phoneNumInput,
+                relationship: relationshipInput,
+                temporary: statusInput,
+                householdId: householdIdInput,
+            });
+
+          fetch("/admin/resident", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify(newResident),
+            })
+              .then(response => {
+              if (response.status !== 201) {
+                throw new Error("Không thể thêm ");
+              }
+              return response.json();
+            })
+            .then(data => {
+              fetchListResident();
+              updateResidentTable(residents);
+              changePage(0);
+              alert("Thêm thành công!");
+            })
+            .catch(error => {
+              console.error("Đã xảy ra lỗi khi thêm ", error);
+              alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
+            });
+    });
+});

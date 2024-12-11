@@ -84,56 +84,17 @@
     width : 100%;
     display: flex;
     flex-direction: row;
+/*    background-color:red;*/
 }
 
 .title{
     height:100%;
     width:70%;
-    padding:8px 10px;
+    padding:0px 10px;
     font-size:40px;
     font-weight:bold;
+/*    background-color:grey;*/
 }
-
-/*.search_container form{
-    flex-grow: 1;
-    display: flex;
-    justify-content:left;
-    flex-direction: row;
-    padding:0 0 0 10px;
-    height: 100%;
-    width: 100%;
-    overflow:hidden;
-}
-*/
-/*.search_bar{
-    position:relative;
-    width:90%;
-}
-
-.search_bar button{    
-    position:absolute;
-    top:8px;
-    min-height:50px;
-    min-width:50px;
-    border: none;
-    border-radius:8px;
-}
-
-.search_bar button:hover{
-    cursor:pointer;
-}
-
-.search_bar input{
-    background-color: #eee;
-    border: none;
-    outline: none;
-    padding-left:50px;
-    width:100%;
-    margin: 8px 0px;
-    border-radius: 8px;
-    font-size:17px;
-    line-height: 50px;
-}*/
 
 .noti_and_id{
     min-height:100%;
@@ -164,49 +125,10 @@
 
 /*----------------------------------------------------------*/
 
-/*.title_and_filter_container{
+.householdName{
     width:100%;
+    padding:8px 20px;
+    margin:0;
+    font-size:25px;
+/*    background-color:green;*/
 }
-
-#title{
-    padding:10px 10px;
-    font-size:30px;
-    color:black;
-    font-weight:bold;
-}
-
-#filter_container{
-    padding:0 10px;
-    width : 100%;
-    display: flex;
-    flex-direction: row;
-}
-
-.filter{
-    font-size:20px;
-    font-weight:bold;
-    margin-right:20px;
-    height:100%;
-    width:25%;
-}
-
-.filter_title{
-    font-size:20px; 
-    font-style: italic; 
-    margin-bottom:10px; 
-    padding-left:10px; 
-    display:inline-block;
-}
-
-.filter input{
-    background-color: #eee;
-    border: none;
-    outline: none;
-    width:100%;
-    font-size:17px;
-    line-height: 30px;
-    border-radius:2px;
-    padding:5px 10px;
-}*/
-
-/*----------------------------------------------------------*/

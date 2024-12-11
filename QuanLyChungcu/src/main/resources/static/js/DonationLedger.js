@@ -50,7 +50,6 @@ function renderTable(page) {
                 <td>${item.amount.toLocaleString()}</td>
                 <td>
                     <button onclick="deleteRow(${item.contributionId})">Xóa</button>
-                    <button onclick="editRow(${item.contributionId})">Sửa</button>
                 </td>
             </tr>
         `;
@@ -143,7 +142,7 @@ function deleteRow(contributionId) {
     // Xác nhận với người dùng trước khi xóa
     if (confirm("Bạn có chắc chắn muốn xóa bản ghi này?")) {
         // Gửi yêu cầu DELETE để xóa bản ghi
-        fetch(`/admin/contribution/${contributionId}`, {
+        fetch("/admin/contribution/" + contributionId, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
