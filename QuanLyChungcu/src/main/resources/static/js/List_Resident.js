@@ -2,22 +2,24 @@ let currentPage = 1;
 const itemsPerPage = 5; // Hiển thị 5 dân cư mỗi trang
 
 let selectedResident;
+let filteredResidents = null;
 let residents = [];
 
 // _____HÀM PHÂN TRANG_____
 function changePage(direction) {
-  const totalPages = Math.ceil(residents.length / itemsPerPage);
+  const dataToDisplay = filteredResidents || residents; // Hiển thị danh sách tìm kiếm hoặc toàn bộ danh sách
+  let totalPages = Math.ceil(dataToDisplay.length / itemsPerPage);
   currentPage += direction;
 
   if (currentPage < 1) {
     currentPage = 1;
   } else if (currentPage > totalPages) {
-    currentPage = totalPages;
+    totalPages = currentPage;
   }
 
   const start = (currentPage - 1) * itemsPerPage;
   const end = start + itemsPerPage;
-  const pageResidents = residents.slice(start, end);
+  const pageResidents = dataToDisplay.slice(start, end);
 
   updateResidentTable(pageResidents);
 
@@ -76,13 +78,13 @@ function exitAddResident() {
 }
 
 // Hàm cập nhật bảng dân cư
-function updateResidentTable(residents) {
+function updateResidentTable(data) {
   const tableBody = document
     .getElementById("residentTable")
     .getElementsByTagName("tbody")[0];
   tableBody.innerHTML = ""; // Xóa các dòng cũ trong bảng
 
-  residents.forEach((resident) => {
+  data.forEach((resident) => {
     const row = tableBody.insertRow();
     row.insertCell(0).textContent = resident.residentId; // Mã cư dân
     row.insertCell(1).textContent = resident.name;
@@ -134,19 +136,22 @@ function deleteResident(residentID) {
 
 // Hàm tìm kiếm theo tên
 function searchName() {
-  const nameInput = document.getElementById("nameInput").value.toLowerCase();
-  const filteredResidents = residents.filter((resident) =>
-    resident.name.toLowerCase().includes(nameInput)
+  const nameInput =
+      document.getElementById("nameInput").value.toLowerCase()
+  ;
+  filteredResidents = residents.filter((resident) =>
+      resident.name.includes(nameInput)
   );
   updateResidentTable(filteredResidents);
+  console.log(filteredResidents);
   changePage(0);
 }
 
 // Hàm tìm kiếm theo CCCD
 function searchCCCD() {
   const cccdInput = document.getElementById("cccdInput").value.toLowerCase();
-  const filteredResidents = residents.filter((resident) =>
-    resident.cccd.includes(cccdInput)
+  filteredResidents = residents.filter((resident) =>
+      resident.cccd.includes(cccdInput)
   );
   updateResidentTable(filteredResidents);
   changePage(0);
@@ -155,24 +160,28 @@ function searchCCCD() {
 // Hàm tìm kiếm theo số hộ khẩu
 function searchHousehold() {
   const householdInput = document
-    .getElementById("householdInput")
-    .value.toLowerCase();
-  const filteredResidents = residents.filter((resident) =>
-    resident.household.includes(householdInput)
+      .getElementById("householdInput")
+      .value.toLowerCase();
+  filteredResidents = residents.filter((resident) =>
+      String(resident.householdId).includes(householdInput)
   );
   updateResidentTable(filteredResidents);
   changePage(0);
 }
 
-// Hàm tìm kiếm theo số phòng
-function searchRoom() {
-  const roomInput = document.getElementById("roomInput").value.toLowerCase();
-  const filteredResidents = residents.filter((resident) =>
-    resident.room.includes(roomInput)
+// Hàm tìm kiếm theo trạng thái
+function searchTemporary() {
+  const temporaryInput =
+      document.getElementById("temporaryInput").value.toLowerCase()
+  ;
+  filteredResidents = residents.filter((resident) =>
+      resident.temporary.includes(temporaryInput)
   );
   updateResidentTable(filteredResidents);
+  console.log(filteredResidents);
   changePage(0);
 }
+
 
 //_____THÔNG TIN CHI TIẾT CƯ DÂN_____
 let isModalOpen = false; // Biến kiểm tra trạng thái modal

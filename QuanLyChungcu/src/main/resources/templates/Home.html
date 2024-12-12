@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="/css/Home.css" />
     <link rel="stylesheet" type="text/css" href="/css/global.css" />
+    <script type="text/javascript" src="/js/Home.js"></script>
     <title>Trang chủ</title>
   </head>
   <body>
@@ -43,6 +44,9 @@
             >Cài đặt</a
           >
         </div>
+        <div class="logout-container">
+          <button onclick="window.location.href = '/login'">Đăng xuất</button>
+        </div>
       </div>
       <div class="Main">
         <div class="main_container">
@@ -50,22 +54,22 @@
             <div class="infor_Apart_items">
               <div class="Icon"></div>
               <span class="label">Số nhân khẩu trong chung cư:</span>
-              <span class="value">999</span>
+              <span class="value" id="totalResident"></span>
             </div>
             <div class="infor_Apart_items">
               <div class="Icon"></div>
               <span class="label">Số hộ khẩu trong chung cư:</span>
-              <span class="value">999</span>
+              <span class="value" id="totalHousehold"></span>
             </div>
             <div class="infor_Apart_items">
               <div class="Icon"></div>
               <span class="label">Số nhân khẩu tạm trú:</span>
-              <span class="value">999</span>
+              <span class="value" id="totalTemporary"></span>
             </div>
             <div class="infor_Apart_items">
               <div class="Icon"></div>
-              <span class="label">Số nhân khẩu tạm vắng:</span>
-              <span class="value">999</span>
+              <span class="label">Số nhân khẩu thường trú:</span>
+              <span class="value" id="totalPermanent"></span>
             </div>
           </div>
         </div>
