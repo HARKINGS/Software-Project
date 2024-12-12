@@ -37,7 +37,7 @@ function renderTable(data) {
             tbody.innerHTML += `
                 <tr data-id="${account.id}">
                     <td>${account.username}</td>
-                    <td>${account.password}</td>
+                    <td>********</td>
                     <td>${account.residentId}</td>
                     <td>
                         <button onclick="deleteRow(${index})">Xóa</button>

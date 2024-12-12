@@ -133,7 +133,6 @@ function deleteResident(residentID) {
       }
     });
 }
-
 // Hàm chuyển đổi chuỗi tiếng Việt có dấu thành không dấu
 function removeAccents(str) {
   return str
@@ -173,9 +172,6 @@ function searchResidents() {
   console.log(filteredResidents);
   changePage(0);
 }
-
-
-
 //_____THÔNG TIN CHI TIẾT CƯ DÂN_____
 let isModalOpen = false; // Biến kiểm tra trạng thái modal
 

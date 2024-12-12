@@ -58,6 +58,7 @@ function renderTable(page) {
     const totalPages = Math.ceil(filteredData.length / rowsPerPage);
     document.getElementById("pageNumber").textContent = `Page ${currentPage} of ${totalPages}`;
 }
+
 function filterData() {
   const nameFee = document.getElementById("nameFee").value.toLowerCase();
   const household = document.getElementById("id-house-hold").value.toLowerCase();

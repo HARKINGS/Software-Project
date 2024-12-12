@@ -29,7 +29,6 @@ const rowsPerPage = 10; // Số dòng mỗi trang
 const tableBody = document.querySelector("#FeeTable tbody"); // Lấy phần thân bảng
 
 // Hàm hiển thị bảng với phân trang
-// Hàm hiển thị bảng với phân trang
 function renderTable(page) {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
@@ -67,16 +66,6 @@ function renderTable(page) {
     updatePaginationButtons(); // Cập nhật trạng thái các nút phân trang
 }
 
-// Kiểm tra và cập nhật trạng thái nút phân trang
-function updatePaginationButtons() {
-    document.getElementById("prevPage").disabled = currentPage === 1;
-    document.getElementById("nextPage").disabled =
-        currentPage * rowsPerPage >= filteredData.length;
-}
-
-// Các hàm khác như `editRow`, `deleteRow`, `resetInputRow` cần đảm bảo đã được định nghĩa đúng.
-
-
 // Lọc kết quả theo các điều kiện nhập vào
 function updatePaginationButtons() {
   document.getElementById("prevPage").disabled = currentPage === 1;
@@ -113,8 +102,7 @@ function filterResults() {
 
     return ( (!nameFee || item.feeType.toLowerCase().includes(nameFee)) && matchesHouseId && matchesDate && matchesStatus);
   });
-
-  // Reset về trang đầu tiên và hiển thị lại bảng
+  console.log(filteredData);
   currentPage = 1;
   renderTable(currentPage);
 }
