@@ -136,11 +136,9 @@ function deleteResident(residentID) {
 
 // Hàm tìm kiếm theo tên
 function searchName() {
-  const nameInput =
-      document.getElementById("nameInput").value.toLowerCase()
-  ;
+  const nameInput = document.getElementById("nameInput").value.toLowerCase();
   filteredResidents = residents.filter((resident) =>
-      resident.name.includes(nameInput)
+      resident.name.toLowerCase().includes(nameInput)
   );
   updateResidentTable(filteredResidents);
   console.log(filteredResidents);
@@ -171,14 +169,12 @@ function searchHousehold() {
 
 // Hàm tìm kiếm theo trạng thái
 function searchTemporary() {
-  const temporaryInput =
-      document.getElementById("temporaryInput").value.toLowerCase()
-  ;
+  const temporaryInput = document.getElementById("temporaryInput").value.toLowerCase();
   filteredResidents = residents.filter((resident) =>
-      resident.temporary.includes(temporaryInput)
+      resident.temporary.toLowerCase().includes(temporaryInput)
   );
   updateResidentTable(filteredResidents);
-  console.log(filteredResidents);
+  console.log(filteredResidents)
   changePage(0);
 }
 

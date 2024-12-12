@@ -58,17 +58,9 @@ function renderTable(page) {
     const totalPages = Math.ceil(filteredData.length / rowsPerPage);
     document.getElementById("pageNumber").textContent = `Page ${currentPage} of ${totalPages}`;
 }
-function removeVietnameseTones(str) {
-    return str
-        .normalize("NFD") // Chuẩn hóa Unicode
-        .replace(/[\u0300-\u036f]/g, "") // Loại bỏ dấu
-        .replace(/đ/g, "d")
-        .replace(/Đ/g, "D")
-        .toLowerCase();
-}
 
 function filterData() {
-  const nameFee = removeVietnameseTones(document.getElementById("nameFee").value.toLowerCase());
+  const nameFee = document.getElementById("nameFee").value.toLowerCase();
   const household = document.getElementById("id-house-hold").value.toLowerCase();
   const fromDate = document.getElementById("from-date").value;
   const toDate = document.getElementById("to-date").value;
@@ -82,7 +74,7 @@ function filterData() {
     const householdMatch = !household || item.householdId.toString().toLowerCase().includes(household);
 
     return (
-      (!nameFee || removeVietnameseTones(String(item.contributionType).toLowerCase().includes(nameFee))) && householdMatch && dateMatch
+      (!nameFee || item.contributionType.toLowerCase().includes(nameFee)) && householdMatch && dateMatch
     );
   });
 
