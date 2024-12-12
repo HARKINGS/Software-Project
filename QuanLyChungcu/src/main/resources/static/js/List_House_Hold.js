@@ -22,7 +22,7 @@ function searchData() {
   const filteredData = data.filter((item) => {
     return (
         String(item.code).toLowerCase().includes(maHoKhau) &&
-        item.name.toLowerCase().includes(chuHo)&&
+        removeAccents(item.name).toLowerCase().includes(chuHo)&&
         item.apartment.toLowerCase().includes(soCanHo)
     );
   });

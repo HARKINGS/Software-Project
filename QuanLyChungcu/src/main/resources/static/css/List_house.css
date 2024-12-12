@@ -11,6 +11,7 @@
 }
 
 .search label {
+  padding: 8px;
   font-size: 16px;
   margin-right: 10px;
 }
@@ -75,11 +76,11 @@ button.delete:hover {
 /* ______________ */
 
 .Buttons {
-  width: 150px;
-  height: 30px;
+  width: 170px;
+  height: 45px;
   padding: 9px 20px;
   background: #488df3;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
   border-radius: 32px;
   display: inline-flex;
   justify-content: center;
@@ -99,8 +100,8 @@ button.delete:hover {
 .Buttons .Buttons-items {
   text-align: center;
   color: white;
-  font-size: 12px;
-  font-family: Poppins, sans-serif;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   line-height: 15px;
   letter-spacing: 0.03px;

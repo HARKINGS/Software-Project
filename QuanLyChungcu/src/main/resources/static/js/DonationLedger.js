@@ -59,6 +59,13 @@ function renderTable(page) {
     document.getElementById("pageNumber").textContent = `Page ${currentPage} of ${totalPages}`;
 }
 
+function removeAccents(str) {
+    return str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+}
+
 function filterData() {
   const nameFee = document.getElementById("nameFee").value.toLowerCase();
   const household = document.getElementById("id-house-hold").value.toLowerCase();
@@ -74,7 +81,7 @@ function filterData() {
     const householdMatch = !household || item.householdId.toString().toLowerCase().includes(household);
 
     return (
-      (!nameFee || item.contributionType.toLowerCase().includes(nameFee)) && householdMatch && dateMatch
+      (!nameFee || removeAccents(item.contributionType).toLowerCase().includes(nameFee)) && householdMatch && dateMatch
     );
   });
 

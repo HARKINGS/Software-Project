@@ -73,6 +73,13 @@ function updatePaginationButtons() {
       currentPage * rowsPerPage >= filteredData.length;
 }
 
+function removeAccents(str) {
+    return str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+}
+
 // Lọc kết quả theo các điều kiện nhập vào
 function filterResults() {
   const nameFee = document.getElementById("nameFee").value.toLowerCase();
@@ -100,7 +107,7 @@ function filterResults() {
       }
     }
 
-    return ( (!nameFee || item.feeType.toLowerCase().includes(nameFee)) && matchesHouseId && matchesDate && matchesStatus);
+    return ( (!nameFee || removeAccents(item.feeType).toLowerCase().includes(nameFee)) && matchesHouseId && matchesDate && matchesStatus);
   });
   console.log(filteredData);
   currentPage = 1;
