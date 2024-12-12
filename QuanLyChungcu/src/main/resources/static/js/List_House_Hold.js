@@ -3,7 +3,15 @@ let data = [];
 let listHousehold = [];
 
 let currentPage = 1;
-const rowsPerPage = 5;
+const rowsPerPage = 10;
+
+// Hàm chuyển đổi chuỗi tiếng Việt có dấu thành không dấu
+function removeAccents(str) {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
 
 //Tìm kiếm thông tin
 function searchData() {
@@ -346,7 +354,7 @@ async function readData(){
         displayData(data);
       })
       .catch(error => {
-        console.error("Đã xảy ra lỗi khi hien thi", error);
+        console.error("Đã xảy ra lỗi khi hiển thị", error);
         alert("Đã xảy ra lỗi khi hien thi");
       });
 }
@@ -433,25 +441,25 @@ document.addEventListener("DOMContentLoaded",async () => {
       alert("Vui lòng nhập đầy đủ và chính xác thông tin!");
       return;
     }
-
-    fetch("/admin/household/moveHousehold?id=" + IdHouseInput + "&moveHouseholdNumber=" +  newHHNumInput, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-    })
-        .then(response => {
-          if (response.status !== 200) {
-            throw new Error("Không thể chuyển hộ khẩu ");
-          }
-        })
-        .then(returnedData => {
-          readData();
-          alert("Chuyển thành công!");
-        })
-        .catch(error => {
-          console.error("Đã xảy ra lỗi khi chuyển ", error);
-          alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
-        });
-  });
+          fetch("/admin/household/moveHousehold?id=" + IdHouseInput + "&moveHouseholdNumber=" +  newHHNumInput, {
+              method: "PUT",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+            })
+              .then(response => {
+              if (response.status !== 200) {
+                throw new Error("Không thể chuyển hộ khẩu ");
+              }
+            })
+            .then(returnedData => {
+              readData();
+              alert("Chuyển thành công!");
+              exitMoveForm();
+            })
+            .catch(error => {
+              console.error("Đã xảy ra lỗi khi chuyển ", error);
+              alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
+            });
+    });
 });

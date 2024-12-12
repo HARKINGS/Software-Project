@@ -133,52 +133,45 @@ function deleteResident(residentID) {
       }
     });
 }
+// Hàm chuyển đổi chuỗi tiếng Việt có dấu thành không dấu
+function removeAccents(str) {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
 
-// Hàm tìm kiếm theo tên
-function searchName() {
+// Hàm tìm kiếm đồng thời
+function searchResidents() {
   const nameInput = document.getElementById("nameInput").value.toLowerCase();
-  filteredResidents = residents.filter((resident) =>
-      resident.name.toLowerCase().includes(nameInput)
-  );
+  const cccdInput = document.getElementById("cccdInput").value.toLowerCase();
+  const householdInput = document.getElementById("householdInput").value.toLowerCase();
+  const temporaryInput = document.getElementById("temporaryInput").value.toLowerCase();
+
+  // Lọc danh sách theo các tiêu chí
+  filteredResidents = residents.filter((resident) => {
+    const matchesName = nameInput
+      ? removeAccents(resident.name).includes(removeAccents(nameInput))
+      : true;
+    const matchesCCCD = cccdInput
+      ? resident.cccd.includes(cccdInput)
+      : true;
+    const matchesHousehold = householdInput
+      ? String(resident.householdId).includes(householdInput)
+      : true;
+    const matchesTemporary = temporaryInput
+      ? resident.temporary.toLowerCase().includes(temporaryInput)
+      : true;
+
+    // Chỉ giữ các đối tượng thỏa mãn tất cả các điều kiện
+    return matchesName && matchesCCCD && matchesHousehold && matchesTemporary;
+  });
+
+  // Cập nhật bảng hiển thị
   updateResidentTable(filteredResidents);
   console.log(filteredResidents);
   changePage(0);
 }
-
-// Hàm tìm kiếm theo CCCD
-function searchCCCD() {
-  const cccdInput = document.getElementById("cccdInput").value.toLowerCase();
-  filteredResidents = residents.filter((resident) =>
-      resident.cccd.includes(cccdInput)
-  );
-  updateResidentTable(filteredResidents);
-  changePage(0);
-}
-
-// Hàm tìm kiếm theo số hộ khẩu
-function searchHousehold() {
-  const householdInput = document
-      .getElementById("householdInput")
-      .value.toLowerCase();
-  filteredResidents = residents.filter((resident) =>
-      String(resident.householdId).includes(householdInput)
-  );
-  updateResidentTable(filteredResidents);
-  changePage(0);
-}
-
-// Hàm tìm kiếm theo trạng thái
-function searchTemporary() {
-  const temporaryInput = document.getElementById("temporaryInput").value.toLowerCase();
-  filteredResidents = residents.filter((resident) =>
-      resident.temporary.toLowerCase().includes(temporaryInput)
-  );
-  updateResidentTable(filteredResidents);
-  console.log(filteredResidents)
-  changePage(0);
-}
-
-
 //_____THÔNG TIN CHI TIẾT CƯ DÂN_____
 let isModalOpen = false; // Biến kiểm tra trạng thái modal
 

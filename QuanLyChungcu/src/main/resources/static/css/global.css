@@ -72,6 +72,7 @@ a {
 }
 
 .Dashboard__elements {
+  width: 100%;
   font-size: 18px;
   margin-bottom: 12px;
   align-self: center;
@@ -93,6 +94,38 @@ a {
   font-weight: 700;
   text-shadow: 0px 0px 1px #5d6389;
 }
+
+/* Hiệu ứng khi trỏ chuột */
+.Dashboard__elements:hover {
+  box-shadow: 0 -5px 10px -5px rgba(64, 129, 241, 0.3), 
+              0 5px 10px -5px rgba(64, 129, 241, 0.3); 
+  transform: translateY(-2px); 
+}
+
+/* Trạng thái khi nhấn vào */
+.Dashboard__elements:active {
+  box-shadow: 0 2px 4px rgba(64, 129, 241, 0.5);
+  transform: translateY(0);
+  text-decoration: none;
+}
+
+/* Đường dẫn bên trong */
+.Dashboard__elements a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  display: block; 
+  width: 100%; 
+  height: 100%;
+  text-align: center; 
+  line-height: 2;
+}
+
+.Dashboard__elements a:hover {
+  color: rgb(41, 73, 148); /* Đổi màu chữ khi hover */
+  text-decoration: none;
+  text-shadow: 0px 0px 1px #5d6389;
+}
+
 
 .Main {
   flex: 85;
@@ -148,7 +181,8 @@ tr:hover {
   cursor: pointer;
   transition: all 0.2s ease;
   position: absolute;
-  bottom: 1%; right: 1%;
+  bottom: 1%;
+  right: 1%;
   border: 1px 1px 1px #000;
 }
 /* _________________ */

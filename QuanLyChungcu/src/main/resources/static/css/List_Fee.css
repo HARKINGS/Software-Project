@@ -34,35 +34,6 @@
   background-color: #e6e6e6;
 }
 /* Định dạng cho bảng */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-th,
-td {
-  padding: 12px 15px;
-  text-align: left;
-  font-size: 16px;
-  color: #333;
-}
-
-th {
-  background-color: #3498db;
-  color: white;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-tr:hover {
-  background-color: #e1e1e1;
-}
 
 #inputRow input {
   padding: 8px 0px;
