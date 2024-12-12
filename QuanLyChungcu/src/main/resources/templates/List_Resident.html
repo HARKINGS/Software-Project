@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/css/global.css"/>
-    <link rel="stylesheet" href="/css/List_Resident.css"/>
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/List_Resident.css" />
     <script type="text/javascript" src="/js/List_Resident.js" defer></script>
   </head>
   <body>
@@ -56,7 +56,7 @@
                 list="nameSuggestions"
                 class="input"
                 placeholder="Nhập tên cư dân"
-                oninput="searchName()"
+                oninput="searchResidents()"
               />
               <datalist id="nameSuggestions"></datalist>
               <!--Danh sách gợi ý -->
@@ -68,7 +68,7 @@
                 list="cccdSuggestions"
                 class="input"
                 placeholder="Nhập mã CCCD"
-                oninput="searchCCCD()"
+                oninput="searchResidents()"
               />
               <datalist id="cccdSuggestions"></datalist>
             </div>
@@ -80,21 +80,24 @@
                 list="householdSuggestions"
                 class="input"
                 placeholder="Nhập số hộ khẩu"
-                oninput="searchHousehold()"
+                oninput="searchResidents()"
               />
               <datalist id="householdSuggestions"></datalist>
             </div>
 
             <div class="Search-Res-Item">
-              <label for="roomInput" class="label">Số phòng:</label>
-              <input
-                id="roomInput"
-                list="roomSuggestions"
+              <label for="temporaryInput" class="label">Trạng thái:</label>
+              <select
+                id="temporaryInput"
                 class="input"
-                placeholder="Nhập số phòng"
-                oninput="searchRoom()"
-              />
-              <datalist id="roomSuggestions"></datalist>
+                onchange="searchResidents()"
+                required
+              >
+                <option value="" selected>Tất cả</option>
+                <option value="Tạm trú">Tạm trú</option>
+                <option value="Thường trú">Thường trú</option>
+                <option value="Tạm vắng">Tạm vắng</option>
+              </select>
             </div>
           </div>
 
@@ -135,74 +138,85 @@
       <h1>Thêm cư dân</h1>
       <!-- Form Section -->
       <div class="form-section">
-        <form id ="addResForm">
-          <div class="form-items">
-            <label for="nameRes">Họ và tên:</label>
-            <input
-              type="text"
-              id="nameRes"
-              placeholder="Nhập vào họ và tên"
-              required
-            />
-          </div>
-          <div class="form-items">
-            <label for="birthday">Ngày sinh:</label>
-            <input type="date" id="birthday" required />
-          </div>
-          <div class="form-items">
-            <label for="gender">Giới tính:</label>
-            <input
-              type="text"
-              id="gender"
-              placeholder="Nhập/chọn giới tính"
-              required
-            />
-          </div>
-          <div class="form-items">
-            <label for="CCCD">Số CCCD:</label>
-            <input type="text" id="CCCD" placeholder="Nhập số CCCD" required />
-          </div>
-          <div class="form-items">
-            <label for="SDT">Số điện thoại:</label>
-            <input
-              type="text"
-              id="SDT"
-              placeholder="Nhập số điện thoại"
-              required
-            />
-          </div>
-          <div class="form-items">
-            <label for="IDHousehold">Mã hộ khẩu:</label>
-            <input
-              type="text"
-              id="IDHousehold"
-              placeholder="Nhập vào mã hộ khẩu"
-              required
-            />
-          </div>
-          <div class="form-items">
-            <label for="relation">Quan hệ với chủ hộ:</label>
-            <input
-              type="text"
-              id="relation"
-              placeholder="Quan hệ với chủ hộ"
-              required
-            />
-          </div>
-          <div class="form-items">
-            <label for="status">Trạng thái</label>
-            <input
-              type="text"
-              id="status"
-              placeholder="Nhập vào trạng thái"
-              required
-            />
+        <form id="addResForm">
+          <div class="formaddRes">
+            <div class="column-form">
+              <div class="form-items">
+                <label for="nameRes">Họ và tên:</label>
+                <input
+                  type="text"
+                  id="nameRes"
+                  placeholder="Nhập vào họ và tên"
+                  required
+                />
+              </div>
+              <div class="form-items">
+                <label for="birthday">Ngày sinh:</label>
+                <input type="date" id="birthday" required />
+              </div>
+              <div class="form-items">
+                <label for="gender">Giới tính:</label>
+                <input
+                  type="text"
+                  id="gender"
+                  placeholder="Nhập/chọn giới tính"
+                  required
+                />
+              </div>
+              <div class="form-items">
+                <label for="CCCD">Số CCCD:</label>
+                <input
+                  type="text"
+                  id="CCCD"
+                  placeholder="Nhập số CCCD"
+                  required
+                />
+              </div>
+            </div>
+            <div class="column-form">
+              <div class="form-items">
+                <label for="SDT">Số điện thoại:</label>
+                <input
+                  type="text"
+                  id="SDT"
+                  placeholder="Nhập số điện thoại"
+                  required
+                />
+              </div>
+              <div class="form-items">
+                <label for="IDHousehold">Mã hộ khẩu:</label>
+                <input
+                  type="text"
+                  id="IDHousehold"
+                  placeholder="Nhập vào mã hộ khẩu"
+                  required
+                />
+              </div>
+              <div class="form-items">
+                <label for="relation">Quan hệ với chủ hộ:</label>
+                <input
+                  type="text"
+                  id="relation"
+                  placeholder="Quan hệ với chủ hộ"
+                  required
+                />
+              </div>
+              <div class="form-items">
+                <label for="status">Trạng thái</label>
+                <input
+                  type="text"
+                  id="status"
+                  placeholder="Nhập vào trạng thái"
+                  required
+                />
+              </div>
+            </div>
           </div>
           <button type="submit" class="submit-btn">Đăng ký</button>
         </form>
-      </div>
-      <div id="exit-layer">
-        <button onclick="exitAddResident()">Hủy</button>
+        <div id="exit-layer">
+          <button onclick="exitAddResident()">Hủy</button>
+        </div>
       </div>
     </div>
 

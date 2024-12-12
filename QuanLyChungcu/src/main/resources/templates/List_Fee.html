@@ -53,7 +53,7 @@
               id="nameFee"
               class="input"
               placeholder="Nhập tên khoản thu"
-              oninput="filterFeeSuggestions(this.value)"
+              oninput="filterResults()"
               list="nameFeeSuggestions"
             />
             <datalist id="nameFeeSuggestions"></datalist>
@@ -87,11 +87,7 @@
           </div>
           <div class="Search-Fee-Item">
             <label for="payment-status" class="label">Trạng thái:</label>
-            <select
-              id="payment-status"
-              class="input"
-              oninput="filterResults()"
-            >
+            <select id="payment-status" class="input" oninput="filterResults()">
               <option value="">Tất cả</option>
               <option value="hoàn tất">Hoàn tất</option>
               <option value="chưa hoàn tất">Chưa hoàn tất</option>
@@ -119,7 +115,7 @@
                   type="text"
                   id="newHouseId"
                   class="input-cell"
-                  placeholder="Hxxx"
+                  placeholder="Nhập mã hộ dân"
                 />
               </td>
               <td>

@@ -3,7 +3,15 @@ let data = [];
 let listHousehold = []; 
 
 let currentPage = 1;
-const rowsPerPage = 5;
+const rowsPerPage = 10;
+
+// Hàm chuyển đổi chuỗi tiếng Việt có dấu thành không dấu
+function removeAccents(str) {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
 
 //Tìm kiếm thông tin
 function searchData() {
@@ -13,8 +21,8 @@ function searchData() {
 
   const filteredData = data.filter((item) => {
     return (
-      item.code.toLowerCase().includes(maHoKhau) &&
-      item.name.toLowerCase().includes(chuHo) &&
+      String(item.code).toLowerCase().includes(maHoKhau) &&
+      removeAccents(item.name).toLowerCase().includes(removeAccents(chuHo)) &&
       item.apartment.toLowerCase().includes(soCanHo)
     );
   });
@@ -346,7 +354,7 @@ async function readData(){
         displayData(data);
       })
       .catch(error => {
-        console.error("Đã xảy ra lỗi khi hien thi", error);
+        console.error("Đã xảy ra lỗi khi hiển thị", error);
         alert("Đã xảy ra lỗi khi hien thi");
       });
 }
@@ -448,6 +456,7 @@ document.addEventListener("DOMContentLoaded",async () => {
             .then(returnedData => {
               readData();
               alert("Chuyển thành công!");
+              exitMoveForm();
             })
             .catch(error => {
               console.error("Đã xảy ra lỗi khi chuyển ", error);
