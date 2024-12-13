@@ -22,7 +22,8 @@ async function fetchResidentData() {
         const filteredData = data.filter((item) => item.temporary.toLowerCase().includes("tạm trú"));
         dataApartment.totalResident = data.length;
         dataApartment.temporaryResident = filteredData.length;
-        dataApartment.permanentResident = data.length - filteredData.length;
+        const filteredData1 = data.filter((item) => item.temporary.toLowerCase().includes("thường trú"));
+        dataApartment.permanentResident = filteredData1.length;
     } catch (error) {
         console.error("Lỗi khi tải danh sách cư dân:", error);
         alert("Không thể tải dữ liệu cư dân. Vui lòng thử lại sau.");
