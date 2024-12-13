@@ -1,0 +1,20 @@
+\definecolor{lightblue}{HTML}{b3c5e6}
+\definecolor{blueL}{HTML}{4371c3}
+\newcommand{\setwhite}{\textcolor{white}}
+
+\newcommand{\describetable}[2]
+{
+    \textit{#1}
+    \begin{center}
+        \begin{tabular}{|c|p{2.5cm}|p{2cm}|p{2cm}|p{2.5cm}|p{1.5cm}|}
+            \hline
+            \cellcolor{blueL}{\setwhite{Tên trường}} & 
+            \cellcolor{blueL}{\setwhite{\makecell[c]{Kiểu dữ liệu}}} & \cellcolor{blueL}{\setwhite{Kích thước}} & 
+            \cellcolor{blueL}{\setwhite{Ràng buộc}} \newline 
+            \cellcolor{blueL}{\setwhite{toàn vẹn}} & 
+            \cellcolor{blueL}{\setwhite{\makecell[c]{Khuôn dạng}}} & \cellcolor{blueL}{\setwhite{\makecell[c]{Ghi chú}}} \\
+            \hline
+            #2 
+        \end{tabular}
+    \end{center}
+}
