@@ -35,7 +35,7 @@ async function changePassword(event) {
     alert("Đổi mật khẩu thành công!");
     // Reset form sau khi thành công
     document.getElementById("userInfo").reset();
-    window.location.href = '/logout';
+    window.location.href = '/login';
 
   } catch (error) {
     console.error("Đã xảy ra lỗi khi đổi mật khẩu:", error);
