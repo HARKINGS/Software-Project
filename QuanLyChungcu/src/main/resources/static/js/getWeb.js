@@ -18,6 +18,11 @@ function getContribution(){
   window.location.href = '/user/contributionUser';
 }
 
+function getMessage(){
+  window.location.href = '/user/messageUser';
+}
+
 function userLogout(){
   window.location.href = '/user/logout';
 }
+

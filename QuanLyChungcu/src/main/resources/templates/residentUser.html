@@ -4,15 +4,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="/css/styleMain.css" />
-    <link rel="stylesheet" type="text/css" href="/css/residentUser.css" />
+    <link rel="stylesheet" type="text/css" href="/css/globalUser.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/residentUser.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <script type="text/javascript" src="/js/getWeb.js"></script>
     <script type="text/javascript" src="/js/residentUser.js"></script>
     <title>Thông tin cá nhân</title>
 </head>
-<body onload="fetchResidentInfo()">
+<body>
 <div class="fullscreen">
+    <!-- Navbar Section -->
     <div class="nav_bar">
         <div class="nav_bar_option_container">
             <div class="nav_bar_option" id="user">
@@ -31,8 +32,14 @@
                 <div class="icon_wrapper"><i class="fas fa-file-invoice-dollar fa-fw fa-align-center"></i></div>
                 <span>Đóng góp tình nguyện</span>
             </div>
+            <div class="nav_bar_option" id="message" onclick="getMessage()">
+                <div class="icon_wrapper"><i class="fas fa-bell fa-fw fa-align-center"></i></div>
+                <span>Thông báo</span>
+            </div>
         </div>
     </div>
+
+    <!-- Main Layout Section -->
     <div class="main_layout">
         <div class="main_header_container">
             <div class="title">
@@ -40,12 +47,14 @@
             </div>
             <div class="noti_and_id">
                 <div id="id_btn">
-                    <form action="/logout" method="post" id="logoutForm" style="display: inline;">
+                    <form action="/logout" method="post" id="logoutForm">
                         <button type="submit"><i class="fas fa-sign-out-alt fa-fw fa-align-center"></i></button>
                     </form>
                 </div>
             </div>
         </div>
+
+        <!-- Profile Section -->
         <div class="main_container">
             <div class="InformationUser">
                 <img class="profile-avatar" src="https://via.placeholder.com/280x280" alt="Profile Avatar" />
@@ -88,6 +97,7 @@
     </div>
 </div>
 
+<!-- Change Password Form Section -->
 <div id="wrapper_1">
     <div id="exit_wrapper_1">
         <button onclick="exitChangePassword()">Quay lại</button>
@@ -111,5 +121,8 @@
         </form>
     </div>
 </div>
+
+<!-- Font Awesome Icons (for the icons used in buttons) -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
 </html>

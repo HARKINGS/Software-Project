@@ -1,23 +1,17 @@
-#user{
-	background-color:rgb(150, 200, 255);
-	color:rgb(255, 255, 255);
-}
-#user:hover{
-	text-shadow:none;
-	box-shadow:none;
-	cursor:default;
-}
-.main_container{
-/*	background-color:black;*/
-    flex-grow:1;
-    padding:20px 10px;
-    height:100%;
-    width:100%;
-    overflow:hidden;
+#user {
+    background-color: rgb(150, 200, 255); 
+    color: rgb(255, 255, 255);
+    box-shadow: none;
+    cursor: default;
 }
 
-  /* Information Admin */
-  .InformationUser {
+#user:hover {
+    background-color: rgb(150, 200, 255); 
+    transform: none;
+}
+
+/* Profile Section */
+.InformationUser {
     width: 100%;
     max-width: 100%;
     display: flex;
@@ -29,103 +23,115 @@
     justify-content: center;
     position: relative;
     top: 25px;
-  }
+}
 
-  /* Profile Avatar */
-  .profile-avatar {
+.profile-avatar {
     width: 280px;
     height: 280px;
-    border-radius: 10px;
+    border-radius: 50%;
     object-fit: cover;
-  }
+    border: 5px solid #ddd;
+}
 
 .basic-details, .account-details {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 15px;
-  }
+}
 
-  /* Detail Row */
-  .detail-row {
+.detail-row {
     display: flex;
     gap: 10px;
     font-size: 16px;
-  }
+}
 
-  .label {
+.label {
     color: #db4646;
     font-weight: 600;
     min-width: 120px;
-  }
+}
 
-  .value {
+.value {
     color: black;
     font-weight: 400;
-  }
+}
 
-  .btn{
-    background-color:black;
-    position:absolute;
-    border: none;
-    border-radius:8px;
-  }
+#changeInfoBtn {
+    position: absolute;
+    bottom: 20px;
+    right: 50px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-  .btn button{
-    border-style: double;
-    border-width: 3px;
-    border-color:grey;
-  }
-
-  #changeInfoBtn{
-    bottom:20px;
-    right:50px;
-  }
-
-  #changeInfoBtn button{
-    padding:10px 10px 10px 30px;
-  }
-
-  #changeInfoBtn button:hover{
+#changeInfoBtn button {
+    padding: 12px 30px;
+    background-color: #512da8;
+    color: white;
+    border-radius: 25px;
+    border: 2px solid transparent;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
-  }
+}
 
-  #wrapper_1{
-    height:100vh;
-    width:100vw;
-    background-color:rgba(0, 0, 0, 0.3);
-    display:none;
-    position:relative;
+#changeInfoBtn button:hover {
+    background-color: #673ab7;
+    transform: translateY(-5px);
+}
+
+#changeInfoBtn button:active {
+    transform: translateY(2px);
+    box-shadow: none;
+}
+
+#wrapper_1 {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: none;
+    position: relative;
     z-index: 2;
-  }
+}
 
-  #exit_wrapper_1{
-    position:absolute;
-    top:20px;
-    right:250px;
-  }
-  #exit_wrapper_1 button{
-    padding:10px 10px 10px 10px;
-  }
-  #exit_wrapper_1 button:hover{
+#exit_wrapper_1 {
+    position: absolute;
+    top: 20px;
+    right: 250px;
+}
+
+#exit_wrapper_1 button {
+    padding: 10px 10px 10px 10px;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+#exit_wrapper_1 button:hover {
     cursor: pointer;
-  }
+    background-color: #c0392b;
+}
 
-  #changeInfoForm{
+#changeInfoForm {
     margin: 0;
     position: absolute;
     top: 15%;
-    left:15%;
-    font-size:17px;
-    height:70%;
+    left: 15%;
+    font-size: 17px;
+    height: 70%;
     width: 70%;
     color: black;
-    border-radius:25px;
+    border-radius: 25px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-    overflow:hidden;
-  }
-  #changeInfoForm form{
-    position:relative;
+    overflow: hidden;
+}
+
+#changeInfoForm form {
+    position: relative;
     background-color: #fff;
     flex: 1;
     display: flex;
@@ -133,15 +139,16 @@
     padding: 10px 40px;
     height: 100%;
 }
-#changeInfoForm button{
-    position:absolute;
-    bottom:20px;
-    right:70px;
+
+#changeInfoForm button {
+    position: absolute;
+    bottom: 20px;
+    right: 70px;
     background-color: #512da8;
     color: #fff;
     font-size: 14px;
-    width:20%;
-    padding:10px 50px;
+    width: 20%;
+    padding: 10px 50px;
     border: 1px solid transparent;
     border-radius: 8px;
     font-weight: 600;
@@ -149,31 +156,41 @@
     text-transform: uppercase;
     margin-top: 10px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-#form_wrapper_1_title{
-  font-size:40px;
-  font-weight:bold;
-  padding-bottom:50px;
+#changeInfoForm button:hover {
+    background-color: #673ab7;
 }
 
-.input_field_wrapper_1{
-/*  background-color:red;*/
-  margin:10px;
-  display: flex;
+#form_wrapper_1_title {
+    font-size: 40px;
+    font-weight: bold;
+    padding-bottom: 50px;
 }
 
-.input_field_wrapper_1 input{
+.input_field_wrapper_1 {
+    margin: 10px;
+    display: flex;
+}
+
+.input_field_wrapper_1 input {
     background-color: #eee;
-    border: none;
+    border: 1px solid #ccc;
     outline: none;
-    padding:10px 10px;
-    width:70%;
-    font-size:17px;
+    padding: 10px 10px;
+    width: 70%;
+    font-size: 17px;
+    border-radius: 5px;
+    transition: border-color 0.3s;
 }
 
-.input_field_wrapper_1 span{
-  font-size: 20px;
-  width:30%;
-  align-self: center;
+.input_field_wrapper_1 input:focus {
+    border-color: #512da8;
+}
+
+.input_field_wrapper_1 span {
+    font-size: 20px;
+    width: 30%;
+    align-self: center;
 }

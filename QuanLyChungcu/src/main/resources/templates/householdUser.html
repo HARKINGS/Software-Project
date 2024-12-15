@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name = "viewport" content= "width = device_width initial-scale = 1.0">
-  <link rel="stylesheet" type="text/css" href="/css/styleMain.css">
+  <link rel="stylesheet" type="text/css" href="/css/globalUser.css">
   <link rel="stylesheet" type="text/css" href="/css/householdUser.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-  <script type="text/javascript" src="/js/getWeb.js"></script>
-  <script type="text/javascript" src="/js/householdUser.js"></script>
+  <script type="text/javascript" src="/js/getWeb.js" defer></script>
+  <script type="text/javascript" src="/js/householdUser.js" defer></script>
   <title>Thông tin hộ khẩu</title>
 </head>
-<body onload="Init()">
+<body>
   <div class ="fullscreen">
     <div class="nav_bar">
       <div class = "nav_bar_option_container">
@@ -31,6 +31,10 @@
           <div class = "icon_wrapper"><i class="fas fa-file-invoice-dollar fa-fw fa-align-center" ></i></div>
           <span>Đóng góp tình nguyện</span>
         </div>
+        <div class="nav_bar_option" id="message" onclick="getMessage()">
+            <div class="icon_wrapper"><i class="fas fa-bell fa-fw fa-align-center"></i></div>
+            <span>Thông báo</span>
+        </div>
       </div>
     </div>
     <div class="main_layout">
@@ -40,7 +44,7 @@
         </div>
         <div class ="noti_and_id">
           <div id="id_btn">
-            <form action="/logout" method="post" id="logoutForm" style="display: inline;">
+            <form action="/logout" method="post" id="logoutForm">
                 <button type="submit"><i class="fas fa-sign-out-alt fa-fw fa-align-center"></i></button>
             </form>          
           </div>
@@ -71,7 +75,7 @@
             <button class="pageButton" id="prevPage" onclick="changePage(-1)">
               Prev
             </button>
-            <span id="pageNumber">Page 1</span>
+            <span id="pageNumber">Trang 1</span>
             <button class="pageButton" id="nextPage" onclick="changePage(1)">
               Next
             </button>

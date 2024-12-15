@@ -72,7 +72,6 @@ async function fetchResidentList() {
   }
 }
 
-// Hàm khởi tạo
-function Init() {
-  fetchResidentList();
-}
+document.addEventListener("DOMContentLoaded", function () {
+    fetchResidentList();
+});

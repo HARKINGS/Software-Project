@@ -1,11 +1,13 @@
-#contribution{
-	background-color:rgb(150, 200, 255);
-	color:rgb(255, 255, 255);
+#contribution {
+    background-color: rgb(150, 200, 255); 
+    color: rgb(255, 255, 255);
+    box-shadow: none;
+    cursor: default;
 }
-#contribution:hover{
-	text-shadow:none;
-	box-shadow:none;
-	cursor:default;
+
+#contribution:hover {
+    background-color: rgb(150, 200, 255); 
+    transform: none;
 }
 
 .main_container{
