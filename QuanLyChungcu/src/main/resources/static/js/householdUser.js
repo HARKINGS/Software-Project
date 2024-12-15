@@ -12,15 +12,15 @@ function updateResidentTable(residents) {
 
   residents.forEach((resident) => {
     const row = tableBody.insertRow();
-    row.insertCell(0).textContent = resident.residentId;
-    row.insertCell(1).textContent = resident.name;
-    row.insertCell(2).textContent = resident.dateOfBirth; 
-    row.insertCell(3).textContent = resident.cccd;
-    row.insertCell(4).textContent = resident.gender; 
-    row.insertCell(5).textContent = resident.phoneNumber; 
-    row.insertCell(6).textContent = resident.relationship;
-    row.insertCell(7).textContent = resident.temporary;
-    row.insertCell(8).textContent = resident.householdId;
+    // row.insertCell(0).textContent = resident.residentId;
+    row.insertCell(0).textContent = resident.name;
+    row.insertCell(1).textContent = resident.dateOfBirth; 
+    row.insertCell(2).textContent = resident.cccd;
+    row.insertCell(3).textContent = resident.gender; 
+    row.insertCell(4).textContent = resident.phoneNumber; 
+    row.insertCell(5).textContent = resident.relationship;
+    row.insertCell(6).textContent = resident.temporary;
+    row.insertCell(7).textContent = resident.householdId;
   });
 }
 

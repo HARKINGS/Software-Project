@@ -19,6 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final ResidentRepository residentRepository;
@@ -30,6 +31,7 @@ public class UserServiceImpl implements UserService{
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
+    @Autowired
     public UserServiceImpl(UserRepository userRepository, ResidentRepository residentRepository, HouseholdRepository householdRepository, ContributionRepository contributionRepository, FeeRepository feeRepository, ParkingFeeRepository parkingFeeRepository, NotificationRepository notificationRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.residentRepository = residentRepository;
@@ -41,9 +43,6 @@ public class UserServiceImpl implements UserService{
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
     }
-
-    @Autowired
-
 
     @Override
     public List<UserDTO> getListUser() {

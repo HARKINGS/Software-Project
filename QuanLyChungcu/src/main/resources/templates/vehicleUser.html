@@ -5,11 +5,11 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name = "viewport" content= "width = device_width initial-scale = 1.0">
   <link rel="stylesheet" type="text/css" href="/css/globalUser.css">
-  <link rel="stylesheet" type="text/css" href="/css/householdUser.css">
+  <link rel="stylesheet" type="text/css" href="/css/vehicleUser.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
   <script type="text/javascript" src="/js/getWeb.js" defer></script>
   <script type="text/javascript" src="/js/householdUser.js" defer></script>
-  <title>Thông tin hộ khẩu</title>
+  <title>Thông tin gửi xe</title>
 </head>
 <body>
   <div class ="fullscreen">
@@ -19,7 +19,7 @@
           <div class = "icon_wrapper"><i class="fas fa-user-alt fa-fw fa-align-center" ></i></div>
           <span>Thông tin cá nhân</span>
         </div>
-        <div class = "nav_bar_option" id ="household">
+        <div class = "nav_bar_option" id ="household" onclick ="getHousehold()">
           <div class = "icon_wrapper"><i class="fas fa-users fa-fw fa-align-center"></i></div>
           <span>Thông tin hộ khẩu</span>
         </div>
@@ -31,7 +31,7 @@
           <div class = "icon_wrapper"><i class="fas fa-file-invoice-dollar fa-fw fa-align-center" ></i></div>
           <span>Đóng góp tình nguyện</span>
         </div>
-        <div class="nav_bar_option" id="vehicle" onclick = "getVehicle()">
+        <div class="nav_bar_option" id="vehicle">
             <div class="icon_wrapper"><i class="fas fa-car fa-fw fa-align-center"></i></div>
             <span>Thông tin gửi xe</span>
         </div>
@@ -56,18 +56,16 @@
       </div>
       <div class ="main_container">
         <div class="table_container">
-          <table id="residentTable">
+          <table id="vehicleTable">
             <thead>
               <tr>
-                <!-- <th>ID</th> -->
-                <th>Tên dân cư</th>
-                <th>Ngày sinh</th>
-                <th>Số CCCD</th>
-                <th>Giới tính</th>
-                <th>Số điện thoại</th>
-                <th>Quan hệ với chủ hộ</th>
+                <th>Mã hộ dân</th>
+                <th>Số xe máy</th>
+                <th>Số ô tô</th>
+                <th>Số tiền cần thu</th>
+                <th>Số tiền đã thu</th>
+                <th>Hạn thu</th>
                 <th>Trạng thái</th>
-                <th>Số hộ khẩu</th>
               </tr>
             </thead>
             <tbody>
