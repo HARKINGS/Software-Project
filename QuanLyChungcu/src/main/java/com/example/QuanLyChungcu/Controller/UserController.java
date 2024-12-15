@@ -93,4 +93,10 @@ public class UserController {
     public List<ContributionDTO> getListContribution() {
         return userService.getListContribution();
     }
+
+    @GetMapping("/user/getListParkingFee")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ParkingFeeDTO> getListParkingFee() {
+        return userService.getListParkingFee();
+    }
 }

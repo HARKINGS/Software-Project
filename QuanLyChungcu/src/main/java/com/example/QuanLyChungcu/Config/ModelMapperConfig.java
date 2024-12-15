@@ -129,6 +129,33 @@ public class ModelMapperConfig {
                     mapper.map(src -> src.getUserOfResident().getResidentId(),
                             UserDTO::setResidentId);
                 });
+
+        // ModelMapper cho ParkingFee
+        Mapper.typeMap(ParkingFeeDTO.class, ParkingFee.class)
+                .addMappings(mapper -> {
+                    mapper.skip(ParkingFee::setHousehold_parking);
+                })
+                .setPostConverter(context -> {
+                    ParkingFeeDTO source = context.getSource();
+                    ParkingFee destination = context.getDestination();
+
+                    if(source.getHouseholdId() != null) {
+                        Household household = householdRepository.findById(source.getHouseholdId())
+                                .orElseThrow(() -> new ResourceNotFoundException("Khong ton tai ho khau co id nay"));
+                        destination.setHousehold_parking(household);
+                    }
+
+                    return destination;
+                });
+
+        Mapper.typeMap(ParkingFee.class, ParkingFeeDTO.class)
+                .addMappings(mapper -> {
+                    mapper.map(src -> src.getHousehold_parking().getHouseholdId(),
+                            ParkingFeeDTO::setHouseholdId);
+                });
+
         return Mapper;
     }
+
+
 }

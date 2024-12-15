@@ -4,10 +4,7 @@ import com.example.QuanLyChungcu.DTO.*;
 import com.example.QuanLyChungcu.Exception.BadRequestException;
 import com.example.QuanLyChungcu.Exception.ConflictException;
 import com.example.QuanLyChungcu.Exception.ResourceNotFoundException;
-import com.example.QuanLyChungcu.Model.Contribution;
-import com.example.QuanLyChungcu.Model.Fee;
-import com.example.QuanLyChungcu.Model.Resident;
-import com.example.QuanLyChungcu.Model.Users;
+import com.example.QuanLyChungcu.Model.*;
 import com.example.QuanLyChungcu.Repository.*;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
@@ -28,19 +25,25 @@ public class UserServiceImpl implements UserService{
     private final HouseholdRepository householdRepository;
     private final ContributionRepository contributionRepository;
     private final FeeRepository feeRepository;
+    private final ParkingFeeRepository parkingFeeRepository;
+    private final NotificationRepository notificationRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository, ResidentRepository residentRepository, HouseholdRepository householdRepository, ContributionRepository contributionRepository, FeeRepository feeRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, ResidentRepository residentRepository, HouseholdRepository householdRepository, ContributionRepository contributionRepository, FeeRepository feeRepository, ParkingFeeRepository parkingFeeRepository, NotificationRepository notificationRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.residentRepository = residentRepository;
         this.householdRepository = householdRepository;
         this.contributionRepository = contributionRepository;
         this.feeRepository = feeRepository;
+        this.parkingFeeRepository = parkingFeeRepository;
+        this.notificationRepository = notificationRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
     }
+
+    @Autowired
+
 
     @Override
     public List<UserDTO> getListUser() {
@@ -184,6 +187,23 @@ public class UserServiceImpl implements UserService{
 
             return contributions.stream()
                     .map(contribution -> modelMapper.map(contribution, ContributionDTO.class))
+                    .collect(Collectors.toList());
+        }else {
+            throw new ResourceNotFoundException("User khong ton tai");
+        }
+    }
+
+    @Override
+    public List<ParkingFeeDTO> getListParkingFee() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<Users> findUser = userRepository.findByUsername(authentication.getName());
+        if(findUser.isPresent()) {
+            Users users = findUser.get();
+            Long id = users.getUserOfResident().getHousehold_resident().getHouseholdId();
+            List<ParkingFee> parkingFees = parkingFeeRepository.findParkingFeesByHouseholdId(id);
+
+            return parkingFees.stream()
+                    .map(parkingFee -> modelMapper.map(parkingFee, ParkingFeeDTO.class))
                     .collect(Collectors.toList());
         }else {
             throw new ResourceNotFoundException("User khong ton tai");

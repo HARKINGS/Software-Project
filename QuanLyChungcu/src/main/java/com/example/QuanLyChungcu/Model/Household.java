@@ -35,6 +35,9 @@ public class Household {
     @OneToMany(mappedBy = "Household_fee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Fee> fees;
 
+    @OneToMany(mappedBy = "household_parking", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ParkingFee> parkingFees;
+
     public Long getHouseholdId() {
         return householdId;
     }

@@ -15,4 +15,5 @@ public interface UserService {
     public List<ResidentDTO> getListResident();
     public List<FeeDTO> getListFee();
     public List<ContributionDTO> getListContribution();
+    public List<ParkingFeeDTO> getListParkingFee();
 }

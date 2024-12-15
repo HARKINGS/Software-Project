@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Fee {
@@ -35,6 +36,9 @@ public class Fee {
     @ManyToOne
     @JoinColumn(name = "household_id", nullable = false)
     private Household Household_fee; // Quan hệ với hộ gia đình
+
+    @OneToMany(mappedBy = "history_fee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<HistoryFee> historyFeeList;
 
     // Getters và setters
     public Long getFeeId() {

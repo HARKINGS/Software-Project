@@ -21,6 +21,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Phân quyền theo URL
                         .requestMatchers("/login", "/img/**", "/js/**", "/css/**").permitAll() // Không yêu cầu đăng nhập
+                        .requestMatchers("/getAllNotification").hasAnyRole("ADMIN", "USER") // Cho phép cả ADMIN và USER
                         .requestMatchers("/admin/**").hasRole("ADMIN") // Chỉ ADMIN được phép
                         .requestMatchers("/user/**").hasRole("USER")   // Chỉ USER được phép
                         .anyRequest().authenticated() // Các URL còn lại yêu cầu đăng nhập
