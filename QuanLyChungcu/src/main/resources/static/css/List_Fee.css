@@ -56,7 +56,7 @@
 }
 
 #addButton:hover {
-  background-color: #3e8e41; /* Màu khi hover */
+  background-color: #c27ac4; /* Màu khi hover */
 }
 
 /* Định dạng hàng nhập liệu để chứa nút */
@@ -97,4 +97,71 @@
 .pageButton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+#FeeModal {
+  display: none; /* Ẩn modal khi chưa được mở */
+  position: fixed; /* Đảm bảo modal đứng trên trang */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Đặt modal ở giữa màn hình */
+  width: 80%; /* Kích thước modal */
+  max-width: 900px; /* Đảm bảo modal không quá rộng */
+  background-color: white; /* Màu nền của modal */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Tạo bóng cho modal */
+  z-index: 9999; /* Đảm bảo modal nổi bật hơn */
+  min-height: 350px;
+}
+
+.payment-history {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.basic-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.basic-details .detail-row {
+  display: flex;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.label {
+  color: #db4646;
+  font-weight: 600;
+  min-width: 120px;
+}
+
+.value {
+  font-size: 1.6rem;
+  color: black;
+  font-weight: 400;
+  border: 1px solid #555;
+  height: 20px;
+  padding: 10px;
+  background-color: #fff;
+}
+
+.status.completed {
+  background-color: #4caf50;
+}
+
+.status.incomplete {
+  background-color: #f44336;
+}
+
+.status {
+  display: inline-block;
+  padding: 3px 5px;
+  color: #fff;
+  border-radius: 4px;
+  text-align: center;
 }

@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService{
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
+    @Autowired
     public UserServiceImpl(UserRepository userRepository, ResidentRepository residentRepository, HouseholdRepository householdRepository, ContributionRepository contributionRepository, FeeRepository feeRepository, ParkingFeeRepository parkingFeeRepository, NotificationRepository notificationRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.residentRepository = residentRepository;
@@ -42,7 +43,6 @@ public class UserServiceImpl implements UserService{
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Autowired
 
 
     @Override

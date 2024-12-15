@@ -92,6 +92,7 @@ a {
 }
 
 .Dashboard__elements a:hover {
+  cursor: pointer;
   color: rgb(41, 73, 148);
   text-shadow: 0px 0px 1px #5d6389;
 }
@@ -153,6 +154,7 @@ table {
 
 th,
 td {
+  border: 2px solid #818181;
   padding: 12px 15px;
   text-align: left;
   font-size: 16px;

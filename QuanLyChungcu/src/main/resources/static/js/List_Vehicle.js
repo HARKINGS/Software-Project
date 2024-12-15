@@ -195,3 +195,82 @@ document
 document
   .getElementById("newPaid")
   .addEventListener("input", calculateTotalAmount);
+
+
+//MODAL
+let isModalOpen = false; // Biến kiểm tra trạng thái modal
+
+function showModal(Fee) {
+  const modal = document.getElementById("FeeModal");
+  const modalDetails = document.getElementById("modalDetails");
+  const status = Fee.paid ? "Hoàn tất" : "Chưa hoàn tất";
+
+  // Cập nhật thông tin vào modal
+  modalDetails.innerHTML = `
+      <div class="payment-history">
+      <div class="basic-detail">
+        <div class="detail-row">
+          <span class="label">Số xe ô tô:</span>
+          <input class="value" value="${Fee.numCar}" disabled />
+        </div>
+        <div class="detail-row">
+          <span class="label">Số xe ô tô:</span>
+          <input class="value" value="${Fee.numMotor}" disabled />
+        </div>
+        <div class="detail-row">
+          <span class="label">Số tiền cần thu:</span>
+          <input class="value" id="totalPay" value="${Fee.amount}" disabled />
+        </div>
+        <div class="detail-row">
+          <span class="label">Hạn thu:</span>
+          <input class="value" value="${Fee.dueDate}" disabled />
+        </div>
+        <div class="detail-row">
+          <span class="label">Trạng thái:</span>
+          <input class="value" id="status-pay" value="${status}" disabled />
+        </div>
+      </div>
+      <h1>Lịch sử các lần thu</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Mã phiếu thu</th>
+            <th>Ngày đóng</th>
+            <th>Số tiền đóng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>nối mã phiếu thu</td>
+            <td>nối Ngày đóng</td>
+            <td>nối Số tiền đóng</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> 
+    `;
+
+  // Hiển thị modal
+  console.log("Modal đang hiển thị");
+  modal.style.display = "block";
+  isModalOpen = true; // Modal đã được mở
+
+  event.stopPropagation();
+}
+
+// Lắng nghe sự kiện click trên toàn bộ window
+window.addEventListener("click", (event) => {
+  const modal = document.getElementById("FeeModal");
+
+  // Chỉ đóng modal nếu nó đang hiển thị
+  if (isModalOpen && !modal.contains(event.target)) {
+    closeModal(); // Đóng modal
+  }
+});
+
+// Đóng modal
+function closeModal() {
+  const modal = document.getElementById("FeeModal");
+  modal.style.display = "none";
+  isModalOpen = false; // Modal đã đóng
+}

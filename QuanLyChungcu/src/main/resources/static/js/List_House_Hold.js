@@ -420,6 +420,7 @@ document.addEventListener("DOMContentLoaded",async () => {
         .then(returnedData => {
           readData();
           alert("Thêm thành công!");
+          exitAddHouse();
         })
         .catch(error => {
           console.error("Đã xảy ra lỗi khi thêm ", error);
