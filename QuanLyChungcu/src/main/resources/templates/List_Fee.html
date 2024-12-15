@@ -29,8 +29,18 @@
           >
         </div>
         <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/List_Vehicle'"
+            >Thông tin gửi xe</a
+          >
+        </div>
+        <div class="Dashboard__elements">
           <a onclick="window.location.href = '/admin/DonationLedger'"
             >Đóng góp tình nguyện</a
+          >
+        </div>
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/List_Notification'"
+            >Thông báo</a
           >
         </div>
         <div class="Dashboard__elements">
@@ -59,7 +69,9 @@
               oninput="filterResults()"
               list="nameFeeSuggestions"
             />
-            <datalist id="nameFeeSuggestions"></datalist>
+            <datalist id="nameFeeSuggestions">
+              
+            </datalist>
           </div>
           <div class="Search-Fee-Item">
             <label for="id-house-hold" class="label">Mã hộ dân:</label>

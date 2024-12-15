@@ -1,0 +1,100 @@
+/* Định dạng cho bảng tìm kiếm */
+.Search-Fee {
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgb(255, 255, 255);
+  align-items: center;
+  box-shadow: 1px 1px #555;
+  border-radius: 5px;
+}
+
+.Search-Fee-Item {
+  font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Search-Fee input {
+  padding: 8px;
+  margin-right: 10px;
+  border: 1.5px solid #ccc;
+  border-radius: 5px;
+  background-color: #e6e6e6;
+}
+
+#payment-status {
+  padding: 8px;
+  margin-right: 10px;
+  border: 1.5px solid #ccc;
+  border-radius: 5px;
+  background-color: #e6e6e6;
+}
+/* Định dạng cho bảng */
+
+#inputRow input {
+  padding: 8px 0px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+/* Định dạng nút dấu cộng thêm thu phí */
+#addButton {
+  position: relative; /* Định vị tuyệt đối để có thể đặt ngoài bảng */
+  border: 1px solid #333;
+  border-radius: 3px;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+}
+
+#addButton:hover {
+  background-color: #3e8e41; /* Màu khi hover */
+}
+
+/* Định dạng hàng nhập liệu để chứa nút */
+#inputRow {
+  position: relative; /* Đặt hàng làm tham chiếu để định vị nút dấu cộng */
+}
+
+/* Định dang cho chuyển trang */
+#pagination {
+  display: flex;
+  justify-content: center; /* Căn giữa các nút phân trang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+
+  width: 100%;
+  padding: 10px 0;
+}
+
+#pageNumber {
+  font-size: 16px;
+}
+
+.pageButton {
+  padding: 5px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  font-size: 12px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.pageButton:hover {
+  background-color: #2980b9;
+}
+
+.pageButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

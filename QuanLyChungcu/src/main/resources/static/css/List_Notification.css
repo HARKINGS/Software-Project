@@ -1,0 +1,230 @@
+/* Container chứa danh sách thông báo */
+.container {
+  margin-top: 20px;
+  width: 100%;
+  height: 70vh; /* Chiều cao cố định của danh sách */
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow-y: auto; /* Bật thanh cuộn dọc */
+  overflow-x: hidden; /* Ẩn thanh cuộn ngang nếu có */
+}
+
+.search {
+  padding: 10px 10px;
+  border: 0px solid #333;
+  border-radius: 5px;
+  box-shadow: 1px 1px #333;
+  background-color: #fff;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 40px;
+  /* justify-content: space-between; */
+}
+
+.search label {
+  padding: 8px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.search input {
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Các thông báo trong danh sách */
+.message {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 15px 0;
+  padding: 15px;
+  background-color: #fafafa;
+}
+
+.message h2 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  color: #007bff;
+}
+
+.message time {
+  font-size: 14px;
+  color: #888;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.message p {
+  margin: 0 0 10px;
+  color: #555;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.message button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.message button:hover {
+  background-color: #0056b3;
+}
+
+/* Tùy chỉnh thanh cuộn */
+.container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #c0c0c0;
+  border-radius: 4px;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+  background-color: #a0a0a0;
+}
+
+/* Overlay hiển thị thông báo chi tiết */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.overlay .full-message {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.overlay .full-message h2 {
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.overlay .full-message p {
+  color: #555;
+  margin: 10px 20px 0px;
+  text-align: left;
+}
+
+.overlay .full-message button {
+  margin-top: 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.overlay .full-message button:hover {
+  background-color: #0056b3;
+}
+
+/* Căn chỉnh chính trong layout */
+.main_layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Buttons {
+  width: 150px;
+  height: 35px;
+  padding: 9px 20px;
+  background: #488df3;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 32px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.Buttons:hover {
+  opacity: 0.9;
+}
+
+.Buttons .Buttons-items {
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0.03px;
+  word-wrap: break-word;
+}
+
+.addNoti {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1000;
+  min-width: 500px;
+  width: 40%;
+}
+
+.form-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-items label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #34495e;
+}
+
+.form-items input {
+  min-height: 40px;
+}
+
+.formaddNoti {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.form-section-btn {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}

@@ -107,7 +107,7 @@ function filterResults() {
       }
     }
 
-    return ( (!nameFee || removeAccents(item.feeType).toLowerCase().includes(nameFee)) && matchesHouseId && matchesDate && matchesStatus);
+    return ( (!nameFee || removeAccents(item.feeType).toLowerCase().includes(removeAccents(nameFee))) && matchesHouseId && matchesDate && matchesStatus);
   });
   console.log(filteredData);
   currentPage = 1;
