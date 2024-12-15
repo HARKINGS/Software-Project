@@ -1,11 +1,11 @@
-#household {
+#vehicle {
     background-color: rgb(150, 200, 255); 
     color: rgb(255, 255, 255);
     box-shadow: none;
     cursor: default;
 }
 
-#household:hover {
+#vehicle:hover {
     background-color: rgb(150, 200, 255); 
     transform: none;
 }
@@ -32,7 +32,7 @@ table {
     border-radius: 5px;
     overflow: hidden;
     box-shadow:5px 5px 5px rgba(0, 0, 0, 0.2);
-    table-layout: auto;
+    table-layout: fixed;
 }
 
 table th,
@@ -63,18 +63,6 @@ tr:hover {
     background-color: #ddd;
 }
 
-td:nth-child(1) {
-    width:25%;
-}
-td:nth-child(2), td:nth-child(7) {
-    width:12%;
-}
-td:nth-child(4), td:nth-child(8) {
-    width:8%;
-}
-td:nth-child(6) {
-    width:10%;
-}
 #pagination {
     display: flex;
     justify-content: center;  

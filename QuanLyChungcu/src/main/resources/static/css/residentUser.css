@@ -46,13 +46,19 @@
     font-size: 16px;
 }
 
+.account-details .label{
+    min-width: 200px;
+}
+
 .label {
+    font-size:18px;
     color: #db4646;
     font-weight: 600;
     min-width: 120px;
 }
 
 .value {
+    font-size:18px;
     color: black;
     font-weight: 400;
 }

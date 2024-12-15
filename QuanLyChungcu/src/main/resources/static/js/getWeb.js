@@ -18,6 +18,10 @@ function getContribution(){
   window.location.href = '/user/contributionUser';
 }
 
+function getVehicle(){
+  window.location.href = '/user/vehicleUser';
+}
+
 function getMessage(){
   window.location.href = '/user/messageUser';
 }

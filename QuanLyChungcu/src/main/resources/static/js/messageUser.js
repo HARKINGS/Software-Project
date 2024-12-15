@@ -15,41 +15,34 @@ function closeDetail() {
  function addMessage(title, time, content) {
         const container = document.querySelector(".container");
 
-        // Create message container
         const messageDiv = document.createElement("div");
         messageDiv.classList.add("message");
 
-        // Create title
         const titleElement = document.createElement("h2");
         titleElement.textContent = title;
         messageDiv.appendChild(titleElement);
 
-        // Create time element
         const timeElement = document.createElement("time");
         timeElement.textContent = time;
         messageDiv.appendChild(timeElement);
 
-        // Create content preview
         const contentElement = document.createElement("p");
         contentElement.textContent = content;
         messageDiv.appendChild(contentElement);
 
-        // Create button for details
         const buttonElement = document.createElement("button");
         buttonElement.textContent = "Chi tiết";
         buttonElement.onclick = () => showDetail(title, time, content);
         messageDiv.appendChild(buttonElement);
 
-        // Append the message to the container
         container.appendChild(messageDiv);
     }
 
 function truncateMessage(selector, maxLength) {
         const messages = document.querySelectorAll(selector);
         messages.forEach(message => {
-            const fullText = message.textContent; // Store the full text
+            const fullText = message.textContent; 
             if (fullText.length > maxLength) {
-                // Truncate to the last space within the maxLength
                 let truncatedText = fullText.substring(0, maxLength);
                 const lastSpaceIndex = truncatedText.lastIndexOf(' ');
                 if (lastSpaceIndex !== -1) {
@@ -57,7 +50,7 @@ function truncateMessage(selector, maxLength) {
                 }
                 message.textContent = truncatedText + "...";
             } else {
-                message.style.cursor = "default"; // No need for click event if it's not truncated
+                message.style.cursor = "default"; 
             }
         });
     }
@@ -76,15 +69,13 @@ function closeDetail() {
     overlay.style.display = 'none';
 }
 
-// Call truncateMessage on page load
 document.addEventListener("DOMContentLoaded", () => {
     truncateMessage('.message p', 40); 
 });
 
-// Function to add a new message to the container
 document.addEventListener("DOMContentLoaded", () => {
 
-    const maxLength = 50;
+    const maxLength = 100;
 
     addMessage(
         "Thông báo phạt",
@@ -101,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     addMessage(
         "Nhắc nhở thu phí",
         "December 19, 2024, 11:00 AM",
-        "Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !"
+        "Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư ! Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !"
     );
 
     truncateMessage('.message p', maxLength);

@@ -19,6 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final ResidentRepository residentRepository;
@@ -43,8 +44,11 @@ public class UserServiceImpl implements UserService{
         this.passwordEncoder = passwordEncoder;
     }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> e1223a1764ab74c59a8664f2edf218e17368d94d
     @Override
     public List<UserDTO> getListUser() {
         List<Users> users = userRepository.findAll();

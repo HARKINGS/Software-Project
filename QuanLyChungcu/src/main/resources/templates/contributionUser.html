@@ -7,7 +7,7 @@
   <link rel="stylesheet" type="text/css" href="/css/globalUser.css">
   <link rel="stylesheet" type="text/css" href="/css/contributionUser.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-  <script type="text/javascript" src="/js/getWeb.js"></script>
+  <script type="text/javascript" src="/js/getWeb.js" defer></script>
   <script type="text/javascript" src="/js/contributionUser.js" defer></script>  
   <title>Thông tin đóng góp tình nguyện</title>
 </head>
@@ -30,6 +30,10 @@
         <div class = "nav_bar_option" id ="contribution">
           <div class = "icon_wrapper"><i class="fas fa-file-invoice-dollar fa-fw fa-align-center"></i></div>
           <span>Đóng góp tình nguyện</span>
+        </div>
+        <div class="nav_bar_option" id="vehicle" onclick = "getVehicle()">
+            <div class="icon_wrapper"><i class="fas fa-car fa-fw fa-align-center"></i></div>
+            <span>Thông tin gửi xe</span>
         </div>
         <div class="nav_bar_option" id="message" onclick="getMessage()">
             <div class="icon_wrapper"><i class="fas fa-bell fa-fw fa-align-center"></i></div>
