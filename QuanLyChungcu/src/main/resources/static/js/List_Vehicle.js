@@ -9,7 +9,7 @@ const rowsPerPage = 10; // Số dòng mỗi trang
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     // Tải dữ liệu ban đầu
-    const response = await fetch("/admin/vehicle-fee", {
+    const response = await fetch("/admin/parkingFee", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -72,8 +72,8 @@ function addNewRow() {
   const totalAmount = numMotor * 70000 + numCar * 1200000;
   const newEntry = {
     householdId: houseId,
-    motorcycles: numMotor,
-    cars: numCar,
+    numberMotor: numMotor,
+    numberCar: numCar,
     amount: totalAmount,
     collectAmount: paid,
     dueDate: lastDate,
@@ -81,7 +81,7 @@ function addNewRow() {
   };
 
   // Gửi yêu cầu thêm mới
-  fetch("/admin/vehicle-fee", {
+  fetch("/admin/parkingFee", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -124,8 +124,8 @@ function renderTable(page) {
     const row = tableBody.insertRow(-1);
     row.innerHTML = `
       <td>${item.householdId}</td>
-      <td>${item.motorcycles || 0}</td>
-      <td>${item.cars || 0}</td>
+      <td>${item.numberMotor || 0}</td>
+      <td>${item.numberCar || 0}</td>
       <td>${item.amount.toLocaleString()} VND</td>
       <td>${item.collectAmount.toLocaleString()} VND</td>
       <td>${item.dueDate}</td>
@@ -170,6 +170,47 @@ function filterResults() {
   currentPage = 1;
   renderTable(currentPage);
 }
+
+function deleteRow(index) {
+  // Lấy `parkingFeeId` từ dữ liệu
+  const parkingFeeId = filteredData[index].parkingFeeId;
+
+  // Hiển thị xác nhận trước khi xóa
+  const confirmDelete = confirm("Bạn có chắc chắn muốn xóa mục này không?");
+  if (!confirmDelete) {
+    return; // Người dùng hủy thao tác xóa
+  }
+
+  // Gửi yêu cầu DELETE đến API
+  fetch(`/admin/parkingFee/${parkingFeeId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.status !== 204) {
+        throw new Error("Không thể xóa mục này. Vui lòng thử lại sau.");
+      }
+    })
+    .then(() => {
+      // Xóa mục khỏi `data` và `filteredData`
+      data = data.filter((item) => item.parkingFeeId !== parkingFeeId);
+      filteredData = filteredData.filter(
+        (item) => item.parkingFeeId !== parkingFeeId
+      );
+
+      // Cập nhật lại bảng
+      renderTable(currentPage);
+
+      alert("Xóa thành công!");
+    })
+    .catch((error) => {
+      console.error("Lỗi xóa dữ liệu:", error);
+      alert("Không thể xóa. Vui lòng thử lại.");
+    });
+}
+
 
 // Chuyển trang
 function changePage(direction) {
@@ -273,4 +314,16 @@ function closeModal() {
   const modal = document.getElementById("FeeModal");
   modal.style.display = "none";
   isModalOpen = false; // Modal đã đóng
+}
+
+function resetInputRow() {
+  document.getElementById("newHouseId").value = "";
+  document.getElementById("numMotor").value = "";
+  document.getElementById("numCar").value = "";
+  document.getElementById("lastdate").value = "";
+  document.getElementById("newPaid").value = "";
+  document.getElementById("newTotal").value = "";
+  const statusSpan = document.getElementById("newStatus");
+  statusSpan.textContent = "";
+  statusSpan.className = "";
 }

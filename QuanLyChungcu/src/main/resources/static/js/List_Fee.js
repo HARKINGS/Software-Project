@@ -306,7 +306,7 @@ function showModal(Fee) {
   const modalDetails = document.getElementById("modalDetails");
   const status = Fee.paid ? "Hoàn tất" : "Chưa hoàn tất";
 
-  // Cập nhật thông tin vào modal
+  // Hiển thị thông tin cơ bản
   modalDetails.innerHTML = `
       <div class="payment-history">
       <div class="basic-detail">
@@ -320,7 +320,7 @@ function showModal(Fee) {
         </div>
         <div class="detail-row">
           <span class="label">Số tiền cần thu:</span>
-          <input class="value" id="totalPay" value="${Fee.amount}" disabled />
+          <input class="value" id="totalPay" value="${Fee.amount.toLocaleString()} VND" disabled />
         </div>
         <div class="detail-row">
           <span class="label">Trạng thái:</span>
@@ -336,21 +336,54 @@ function showModal(Fee) {
             <th>Số tiền đóng</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="paymentHistoryTableBody">
           <tr>
-            <td>nối mã phiếu thu</td>
-            <td>nối Ngày đóng</td>
-            <td>nối Số tiền đóng</td>
+            <td colspan="3">Đang tải dữ liệu...</td>
           </tr>
         </tbody>
       </table>
-    </div> 
+    </div>
     `;
 
   // Hiển thị modal
-  console.log("Modal đang hiển thị");
   modal.style.display = "block";
   isModalOpen = true; // Modal đã được mở
+
+  // Gửi yêu cầu API để lấy lịch sử các lần thu
+  fetch(`/admin/historyFee/${Fee.feeId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Không thể tải lịch sử thu. Vui lòng thử lại sau.");
+      }
+      return response.json();
+    })
+    .then(history => {
+      const tableBody = document.getElementById("paymentHistoryTableBody");
+      if (history.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="3">Không có lịch sử thu.</td></tr>`;
+      } else {
+        tableBody.innerHTML = history
+          .map(
+            (item) => `
+            <tr>
+              <td>${item.historyFeeId}</td>
+              <td>${new Date(item.ngayThu).toLocaleDateString("vi-VN")}</td>
+              <td>${item.soTien.toLocaleString()} VND</td>
+            </tr>`
+          )
+          .join("");
+      }
+    })
+    .catch(error => {
+      console.error("Đã xảy ra lỗi khi tải lịch sử thu:", error);
+      const tableBody = document.getElementById("paymentHistoryTableBody");
+      tableBody.innerHTML = `<tr><td colspan="3">Không thể tải dữ liệu lịch sử thu.</td></tr>`;
+    });
 
   event.stopPropagation();
 }

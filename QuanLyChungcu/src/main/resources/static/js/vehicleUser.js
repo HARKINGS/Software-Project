@@ -3,15 +3,28 @@ let filteredData = []; // Dữ liệu đã lọc
 let currentPage = 1; // Trang hiện tại
 const rowsPerPage = 10; // Số dòng mỗi trang
 
-const newEntry = {
-    householdId: 1,
-    motorcycles: 2,
-    cars: 3,
-    amount: 500000,
-    collectAmount: 300000,
-    dueDate: 2024-12-10,
-    paid: paid >= totalAmount,
-  };
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    // Tải dữ liệu ban đầu
+    const response = await fetch("/user/getListParkingFee", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Không thể tải danh sách xe. Vui lòng thử lại sau.");
+    }
+
+    data = await response.json();
+    filteredData = [...data];
+    renderTable(currentPage);
+  } catch (error) {
+    console.error("Lỗi tải dữ liệu:", error);
+    alert("Không thể tải dữ liệu. Vui lòng kiểm tra kết nối.");
+  }
+});
 
 // Hiển thị bảng
 function renderTable(page) {
@@ -39,10 +52,6 @@ function renderTable(page) {
         <span class="status ${item.paid ? "completed" : "incomplete"}">
           ${item.paid ? "Hoàn tất" : "Chưa hoàn tất"}
         </span>
-      </td>
-      <td>
-        <button onclick="editRow(this)">Sửa</button>
-        <button onclick="deleteRow(${start + index})">Xóa</button>
       </td>
     `;
   });
