@@ -110,37 +110,63 @@ function addNewRow() {
 // Hiển thị bảng
 function renderTable(page) {
   const tableBody = document.querySelector("#FeeTable tbody");
+
+  // Kiểm tra dữ liệu
+  if (!Array.isArray(filteredData)) {
+    console.error("filteredData không hợp lệ.");
+    return;
+  }
+
   const start = (page - 1) * rowsPerPage;
   const end = start + rowsPerPage;
   const pageData = filteredData.slice(start, end);
 
-  // Xóa dữ liệu cũ
-  while (tableBody.rows.length > 1) {
-    tableBody.deleteRow(1);
-  }
+  // Xóa dữ liệu cũ trong bảng
+  tableBody.innerHTML = ""; // Xóa toàn bộ nội dung cũ
 
   // Thêm dữ liệu mới
   pageData.forEach((item, index) => {
+    const formattedAmount = item.amount ? item.amount.toLocaleString() : "0";
+    const formattedCollectAmount = item.collectAmount
+      ? item.collectAmount.toLocaleString()
+      : "0";
+    const status = item.paid ? "Hoàn tất" : "Chưa hoàn tất";
+    const statusClass = item.paid ? "completed" : "incomplete";
+
     const row = tableBody.insertRow(-1);
+    row.setAttribute("data-index", start + index); // Gán data-index cho hàng
+
     row.innerHTML = `
       <td>${item.householdId}</td>
       <td>${item.numberMotor || 0}</td>
       <td>${item.numberCar || 0}</td>
-      <td>${item.amount.toLocaleString()} VND</td>
-      <td>${item.collectAmount.toLocaleString()} VND</td>
-      <td>${item.dueDate}</td>
+      <td>${formattedAmount} VND</td>
       <td>
-        <span class="status ${item.paid ? "completed" : "incomplete"}">
-          ${item.paid ? "Hoàn tất" : "Chưa hoàn tất"}
-        </span>
+          <span>${formattedCollectAmount} VND</span>
+          <input type="number" class="editPaidInput" style="display:none;" value="${
+            item.collectAmount || 0
+          }" />
+      </td>
+      <td>${item.dueDate || "N/A"}</td>
+      <td>
+        <span class="status ${statusClass}">${status}</span>
       </td>
       <td>
         <button onclick="editRow(this)">Sửa</button>
         <button onclick="deleteRow(${start + index})">Xóa</button>
       </td>
     `;
+    row.style.cursor = "pointer";
+    row.addEventListener("click", () => {
+      if (event.target.tagName === "INPUT") {
+        event.stopPropagation();
+        return;
+      }
+      showModal(pageData[index]);
+    });
   });
 
+  // Cập nhật các nút phân trang
   updatePaginationButtons();
 }
 
@@ -152,20 +178,19 @@ function filterResults() {
   const paymentStatus = document.getElementById("payment-status").value;
 
   filteredData = data.filter((item) => {
-    const matchHouseId = !houseId || item.householdId.includes(houseId);
-    const matchFromDate =
-      !fromDate || new Date(item.dueDate) >= new Date(fromDate);
+    const matchHouseId = !houseId || (String(item.householdId) || "").includes(houseId); // Đảm bảo item.householdId là chuỗi
+    const matchFromDate = !fromDate || new Date(item.dueDate) >= new Date(fromDate);
     const matchToDate = !toDate || new Date(item.dueDate) <= new Date(toDate);
-
+  
     let matchStatus = true;
     if (paymentStatus === "hoàn tất") {
       matchStatus = item.paid === true;
     } else if (paymentStatus === "chưa hoàn tất") {
       matchStatus = item.paid === false;
     }
-
+  
     return matchHouseId && matchFromDate && matchToDate && matchStatus;
-  });
+  });  
 
   currentPage = 1;
   renderTable(currentPage);
@@ -210,8 +235,6 @@ function deleteRow(index) {
       alert("Không thể xóa. Vui lòng thử lại.");
     });
 }
-
-
 // Chuyển trang
 function changePage(direction) {
   const totalPages = Math.ceil(filteredData.length / rowsPerPage);
@@ -237,7 +260,6 @@ document
   .getElementById("newPaid")
   .addEventListener("input", calculateTotalAmount);
 
-
 //MODAL
 let isModalOpen = false; // Biến kiểm tra trạng thái modal
 
@@ -252,11 +274,11 @@ function showModal(Fee) {
       <div class="basic-detail">
         <div class="detail-row">
           <span class="label">Số xe ô tô:</span>
-          <input class="value" value="${Fee.numCar}" disabled />
+          <input class="value" value="${Fee.numberCar}" disabled />
         </div>
         <div class="detail-row">
-          <span class="label">Số xe ô tô:</span>
-          <input class="value" value="${Fee.numMotor}" disabled />
+          <span class="label">Số xe máy:</span>
+          <input class="value" value="${Fee.numberMotor}" disabled />
         </div>
         <div class="detail-row">
           <span class="label">Số tiền cần thu:</span>
@@ -280,7 +302,7 @@ function showModal(Fee) {
             <th>Số tiền đóng</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="paymentHistoryTableBody">
           <tr>
             <td>nối mã phiếu thu</td>
             <td>nối Ngày đóng</td>
@@ -295,6 +317,41 @@ function showModal(Fee) {
   console.log("Modal đang hiển thị");
   modal.style.display = "block";
   isModalOpen = true; // Modal đã được mở
+
+  fetch(`/admin/historyParkingFee/${Fee.parkingFeeId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Không thể tải lịch sử thu. Vui lòng thử lại sau.");
+      }
+      return response.json();
+    })
+    .then((history) => {
+      const tableBody = document.getElementById("paymentHistoryTableBody");
+      if (history.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="3">Không có lịch sử thu.</td></tr>`;
+      } else {
+        tableBody.innerHTML = history
+          .map(
+            (item) => `
+            <tr>
+              <td>${item.historyFeeId}</td>
+              <td>${new Date(item.ngayThu).toLocaleDateString("vi-VN")}</td>
+              <td>${item.soTien.toLocaleString()} VND</td>
+            </tr>`
+          )
+          .join("");
+      }
+    })
+    .catch((error) => {
+      console.error("Đã xảy ra lỗi khi tải lịch sử thu:", error);
+      const tableBody = document.getElementById("paymentHistoryTableBody");
+      tableBody.innerHTML = `<tr><td colspan="3">Không thể tải dữ liệu lịch sử thu.</td></tr>`;
+    });
 
   event.stopPropagation();
 }
@@ -326,4 +383,61 @@ function resetInputRow() {
   const statusSpan = document.getElementById("newStatus");
   statusSpan.textContent = "";
   statusSpan.className = "";
+}
+
+function editRow(button) {
+  event.stopPropagation(); // Ngăn sự kiện click hàng
+  const row = button.parentElement.parentElement;
+  const index = row.getAttribute("data-index");
+  const cells = row.querySelectorAll("td");
+  const parkingFeeId = filteredData[index].parkingFeeId; // Lấy feeId từ đối tượng dữ liệu
+
+  if (button.textContent === "Sửa") {
+    button.textContent = "Lưu";
+    cells[4].querySelector("span").style.display = "none";
+    cells[4].querySelector("input").style.display = "block";
+  } else {
+    button.textContent = "Sửa";
+    const newPaid = parseInt(cells[4].querySelector("input").value, 10);
+
+    if (isNaN(newPaid) || newPaid < 0 || newPaid > filteredData[index].amount) {
+      alert("Số tiền không hợp lệ!");
+      return;
+    }
+
+    filteredData[index].paid = newPaid; // Cập nhật giá trị paid trong dữ liệu local
+
+    // Cập nhật dữ liệu trên server với PUT request
+    fetch(`/admin/parkingFee/` + parkingFeeId, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        parkingFeeId: parkingFeeId, // Gửi feeId cùng với dữ liệu cập nhật
+        dueDate: filteredData[index].dueDate,
+        householdId: filteredData[index].householdId,
+        numberCar: filteredData[index].numberCar,
+        numberMotor: filteredData[index].numberMotor,
+        amount: filteredData[index].amount,
+        collectAmount: filteredData[index].paid,
+        paid: filteredData[index].paid >= filteredData[index].amount,
+      }),
+    })
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error("Không thể cập nhật khoản thu. Vui lòng thử lại.");
+        }
+        return response.json();
+      })
+      .then((updatedData) => {
+        filteredData[index] = updatedData; // Cập nhật dữ liệu trả về từ server
+        renderTable(currentPage); // Hiển thị lại bảng
+        alert("Cập nhật khoản thu thành công!");
+      })
+      .catch((error) => {
+        console.error("Đã xảy ra lỗi khi cập nhật khoản thu:", error);
+        alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
+      });
+  }
 }
