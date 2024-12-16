@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/List_Notification.css" />
+    <script type="text/javascript" src="/js/List_Notification.js" defer></script>
+    <title>Thông báo</title>
+  </head>
+  <body>
+    <div class="fullscreen">
+      <div class="Dashboard">
+        <a style="color: #4081f1" onclick="window.location.href = '/admin/Home'"
+          >Chung cư BlueMoon</a
+        >
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/List_Resident'"
+            >Thông tin dân cư</a
+          >
+        </div>
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/List_House_Hold'"
+            >Thông tin hộ khẩu</a
+          >
+        </div>
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/List_Fee'"
+            >Thông tin thu phí</a
+          >
+        </div>
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/List_Vehicle'"
+            >Thông tin gửi xe</a
+          >
+        </div>
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/DonationLedger'"
+            >Đóng góp tình nguyện</a
+          >
+        </div>
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/List_Notification'"
+            >Thông báo</a
+          >
+        </div>
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/List_Account'"
+            >Quản lý tài khoản</a
+          >
+        </div>
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/Settings_ADMIN'"
+            >Cài đặt</a
+          >
+        </div>
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/logout'">Đăng xuất</a>
+        </div>
+      </div>
+      <div class="Main">
+        <h1>Thông báo chung cư</h1>
+        <!-- Thanh tìm kiếm, lọc thông tin -->
+        <div class="search">
+          <label for="from-date">Từ ngày:</label>
+          <input
+            type="date"
+            id="from-date"
+            placeholder="từ ngày"
+            oninput="searchData()"
+          />
+
+          <label for="to-date">Đến ngày:</label>
+          <input
+            type="date"
+            id="to-date"
+            placeholder="đến ngày"
+            oninput="searchData()"
+          />
+        </div>
+
+        <div class="main_layout">
+          <!-- Message container area -->
+          <div class="container"></div>
+        </div>
+
+        <div class="overlay" onclick="closeDetail()">
+          <div class="full-message" onclick="event.stopPropagation();">
+            <h2></h2>
+            <time></time>
+            <p></p>
+            <button onclick="closeDetail()">Đóng</button>
+          </div>
+        </div>
+        <!-- Các nút hành động -->
+        <div class="action-buttons">
+          <button id="addBtn" class="Buttons add">
+            <div class="Buttons-items">Thêm thông báo</div>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="addNoti">
+      <form id="addNotiForm">
+        <div class="formaddNoti">
+          <div class="form-column">
+            <div class="form-items">
+              <label for="tieude">Nhập tiêu đề:</label>
+              <input type="text" id="tieude" placeholder="Nhập vào tiêu đề" />
+            </div>
+            <div class="form-items">
+              <label for="noidung">Nội dung:</label>
+              <textarea id="noidung" placeholder="Nhập vào nội dung"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="form-section-btn">
+          <button type="submit" class="submit-btn">Gửi</button>
+          <button type="button" id="exit-layer" onclick="exitAddNoti()">
+            Hủy
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

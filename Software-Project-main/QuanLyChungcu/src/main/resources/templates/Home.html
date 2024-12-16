@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/css/Home.css" />
+    <link rel="stylesheet" type="text/css" href="/css/global.css" />
+    <script type="text/javascript" src="/js/Home.js"></script>
+    <title>Trang chủ</title>
+  </head>
+  <body>
+    <div class="fullscreen">
+      <div class="Dashboard">
+        <a style="color: #4081f1" onclick="window.location.href = '/admin/Home'"
+          >Chung cư BlueMoon</a
+        >
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/List_Resident'"
+            >Thông tin dân cư</a
+          >
+        </div>
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/List_House_Hold'"
+            >Thông tin hộ khẩu</a
+          >
+        </div>
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/List_Fee'"
+            >Thông tin thu phí</a
+          >
+        </div>
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/List_Vehicle'"
+            >Thông tin gửi xe</a
+          >
+        </div>
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/DonationLedger'"
+            >Đóng góp tình nguyện</a
+          >
+        </div>
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/List_Notification'"
+            >Thông báo</a
+          >
+        </div>
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/List_Account'"
+            >Quản lý tài khoản</a
+          >
+        </div>
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/admin/Settings_ADMIN'"
+            >Cài đặt</a
+          >
+        </div>
+        <div class="Dashboard__elements">
+          <a onclick="window.location.href = '/logout'">Đăng xuất</a>
+        </div>
+      </div>
+      <div class="Main">
+        <div class="main_container">
+          <div class="infor_Apart">
+            <div class="infor_Apart_items">
+              <div class="Icon"></div>
+              <span class="label">Số nhân khẩu trong chung cư:</span>
+              <span class="value" id="totalResident"></span>
+            </div>
+            <div class="infor_Apart_items">
+              <div class="Icon"></div>
+              <span class="label">Số hộ khẩu trong chung cư:</span>
+              <span class="value" id="totalHousehold"></span>
+            </div>
+            <div class="infor_Apart_items">
+              <div class="Icon"></div>
+              <span class="label">Số nhân khẩu tạm trú:</span>
+              <span class="value" id="totalTemporary"></span>
+            </div>
+            <div class="infor_Apart_items">
+              <div class="Icon"></div>
+              <span class="label">Số nhân khẩu thường trú:</span>
+              <span class="value" id="totalPermanent"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

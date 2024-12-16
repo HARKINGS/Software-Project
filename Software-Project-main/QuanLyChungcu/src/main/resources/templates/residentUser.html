@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/css/globalUser.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/residentUser.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <script type="text/javascript" src="/js/getWeb.js"></script>
+    <script type="text/javascript" src="/js/residentUser.js"></script>
+    <title>Thông tin cá nhân</title>
+</head>
+<body>
+<div class="fullscreen">
+    <!-- Navbar Section -->
+    <div class="nav_bar">
+        <div class="nav_bar_option_container">
+            <div class="nav_bar_option" id="user">
+                <div class="icon_wrapper"><i class="fas fa-user-alt fa-fw fa-align-center"></i></div>
+                <span>Thông tin cá nhân</span>
+            </div>
+            <div class="nav_bar_option" id="household" onclick="getHousehold()">
+                <div class="icon_wrapper"><i class="fas fa-users fa-fw fa-align-center"></i></div>
+                <span>Thông tin hộ khẩu</span>
+            </div>
+            <div class="nav_bar_option" id="fee" onclick="getFee()">
+                <div class="icon_wrapper"><i class="fas fa-receipt fa-fw fa-align-center"></i></div>
+                <span>Thông tin thu phí</span>
+            </div>
+            <div class="nav_bar_option" id="contribution" onclick="getContribution()">
+                <div class="icon_wrapper"><i class="fas fa-file-invoice-dollar fa-fw fa-align-center"></i></div>
+                <span>Đóng góp tình nguyện</span>
+            </div>
+            <div class="nav_bar_option" id="vehicle" onclick = "getVehicle()">
+                <div class="icon_wrapper"><i class="fas fa-car fa-fw fa-align-center"></i></div>
+                <span>Thông tin gửi xe</span>
+            </div>
+            <div class="nav_bar_option" id="message" onclick="getMessage()">
+                <div class="icon_wrapper"><i class="fas fa-bell fa-fw fa-align-center"></i></div>
+                <span>Thông báo</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Layout Section -->
+    <div class="main_layout">
+        <div class="main_header_container">
+            <div class="title">
+                <span>Thông tin cá nhân</span>
+            </div>
+            <div class="noti_and_id">
+                <div id="id_btn">
+                    <form action="/logout" method="post" id="logoutForm">
+                        <button type="submit"><i class="fas fa-sign-out-alt fa-fw fa-align-center"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="main_container">
+            <div class="InformationUser">
+                <img class="profile-avatar" src="https://via.placeholder.com/280x280" alt="Profile Avatar" />
+
+                <div class="basic-details">
+                    <div class="detail-row">
+                        <span class="label">Họ và tên:</span>
+                        <span class="value" id="residentName"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Ngày sinh:</span>
+                        <span class="value" id="residentDate"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Giới tính:</span>
+                        <span class="value" id="residentGender"></span>
+                    </div>
+                </div>
+
+                <div class="account-details">
+                    <div class="detail-row">
+                        <span class="label">Số CCCD:</span>
+                        <span class="value" id="residentID"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Số điện thoại:</span>
+                        <span class="value" id="residentPhone"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Quan hệ với chủ hộ:</span>
+                        <span class="value" id="residentRelation"></span>
+                    </div>
+                </div>
+
+                <div class="btn" id="changeInfoBtn">
+                    <button onclick="changePassword()">Đổi mật khẩu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Change Password Form Section -->
+<div id="wrapper_1">
+    <div id="exit_wrapper_1">
+        <button onclick="exitChangePassword()">Quay lại</button>
+    </div>
+    <div id="changeInfoForm">
+        <form id="userInfo">
+            <span id="form_wrapper_1_title">Thay đổi mật khẩu</span>
+            <div class="input_field_wrapper_1">
+                <span>Mật khẩu cũ</span>
+                <input type="password" placeholder="Nhập mật khẩu cũ" />
+            </div>
+            <div class="input_field_wrapper_1">
+                <span>Mật khẩu mới</span>
+                <input type="password" placeholder="Nhập mật khẩu mới" />
+            </div>
+            <div class="input_field_wrapper_1">
+                <span>Nhập lại mật khẩu mới</span>
+                <input type="password" placeholder="Xác nhận mật khẩu mới" />
+            </div>
+            <button type="submit">Hoàn tất</button>
+        </form>
+    </div>
+</div>
+
+<!-- Font Awesome Icons (for the icons used in buttons) -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

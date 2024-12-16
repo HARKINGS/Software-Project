@@ -1,0 +1,232 @@
+:root {
+  --white-color: #fff;
+  --black-color: #000;
+  --text-color: #333;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  line-height: 1.6rem;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 24px;
+  color: #34495e;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.6rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.grid {
+  width: 1200;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.grid__full-width {
+  width: 100%;
+}
+
+.grid__row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fullscreen {
+  font-family: "Poppins", sans-serif;
+  background-color: #f5f5f5;
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.Dashboard_wrapper {
+  height: 100vh;
+  width: 15vw;
+}
+
+.Dashboard {
+  padding-top: 20px;
+  min-width: 150px;
+  width: 15vw;
+  height: 350px;
+  font-size: 20px;
+  color: #4081f1;
+  font-family: Poppins;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 15;
+  padding-bottom: 30px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.Dashboard__elements {
+  width: 100%;
+  font-size: 18px;
+  margin-bottom: 12px;
+  align-self: center;
+}
+
+.Dashboard__elements a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+.Dashboard__elements a:hover {
+  cursor: pointer;
+  color: rgb(41, 73, 148);
+  text-shadow: 0px 0px 1px #5d6389;
+}
+
+.Dashboard__elements:active {
+  color: #1500ff;
+  text-decoration: underline;
+  font-weight: 700;
+  text-shadow: 0px 0px 1px #5d6389;
+}
+
+/* Hiệu ứng khi trỏ chuột */
+.Dashboard__elements:hover {
+  box-shadow: 0 -5px 10px -5px rgba(64, 129, 241, 0.3), 
+              0 5px 10px -5px rgba(64, 129, 241, 0.3); 
+  transform: translateY(-2px); 
+}
+
+/* Trạng thái khi nhấn vào */
+.Dashboard__elements:active {
+  box-shadow: 0 2px 4px rgba(64, 129, 241, 0.5);
+  transform: translateY(0);
+  text-decoration: none;
+}
+
+/* Đường dẫn bên trong */
+.Dashboard__elements a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  display: block; 
+  width: 100%; 
+  height: 100%;
+  text-align: center; 
+  line-height: 2;
+}
+
+.Dashboard__elements a:hover {
+  color: rgb(41, 73, 148); /* Đổi màu chữ khi hover */
+  text-decoration: none;
+  text-shadow: 0px 0px 1px #5d6389;
+}
+
+
+.Main {
+  flex: 85;
+  padding: 20px;
+  background-color: #99c6e9;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 1px 1px #afafaf;
+}
+
+th,
+td {
+  border: 2px solid #818181;
+  padding: 12px 15px;
+  text-align: left;
+  font-size: 16px;
+  color: #333;
+}
+
+th {
+  background-color: #2583c2;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #e6e7c8;
+}
+
+tr:nth-child(odd) {
+  background-color: #eaf2f8;
+}
+
+tr:hover {
+  background-color: #9e9e9e;
+}
+
+.Btn {
+  width: 150px;
+  height: 30px;
+  padding: 9px 20px;
+  background: #5085d5;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: absolute;
+  bottom: 1%;
+  right: 1%;
+  border: 1px 1px 1px #000;
+}
+/* _________________ */
+
+#pagination {
+  display: flex;
+  justify-content: center; /* Căn giữa các nút phân trang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  position: fixed; /* Cố định phần phân trang ở dưới cùng màn hình */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  /* background-color: #fff; */
+  padding: 10px 0;
+  /* box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);  Tạo bóng nhẹ cho phần phân trang */
+}
+
+.pageButton {
+  padding: 5px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.pageButton:hover {
+  background-color: #2980b9;
+}
+
+.pageButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
