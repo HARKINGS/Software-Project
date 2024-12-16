@@ -14,6 +14,7 @@ public class Notification {
     private String title;
 
     @Column(name = "Content", nullable = false)
+    @Lob
     private String content;
 
     @Column(name = "Date", nullable = false)

@@ -1,3 +1,6 @@
+let listMessage = [];
+const maxLength = 100;
+
 function showDetail(title, time, message) {
   const overlay = document.querySelector(".overlay");
   const fullMessage = overlay.querySelector(".full-message");
@@ -13,60 +16,62 @@ function closeDetail() {
 }
 
 function addMessage(title, time, content) {
-  const container = document.querySelector(".container");
+    const container = document.querySelector(".container");
 
-  // Create message container
-  const messageDiv = document.createElement("div");
-  messageDiv.classList.add("message");
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add("message");
 
-  // Create title
-  const titleElement = document.createElement("h2");
-  titleElement.textContent = title;
-  messageDiv.appendChild(titleElement);
+    const titleElement = document.createElement("h2");
+    titleElement.textContent = title;
+    messageDiv.appendChild(titleElement);
 
-  // Create time element
-  const timeElement = document.createElement("time");
-  timeElement.textContent = time;
-  messageDiv.appendChild(timeElement);
+    const timeElement = document.createElement("span");
+    timeElement.type = "date";
+    timeElement.textContent = time;
+    messageDiv.appendChild(timeElement);
 
-  // Create content preview
-  const contentElement = document.createElement("p");
-  contentElement.textContent = content;
-  messageDiv.appendChild(contentElement);
+    const contentElement = document.createElement("p");
+    contentElement.textContent = content;
+    messageDiv.appendChild(contentElement);
 
-  // Create button for details
-  const buttonElement = document.createElement("button");
-  buttonElement.textContent = "Chi tiết";
-  buttonElement.onclick = () => showDetail(title, time, content);
-  messageDiv.appendChild(buttonElement);
+    const buttonElement = document.createElement("button");
+    buttonElement.textContent = "Chi tiết";
+    buttonElement.onclick = () => showDetail(title, time, content);
+    messageDiv.appendChild(buttonElement);
 
-  // Append the message to the container
-  container.appendChild(messageDiv);
+    container.appendChild(messageDiv);
+    console.log("add succesfully " + title);
 }
 
 function truncateMessage(selector, maxLength) {
-  const messages = document.querySelectorAll(selector);
-  messages.forEach((message) => {
-    const fullText = message.textContent; // Store the full text
-    if (fullText.length > maxLength) {
-      // Truncate to the last space within the maxLength
-      let truncatedText = fullText.substring(0, maxLength);
-      const lastSpaceIndex = truncatedText.lastIndexOf(" ");
-      if (lastSpaceIndex !== -1) {
-        truncatedText = truncatedText.substring(0, lastSpaceIndex);
-      }
-      message.textContent = truncatedText + "...";
-    } else {
-      message.style.cursor = "default"; // No need for click event if it's not truncated
+        const messages = document.querySelectorAll(selector);
+        messages.forEach(message => {
+            let fullText = message.textContent; 
+            const newlineIndex = fullText.indexOf("\n");
+            console.log(newlineIndex);
+            if (newlineIndex !== -1) {
+                fullText = fullText.slice(0, newlineIndex); 
+                message.textContent = fullText;
+            }
+            else if (fullText.length > maxLength) {
+                let truncatedText = fullText.substring(0, maxLength);
+                const lastSpaceIndex = truncatedText.lastIndexOf(' ');
+                if (lastSpaceIndex !== -1) {
+                    truncatedText = truncatedText.substring(0, lastSpaceIndex);
+                }
+                message.textContent = truncatedText + "...";
+            } 
+            else {
+                message.style.cursor = "default"; 
+            }
+        });
     }
-  });
-}
 
 function showDetail(title, time, message) {
   const overlay = document.querySelector(".overlay");
   const fullMessage = overlay.querySelector(".full-message");
   fullMessage.querySelector("h2").textContent = title;
-  fullMessage.querySelector("time").textContent = time;
+  fullMessage.querySelector("span").textContent = time;
   fullMessage.querySelector("p").textContent = message;
   overlay.style.display = "flex";
 }
@@ -81,37 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
   truncateMessage(".message p", 40);
 });
 
-// Function to add a new message to the container
-document.addEventListener("DOMContentLoaded", () => {
-  const maxLength = 50;
-
-  addMessage(
-    "Thông báo phạt",
-    "December 17, 2024, 5:00 PM",
-    "Hộ dân cư số 3 bị phạt 200.000 VND do để chó tè bậy lên poster của chung cư"
-  );
-
-  addMessage(
-    "Bảo trì",
-    "December 18, 2024, 2:00 PM",
-    "Hệ thống sẽ được bảo trì vào ngày 20 tháng 10 năm 2024, từ 01 giờ 00 đến 03 giờ 00. Trân trọng !"
-  );
-
-  addMessage(
-    "Nhắc nhở thu phí",
-    "December 19, 2024, 11:00 AM",
-    "Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !"
-  );
-
-  addMessage(
-    "Nhắc nhở thu phí",
-    "December 19, 2024, 11:00 AM",
-    "Hộ dân cư số 7 nộp tiền điện nước chậm quá hạn 1 tháng ! Hãy hoàn thành khoản thu trước ngày 24 tháng 12 năm 2024 để được xét duyệt tiếp tục ở lại chung cư !"
-  );
-
-  truncateMessage(".message p", maxLength);
-});
-
 const showAddButton = document.getElementById("addBtn");
 const addNoti = document.querySelector(".addNoti");
 
@@ -120,9 +94,14 @@ showAddButton.addEventListener("click", (event) => {
   event.stopPropagation(); // Ngừng sự kiện click lan truyền để không đóng form
 });
 
+
+showAddButton.addEventListener("click", (event) => {
+  addNoti.style.display = "block"; // Hiển thị form
+  event.stopPropagation(); // Ngừng sự kiện click lan truyền để không đóng form
+});
+
 function exitAddNoti() {
   addNoti.style.display = "none"; // Đảm bảo đóng đúng phần tử form
-
   // Reset form về trạng thái ban đầu
   const inputs = document.querySelectorAll(".addNoti input");
   inputs.forEach((input) => {
@@ -135,4 +114,79 @@ window.addEventListener("click", (event) => {
   if (!addNoti.contains(event.target) && event.target !== showAddButton) {
     exitAddNoti(); // Đóng form
   }
+});
+
+document.getElementById("addNotiForm").addEventListener('submit', async function (event) {
+        event.preventDefault(); // Ngăn hành động mặc định của form
+
+        const titleInput = document.getElementById("tieude").value;
+        const contentInput = document.getElementById("noidung").value;
+        if (
+          !titleInput ||
+          !contentInput
+        ) {
+          alert("Vui lòng nhập đầy đủ và chính xác thông tin!");
+          return;
+        }
+
+        const newMessage = {
+          title: titleInput,
+          content: contentInput,
+        };
+        console.log(newMessage);
+        let sendMessage = JSON.stringify(newMessage);
+        fetch("/admin/notification", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: sendMessage,
+        })
+          .then((response) => {
+            if (response.status !== 201) {
+              throw new Error("Không thể thêm ");
+            }
+            exitAddNoti();
+            alert("Them thanh cong");
+            return response.json();
+          })
+          .then(returnData =>{
+            let listMessage = returnData;
+            console.log(listMessage);
+            const date = new Date(listMessage.date); 
+            addMessage(listMessage.title,date,listMessage.content);
+            truncateMessage('.message p', maxLength);
+          })
+          .catch((error) => {
+            console.error("Lỗi:", error);
+            alert("Có lỗi xảy ra khi gửi dữ liệu!");
+          });
+});
+
+document.addEventListener("DOMContentLoaded", async function () {
+    fetch("/getAllNotification", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => {
+        if (response.status !== 200) {
+          throw new Error("Không thể get all message");
+        }
+        return response.json();
+      })
+      .then( returnData =>{
+        let listMessage = returnData;
+        console.log(listMessage);
+        for(var i = 0; i < listMessage.length; i++){
+            const date = new Date(listMessage[i].date); 
+            addMessage(listMessage[i].title,date,listMessage[i].content);
+        }
+        truncateMessage('.message p', maxLength);
+      })
+      .catch(error => {
+        console.error("Đã xảy ra lỗi khi hien thi", error);
+        alert("Đã xảy ra lỗi khi hien thi");
+      });
 });

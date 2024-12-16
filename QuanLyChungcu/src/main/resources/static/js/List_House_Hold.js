@@ -1,7 +1,7 @@
 let data = [];
 
 let listHousehold = [];
-
+let listMessage = [];
 let currentPage = 1;
 const rowsPerPage = 10;
 
