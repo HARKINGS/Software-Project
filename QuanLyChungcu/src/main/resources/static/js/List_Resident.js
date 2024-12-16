@@ -201,6 +201,9 @@ function showModal(resident) {
             <span class="label">Số CCCD:</span>
             <input class="value" id="editCCCD" value="${resident.cccd}" />
           </div>
+        </div>
+
+        <div class="account-details">
           <div class="detail-row">
             <span class="label">Số điện thoại:</span>
             <input class="value" id="editPhone" value="${resident.phoneNumber}" /> <!-- Thay bằng dữ liệu thực -->
@@ -209,9 +212,6 @@ function showModal(resident) {
             <span class="label">Số hộ khẩu:</span>
             <input class="value" id="editHousehold" value="${resident.householdId}" />
           </div>
-        </div>
-
-        <div class="account-details">
           <div class="detail-row">
             <span class="label">Trạng thái:</span>
             <input class="value" id="editState" value="${resident.temporary}" />

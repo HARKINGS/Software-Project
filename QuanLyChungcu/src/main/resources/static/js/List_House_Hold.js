@@ -136,15 +136,11 @@ function showModal(household) {
             </div>
             <div class="detail-row">
               <span class="label">Số căn hộ:</span>
-              <input class="value" id="editNumbehouse" value="${
-      household.numHouse
-  }" disabled/>
+              <input class="value" id="editNumbehouse" value="${household.numHouse}" />
             </div>
             <div class="detail-row">
               <span class="label">Diện tích:</span>
-              <input class="value" id="editArea" value="${
-      household.area
-  }" disabled/>
+              <input class="value" id="editArea" value="${household.area}" />
             </div>
         </div>
         <h1>Danh sách thành viên của hộ:</h1>
@@ -180,6 +176,10 @@ function showModal(household) {
       .join("")}
             </tbody>
         </table>
+        <div class="modal-actions">
+          <button onclick="saveChanges()">Lưu</button>
+          <button onclick="closeModal()">Đóng</button>
+        </div>
     </div>  
     `;
 
@@ -191,6 +191,43 @@ function showModal(household) {
   if (event) {
     event.stopPropagation();
   }
+}
+//Lưu thông tin SỬA LẠI FETCH NÀY
+function saveChanges() {
+  const updatedResident = {
+    name: document.getElementById("editName").value,
+    dateOfBirth: document.getElementById("editBirthdate").value,
+    gender: document.getElementById("editGender").value,
+    cccd: document.getElementById("editCCCD").value,
+    phoneNumber: document.getElementById("editPhone").value,
+    relationship: document.getElementById("editRelation").value,
+    temporary: document.getElementById("editState").value,
+    householdId: document.getElementById("editHousehold").value,
+  };
+
+  // Gửi dữ liệu cập nhật đến backend
+  fetch("/admin/resident/" + selectedResident.residentId, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedResident),
+  })
+    .then((response) => {
+      if (response.ok) {
+        alert("Cập nhật thành công!");
+        closeModal();
+        fetchListResident();
+        updateResidentTable(residents);
+        changePage(0);
+      } else {
+        alert("Cập nhật thất bại!");
+      }
+    })
+    .catch((error) => {
+      console.error("Lỗi:", error);
+      alert("Có lỗi xảy ra khi gửi dữ liệu!");
+    });
 }
 
 // Lắng nghe sự kiện click trên toàn bộ window

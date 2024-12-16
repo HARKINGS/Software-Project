@@ -60,7 +60,13 @@ function renderTable(page) {
             </td>
         `;
         tr.style.cursor = "pointer";
-        tr.addEventListener("click", () => showModal(pageData[index]));
+        tr.addEventListener("click", () => {
+          if (event.target.tagName === "INPUT") {
+            event.stopPropagation();
+            return;
+          }
+          showModal(pageData[index])
+        });
         tableBody.appendChild(tr);
     });
 
@@ -183,6 +189,7 @@ function addNewRow() {
 
 // Xóa một dòng
 function deleteRow(index) {
+  event.stopPropagation(); // Ngăn sự kiện click hàng
   const feeId = filteredData[index].feeId; // Lấy feeId từ đối tượng dữ liệu
 
     if (confirm("Bạn có chắc muốn xóa khoản thu này không?")) {
@@ -221,6 +228,7 @@ function deleteRow(index) {
 // Hàm chỉnh sửa hàng dữ liệu
 // Hàm chỉnh sửa hàng dữ liệu
 function editRow(button) {
+  event.stopPropagation(); // Ngăn sự kiện click hàng
   const row = button.parentElement.parentElement;
   const index = row.getAttribute("data-index");
   const cells = row.querySelectorAll("td");
