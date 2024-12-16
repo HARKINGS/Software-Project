@@ -1,57 +1,35 @@
 package com.example.QuanLyChungcu.Model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
-import java.util.List;
 
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class HistoryParkingFee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "historyParkingFee_id")
-    private Long historyParkingFeeId;
+    Long historyParkingFeeId;
 
     @Column(name = "Amount", nullable = false)
-    private double soTien;
+    double soTien;
 
     @Column(name = "Payment_date", nullable = false)
-    private LocalDate ngayThu;
+    LocalDate ngayThu;
 
     @ManyToOne
     @JoinColumn(name = "parkingFee_id", nullable = false)
-    private ParkingFee history_parkingFee;
-
-
-    public Long getHistoryParkingFeeId() {
-        return historyParkingFeeId;
-    }
-
-    public void setHistoryParkingFeeId(Long historyParkingFeeId) {
-        this.historyParkingFeeId = historyParkingFeeId;
-    }
-
-    public double getSoTien() {
-        return soTien;
-    }
-
-    public void setSoTien(double soTien) {
-        this.soTien = soTien;
-    }
-
-    public LocalDate getNgayThu() {
-        return ngayThu;
-    }
-
-    public void setNgayThu(LocalDate ngayThu) {
-        this.ngayThu = ngayThu;
-    }
-
-    public ParkingFee getHistory_parkingFee() {
-        return history_parkingFee;
-    }
-
-    public void setHistory_parkingFee(ParkingFee history_parkingFee) {
-        this.history_parkingFee = history_parkingFee;
-    }
+    ParkingFee history_parkingFee;
 }

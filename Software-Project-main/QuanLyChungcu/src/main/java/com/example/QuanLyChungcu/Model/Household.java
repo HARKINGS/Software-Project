@@ -2,93 +2,51 @@ package com.example.QuanLyChungcu.Model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Household {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "household_id")
-    private Long householdId; // Id
+    Long householdId; // Id
 
     @NotBlank(message = "Số nhà không được trống")
     @Column(name = "household_number",nullable = false, length = 50)
-    private String householdNumber; // Số nhà
+    String householdNumber; // Số nhà
 
     @Positive(message = "Diện tích căn hộ không được trống và phải lớn hơn 0")
     @Column(name = "apartment_size", nullable = false)
-    private double apartmentSize; // Diện tích
+    double apartmentSize; // Diện tích
 
     @Column(name = "num_cars", nullable = true)
-    private Long numCars;
+    Long numCars;
 
     @Column(name = "num_motors", nullable = true)
-    private Long numMotors;
+    Long numMotors;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "owner_id", referencedColumnName = "resident_id", nullable = true)
-    private Resident chuHo;
+    Resident chuHo;
 
     @OneToMany(mappedBy = "Household_resident", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Resident> residents;
+    List<Resident> residents;
 
     @OneToMany(mappedBy = "Household_contribution", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Contribution> contributions;
+    List<Contribution> contributions;
 
     @OneToMany(mappedBy = "Household_fee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Fee> fees;
+    List<Fee> fees;
 
     @OneToMany(mappedBy = "household_parking", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ParkingFee> parkingFees;
-
-    public Long getHouseholdId() {
-        return householdId;
-    }
-
-    public void setHouseholdId(Long householdId) {
-        this.householdId = householdId;
-    }
-
-    public String getHouseholdNumber() {
-        return householdNumber;
-    }
-
-    public void setHouseholdNumber(String householdNumber) {
-        this.householdNumber = householdNumber;
-    }
-
-    public double getApartmentSize() {
-        return apartmentSize;
-    }
-
-    public void setApartmentSize(double apartmentSize) {
-        this.apartmentSize = apartmentSize;
-    }
-
-    public Resident getChuHo() {
-        return chuHo;
-    }
-
-    public void setChuHo(Resident chuHo) {
-        this.chuHo = chuHo;
-    }
-
-    public Long getNumCars() {
-        return numCars;
-    }
-
-    public void setNumCars(Long numCars) {
-        this.numCars = numCars;
-    }
-
-    public Long getNumMotors() {
-        return numMotors;
-    }
-
-    public void setNumMotors(Long numMotors) {
-        this.numMotors = numMotors;
-    }
+    List<ParkingFee> parkingFees;
 }
