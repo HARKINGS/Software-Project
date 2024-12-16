@@ -19,7 +19,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final ResidentRepository residentRepository;
@@ -44,11 +43,9 @@ public class UserServiceImpl implements UserService{
         this.passwordEncoder = passwordEncoder;
     }
 
-
-
     @Override
     public List<UserDTO> getListUser() {
-        List<Users> users = userRepository.findAll();
+        List<Users> users = userRepository.findByRole("USER");
         return users.stream()
                 .map(users1 -> modelMapper.map(users1, UserDTO.class))
                 .collect(Collectors.toList());
