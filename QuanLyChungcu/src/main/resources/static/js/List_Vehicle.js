@@ -110,14 +110,20 @@ function addNewRow() {
 // Hiển thị bảng
 function renderTable(page) {
   const tableBody = document.querySelector("#FeeTable tbody");
-
+  const inputRow = document.getElementById("inputRow");
+  
+  // Kiểm tra dữ liệu
+  if (!Array.isArray(filteredData)) {
+    console.error("filteredData không hợp lệ.");
+    return;
+  }
+  
   const start = (page - 1) * rowsPerPage;
   const end = start + rowsPerPage;
   const pageData = filteredData.slice(start, end);
-
-  const inputRow = document.getElementById("inputRow");
-
-  tableBody.innerHTML = ""; // Xóa bảng hiện tại
+  
+  // Xóa dữ liệu cũ trong bảng
+  tableBody.innerHTML = ""; // Xóa toàn bộ nội dung cũ
   tableBody.appendChild(inputRow); // Thêm dòng nhập liệu (nếu có)
 
   // Thêm dữ liệu mới

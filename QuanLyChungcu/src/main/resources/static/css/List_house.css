@@ -1,28 +1,3 @@
-.search {
-  padding: 10px 10px;
-  border: 0px solid #333;
-  border-radius: 5px;
-  box-shadow: 1px 1px #333;
-  background-color: #fff;
-  margin-bottom: 20px;
-  display: flex;
-  gap: 25px;
-  /* justify-content: space-between; */
-}
-
-.search label {
-  padding: 8px;
-  font-size: 16px;
-  margin-right: 10px;
-}
-
-.search input {
-  padding: 8px;
-  margin-right: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
 button.delete {
   padding: 5px 10px;
   background-color: #e74c3c;
@@ -144,7 +119,7 @@ button.delete:hover {
   border-radius: 10px;
   z-index: 1000;
   min-width: 500px;
-  width: 40%;
+  width: 60%;
 }
 
 .moveHouseHold h1 {
@@ -360,14 +335,6 @@ button.delete:hover {
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
-table th,
-table td {
-  text-align: left;
-  font-size: 16px;
-  border: 2px solid #cccccc;
-  color: #333;
-}
-
 .tableZone table th {
   background-color: #3498db;
   color: white;
@@ -405,7 +372,7 @@ td:nth-child(2) {
   position: absolute;
   bottom: 5px;
   right: 20px;
-  background-color: #512da8;
+  background-color: #1d3cab;
   color: #fff;
   font-size: 14px;
   width: 10%;
@@ -511,21 +478,21 @@ td:nth-child(2) {
 .basic-details {
   flex: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 20px;
-  padding: 20px;
 }
 
-.basic-details .detail-row {
+.detail-row input {
+  border-radius: 5px;
+  color: #666;
+  width: 80px;
+}
+
+.basic-details {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
   font-size: 16px;
-}
-
-.label {
-  color: #db4646;
-  font-weight: 600;
-  min-width: 120px;
+  padding: 20px 0px;
 }
 
 .value {
@@ -536,4 +503,13 @@ td:nth-child(2) {
   height: 20px;
   padding: 10px;
   background-color: #fff;
+}
+
+#moveHouseholdForm .form-items{
+  display: flex;
+  flex-direction: row;
+}
+
+#saveBtn {
+  position: relative;
 }

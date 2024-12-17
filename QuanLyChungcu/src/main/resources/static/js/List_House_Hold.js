@@ -21,9 +21,9 @@ function searchData() {
 
   const filteredData = data.filter((item) => {
     return (
-        String(item.code).toLowerCase().includes(maHoKhau) &&
-        removeAccents(item.name).toLowerCase().includes(chuHo)&&
-        item.apartment.toLowerCase().includes(soCanHo)
+      String(item.code).toLowerCase().includes(maHoKhau) &&
+      removeAccents(item.name).toLowerCase().includes(chuHo) &&
+      item.apartment.toLowerCase().includes(soCanHo)
     );
   });
 
@@ -63,21 +63,23 @@ function displayData(filteredData) {
             "Content-Type": "application/json",
           },
         })
-            .then(response => {
-              if (response.status !== 204) {
-                throw new Error("Không thể xóa hộ khẩu. Vui lòng thử lại.");
-              }
-            })
-            .then(() => {
-              alert("Xóa hộ khẩu thành công!");
-              readData();
-            })
-            .catch(error => {
-              console.error("Đã xảy ra lỗi khi xóa hộ khẩu:", error);
-              alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
-            });
+          .then((response) => {
+            if (response.status !== 204) {
+              throw new Error("Không thể xóa hộ khẩu. Vui lòng thử lại.");
+            }
+          })
+          .then(() => {
+            alert("Xóa hộ khẩu thành công!");
+            readData();
+          })
+          .catch((error) => {
+            console.error("Đã xảy ra lỗi khi xóa hộ khẩu:", error);
+            alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
+          });
       }
-      if(event) { event.stopPropagation();  }
+      if (event) {
+        event.stopPropagation();
+      }
     });
 
     tableBody.appendChild(row);
@@ -89,38 +91,36 @@ function displayData(filteredData) {
 // ______THÔNG TIN CHI TIẾT HỘ KHẨU_________
 let isModalOpen = false; // Biến kiểm tra trạng thái modal
 
-
-async function showHouseholdDetail(household){
+async function showHouseholdDetail(household) {
   fetch("/admin/resident", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   })
-      .then(response => {
-        if (response.status !== 200) {
-          throw new Error("Không thể get list resident");
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error("Không thể get list resident");
+      }
+      return response.json();
+    })
+    .then((returnData) => {
+      let listResident = returnData;
+      household.members.length = 0;
+      for (var i = 0; i < listResident.length; i++) {
+        if (listResident[i].householdId === household.code) {
+          household.members.push(listResident[i]);
         }
-        return response.json();
-      })
-      .then( returnData =>{
-        let listResident = returnData;
-        household.members.length = 0;
-        for(var i = 0; i < listResident.length; i++){
-          if(listResident[i].householdId === household.code){
-            household.members.push(listResident[i]);
-          }
-        }
-      })
-      .then( () =>{
-        showModal(household);
-      })
-      .catch(error => {
-        console.error("Đã xảy ra lỗi khi hien thi", error);
-        alert("Đã xảy ra lỗi khi hien thi");
-      });
+      }
+    })
+    .then(() => {
+      showModal(household);
+    })
+    .catch((error) => {
+      console.error("Đã xảy ra lỗi khi hien thi", error);
+      alert("Đã xảy ra lỗi khi hien thi");
+    });
 }
-
 
 function showModal(household) {
   const modal = document.getElementById("houseHoldModal");
@@ -136,7 +136,9 @@ function showModal(household) {
             </div>
             <div class="detail-row">
               <span class="label">Số căn hộ:</span>
-              <input class="value" id="editNumbehouse" value="${household.numHouse}" />
+              <input class="value" id="editNumbehouse" value="${
+                household.numHouse
+              }" />
             </div>
             <div class="detail-row">
               <span class="label">Diện tích:</span>
@@ -159,8 +161,8 @@ function showModal(household) {
             </thead>
             <tbody>
                 ${household.members
-      .map(
-          (member) => `
+                  .map(
+                    (member) => `
                   <tr>
                     <td>${member.residentId}</td>
                     <td>${member.name}</td>
@@ -172,13 +174,13 @@ function showModal(household) {
                     <td>${member.temporary}</td>
                   </tr>
                 `
-      )
-      .join("")}
+                  )
+                  .join("")}
             </tbody>
         </table>
         <div class="modal-actions">
-          <button onclick="saveChanges()">Lưu</button>
-          <button onclick="closeModal()">Đóng</button>
+          <button id="saveBtn" onclick="saveChanges()">Lưu</button>
+          <button id="closeBtn" onclick="closeModal()">Đóng</button>
         </div>
     </div>  
     `;
@@ -251,7 +253,7 @@ function closeModal() {
 function updatePagination(filteredDataLength) {
   const totalPages = Math.ceil(filteredDataLength / rowsPerPage);
   document.getElementById(
-      "pageNumber"
+    "pageNumber"
   ).innerText = `Page ${currentPage} of ${totalPages}`;
   document.getElementById("prevBtn").disabled = currentPage === 1;
   document.getElementById("nextBtn").disabled = currentPage === totalPages;
@@ -274,6 +276,7 @@ document.getElementById("nextBtn").addEventListener("click", () => {
 
 //_____CHUYỂN HỘ KHẨU_____
 const showMoveButton = document.getElementById("moveBtn");
+const searchHouseBtn = document.getElementById("searchHouseBtn");
 const moveHouseHold = document.querySelector(".moveHouseHold");
 
 showMoveButton.addEventListener("click", (event) => {
@@ -289,13 +292,16 @@ function exitMoveForm() {
   inputs.forEach((input) => {
     input.value = ""; // Xóa các giá trị trong input
   });
+  const tableBody = document.getElementById("ListNewHost--body");
+  tableBody.innerHTML = "";
 }
 
 window.addEventListener("click", (event) => {
   // Kiểm tra nếu click ra ngoài form và không click vào nút hiển thị
   if (
-      !moveHouseHold.contains(event.target) &&
-      event.target !== showMoveButton
+    !moveHouseHold.contains(event.target) &&
+    event.target !== showMoveButton &&
+    event.target !== searchHouseBtn
   ) {
     exitMoveForm(); // Đóng form
   }
@@ -358,146 +364,249 @@ searchData();
 
 //----------------------------------------------------------------//
 
-async function readData(){
+async function readData() {
   fetch("/admin/household", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   })
-      .then(response => {
-        if (response.status !== 200) {
-          throw new Error("Không thể get list houshold");
-        }
-        return response.json();
-      })
-      .then( returnData =>{
-        listHousehold = returnData;
-        data.length = 0;
-        for(var i = 0; i < listHousehold.length; i++){
-          let newHouseData ={
-            code: listHousehold[i].householdId,
-            name: listHousehold[i].chuHo.name,
-            apartment: listHousehold[i].householdNumber,
-            phone: listHousehold[i].chuHo.phoneNumber,
-            area: listHousehold[i].apartmentSize,
-            members:[],
-            numHouse : listHousehold[i].householdNumber,
-          }
-          data.push(newHouseData);
-        }
-        console.log("data is: ");
-        console.log(data);
-        displayData(data);
-      })
-      .catch(error => {
-        console.error("Đã xảy ra lỗi khi hiển thị", error);
-        alert("Đã xảy ra lỗi khi hien thi");
-      });
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error("Không thể get list houshold");
+      }
+      return response.json();
+    })
+    .then((returnData) => {
+      listHousehold = returnData;
+      data.length = 0;
+      for (var i = 0; i < listHousehold.length; i++) {
+        let newHouseData = {
+          code: listHousehold[i].householdId,
+          name: listHousehold[i].chuHo.name,
+          apartment: listHousehold[i].householdNumber,
+          phone: listHousehold[i].chuHo.phoneNumber,
+          area: listHousehold[i].apartmentSize,
+          members: [],
+          numHouse: listHousehold[i].householdNumber,
+        };
+        data.push(newHouseData);
+      }
+      console.log("data is: ");
+      console.log(data);
+      displayData(data);
+    })
+    .catch((error) => {
+      console.error("Đã xảy ra lỗi khi hiển thị", error);
+      alert("Đã xảy ra lỗi khi hien thi");
+    });
 }
 
-
-document.addEventListener("DOMContentLoaded",async () => {
+document.addEventListener("DOMContentLoaded", async () => {
   readData();
+  //THÊM HỘ KHẨU
+  document
+    .getElementById("addHouseholdForm")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault(); // Ngăn hành động mặc định của form
 
-  document.getElementById("addHouseholdForm").addEventListener('submit', async function (event) {
-    event.preventDefault(); // Ngăn hành động mặc định của form
+      const nameInput = document.getElementById("nameHost").value;
+      const dobInput = document.getElementById("birthday").value;
+      const genderInput = document.getElementById("gender").value;
+      const cccdInput = document.getElementById("CCCD").value;
+      const phoneNumInput = document.getElementById("SDT").value;
+      const addressInput = document.getElementById("Addr").value;
+      const tmpInput = document.getElementById("temp").value;
+      const areaInput = document.getElementById("Area").value;
 
-    const nameInput = document.getElementById('nameHost').value;
-    const dobInput = document.getElementById('birthday').value;
-    const genderInput = document.getElementById('gender').value;
-    const cccdInput = document.getElementById('CCCD').value;
-    const phoneNumInput = document.getElementById('SDT').value;
-    const addressInput = document.getElementById('Addr').value;
-    const tmpInput = document.getElementById('temp').value;
-    const areaInput = document.getElementById('Area').value;
-
-    // Kiểm tra dữ liệu hợp lệ
-    if (
+      // Kiểm tra dữ liệu hợp lệ
+      if (
         !nameInput ||
         !dobInput ||
         !genderInput ||
         !cccdInput ||
-        !phoneNumInput||
-        !addressInput||
-        !tmpInput||
+        !phoneNumInput ||
+        !addressInput ||
+        !tmpInput ||
         !areaInput
-    ) {
-      alert("Vui lòng nhập đầy đủ và chính xác thông tin!");
-      return;
-    }
-
-    const newHousehold ={
-      householdNumber:addressInput,
-      apartmentSize: areaInput,
-      chuHo:{
-        name: nameInput,
-        dateOfBirth: dobInput,
-        cccd: cccdInput,
-        gender: genderInput,
-        phoneNumber: phoneNumInput,
-        temporary: tmpInput
+      ) {
+        alert("Vui lòng nhập đầy đủ và chính xác thông tin!");
+        return;
       }
-    };
 
-    console.log("Sending data to API:", newHousehold);
+      const newHousehold = {
+        householdNumber: addressInput,
+        apartmentSize: areaInput,
+        chuHo: {
+          name: nameInput,
+          dateOfBirth: dobInput,
+          cccd: cccdInput,
+          gender: genderInput,
+          phoneNumber: phoneNumInput,
+          temporary: tmpInput,
+        },
+      };
 
-    fetch("/admin/household", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newHousehold),
-    })
-        .then(response => {
+      console.log("Sending data to API:", newHousehold);
+
+      fetch("/admin/household", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newHousehold),
+      })
+        .then((response) => {
           if (response.status !== 201) {
             throw new Error("Không thể thêm ");
           }
         })
-        .then(returnedData => {
+        .then((returnedData) => {
           readData();
           alert("Thêm thành công!");
           exitAddHouse();
         })
-        .catch(error => {
+        .catch((error) => {
           console.error("Đã xảy ra lỗi khi thêm ", error);
           alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
         });
-  });
+    });
 
-  document.getElementById("moveHouseholdForm").addEventListener('submit', async function (event) {
-    event.preventDefault(); // Ngăn hành động mặc định của form
-
-    const IdHouseInput = document.getElementById('id-house').value;
-    const newHHNumInput = document.getElementById('newHouseholdNumber').value;
-
-    // Kiểm tra dữ liệu hợp lệ
-    if (
-        !IdHouseInput ||
-        !newHHNumInput
-    ) {
-      alert("Vui lòng nhập đầy đủ và chính xác thông tin!");
+  // TÌM KIẾM THÔNG TIN HỘ KHẨU
+  document.getElementById("id-house").addEventListener("blur", async () => {
+    const inputElement = document.getElementById("id-house");
+    const householdId = inputElement.value.trim();
+  
+    // Kiểm tra input
+    if (!householdId) {
+      alert("Vui lòng nhập mã hộ khẩu!");
+      console.warn("Household ID không được để trống!");
       return;
     }
-          fetch("/admin/household/moveHousehold?id=" + IdHouseInput + "&moveHouseholdNumber=" +  newHHNumInput, {
-              method: "PUT",
-              headers: {
-                  "Content-Type": "application/json"
-              },
-            })
-              .then(response => {
-              if (response.status !== 200) {
-                throw new Error("Không thể chuyển hộ khẩu ");
-              }
-            })
-            .then(returnedData => {
-              readData();
-              alert("Chuyển thành công!");
-              exitMoveForm();
-            })
-            .catch(error => {
-              console.error("Đã xảy ra lỗi khi chuyển ", error);
-              alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
-            });
+  
+    // Chuyển đổi sang số
+    const numericHouseholdId = Number(householdId);
+    if (isNaN(numericHouseholdId)) {
+      alert("Mã hộ khẩu không hợp lệ. Vui lòng nhập một số!");
+      console.error("Household ID phải là số.");
+      return;
+    }
+  
+    try {
+      // Gọi API lấy danh sách cư dân
+      const response = await fetch("/admin/resident", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Lỗi Server: ${response.status} - ${response.statusText}`);
+      }
+  
+      // Parse JSON
+      const listResident = await response.json();
+  
+      // Lọc danh sách cư dân theo householdId
+      const members = listResident.filter(
+        (resident) => resident.householdId === numericHouseholdId
+      );
+  
+      // Kiểm tra nếu không có thành viên nào
+      if (members.length === 0) {
+        alert("Không tìm thấy thành viên nào cho mã hộ khẩu này!");
+        console.warn("Danh sách thành viên trống.");
+        return;
+      }
+  
+      // Hiển thị dữ liệu lên bảng
+      fillInitTable(members);
+    } catch (error) {
+      console.error("Lỗi khi tải danh sách thành viên:", error);
+      alert("Không thể tải danh sách thành viên. Vui lòng thử lại!");
+    }
+  });
+
+  document
+    .getElementById("moveHouseholdForm")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const householdId = document.getElementById("id-house").value;
+      const selectedHostRadio = document.querySelector(
+        "input.selectNewHost:checked"
+      );
+
+      if (!selectedHostRadio) {
+        alert("Vui lòng chọn thành viên để làm chủ hộ mới!");
+        return;
+      }
+
+      const newHostId = selectedHostRadio.dataset.residentId;
+
+      try {
+        const response = await fetch(
+          `/admin/household/${householdId}/change-host`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ newHostId }),
+          }
+        );
+
+        if (!response.ok) throw new Error("Chuyển chủ hộ thất bại!");
+
+        alert("Chuyển chủ hộ thành công!");
+        exitMoveForm();
+        readData(); // Refresh dữ liệu
+      } catch (error) {
+        console.error("Lỗi khi chuyển chủ hộ:", error);
+        alert("Đã xảy ra lỗi, vui lòng thử lại sau!");
+      }
     });
 });
+
+function fillInitTable(residents) {
+  const table = document.getElementById("ListNewHost");
+
+  // Kiểm tra nếu bảng tồn tại
+  if (!table) {
+    console.error("Bảng với ID 'ListNewHost' không tồn tại!");
+    alert("Có lỗi xảy ra: Không tìm thấy bảng hiển thị danh sách thành viên.");
+    return;
+  }
+
+  const tableBody = table.getElementsByTagName("tbody")[0];
+
+  // Kiểm tra nếu tbody tồn tại
+  if (!tableBody) {
+    console.error("Bảng không có phần <tbody>!");
+    return;
+  }
+
+  tableBody.innerHTML = ""; // Xóa dữ liệu cũ
+
+  residents.forEach((resident) => {
+    const isHouseholdHead = resident.relationship === "Chủ hộ"; // Kiểm tra quan hệ "Chủ hộ"
+
+    const row = tableBody.insertRow();
+
+    // Thêm các ô dữ liệu vào bảng
+    row.insertCell(0).innerHTML = `
+      <input 
+        type="radio" 
+        name="newHostRadio" 
+        class="selectNewHost" 
+        data-resident-id="${resident.residentId}"
+        ${isHouseholdHead ? "checked" : ""}
+      >
+    `;
+    row.insertCell(1).textContent = resident.name || "N/A";
+    row.insertCell(2).textContent = resident.residentId || "N/A";
+    row.insertCell(3).textContent = resident.dateOfBirth || "N/A";
+    row.insertCell(4).textContent = resident.gender || "N/A";
+    row.insertCell(5).textContent = resident.relationship || "N/A";
+  });
+}
+
+
+

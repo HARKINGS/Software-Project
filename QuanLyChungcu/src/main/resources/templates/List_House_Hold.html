@@ -61,30 +61,36 @@
       <div class="Main">
         <h1>Thông tin hộ khẩu</h1>
         <!-- Thanh tìm kiếm, lọc thông tin -->
-        <div class="search">
-          <label for="ma-ho-khau">Mã hộ khẩu:</label>
-          <input
-            type="text"
-            id="ma-ho-khau"
-            placeholder="Nhập mã hộ khẩu"
-            oninput="searchData()"
-          />
+        <div class="Search">
+          <div class="Search-Item">
+            <label for="ma-ho-khau" class="label">Mã hộ khẩu:</label>
+            <input
+              type="text"
+              id="ma-ho-khau"
+              placeholder="Nhập mã hộ khẩu"
+              oninput="searchData()"
+            />
+          </div>
 
-          <label for="chu-ho">Tên chủ hộ:</label>
-          <input
-            type="text"
-            id="chu-ho"
-            placeholder="Nhập tên chủ hộ"
-            oninput="searchData()"
-          />
+          <div class="Search-Item">
+            <label for="chu-ho" class="label">Tên chủ hộ:</label>
+            <input
+              type="text"
+              id="chu-ho"
+              placeholder="Nhập tên chủ hộ"
+              oninput="searchData()"
+            />
+          </div>
 
-          <label for="so-can-ho">Số căn hộ:</label>
-          <input
-            type="text"
-            id="so-can-ho"
-            placeholder="Nhập số căn hộ"
-            oninput="searchData()"
-          />
+          <div class="Search-Item">
+            <label for="so-can-ho" class="label">Số căn hộ:</label>
+            <input
+              type="text"
+              id="so-can-ho"
+              placeholder="Nhập số căn hộ"
+              oninput="searchData()"
+            />
+          </div>
         </div>
 
         <!-- Bảng thông tin -->
@@ -116,72 +122,47 @@
           <button id="addBtn" class="Buttons add">
             <div class="Buttons-items">Thêm hộ khẩu</div>
           </button>
-          <button id="splitBtn" class="Buttons split" style ="display:none;">
+          <button id="splitBtn" class="Buttons split" style="display: none">
             <div class="Buttons-items">Tách hộ khẩu</div>
           </button>
           <button id="moveBtn" class="Buttons move">
-            <div class="Buttons-items">Di chuyển hộ khẩu</div>
+            <div class="Buttons-items">Chuyển đổi chủ hộ</div>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- CHUYỂN HỘ KHẨU -->
+    <!-- THAY ĐỔI CHỦ HỘ  -->
     <div class="moveHouseHold" style="display: none">
       <h1>Chuyển hộ khẩu</h1>
-      <form id ="moveHouseholdForm">
+      <form id="moveHouseholdForm">
         <div class="form-items-row">
           <div class="form-items">
-            <label for="id-house">Mã hộ khẩu cần chuyển:</label>
+            <label for="id-house">Mã hộ khẩu cần đổi chủ hộ:</label>
             <input
               type="text"
               id="id-house"
-              placeholder="Nhập mã hộ khẩu cần chuyển"
+              placeholder="Nhập mã hộ khẩu cần đổi chủ hộ"
             />
-          </div>
-          <div class="form-items">
-            <label for="newHouseholdNumber">Số căn hộ chuyển đến:</label>
-            <input
-              type="text"
-              id="newHouseholdNumber"
-              placeholder="Nhập số căn hộ chuyển đến"
-            />
+            <button class="searchBtn" id="searchHouseBtn">Tìm</button>
           </div>
         </div>
-       <!--  <div class="form-items-row">
-          <div class="form-items">
-            <label for="addr-now">Số căn hộ hiện tại:</label>
-            <input
-              type="text"
-              id="addr-now"
-              placeholder="Nhập số căn hộ hiện tại"
-              disabled
-            />
-          </div>
-          <div class="form-items">
-            <label for="cccd">Số CCCD của chủ hộ:</label>
-            <input
-              type="text"
-              id="cccd"
-              placeholder="Số CCCD của chủ hộ"
-              disabled
-            />
-          </div>
-        </div>
+        <h1>Chọn chủ hộ mới</h1>
+        <table id="ListNewHost">
+          <thead>
+            <th>Chọn</th>
+            <th>Tên cư dân</th>
+            <th>Mã CCCD</th>
+            <th>Ngày sinh</th>
+            <th>Giới tính</th>
+            <th>Quan hệ với chủ hộ</th>
+          </thead>
+          <tbody id="ListNewHost--body">
+            <!-- Danh sách thành viên trong hộ -->
+          </tbody>
+        </table>
 
-        <div class="form-items">
-          <label for="addr-new">Số căn hộ chuyển đến:</label>
-          <input
-            type="text"
-            id="addr-new"
-            placeholder="Nhập số căn hộ chuyển đến"
-          />
-        </div>
-        <div class="form-items">
-          <label for="ly-do">Lý do:</label>
-          <textarea id="ly-do" placeholder="Nhập lý do"></textarea>
-        </div> -->
-        <button type="submit" class="submit-btn">Lưu thông tin</button>
+        <button type="submit" class="submit-btn">Xác nhận</button>
         <button type="button" class="cancel-btn" onclick="exitMoveForm()">
           Hủy
         </button>
@@ -268,12 +249,16 @@
       <h1>Thêm hộ khẩu</h1>
       <!-- Form Section -->
       <div class="form-section">
-        <form id = "addHouseholdForm">
+        <form id="addHouseholdForm">
           <div class="formaddHouse">
             <div class="form-column">
               <div class="form-items">
                 <label for="nameHost">Họ và tên chủ hộ:</label>
-                <input type="text" id="nameHost" placeholder="Nhập vào họ và tên" />
+                <input
+                  type="text"
+                  id="nameHost"
+                  placeholder="Nhập vào họ và tên"
+                />
               </div>
               <div class="form-items">
                 <label for="birthday">Ngày sinh:</label>
@@ -281,7 +266,11 @@
               </div>
               <div class="form-items">
                 <label for="gender">Giới tính:</label>
-                <input type="text" id="gender" placeholder="Nhập/chọn giới tính" />
+                <input
+                  type="text"
+                  id="gender"
+                  placeholder="Nhập/chọn giới tính"
+                />
               </div>
               <div class="form-items">
                 <label for="CCCD">Số CCCD:</label>
@@ -299,7 +288,11 @@
               </div>
               <div class="form-items">
                 <label for="Addr">Số căn hộ:</label>
-                <input type="text" id="Addr" placeholder="Nhập vào số hộ khẩu" />
+                <input
+                  type="text"
+                  id="Addr"
+                  placeholder="Nhập vào số hộ khẩu"
+                />
               </div>
               <div class="form-items">
                 <label for="Area">Diện tích:</label>
@@ -313,11 +306,12 @@
           </div>
           <div class="form-section-btn">
             <button type="submit" class="submit-btn">Đăng ký</button>
-            <button type="button" id="exit-layer" onclick="exitAddHouse()">Hủy</button>
+            <button type="button" id="exit-layer" onclick="exitAddHouse()">
+              Hủy
+            </button>
           </div>
         </form>
       </div>
-      
     </div>
     <!-- Modal hiển thị thông tin dân cư -->
     <div id="houseHoldModal" class="modal">

@@ -56,16 +56,11 @@ a {
   flex-direction: row;
 }
 
-.Dashboard_wrapper {
-  height: 100vh;
-  width: 15vw;
-}
-
 .Dashboard {
   padding-top: 20px;
   min-width: 150px;
   width: 15vw;
-  height: 350px;
+  /* height: 350px; */
   font-size: 20px;
   color: #4081f1;
   font-family: Poppins;
@@ -140,6 +135,41 @@ a {
   flex: 85;
   padding: 20px;
   background-color: #99c6e9;
+}
+
+/* TÌM KIẾM */
+.Search {
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgb(255, 255, 255);
+  align-items: center;
+  box-shadow: 1px 1px #555;
+  border-radius: 5px;
+}
+
+.Search-Item {
+  font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Search input {
+  padding: 8px;
+  margin-right: 10px;
+  border: 1.5px solid #ccc;
+  border-radius: 5px;
+  background-color: #e6e6e6;
+}
+
+.label {
+  color: #db4646;
+  font-weight: 600;
+  min-width: 120px;
+  font-size: 18px;
 }
 
 table {
