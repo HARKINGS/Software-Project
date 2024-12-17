@@ -61,22 +61,28 @@
       <div class="Main">
         <h1>Thông báo chung cư</h1>
         <!-- Thanh tìm kiếm, lọc thông tin -->
-        <div class="search">
-          <label for="from-date">Từ ngày:</label>
-          <input
-            type="date"
-            id="from-date"
-            placeholder="từ ngày"
-            oninput="searchData()"
-          />
+        <div class="Search">
+          <div class="Search-Item">
+            <label for="from-date" class="label">Từ ngày:</label>
+            <input
+              type="date"
+              id="from-date"
+              class="input"
+              placeholder="từ ngày"
+              oninput="searchData()"
+            />
+          </div>
 
-          <label for="to-date">Đến ngày:</label>
-          <input
-            type="date"
-            id="to-date"
-            placeholder="đến ngày"
-            oninput="searchData()"
-          />
+          <div class="Search-Item">
+            <label for="to-date" class="label">Đến ngày:</label>
+            <input
+              type="date"
+              id="to-date"
+              class="input"
+              placeholder="đến ngày"
+              oninput="searchData()"
+            />
+          </div>
         </div>
 
         <div class="main_layout">

@@ -1,5 +1,11 @@
 /* Định dạng cho bảng tìm kiếm */
+#FeeTable td:nth-child(2), th:nth-child(2) {
+  width: 120px;
+}
 
+#newHouseId {
+  width: 100px;
+}
 
 #payment-status {
   padding: 8px;
@@ -8,8 +14,8 @@
   border-radius: 5px;
   background-color: #e6e6e6;
 }
-/* Định dạng cho bảng */
 
+/* Định dạng cho bảng */
 #inputRow input {
   padding: 8px 0px;
   border: 1px solid #ccc;
@@ -18,20 +24,19 @@
 
 /* Định dạng nút dấu cộng thêm thu phí */
 #addButton {
-  position: relative; /* Định vị tuyệt đối để có thể đặt ngoài bảng */
-  border: 1px solid #333;
-  border-radius: 3px;
-  width: auto;
-  height: auto;
-  cursor: pointer;
-  display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.6rem;
+  font-size: 2rem;
+  border: 1px solid #555;
+  width: 25px;
+  height: 25px;
+  border-radius: 50px;
+  cursor: pointer;
 }
 
 #addButton:hover {
-  background-color: #c27ac4; /* Màu khi hover */
+  color: #fff;
+  background-color: #3e8e41; /* Màu khi hover */
 }
 
 /* Định dạng hàng nhập liệu để chứa nút */
@@ -95,18 +100,32 @@
   overflow-y: auto;
 }
 
-.basic-details {
-  flex: 1;
+.basic-detail {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-}
-
-.basic-details .detail-row {
-  display: flex;
   gap: 10px;
   font-size: 16px;
+  padding: 0px 0px 20px 0px;
+}
+
+.basic-detail-row {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+
+.detail-row {
+  width: 260px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.detail-row input {
+  border: none;
+  border-radius: 5px;
+  color: #333;
+  width: 130px;
 }
 
 .label {
@@ -125,18 +144,21 @@
   background-color: #fff;
 }
 
-.status.completed {
-  background-color: #4caf50;
+/* Nút đóng */
+.closeBtn {
+  position: absolute;
+  top: 10px; /* Đặt nút cách cạnh trên của modal */
+  right: 10px; /* Đặt nút cách cạnh phải của modal */
+  font-size: 30px;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: transform 0.2s ease, color 0.2s ease; /* Thêm hiệu ứng chuyển động */
 }
 
-.status.incomplete {
-  background-color: #f44336;
-}
-
-.status {
-  display: inline-block;
-  padding: 3px 5px;
-  color: #fff;
-  border-radius: 4px;
-  text-align: center;
+/* Khi nhấn vào */
+.closeBtn:active {
+  transform: translateY(2px); /* Nút sẽ dìm xuống khi nhấn */
 }

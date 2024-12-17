@@ -25,11 +25,11 @@ let accounts = []; // Khởi tạo danh sách tài khoản từ API
 function renderTable(data) {
     const tbody = document.querySelector("#AccountTable tbody");
     tbody.innerHTML = `
-        <tr class="add-row">
+        <tr id="inputRow" class="add-row">
             <td><input type="text" id="addUsername" class="input" placeholder="Tên tài khoản" /></td>
             <td><input type="password" id="addPassword" class="input" placeholder="Mật khẩu" /></td>
             <td><input type="text" id="addResidentId" class="input" placeholder="Mã cư dân" /></td>
-            <td><button onclick="addRow()">Thêm</button></td>
+            <td><button id="addButton" onclick="addRow()">+</button></td>
         </tr>
     `;
 

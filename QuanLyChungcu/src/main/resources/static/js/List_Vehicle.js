@@ -154,8 +154,8 @@ function renderTable(page) {
         <span class="status ${statusClass}">${status}</span>
       </td>
       <td>
-        <button onclick="editRow(this)">Sửa</button>
-        <button onclick="deleteRow(${start + index})">Xóa</button>
+        <button class="changeBtn" onclick="editRow(this)">Sửa</button>
+        <button class="deleteBtn" onclick="deleteRow(${start + index})">Xóa</button>
       </td>
     `;
     row.style.cursor = "pointer";
@@ -272,27 +272,31 @@ function showModal(Fee) {
 
   // Cập nhật thông tin vào modal
   modalDetails.innerHTML = `
-      <div class="payment-history">
+    <div class="payment-history">
       <div class="basic-detail">
-        <div class="detail-row">
-          <span class="label">Số xe ô tô:</span>
-          <input class="value" value="${Fee.numberCar}" disabled />
+        <div class="basic-detail-row">
+          <div class="detail-row">
+            <span class="label">Số xe ô tô:</span>
+            <input class="value" value="${Fee.numberCar}" disabled />
+          </div>
+          <div class="detail-row">
+            <span class="label">Số xe máy:</span>
+            <input class="value" value="${Fee.numberMotor}" disabled />
+          </div>
         </div>
-        <div class="detail-row">
-          <span class="label">Số xe máy:</span>
-          <input class="value" value="${Fee.numberMotor}" disabled />
-        </div>
-        <div class="detail-row">
-          <span class="label">Số tiền cần thu:</span>
-          <input class="value" id="totalPay" value="${Fee.amount}" disabled />
-        </div>
-        <div class="detail-row">
-          <span class="label">Hạn thu:</span>
-          <input class="value" value="${Fee.dueDate}" disabled />
-        </div>
-        <div class="detail-row">
-          <span class="label">Trạng thái:</span>
-          <input class="value" id="status-pay" value="${status}" disabled />
+        <div class="basic-detail-row">
+          <div class="detail-row">
+            <span class="label">Số tiền cần thu:</span>
+            <input class="value" id="totalPay" value="${Fee.amount}VND" disabled />
+          </div>
+          <div class="detail-row">
+            <span class="label">Hạn thu:</span>
+            <input class="value" value="${Fee.dueDate}" disabled />
+          </div>
+          <div class="detail-row">
+            <span class="label">Trạng thái:</span>
+            <input class="value" id="status-pay" value="${status}" disabled />
+          </div>
         </div>
       </div>
       <h1>Lịch sử các lần thu</h1>
@@ -301,14 +305,14 @@ function showModal(Fee) {
           <tr>
             <th>Mã phiếu thu</th>
             <th>Ngày đóng</th>
-            <th>Số tiền đóng</th>
+            <th>Tổng số tiền đã đóng</th>
           </tr>
         </thead>
         <tbody id="paymentHistoryTableBody">
           <tr>
             <td>nối mã phiếu thu</td>
             <td>nối Ngày đóng</td>
-            <td>nối Số tiền đóng</td>
+            <td>nối Tổng số tiền đã đóng</td>
           </tr>
         </tbody>
       </table>
@@ -387,6 +391,35 @@ function resetInputRow() {
   statusSpan.className = "";
 }
 
+let editingIndex = null; // Lưu trạng thái index của dòng đang chỉnh sửa
+// Hủy thao tác chỉnh sửa
+function cancelEditRow() {
+  if (editingIndex !== null) {
+    const tableBody = document.querySelector("#FeeTable tbody");
+    const row = tableBody.rows[editingIndex % rowsPerPage + 1]; // Lấy hàng đang sửa (dòng +1 vì có dòng input đầu tiên)
+    const cells = row.querySelectorAll("td");
+    const item = filteredData[editingIndex];
+
+    // Khôi phục dữ liệu cũ
+    cells[4].querySelector("span").style.display = "block";
+    cells[4].querySelector("input").style.display = "none";
+    cells[4].querySelector("input").value = item.collectAmount;
+    row.querySelector(".changeBtn").textContent = "Sửa";
+
+    editingIndex = null; // Hủy trạng thái sửa
+  }
+}
+
+window.addEventListener("click", (event) => {
+  const tableBody = document.querySelector("#FeeTable tbody");
+  const clickedInsideTable = tableBody.contains(event.target);
+
+  // Nếu click ra ngoài bảng và đang có dòng chỉnh sửa
+  if (!clickedInsideTable && editingIndex !== null) {
+    cancelEditRow(); // Hủy thao tác sửa
+  }
+});
+
 function editRow(button) {
   event.stopPropagation(); // Ngăn sự kiện click hàng
   const row = button.parentElement.parentElement;
@@ -394,15 +427,21 @@ function editRow(button) {
   const cells = row.querySelectorAll("td");
   const parkingFeeId = filteredData[index].parkingFeeId; // Lấy feeId từ đối tượng dữ liệu
 
+  // Nếu không có dòng nào đang sửa hoặc dòng hiện tại khác với dòng đang sửa
+  if (editingIndex !== null && editingIndex !== index) {
+    cancelEditRow(); // Hủy thao tác sửa của dòng trước
+  }
+
   if (button.textContent === "Sửa") {
     button.textContent = "Lưu";
+    editingIndex = index; // Lưu trạng thái index dòng đang sửa
     cells[4].querySelector("span").style.display = "none";
     cells[4].querySelector("input").style.display = "block";
   } else {
     button.textContent = "Sửa";
     const newPaid = parseInt(cells[4].querySelector("input").value, 10);
 
-    if (isNaN(newPaid) || newPaid < 0 || newPaid > filteredData[index].amount) {
+    if (isNaN(newPaid) || newPaid < 0 || newPaid > filteredData[index].amount || newPaid <filteredData[index].collectAmount) {
       alert("Số tiền không hợp lệ!");
       return;
     }

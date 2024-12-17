@@ -37,7 +37,7 @@ function renderTable(page) {
             <td><input type="text" id="addHousehold" class="input" placeholder="Mã hộ" /></td>
             <td><input type="text" id="addFeeName" class="input" placeholder="Tên khoản phí" /></td>
             <td><input type="number" id="addAmount" class="input" placeholder="Số tiền" /></td>
-            <td><button onclick="addRow()">Thêm</button></td>
+            <td><button id="addButton" onclick="addRow()">+</button></td>
         </tr>
     `;
 
