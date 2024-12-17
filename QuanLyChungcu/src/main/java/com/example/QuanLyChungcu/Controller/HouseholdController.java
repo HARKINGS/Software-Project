@@ -61,4 +61,10 @@ public class HouseholdController {
     public HouseholdDTO moveHousehold(@RequestParam Long id, @RequestParam String moveHouseholdNumber) {
         return householdService.moveHousehold(id, moveHouseholdNumber);
     }
+
+    @PutMapping("/changeOwner")
+    @ResponseStatus(HttpStatus.OK)
+    public HouseholdDTO changeOwner(@RequestParam Long householdId, @RequestParam Long residentId) {
+        return householdService.changeOwner(householdId, residentId);
+    }
 }

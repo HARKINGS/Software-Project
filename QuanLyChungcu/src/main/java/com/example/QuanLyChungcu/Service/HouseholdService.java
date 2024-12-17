@@ -15,5 +15,6 @@ public interface HouseholdService {
     public void deleteHousehold(Long id);
     public List<ResidentDTO> getListResident(Long id);
     public HouseholdDTO moveHousehold(Long id, String moveHouseholdNumber);
+    public HouseholdDTO changeOwner(Long householdId, Long residentId);
 }
 

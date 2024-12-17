@@ -158,5 +158,19 @@ public class HouseholdServiceImpl implements HouseholdService{
             throw new ConflictException("Số nhà đã có hộ khẩu");
         }
     }
+
+    @Override
+    public HouseholdDTO changeOwner(Long householdId, Long residentId) {
+        Optional<Household> findHousehold = householdRepository.findById(householdId);
+        Optional<Resident> findResident = residentRepository.findById(residentId);
+        if(findHousehold.isPresent() && findResident.isPresent()) {
+            Household household = findHousehold.get();
+            Resident resident  = findResident.get();
+            household.setChuHo(resident);
+            return modelMapper.map(householdRepository.save(household), HouseholdDTO.class);
+        }else {
+            throw new ResourceNotFoundException("Hộ khẩu hoặc cư dân không tồn tại");
+        }
+    }
 }
 
