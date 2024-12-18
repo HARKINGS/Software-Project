@@ -66,6 +66,11 @@
   font-size: 16px;
 }
 
+.editPaidInput {
+  border-radius: 5px;
+  border: 1px solid #2c59c4;
+}
+
 .pageButton {
   padding: 5px 15px;
   margin: 0 5px;

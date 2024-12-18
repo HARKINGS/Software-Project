@@ -1,6 +1,36 @@
 let listMessage = [];
 const maxLength = 100;
 
+function searchData() {
+  const fromDate = document.getElementById("from-date").value;
+  const toDate = document.getElementById("to-date").value;
+
+  // Chuyển đổi ngày sang đối tượng Date
+  const fromDateObj = fromDate ? new Date(fromDate) : null;
+  const toDateObj = toDate ? new Date(toDate) : null;
+
+  const container = document.querySelector(".container");
+  const messages = container.querySelectorAll(".message");
+
+  messages.forEach((messageDiv) => {
+    const timeElement = messageDiv.querySelector("span");
+    const messageDate = new Date(timeElement.textContent);
+
+    let isVisible = true;
+
+    // Kiểm tra nếu có ngày từ và ngày đến
+    if (fromDateObj && messageDate < fromDateObj) {
+      isVisible = false;
+    }
+    if (toDateObj && messageDate > toDateObj) {
+      isVisible = false;
+    }
+
+    // Hiển thị hoặc ẩn thông báo
+    messageDiv.style.display = isVisible ? "block" : "none";
+  });
+}
+
 function showDetail(title, time, message) {
   const overlay = document.querySelector(".overlay");
   const fullMessage = overlay.querySelector(".full-message");
