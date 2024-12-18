@@ -13,7 +13,7 @@ public class Notification {
     @Column(name = "Title", nullable = false)
     private String title;
 
-    @Column(name = "Content", nullable = false)
+    @Column(columnDefinition = "TEXT", name = "Content", nullable = false)
     @Lob
     private String content;
 

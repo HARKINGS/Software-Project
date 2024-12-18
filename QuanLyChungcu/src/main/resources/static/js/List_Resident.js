@@ -1,5 +1,5 @@
 let currentPage = 1;
-const itemsPerPage = 5; // Hiển thị 5 dân cư mỗi trang
+const itemsPerPage = 10; // Hiển thị 5 dân cư mỗi trang
 
 let selectedResident;
 let filteredResidents = null;
@@ -402,11 +402,13 @@ document.addEventListener("DOMContentLoaded",  () => {
               fetchListResident();
               updateResidentTable(residents);
               changePage(0);
+              exitAddResident();
               alert("Thêm thành công!");
             })
             .catch(error => {
               console.error("Đã xảy ra lỗi khi thêm ", error);
               alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
+              exitAddResident();
             });
     });
 });

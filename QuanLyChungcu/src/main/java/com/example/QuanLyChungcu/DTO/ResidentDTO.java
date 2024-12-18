@@ -23,7 +23,7 @@ public class ResidentDTO {
 
     private String phoneNumber;
 
-    @NotBlank(message = "Phải có quan hệ với chủ hộ")
+    // @NotBlank(message = "Phải có quan hệ với chủ hộ")
     private String relationship;
 
     @NotNull(message = "Phải khai báo thường trú hay tạm trú")

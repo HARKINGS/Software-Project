@@ -32,8 +32,8 @@ public class Resident {
     @Column(name = "CCCD", nullable = false, length = 20)
     private String cccd;
 
-    @NotBlank(message = "Phải có quan hệ với chủ hộ")
-    @Column(name = "Quan he voi chu ho", nullable = false)
+    // @NotBlank(message = "Phải có quan hệ với chủ hộ")
+    @Column(name = "Quan he voi chu ho", nullable = true)
     private String relationship;
 
     @NotNull(message = "Phải khai báo thường trú hay tạm trú")

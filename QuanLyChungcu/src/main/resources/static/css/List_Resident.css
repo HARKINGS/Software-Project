@@ -1,15 +1,11 @@
-.input {
-  height: 25px;
-  border-radius: 5px;
-  border: 1px solid #333;
-}
-
-/* Định dạng cho các phần nhập liệu (input fields) */
-.Search-Res-Item {
-  margin-bottom: 15px;
-}
-
 /* _________________________________ */
+#temporaryInput {
+  padding: 8px;
+  margin-right: 10px;
+  border: 1.5px solid #ccc;
+  border-radius: 5px;
+  background-color: #e6e6e6;
+}
 
 .form-section {
   display: flex;

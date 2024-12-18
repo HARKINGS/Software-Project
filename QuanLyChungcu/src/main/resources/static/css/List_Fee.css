@@ -3,8 +3,12 @@
   width: 120px;
 }
 
-#newHouseId {
-  width: 100px;
+.Feetable td:nth-child(3), th:nth-child(3), td:nth-child(4), th:nth-child(4) {
+  width: 200px;
+}
+
+#newTotal, #newPaid {
+  width: 150px;
 }
 
 #payment-status {
@@ -17,7 +21,7 @@
 
 /* Định dạng cho bảng */
 #inputRow input {
-  padding: 8px 0px;
+  padding: 8px 8px;
   border: 1px solid #ccc;
   border-radius: 3px;
 }

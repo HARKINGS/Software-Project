@@ -165,8 +165,10 @@ public class HouseholdServiceImpl implements HouseholdService{
         Optional<Resident> findResident = residentRepository.findById(residentId);
         if(findHousehold.isPresent() && findResident.isPresent()) {
             Household household = findHousehold.get();
+            household.getChuHo().setRelationship("Chưa rõ");
             Resident resident  = findResident.get();
             household.setChuHo(resident);
+            resident.setRelationship("Chủ hộ");
             return modelMapper.map(householdRepository.save(household), HouseholdDTO.class);
         }else {
             throw new ResourceNotFoundException("Hộ khẩu hoặc cư dân không tồn tại");
