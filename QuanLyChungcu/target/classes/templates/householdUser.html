@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name = "viewport" content= "width = device_width initial-scale = 1.0">
+  <link rel="stylesheet" type="text/css" href="/css/globalUser.css">
+  <link rel="stylesheet" type="text/css" href="/css/householdUser.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+  <script type="text/javascript" src="/js/getWeb.js" defer></script>
+  <script type="text/javascript" src="/js/householdUser.js" defer></script>
+  <title>Thông tin hộ khẩu</title>
+</head>
+<body>
+  <div class ="fullscreen">
+    <div class="nav_bar">
+      <div class = "nav_bar_option_container">
+        <div class = "nav_bar_option" id = "user" onclick ="getResident()">
+          <div class = "icon_wrapper"><i class="fas fa-user-alt fa-fw fa-align-center" ></i></div>
+          <span>Thông tin cá nhân</span>
+        </div>
+        <div class = "nav_bar_option" id ="household">
+          <div class = "icon_wrapper"><i class="fas fa-users fa-fw fa-align-center"></i></div>
+          <span>Thông tin hộ khẩu</span>
+        </div>
+        <div class = "nav_bar_option" id ="fee" onclick="getFee()">
+          <div class = "icon_wrapper"><i class="fas fa-receipt fa-fw fa-align-center"></i></div>
+          <span>Thông tin thu phí</span>
+        </div>
+        <div class = "nav_bar_option" id ="contribution" onclick="getContribution()">
+          <div class = "icon_wrapper"><i class="fas fa-hand-holding-usd fa-fw fa-align-center" ></i></div>
+          <span>Đóng góp tình nguyện</span>
+        </div>
+        <div class="nav_bar_option" id="vehicle" onclick = "getVehicle()">
+            <div class="icon_wrapper"><i class="fas fa-car fa-fw fa-align-center"></i></div>
+            <span>Thông tin gửi xe</span>
+        </div>
+        <div class="nav_bar_option" id="message" onclick="getMessage()">
+            <div class="icon_wrapper"><i class="fas fa-bell fa-fw fa-align-center"></i></div>
+            <span>Thông báo</span>
+        </div>
+      </div>
+    </div>
+    <div class="main_layout">
+      <div class ="main_header_container">
+        <div class ="title">
+          <span>Thông tin hộ khẩu</span>
+        </div>
+        <div class ="noti_and_id">
+          <div id="id_btn">
+            <form action="/logout" method="post" id="logoutForm">
+                <button type="submit"><i class="fas fa-sign-out-alt fa-fw fa-align-center"></i></button>
+            </form>          
+          </div>
+        </div>
+      </div>
+      <div class ="main_container">
+        <div class="table_container">
+          <table id="residentTable">
+            <thead>
+              <tr>
+                <!-- <th>ID</th> -->
+                <th>Tên dân cư</th>
+                <th>Ngày sinh</th>
+                <th>Số CCCD</th>
+                <th>Giới tính</th>
+                <th>Số điện thoại</th>
+                <th>Quan hệ với chủ hộ</th>
+                <th>Trạng thái</th>
+                <th>Số hộ khẩu</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dữ liệu sẽ được điền vào đây -->
+            </tbody>
+          </table>
+          <!-- Phần phân trang -->
+          <div id="pagination">
+            <button class="pageButton" id="prevPage" onclick="changePage(-1)">
+              Prev
+            </button>
+            <span id="pageNumber">Trang 1</span>
+            <button class="pageButton" id="nextPage" onclick="changePage(1)">
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+    <script>
+      
+    </script>
+</body>
+</html>
