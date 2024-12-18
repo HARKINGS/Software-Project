@@ -49,14 +49,14 @@ function renderTable(page) {
                 <td>${item.contributionType}</td>
                 <td>${item.amount.toLocaleString()}</td>
                 <td>
-                    <button onclick="deleteRow(${item.contributionId})">Xóa</button>
+                    <button class="delete-btn" onclick="deleteRow(${item.contributionId})">Xóa</button>
                 </td>
             </tr>
         `;
     });
 
     const totalPages = Math.ceil(filteredData.length / rowsPerPage);
-    document.getElementById("pageNumber").textContent = `Page ${currentPage} of ${totalPages}`;
+    document.getElementById("pageNumber").textContent = `Page ${currentPage}`;
 }
 
 function removeAccents(str) {

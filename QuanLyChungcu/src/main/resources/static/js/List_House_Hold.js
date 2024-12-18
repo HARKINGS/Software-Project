@@ -272,7 +272,7 @@ function updatePagination(filteredDataLength) {
   const totalPages = Math.ceil(filteredDataLength / rowsPerPage);
   document.getElementById(
     "pageNumber"
-  ).innerText = `Page ${currentPage} of ${totalPages}`;
+  ).innerText = `Page ${currentPage}`;
   document.getElementById("prevBtn").disabled = currentPage === 1;
   document.getElementById("nextBtn").disabled = currentPage === totalPages;
 }

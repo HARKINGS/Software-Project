@@ -55,8 +55,8 @@ function renderTable(page) {
             </td>
             <td><span class="status ${statusClass}">${status}</span></td>
             <td>
-                <button class="changeBtn" onclick="editRow(this)">Sửa</button>
-                <button onclick="deleteRow(${start + index})">Xóa</button>
+                <button class="change-btn" onclick="editRow(this)">Sửa</button>
+                <button class="delete-btn" onclick="deleteRow(${start + index})">Xóa</button>
             </td>
         `;
         tr.style.cursor = "pointer";
@@ -238,7 +238,7 @@ function cancelEditRow() {
     cells[4].querySelector("span").style.display = "block";
     cells[4].querySelector("input").style.display = "none";
     cells[4].querySelector("input").value = item.collectAmount;
-    row.querySelector(".changeBtn").textContent = "Sửa";
+    row.querySelector(".change-btn").textContent = "Sửa";
 
     editingIndex = null; // Hủy trạng thái sửa
   }
@@ -345,17 +345,21 @@ function showModal(Fee) {
         <div class="basic-detail-row">
           <div class="detail-row">
             <span class="label">Tên phí thu:</span>
-            <input class="value" value="${Fee.feeType}" disabled />
+            <input class="value" value="${Fee.householdId}" disabled />
           </div>
           <div class="detail-row">
-            <span class="label">Hạn thu:</span>
-            <input class="value" value="${Fee.dueDate}" disabled />
+            <span class="label">Tên phí thu:</span>
+            <input class="value" value="${Fee.feeType}" disabled />
           </div>
         </div>
         <div class="basic-detail-row">
           <div class="detail-row">
             <span class="label">Số tiền cần thu:</span>
             <input class="value" id="totalPay" value="${Fee.amount.toLocaleString()} VND" disabled />
+          </div>
+          <div class="detail-row">
+            <span class="label">Hạn thu:</span>
+            <input class="value" value="${Fee.dueDate}" disabled />
           </div>
           <div class="detail-row">
             <span class="label">Trạng thái:</span>

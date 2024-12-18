@@ -74,11 +74,25 @@ a {
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
+#HomeBtn {
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0px 2px rgba(57, 126, 255, 0.5);
+}
+
+#HomeBtn:hover {
+  box-shadow: 0 -5px 10px -5px rgba(64, 129, 241, 0.3),
+    0 5px 10px -5px rgba(64, 129, 241, 0.3);
+  transform: translateY(-2px);
+}
+
 .Dashboard__elements {
   width: 100%;
   font-size: 18px;
   margin-bottom: 12px;
   align-self: center;
+  /* box-shadow: 0px 1px rgba(57, 126, 255, 0.3); */
 }
 
 .Dashboard__elements a {
@@ -212,7 +226,7 @@ tr:nth-child(odd) {
 }
 
 tr:hover {
-  background-color: #9e9e9e;
+  background-color: #dbdbdb;
 }
 
 .status {
@@ -228,7 +242,7 @@ tr:hover {
 }
 
 .status.incomplete {
-  background-color: #f44336;
+  background-color: #ff1100aa;
 }
 
 .Btn {
@@ -282,4 +296,56 @@ tr:hover {
 .pageButton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* Nút đóng */
+.closeBtn {
+  position: absolute;
+  top: 10px; /* Đặt nút cách cạnh trên của modal */
+  right: 10px; /* Đặt nút cách cạnh phải của modal */
+  font-size: 30px;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: transform 0.2s ease, color 0.2s ease; /* Thêm hiệu ứng chuyển động */
+}
+
+/* Khi nhấn vào */
+.closeBtn:active {
+  transform: translateY(2px); /* Nút sẽ dìm xuống khi nhấn */
+}
+
+.delete-btn {
+  padding: 2px;
+  border-radius: 4px;
+  border: 1px solid #909090;
+  background-color: #ff6b6b;
+  cursor: pointer;
+  color: #ffffff;
+  box-shadow: 1px #555;
+}
+
+.delete-btn:hover {
+  background-color: #ff0000;
+}
+
+.change-btn {
+  padding: 2px;
+  border-radius: 4px;
+  border: 1px solid #909090;
+  background-color: #73b0ff;
+  cursor: pointer;
+  color: #ffffff;
+  box-shadow: 1px #555;
+}
+
+.change-btn:hover {
+  background-color: #003cff;
+}
+
+.non-interactive {
+  pointer-events: none; /* Ngăn không cho nhấp chuột hoặc chỉnh sửa */
+  user-select: none; /* Ngăn không cho chọn văn bản */
 }

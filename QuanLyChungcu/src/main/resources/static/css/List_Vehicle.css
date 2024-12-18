@@ -8,7 +8,7 @@
 /* Định dạng cho bảng */
 
 #inputRow input {
-  padding: 8px 0px;
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 3px;
 }
@@ -109,8 +109,26 @@
   background-color: #fff;
 }
 
-.Feetable td:nth-child(0), th:nth-child(0), td:nth-child(0), th:nth-child(0), td:nth-child(2), th:nth-child(2), td:nth-child(1), th:nth-child(1) {
+.editPaidInput {
+  border-radius: 5px;
+  border: 1px solid #2c59c4
+  co
+}
+
+#Feetable td:nth-child(0), th:nth-child(0), td:nth-child(1), th:nth-child(1), td:nth-child(2), th:nth-child(2) {
+  width: 90px;
+}
+
+#FeeTable td:nth-child(3), th:nth-child(3), td:nth-child(4), th:nth-child(4) {
   width: 120px;
+}
+
+#newTotal.input-cell {
+  width: 150px;
+}
+
+#newPaid.input-cell {
+  width: 150px;
 }
 
 #numCar, #numMotor {
@@ -119,23 +137,4 @@
 
 #newHouseId.input-cell {
   width: 110px;
-}
-
-/* Nút đóng */
-.closeBtn {
-  position: absolute;
-  top: 10px; /* Đặt nút cách cạnh trên của modal */
-  right: 10px; /* Đặt nút cách cạnh phải của modal */
-  font-size: 30px;
-  font-weight: bold;
-  color: black;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  transition: transform 0.2s ease, color 0.2s ease; /* Thêm hiệu ứng chuyển động */
-}
-
-/* Khi nhấn vào */
-.closeBtn:active {
-  transform: translateY(2px); /* Nút sẽ dìm xuống khi nhấn */
 }

@@ -154,8 +154,8 @@ function renderTable(page) {
         <span class="status ${statusClass}">${status}</span>
       </td>
       <td>
-        <button class="changeBtn" onclick="editRow(this)">Sửa</button>
-        <button class="deleteBtn" onclick="deleteRow(${start + index})">Xóa</button>
+        <button class="change-btn" onclick="editRow(this)">Sửa</button>
+        <button class="delete-btn" onclick="deleteRow(${start + index})">Xóa</button>
       </td>
     `;
     row.style.cursor = "pointer";
@@ -200,6 +200,7 @@ function filterResults() {
 
 function deleteRow(index) {
   // Lấy `parkingFeeId` từ dữ liệu
+  event.stopPropagation();
   const parkingFeeId = filteredData[index].parkingFeeId;
 
   // Hiển thị xác nhận trước khi xóa
@@ -275,6 +276,10 @@ function showModal(Fee) {
     <div class="payment-history">
       <div class="basic-detail">
         <div class="basic-detail-row">
+          <div class="detail-row">
+            <span class="label">Mã hộ dân:</span>
+            <input class="value" value="${Fee.householdId}" disabled />
+          </div>
           <div class="detail-row">
             <span class="label">Số xe ô tô:</span>
             <input class="value" value="${Fee.numberCar}" disabled />
@@ -404,7 +409,7 @@ function cancelEditRow() {
     cells[4].querySelector("span").style.display = "block";
     cells[4].querySelector("input").style.display = "none";
     cells[4].querySelector("input").value = item.collectAmount;
-    row.querySelector(".changeBtn").textContent = "Sửa";
+    row.querySelector(".change-btn").textContent = "Sửa";
 
     editingIndex = null; // Hủy trạng thái sửa
   }

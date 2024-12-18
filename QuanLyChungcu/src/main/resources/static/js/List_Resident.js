@@ -116,22 +116,24 @@ function updateResidentTable(data) {
 
 // Hàm xóa cư dân
 function deleteResident(residentID) {
-  fetch("/admin/resident/" + residentID, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => {
-      if (response.status === 204) {
-        alert("Xoá thành công!");
-        fetchListResident();
-        updateResidentTable(residents);
-        changePage(0);
-      } else {
-        alert("Xoá thất bại!");
-      }
-    });
+  if (confirm("Bạn có chắc muốn xóa cư dân này không?")) {
+    fetch("/admin/resident/" + residentID, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.status === 204) {
+          alert("Xoá thành công!");
+          fetchListResident();
+          updateResidentTable(residents);
+          changePage(0);
+        } else {
+          alert("Xoá thất bại!");
+        }
+      });
+  }
 }
 // Hàm chuyển đổi chuỗi tiếng Việt có dấu thành không dấu
 function removeAccents(str) {

@@ -1,13 +1,17 @@
 /* Định dạng cho bảng tìm kiếm */
-#FeeTable td:nth-child(2), th:nth-child(2) {
+#FeeTable td:nth-child(2), th:nth-child(2), td:nth-child(1), th:nth-child(1) {
   width: 120px;
 }
 
-.Feetable td:nth-child(3), th:nth-child(3), td:nth-child(4), th:nth-child(4) {
-  width: 200px;
+#Feetable td:nth-child(3), th:nth-child(3), td:nth-child(4), th:nth-child(4) {
+  width: 180px;
 }
 
-#newTotal, #newPaid {
+#newHouseId {
+  width: 120px;
+}
+
+#newTotal, #newPaid, #newName {
   width: 150px;
 }
 
@@ -119,7 +123,7 @@
 }
 
 .detail-row {
-  width: 260px;
+  width: 250px;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -129,7 +133,7 @@
   border: none;
   border-radius: 5px;
   color: #333;
-  width: 130px;
+  width: 125px;
 }
 
 .label {
