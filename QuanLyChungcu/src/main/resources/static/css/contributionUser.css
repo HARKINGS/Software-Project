@@ -59,11 +59,6 @@ td:nth-child(3), td:nth-child(2){
     width:35%;
 }
 
-td:nth-child(4){
-    text-align:right;
-    padding-right:5%;
-}
-
 tr{
     height:65px;
     background-color:#e7e9eb;

@@ -21,7 +21,7 @@ var residentInfo = {
         // Gán dữ liệu vào biến residentInfo
         residentInfo = {
           name: data.name,
-          birthday: data.dateOfBirth,
+          birthday: data.dateOfBirth.split("-").reverse().join("-"),
           gender: data.gender,
           ID: data.cccd,
           phone: data.phoneNumber,

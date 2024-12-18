@@ -14,7 +14,7 @@ function updateResidentTable(residents) {
     const row = tableBody.insertRow();
     // row.insertCell(0).textContent = resident.residentId;
     row.insertCell(0).textContent = resident.name;
-    row.insertCell(1).textContent = resident.dateOfBirth; 
+    row.insertCell(1).textContent = resident.dateOfBirth.split("-").reverse().join("-"); 
     row.insertCell(2).textContent = resident.cccd;
     row.insertCell(3).textContent = resident.gender; 
     row.insertCell(4).textContent = resident.phoneNumber; 

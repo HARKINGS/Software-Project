@@ -4,6 +4,7 @@ let listHousehold = [];
 let listMessage = [];
 let currentPage = 1;
 const rowsPerPage = 10;
+let selectedHousehold;
 
 // Hàm chuyển đổi chuỗi tiếng Việt có dấu thành không dấu
 function removeAccents(str) {
@@ -50,7 +51,11 @@ function displayData(filteredData) {
         <td><button class="delete-btn">Xóa</button></td>
       `;
     row.style.cursor = "pointer";
-    row.addEventListener("click", () => showHouseholdDetail(item));
+    row.addEventListener("click", () => {
+      console.log(item);
+      showHouseholdDetail(item);
+      selectedHousehold = item;
+    });
 
     const deleteButton = row.querySelector(".delete-btn");
 
@@ -193,44 +198,56 @@ function showModal(household) {
   if (event) {
     event.stopPropagation();
   }
+  console.log("household dang la:", household);
 }
-//Lưu thông tin SỬA LẠI FETCH NÀY
-function saveChanges() {
-  const updatedResident = {
-    name: document.getElementById("editName").value,
-    dateOfBirth: document.getElementById("editBirthdate").value,
-    gender: document.getElementById("editGender").value,
-    cccd: document.getElementById("editCCCD").value,
-    phoneNumber: document.getElementById("editPhone").value,
-    relationship: document.getElementById("editRelation").value,
-    temporary: document.getElementById("editState").value,
-    householdId: document.getElementById("editHousehold").value,
-  };
 
-  // Gửi dữ liệu cập nhật đến backend
-  fetch("/admin/resident/" + selectedResident.residentId, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(updatedResident),
-  })
-    .then((response) => {
-      if (response.ok) {
-        alert("Cập nhật thành công!");
-        closeModal();
-        fetchListResident();
-        updateResidentTable(residents);
-        changePage(0);
-      } else {
-        alert("Cập nhật thất bại!");
-      }
-    })
-    .catch((error) => {
-      console.error("Lỗi:", error);
-      alert("Có lỗi xảy ra khi gửi dữ liệu!");
-    });
+function saveChanges(){
+  if(selectedHousehold === null){
+    alert('chua chon owner');
+    closeModal();
+    return;
+  }
+  console.log("ho can xet", selectedHousehold);
+  const newNumHouse = document.getElementById("editNumbehouse").value;
+  const newArea = document.getElementById("editArea").value;
+
+  if(
+    !newNumHouse ||
+    !newArea
+    ){
+    alert("thieu thong tin");
+    return;
+  }
+  
+  let newHouseholdDTO = {
+    householdNumber:newNumHouse,
+    apartmentSize:newArea,
+    chuHo:selectedHousehold.owner
+  }
+  console.log("dulieuguidi: ", newHouseholdDTO);
+
+  fetch("/admin/household/" + selectedHousehold.code, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newHouseholdDTO),
+      })
+        .then((response) => {
+          if (response.status !== 200) {
+            throw new Error("Xay ra loi khi gui request ");
+          }
+        })
+        .then((returnedData) => {
+          closeModal();
+          readData();
+        })
+        .catch((error) => {
+          console.error("Đã xảy ra lỗi khi thêm ", error);
+          alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
+        });
 }
+
 
 // Lắng nghe sự kiện click trên toàn bộ window
 window.addEventListener("click", (event) => {
@@ -239,6 +256,7 @@ window.addEventListener("click", (event) => {
   // Chỉ đóng modal nếu nó đang hiển thị
   if (isModalOpen && !modal.contains(event.target)) {
     closeModal(); // Đóng modal
+    console.log("modal da dong");
   }
 });
 
@@ -389,6 +407,7 @@ async function readData() {
           area: listHousehold[i].apartmentSize,
           members: [],
           numHouse: listHousehold[i].householdNumber,
+          owner: listHousehold[i].chuHo
         };
         data.push(newHouseData);
       }
@@ -471,98 +490,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
         });
     });
-
-  // TÌM KIẾM THÔNG TIN HỘ KHẨU
-  document.getElementById("id-house").addEventListener("blur", async () => {
-    const inputElement = document.getElementById("id-house");
-    const householdId = inputElement.value.trim();
-  
-    // Kiểm tra input
-    if (!householdId) {
-      alert("Vui lòng nhập mã hộ khẩu!");
-      console.warn("Household ID không được để trống!");
-      return;
-    }
-  
-    // Chuyển đổi sang số
-    const numericHouseholdId = Number(householdId);
-    if (isNaN(numericHouseholdId)) {
-      alert("Mã hộ khẩu không hợp lệ. Vui lòng nhập một số!");
-      console.error("Household ID phải là số.");
-      return;
-    }
-  
-    try {
-      // Gọi API lấy danh sách cư dân
-      const response = await fetch("/admin/resident", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-  
-      if (!response.ok) {
-        throw new Error(`Lỗi Server: ${response.status} - ${response.statusText}`);
-      }
-  
-      // Parse JSON
-      const listResident = await response.json();
-  
-      // Lọc danh sách cư dân theo householdId
-      const members = listResident.filter(
-        (resident) => resident.householdId === numericHouseholdId
-      );
-  
-      // Kiểm tra nếu không có thành viên nào
-      if (members.length === 0) {
-        alert("Không tìm thấy thành viên nào cho mã hộ khẩu này!");
-        console.warn("Danh sách thành viên trống.");
-        return;
-      }
-  
-      // Hiển thị dữ liệu lên bảng
-      fillInitTable(members);
-    } catch (error) {
-      console.error("Lỗi khi tải danh sách thành viên:", error);
-      alert("Không thể tải danh sách thành viên. Vui lòng thử lại!");
-    }
-  });
-
-  document
-    .getElementById("moveHouseholdForm")
-    .addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      const householdId = document.getElementById("id-house").value;
-      const selectedHostRadio = document.querySelector(
-        "input.selectNewHost:checked"
-      );
-
-      if (!selectedHostRadio) {
-        alert("Vui lòng chọn thành viên để làm chủ hộ mới!");
-        return;
-      }
-
-      const newHostId = selectedHostRadio.dataset.residentId;
-
-      try {
-        const response = await fetch(
-          `/admin/household/${householdId}/change-host`,
-          {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ newHostId }),
-          }
-        );
-
-        if (!response.ok) throw new Error("Chuyển chủ hộ thất bại!");
-
-        alert("Chuyển chủ hộ thành công!");
-        exitMoveForm();
-        readData(); // Refresh dữ liệu
-      } catch (error) {
-        console.error("Lỗi khi chuyển chủ hộ:", error);
-        alert("Đã xảy ra lỗi, vui lòng thử lại sau!");
-      }
-    });
 });
 
 function fillInitTable(residents) {
@@ -608,5 +535,106 @@ function fillInitTable(residents) {
   });
 }
 
+document.addEventListener("DOMContentLoaded", async () => {
+  //Thay đổi chủ hộ khẩu
+  document
+    .getElementById("moveHouseholdForm")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault(); // Ngăn hành động mặc định của form
 
+    const radios = document.getElementsByName("newHostRadio");
+    const chosenHousehold = document.getElementById("id-house").value.trim();
+    let newOwnerId;
+    for (const radio of radios) {
+      if (radio.checked) {
+        const selectedRow = radio.closest("tr");
+        newOwnerId = selectedRow.getElementsByTagName("td")[2].innerText.trim();
+        break;
+        }
+    }
+    
+      console.log("Sending data to API:" + "/admin/household/changeOwner?householdId=" + chosenHousehold + "&residentId=" + newOwnerId);
+      if(
+        !newOwnerId ||
+        !chosenHousehold
+        ){
+        alert("Xay ra loi khi chon chu ho moi");
+        return;
+      }
 
+      fetch("/admin/household/changeOwner?householdId=" + chosenHousehold + "&residentId=" + newOwnerId, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.status !== 200) {
+            throw new Error("Xay ra loi khi gui request ");
+          }
+        })
+        .then((returnedData) => {
+          window.location.href = '/admin/List_Resident?findByHousehold=' + chosenHousehold;
+        })
+        .catch((error) => {
+          console.error("Đã xảy ra lỗi khi thêm ", error);
+          alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
+        });
+    });
+});
+
+// document.addEventListener("DOMContentLoaded", async () => {
+//   // TÌM KIẾM THÔNG TIN HỘ KHẨU
+//   document.getElementById("searchHouseBtn").addEventListener("onclick", async (event) => {
+    
+//   });
+// }); 
+
+function findListNewHost(){
+  const inputElement = document.getElementById("id-house");
+    const householdId = inputElement.value.trim();
+  
+    // Kiểm tra input
+    if (!householdId) {
+      alert("Vui lòng nhập mã hộ khẩu!");
+      console.warn("Household ID không được để trống!");
+      return;
+    }
+  
+    // Chuyển đổi sang số
+    const numericHouseholdId = Number(householdId);
+    if (isNaN(numericHouseholdId)) {
+      alert("Mã hộ khẩu không hợp lệ. Vui lòng nhập một số!");
+      console.error("Household ID phải là số.");
+      return;
+    }
+
+     fetch("/admin/household/getListResident/" + numericHouseholdId, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.status !== 200) {
+            throw new Error("Không thể get list resident from" + numericHouseholdId);
+          }
+          return response.json();
+        })
+        .then((returnData) => {
+           const members = returnData;
+      
+          // Kiểm tra nếu không có thành viên nào
+          if (members.length === 0) {
+            alert("Không tìm thấy thành viên nào cho mã hộ khẩu này!");
+            console.warn("Danh sách thành viên trống.");
+            return;
+          }
+          // Hiển thị dữ liệu lên bảng
+          fillInitTable(members);
+        })
+        .catch((error) => {
+          console.error("Đã xảy ra lỗi khi hien thi", error);
+          alert("Đã xảy ra lỗi khi hien thi");
+        });
+}

@@ -11,18 +11,19 @@
 }
 
 .main_container{
-    padding:20px 10px;
+    padding:0px 10px;
     flex-grow:1;
     height:100%;
     width:100%;
-    overflow:hidden;  
+    overflow:hidden;        
+/*    background-color:yellow;*/
+    position:relative;
 }
 
 .table_container{
-    position:relative;
     height:100%;
     width:100%;
-    padding: 20px;
+    padding: 0px 20px;
 }
 
 table {
@@ -32,7 +33,7 @@ table {
     border-radius: 5px;
     overflow: hidden;
     box-shadow:5px 5px 5px rgba(0, 0, 0, 0.2);
-    table-layout: fixed;
+    table-layout: auto;
 }
 
 table th,
@@ -48,6 +49,20 @@ table th {
     background-color: #3498db;
     color: white;
     text-align:center;
+}
+td{
+    padding-left: 5px;
+}
+td:nth-child(2), td:nth-child(3){
+    width:10%;
+}
+
+td:nth-child(4), td:nth-child(5){
+    width:20%;
+}
+
+td:nth-child(6), td:nth-child(7){
+    width:15%;
 }
 
 tr{
@@ -66,7 +81,7 @@ tr:hover {
 #pagination {
     display: flex;
     justify-content: center;  
-    align-items: center;      
+    align-items: center;     
     position:absolute;
     bottom: 0;
     left: 0;

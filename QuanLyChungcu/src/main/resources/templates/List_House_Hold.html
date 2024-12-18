@@ -143,8 +143,9 @@
               type="text"
               id="id-house"
               placeholder="Nhập mã hộ khẩu cần đổi chủ hộ"
+              oninput="findListNewHost()"
             />
-            <button class="searchBtn" id="searchHouseBtn">Tìm</button>
+            <!-- <button class="searchBtn" id="searchHouseBtn">Tìm</button> -->
           </div>
         </div>
         <h1>Chọn chủ hộ mới</h1>
@@ -162,7 +163,7 @@
           </tbody>
         </table>
 
-        <button type="submit" class="submit-btn">Xác nhận</button>
+        <button type="submit" class="submit-btn" id ="moveHouseholdFormSubmit">Xác nhận</button>
         <button type="button" class="cancel-btn" onclick="exitMoveForm()">
           Hủy
         </button>

@@ -145,7 +145,7 @@ function removeAccents(str) {
 function searchResidents() {
   const nameInput = document.getElementById("nameInput").value.toLowerCase();
   const cccdInput = document.getElementById("cccdInput").value.toLowerCase();
-  const householdInput = document.getElementById("householdInput").value.toLowerCase();
+  const householdInput = document.getElementById("householdInput").value.trim();
   const temporaryInput = document.getElementById("temporaryInput").value.toLowerCase();
 
   // Lọc danh sách theo các tiêu chí
@@ -163,13 +163,14 @@ function searchResidents() {
       ? resident.temporary.toLowerCase().includes(temporaryInput)
       : true;
 
+
     // Chỉ giữ các đối tượng thỏa mãn tất cả các điều kiện
     return matchesName && matchesCCCD && matchesHousehold && matchesTemporary;
   });
 
   // Cập nhật bảng hiển thị
   updateResidentTable(filteredResidents);
-  console.log(filteredResidents);
+   console.log("Filtered Residents:", filteredResidents);
   changePage(0);
 }
 //_____THÔNG TIN CHI TIẾT CƯ DÂN_____
@@ -291,28 +292,49 @@ function closeModal() {
   isModalOpen = false; // Modal đã đóng
 }
 
-async function fetchListResident() {
-  console.log("fetching");
-  try {
-    const response = await fetch('/admin/resident');
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    
-    const data = await response.json();
-    console.log(data);
-    
-    residents = data; 
-    changePage(0);
-
-  } catch (error) {
-    console.error('Error fetching resident info:', error);
-  }
-}
-
 document.addEventListener("DOMContentLoaded", function () {
-    fetchListResident();
+    fetch("/admin/resident" , {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error("Không thể get list resident from" + numericHouseholdId);
+        }
+        return response.json();
+      })
+      .then((returnData) => {
+        residents = returnData; 
+        changePage(0);
+      })
+      .then(()=>{      
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('findByHousehold')) {
+        const inputValue = urlParams.get("findByHousehold"); // Get the value
+        if (!inputValue) {
+          console.log("No inputValue provided");
+        } else {
+          console.log("Input Value (Raw):", inputValue);
+
+          const inputField = document.getElementById("householdInput");
+          inputField.value = String(inputValue); // Force value to string
+          console.log("Programmatically set value:", inputField.value);
+
+          // Trigger the input event
+          const event = new Event('input', { bubbles: true, cancelable: true });
+          inputField.dispatchEvent(event);
+          console.log("Input event triggered");
+          alert("Hãy thay đổi quan hệ với chủ hộ !")
+          }
+        } else { console.log("No findByHousehold param");}
+
+        })
+      .catch((error) => {
+        console.error("Đã xảy ra lỗi khi hien thi", error);
+        alert("Đã xảy ra lỗi khi hien thi");
+      });
 });
 
 document.addEventListener("DOMContentLoaded",  () => {
@@ -388,3 +410,33 @@ document.addEventListener("DOMContentLoaded",  () => {
             });
     });
 });
+
+function getQueryParam(paramName) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(paramName); // Returns the value of the parameter
+}
+
+async function fetchListResident(){
+  fetch("/admin/resident" , {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error("Không thể get list resident from" + numericHouseholdId);
+        }
+        return response.json();
+      })
+      .then((returnData) => {
+        residents = returnData; 
+        console.log(residents);
+        updateResidentTable(residents);
+        changePage(0);
+      })
+      .catch((error) => {
+        console.error("Đã xảy ra lỗi khi hien thi", error);
+        alert("Đã xảy ra lỗi khi hien thi");
+      });
+}

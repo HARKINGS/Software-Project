@@ -2,6 +2,7 @@ let data = []; // Dữ liệu ban đầu
 let filteredData = []; // Dữ liệu đã lọc
 let currentPage = 1; // Trang hiện tại
 const rowsPerPage = 10; // Số dòng mỗi trang
+let infoHousehold;
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
@@ -47,7 +48,7 @@ function renderTable(page) {
       <td>${item.cars || 0}</td>
       <td>${item.amount.toLocaleString()} VND</td>
       <td>${item.collectAmount.toLocaleString()} VND</td>
-      <td>${item.dueDate}</td>
+      <td>${item.dueDate.split("-").reverse().join("-")}</td>
       <td>
         <span class="status ${item.paid ? "completed" : "incomplete"}">
           ${item.paid ? "Hoàn tất" : "Chưa hoàn tất"}
@@ -72,3 +73,32 @@ function updatePaginationButtons() {
   document.getElementById("prevPage").disabled = currentPage === 1;
   document.getElementById("nextPage").disabled = currentPage === totalPages;
 }
+
+//Hiển thị số hộ khẩu
+function showInfoHousehold(){
+    document.getElementById('householdNum').innerHTML= "Thông tin gửi xe của căn hộ: " + infoHousehold.householdNumber;
+  }
+
+//
+document.addEventListener("DOMContentLoaded", async function () {
+    fetch("/user/getInfoHousehold", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error("Không thể get current household");
+      }
+      return response.json();
+    })
+    .then((returnData) => {
+      infoHousehold = returnData;
+      showInfoHousehold();
+    })
+    .catch((error) => {
+      console.error("Đã xảy ra lỗi khi hien thi", error);
+      alert("Đã xảy ra lỗi khi hien thi");
+    });
+});

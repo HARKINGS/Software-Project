@@ -18,8 +18,8 @@
           const row = tableBody.insertRow();
           row.insertCell(0).textContent = contribution.contributionId;
           row.insertCell(1).textContent = contribution.contributionType;
-          row.insertCell(2).textContent = contribution.amount; 
-          row.insertCell(3).textContent = contribution.dateContributed;
+          row.insertCell(2).textContent = contribution.amount.toLocaleString() + " VND"; 
+          row.insertCell(3).textContent = contribution.dateContributed.split("-").reverse().join("-");
         });
       }
 

@@ -93,7 +93,7 @@ h1 {
 .overlay .full-message p {
     color: #555;
     margin: 10px 20px 0px;
-    text-align:left;
+    text-align:center;
 }
 .overlay .full-message button {
     margin-top: 15px;

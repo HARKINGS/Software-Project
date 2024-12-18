@@ -18,9 +18,9 @@
           const row = tableBody.insertRow();
           row.insertCell(0).textContent = fee.feeId;
           row.insertCell(1).textContent = fee.feeType;
-          row.insertCell(2).textContent = fee.amount; 
-          row.insertCell(3).textContent = fee.collectAmount;
-          row.insertCell(4).textContent = fee.dueDate;
+          row.insertCell(2).textContent = fee.amount.toLocaleString() + " VND"; 
+          row.insertCell(3).textContent = fee.collectAmount.toLocaleString() + " VND";
+          row.insertCell(4).textContent = fee.dueDate.split("-").reverse().join("-");
           row.insertCell(5).textContent = (fee.paid) ? "Hoàn tất" : "Chưa thanh toán";
         });
       }
