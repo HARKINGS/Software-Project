@@ -118,6 +118,8 @@ function renderTable(page) {
     return;
   }
   
+  filteredData.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+
   const start = (page - 1) * rowsPerPage;
   const end = start + rowsPerPage;
   const pageData = filteredData.slice(start, end);

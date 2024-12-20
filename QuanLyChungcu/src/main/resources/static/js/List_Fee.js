@@ -30,6 +30,8 @@ const tableBody = document.querySelector("#FeeTable tbody"); // Lấy phần th�
 
 // Hàm hiển thị bảng với phân trang
 function renderTable(page) {
+    filteredData.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
     const pageData = filteredData.slice(start, end);
