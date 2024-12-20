@@ -1,0 +1,61 @@
+.Search-Fee {
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgb(255, 255, 255);
+  align-items: center;
+  box-shadow: 1px 1px #555;
+  border-radius: 5px;
+}
+
+.Search-Fee-Item {
+  font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Search-Fee input {
+  padding: 8px;
+  margin-right: 10px;
+  border: 1.5px solid #ccc;
+  border-radius: 5px;
+  background-color: #e6e6e6;
+}
+
+/* ================== */
+
+.input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #999;
+}
+
+.pageButton {
+  margin: 0 5px;
+  padding: 5px 10px;
+}
+
+.add-row {
+  background-color: #e6f7ff;
+}
+
+/* Định dạng nút dấu cộng thêm thu phí */
+#addButton {
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  border: 1px solid #555;
+  width: 25px;
+  height: 25px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+#addButton:hover {
+  color: #fff;
+  background-color: #3e8e41; /* Màu khi hover */
+}

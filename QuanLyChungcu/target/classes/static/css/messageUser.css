@@ -1,0 +1,168 @@
+body {
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    display: flex;
+    position: relative;
+}
+
+.container {
+    margin-top:20px;
+    width: 70%;
+    padding:5px 20px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow-y: auto;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+.message {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 15px 0;
+    padding: 15px;
+    background-color: #fafafa;
+}
+.message h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #007BFF;
+}
+.message span {
+    font-size: 14px;
+    color: #888;
+    display: block;
+    margin-bottom: 10px;
+}
+.message p {
+    margin: 0 0 10px;
+    color: #555;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.message button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.message button:hover {
+    background-color: #0056b3;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    white-space: pre-wrap;
+}
+.overlay .full-message {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-height: 75vh; 
+    overflow-y: auto; 
+}
+.overlay .full-message h2 {
+    margin: 0 0 10px;
+    color: #333;
+}
+.overlay .full-message span{
+    text-align:center;
+}
+.overlay .full-message p {
+    color: #555;
+    margin: 10px 20px 0px;
+    text-align:center;
+}
+.overlay .full-message button {
+    margin-top: 15px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.overlay .full-message::-webkit-scrollbar {
+    width: 8px; /* Slim scrollbar width */
+}
+
+.overlay .full-message::-webkit-scrollbar-track {
+    background: #f4f4f9; /* Light background for the scrollbar track */
+    border-radius: 4px; /* Rounded track edges */
+}
+
+.overlay .full-message::-webkit-scrollbar-thumb {
+    background-color: #888; /* Neutral gray thumb */
+    border-radius: 4px; /* Rounded thumb edges */
+    border: 2px solid #f4f4f9; /* Matches the track background for a clean inset effect */
+}
+
+.overlay .full-message::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Darker gray on hover for better visibility */
+}
+
+/* Main Content Area (Scrollable) */
+.main_layout > .main_header_container,
+.main_layout > .message {
+    flex-shrink: 0; 
+}
+
+/* Make the content area scrollable */
+.main_layout > .container {
+    overflow-y: auto; 
+    flex-grow: 1; 
+    width: 100%; 
+    padding-right: 10px; 
+}
+
+#message {
+    background-color: rgb(150, 200, 255);
+    color: rgb(255, 255, 255);
+    box-shadow: none;
+    cursor: default;
+}
+
+#message:hover {
+    background-color: rgb(150, 200, 255); 
+    transform: none;
+}
+
+.container::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.container::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+.container::-webkit-scrollbar-thumb {
+    background-color: #c0c0c0; 
+    border-radius: 4px; 
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+    background-color: #a0a0a0; 
+}

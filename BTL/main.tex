@@ -183,209 +183,193 @@
 % \newpage
 
 % % Trang mới -----------------------------------------------------------------------
-% \section*{CHƯƠNG 2. ĐẶC TẢ YÊU CẦU BÀI TOÁN}
-% \addcontentsline{toc}{section}{CHƯƠNG 2. ĐẶC TẢ YÊU CẦU BÀI TOÁN}
-% \setcounter{section}{2}
-% \setcounter{subsection}{0}
-% \subsection{Giới thiệu chung}
-% Các tác nhân của hệ thống: 
-% \begin{itemize}
-%     \item[-] Người quản lý và cư dân là những người sử dụng hệ thống này, hệ thống được cung cấp thông tin từ nhân khẩu trong vùng quản lý
-%     \item[-] Người quản lý sẽ duy trì và quản trị hệ thống 
-%     \item[-] Cư dân sử dụng hệ thống để kiểm tra thông tin và nhận thông báo của chung cư
-% \end{itemize}
+\section*{CHƯƠNG 2. ĐẶC TẢ YÊU CẦU BÀI TOÁN}
+\addcontentsline{toc}{section}{CHƯƠNG 2. ĐẶC TẢ YÊU CẦU BÀI TOÁN}
+\setcounter{section}{2}
+\setcounter{subsection}{0}
+\subsection{Giới thiệu chung}
+Các tác nhân của hệ thống: 
+\begin{itemize}
+    \item[-] Người quản lý và cư dân là những người sử dụng hệ thống này, hệ thống được cung cấp thông tin từ nhân khẩu trong vùng quản lý
+    \item[-] Người quản lý sẽ duy trì và quản trị hệ thống 
+    \item[-] Cư dân sử dụng hệ thống để kiểm tra thông tin và nhận thông báo của chung cư
+\end{itemize}
 
-% Bảng liệt kê các tác nhân và mô tả thông tin cho các tác nhân
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=15.53cm, height = 3cm]{Ảnh chương 2/Bảng tác nhân.png}
-% \end{figure}
-% Các Use Case cần thiết cho hệ thống và đặt mã cho các use-case
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.9\textwidth]{Ảnh chương 2/Bảng usecase.png}
-% \end{figure}
-% \subsection{Biểu đồ use case} 
-% \subsubsection{Biểu đồ use case tổng quan}
-% Để truy cập vào ứng dụng, quản lý và cư dân sử dụng tài khoản và mật khẩu được cấp sẵn với vai trò khác nhau. \\
-% Quản lý được cấp quyền chỉnh sửa thông tin liên quan như hộ khẩu, nhân khẩu, khoản thu qua các tính năng của trang web.\\
-% Cư dân có thể dùng tài khoản được cấp để xem thông tin và nhận thông báo từ quản lý
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=12.53cm, height = 8cm]{Ảnh chương 2/Tổng quát.jpg}
-% \end{figure}
+Bảng liệt kê các tác nhân và mô tả thông tin cho các tác nhân
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15.53cm, height = 3cm]{Ảnh chương 2/Bảng tác nhân.png}
+\end{figure}
+Các Use Case cần thiết cho hệ thống và đặt mã cho các use-case
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Ảnh chương 2/Bảng usecase.png}
+\end{figure}
+\subsection{Biểu đồ use case} 
+\subsubsection{Biểu đồ use case tổng quan}
+Để truy cập vào ứng dụng, quản lý và cư dân sử dụng tài khoản và mật khẩu được cấp sẵn với vai trò khác nhau. \\
+Quản lý được cấp quyền chỉnh sửa thông tin liên quan như hộ khẩu, nhân khẩu, khoản thu qua các tính năng của trang web.\\
+Cư dân có thể dùng tài khoản được cấp để xem thông tin và nhận thông báo từ quản lý
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12.53cm, height = 8cm]{Ảnh chương 2/Tổng quát.jpg}
+\end{figure}
 \subsubsection{Biểu đồ use case phân rã mức 2}
 \begin{itemize}
     \item Phân rã Usecase "Đăng nhập"
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 2/Đăng nhập.png}
+        \includegraphics{Ảnh chương 2/Đăng nhập.jpg}
     \end{figure}
+\vspace{5cm}
     \item Phân rã Usecase "Quản lý hộ khẩu"
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 2/Hộ khẩu.png}
+        \includegraphics{Ảnh chương 2/Hộ khẩu.jpg}
     \end{figure}
 
     \item Phân rã Usecase "Quản lý nhân khẩu"
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 2/Nhân khẩu.png}
+        \includegraphics{Ảnh chương 2/Nhân khẩu.jpg}
     \end{figure}
     
     \vspace{1cm}
-    \item Phân rã Usecase "Quản lý thu phí bắt buộc"
+    \item Phân rã Usecase "Quản lý thu phí"
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 2/Khoản thu bắt buộc.png}
-    \end{figure}
-    \newpage
-    \item Phân rã Usecase "Quản lý thu phí tình nguyện"
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 2/Khoản thu tình nguyện.png}
-    \end{figure}
-    \item Phân rã Usecase "Quản lý thông báo"
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 2/Thông baso .png}
-    \end{figure}
-    \newpage
-    \item Phân rã Usecase "Quản lý tài khoản"
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 2/Tài khoản.png}
+        \includegraphics{Ảnh chương 2/Khoản thu.jpg}
     \end{figure}
 \end{itemize}
 \subsection{Đặc tả use case}
-% \begin{itemize}
-%     \item Đăng nhập và Đăng kí
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC01 1.png}
-%     \end{figure}
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC01.png}
-%     \end{figure}
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC02.png}
-%     \end{figure}
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC03.png}
-%     \end{figure}
-%     \item Quản lý nhân khẩu
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC04.png}
-%     \end{figure}
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC05.png}
-%     \end{figure}
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC06 1.png}
-%     \end{figure}
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC06.png}
-%     \end{figure}
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC07.png}
-%     \end{figure}
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC08.png}
-%     \end{figure}
-%     \item Quản lý hộ khẩu
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC09.png}
-%     \end{figure}
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC10.png}
-%     \end{figure}
-%         \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC11 1png.png}
-%     \end{figure}
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC11.png}
-%     \end{figure}
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC12.png}
-%     \end{figure}
+\begin{itemize}
+    \item Đăng nhập và Đăng kí
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC01 1.png}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC01.png}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC02.png}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC03.png}
+    \end{figure}
+    \item Quản lý nhân khẩu
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC04.png}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC05.png}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC06 1.png}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC06.png}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC07.png}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC08.png}
+    \end{figure}
+    \item Quản lý hộ khẩu
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC09.png}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC10.png}
+    \end{figure}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC11 1png.png}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC11.png}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC12.png}
+    \end{figure}
 
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC13.png}
-%     \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC13.png}
+    \end{figure}
 
-%     \item Quản lý khoản thu
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC14.png}
-%     \end{figure}
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC15.png}
-%     \end{figure}
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC16.png}
-%     \end{figure}
-%     \item Quản lý tài khoản
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC17.png}
-%     \end{figure}
-%     \item Tra cứu thông tin
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC18.png}
-%     \end{figure}
-% \end{itemize}
-% \vspace{1cm}
-% \subsection{Các yêu cầu phi chức năng}
-% Chức năng
-% \begin{itemize}
-%     \item Hỗ trợ nhiều quản lý và cư dân truy cập đồng thời
-%     \item Quản lý thông tin nhân khẩu, hộ khẩu, thông tin thu phí và khoản thu của các hộ dân cư
-% \end{itemize}
+    \item Quản lý khoản thu
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC14.png}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC15.png}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC16.png}
+    \end{figure}
+    \item Quản lý tài khoản
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC17.png}
+    \end{figure}
+    \item Tra cứu thông tin
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 2/UC18.png}
+    \end{figure}
+\end{itemize}
+\vspace{1cm}
+\subsection{Các yêu cầu phi chức năng}
+Chức năng
+\begin{itemize}
+    \item Hỗ trợ nhiều quản lý và cư dân truy cập đồng thời
+    \item Quản lý thông tin nhân khẩu, hộ khẩu, thông tin thu phí và khoản thu của các hộ dân cư
+\end{itemize}
 
-% Tính dễ dùng
-% \begin{itemize}
-%     \item Giao diện nguời dùng tương thích Windows 7/ Window 10. Thân thiện.
-% \end{itemize}
+Tính dễ dùng
+\begin{itemize}
+    \item Giao diện nguời dùng tương thích Windows 7/ Window 10. Thân thiện.
+\end{itemize}
 
-% Tính ổn định
-% \begin{itemize}
-%     \item Hệ thống phải hoạt động liên tục 24 giờ/ngày, 7 ngày/tuần
-% \end{itemize}
+Tính ổn định
+\begin{itemize}
+    \item Hệ thống phải hoạt động liên tục 24 giờ/ngày, 7 ngày/tuần
+\end{itemize}
 
-% Hiệu suất
-% \begin{itemize}
-%     \item Hệ thống phải hỗ trợ đến 1000 người dùng truy xuất CSDL trung tâm đồng thời bất kỳ lúc nào, và đến 500 người dùng truy xuất các server cục bộ. 
-%     \item Hoàn thành các thao tác nhanh, chuyển giao diện không quá 2s
-% \end{itemize}
+Hiệu suất
+\begin{itemize}
+    \item Hệ thống phải hỗ trợ đến 1000 người dùng truy xuất CSDL trung tâm đồng thời bất kỳ lúc nào, và đến 500 người dùng truy xuất các server cục bộ. 
+    \item Hoàn thành các thao tác nhanh, chuyển giao diện không quá 2s
+\end{itemize}
 
-% Sự hỗ trợ
-% \begin{itemize}
-%     \item Không
-% \end{itemize}
+Sự hỗ trợ
+\begin{itemize}
+    \item Không
+\end{itemize}
 
-% Các ràng buộc thiết kế
-% \begin{itemize}
-%     \item Không
-% \end{itemize}
-% \newpage
+Các ràng buộc thiết kế
+\begin{itemize}
+    \item Không
+\end{itemize}
+\newpage
 % % ----------------------------------------------------------------------------
 % \section*{CHƯƠNG 3. PHÂN TÍCH YÊU CẦU}
 % \addcontentsline{toc}{section}{CHƯƠNG 3. PHÂN TÍCH YÊU CẦU}
@@ -483,86 +467,79 @@
 
 % \subsection{Sơ đồ lớp chi tiết}
 \subsection{Thiết kế giao diện}
-\textbf{Biểu đồ chuyển tiếp giữa các giao diện}
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Presentation1.png}
-    \end{figure}
 \textbf{Thiết kế mock-up cho từng giao diện của bài toán}
 \begin{itemize}
     \item Mock-up cho giao diện đăng nhập của bài toán :
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình đăng nhập.png}
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 4/Đăng nhập.png}
     \end{figure}
-    \newpage
     \item Mock-up cho màn hình chính của bài toán :
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Cập nhật dashboard.png}
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 4/Màn hình chính.png}
     \end{figure}
-    \vspace{2cm}
+    \vspace{1cm}
     \item Mock-up cho màn hình hộ khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình hộ khẩu.png}
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 4/Màn hình hộ khẩu.png}
     \end{figure}
-    \newpage
     \item Mock-up cho màn hình hộ khẩu của bài toán (User):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình hộ khẩu (cư dân).png}
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 4/Màn hình hộ khẩu (cư dân).png}
     \end{figure}
+    \vspace{4cm}
     \item Mock-up cho màn hình xem thông tin chi tiết hộ khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình thông tin hộ khẩu (admin).png}
+        \includegraphics[width=0.75\textwidth]{Ảnh chương 4/Màn hình thông tin hộ khẩu (admin).png}
     \end{figure}
-    \newpage
     \item Mock-up cho màn hình thêm hộ khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình thêm hộ khẩu.png}
+        \includegraphics[width=0.75\textwidth]{Ảnh chương 4/Màn hình thêm hộ khẩu.png}
     \end{figure}
-    \item Mock-up cho màn hình chuyển chủ hộ khẩu của bài toán (Admin):
+    \item Mock-up cho màn hình chuyển hộ khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình chuyển hộ khẩu.png}
     \end{figure}
-    \newpage
+    \vspace{3cm}
     \item Mock-up cho màn hình nhân khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình dân cư.png}
     \end{figure}
+    \vspace{2cm}
     \item Mock-up cho màn hình đăng ký nhân khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.8\textwidth]{Ảnh chương 4/Màn hình thêm thông tin dân cư.png}
     \end{figure}
-    \newpage
+    
     \item Mock-up cho màn hình thông tin dân cư của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình thông tin cư dân (admin).png}
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 4/Màn hình thông tin cư dân (admin).png}
     \end{figure}
     \item Mock-up cho màn hình thông tin dân cư của bài toán (User):
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình thông tin cư dân.png}
     \end{figure}
-    \newpage
     \item Mock-up cho màn hình thu phí của bài toán (Admin) :
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình thu phí.png}
     \end{figure}
+    \vspace{3cm}
     \item Mock-up cho màn hình thu phí của bài toán (User) :
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình khoản thu (cư dân).png}
     \end{figure}
-    \newpage
     \item Mock-up cho màn hình khoản đóng góp tự nguyện của bài toán (Admin) :
     \begin{figure}[H]
         \centering
@@ -574,214 +551,129 @@
         \centering
         \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình đóng góp (cư dân).png}
     \end{figure}
-    \newpage
     \item Mock-up cho màn hình quản lý tài khoản (Admin) :
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình quản lý tài khoản.png}
     \end{figure}
+    \vspace{2cm}
     \item Mock-up cho màn hình cài đặt (Admin):
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình cài đặt.png}
     \end{figure}
-    \newpage
     \item Mock-up cho màn hình cài đặt (User):
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình cài đặt User.png}
     \end{figure}
-    \item Mock-up cho màn hình thông tin gửi xe (Admin)
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình quản lý trông giữ xe.png}
-    \end{figure}
-    \newpage
-    \item Mock-up cho màn hình thông tin gửi xe (User)
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình gửi xe User.png}
-    \end{figure}
-    \item Mock-up cho màn hình lịch sử thu phí
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình xem lịch sử thu phí.png}
-    \end{figure}
-    \newpage
-    \item Mock-up cho màn hình thông báo (Admin)
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình thông báo Admin.png}
-    \end{figure}
-    \item Mock-up cho màn hình thông báo (User)
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình thông báo User.png}
-    \end{figure}
-    \newpage
-    \item Mock-up cho màn hình thêm thông báo (Admin)
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình thêm thông báo.png}
-    \end{figure}
-
-    \item Mock-up cho màn hình xem chi tiết thông báo
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình xem chi tiết thông báo.png}
-    \end{figure}
 \end{itemize}
-\newpage
+\vspace{3cm}\
 
 \textbf{Đặc tả thiết kế giao diện cho các màn hình}
 \begin{itemize}
     \item Giao diện đăng nhập của bài toán :
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.75\textwidth]{Ảnh chương 4/Đăng nhập.png}
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 4/Đăng nhập 1.png}
     \end{figure}
-    \item Dashboard cho giao diện Admin :
+    \item Màn hình chính của bài toán :
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.75\textwidth]{Ảnh chương 4/Dashboard.png}
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 4/Màn hình chính 1.png}
     \end{figure}
-    \item Dashboard cho giao diện User :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Dashboard User.png}
-    \end{figure}
-    \item Màn hình chính của bài toán (Admin) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Màn hình chính.png}
-    \end{figure}
-    \vspace{10cm}
+    \vspace{1cm}
     \item Màn hình hộ khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Hộ khẩu Admin.png}
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 4/Hộ khẩu Admin 1.png}
     \end{figure}
-    \vspace{5cm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 4/Hộ khẩu Admin 2.png}
+    \end{figure}
     \item Màn hình hộ khẩu của bài toán (User):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Hộ khẩu User.png}
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 4/Hộ khẩu User 1.png}
     \end{figure}
+    \vspace{4cm}
     \item Màn hình xem thông tin chi tiết hộ khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Chi tiết hộ khẩu Admin.png}
+        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Thông tin hộ khẩu Admin 1.png}
     \end{figure}
-    \vspace{5cm}
     \item Màn hình thêm hộ khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Thêm hộ khẩu Admin.png}
+        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Thêm hộ khẩu 1.png}
     \end{figure}
-    \item Màn hình chuyển chủ hộ khẩu của bài toán (Admin):
+    \item Màn hình chuyển hộ khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Chuyển chủ hộ Admin.png}
+        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Chuyẻn hộ khẩu 1.png}
     \end{figure}
-    \vspace{5cm}
+    \vspace{3cm}
     \item Màn hình nhân khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.8\textwidth]{Ảnh chương 4/Nhân khẩu Admin.png}
+        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Dân cư Admin 1.png}
+    \end{figure}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Dân cư Admin 2.png}
     \end{figure}
     \item Màn hình đăng ký nhân khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.8\textwidth]{Ảnh chương 4/Thêm nhân khẩu Admin.png}
+        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Đăng ký nhân khẩu 1.png}
     \end{figure}
     \vspace{5cm}
     \item Màn hình thông tin dân cư của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Chi tiết nhân khẩu Admin.png}
+        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Thông tin dân cư 1.png}
     \end{figure}
     \item Màn hình thông tin dân cư của bài toán (User):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Nhân khẩu User.png}
+        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Thông tin dân cư User 1.png}
+    \end{figure}
+    \vspace{1cm}
+    \item Màn hình thu phí của bài toán (Admin) :
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Thu phí Admin 1.png}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Thông tin thu phí Admin 2.png}
     \end{figure}
     \item Màn hình thu phí của bài toán (User) :
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Thu phí User.png}
-    \end{figure}
-    \item Màn hình thu phí của bài toán (Admin) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.8\textwidth]{Ảnh chương 4/Thu phí Admin.png}
-    \end{figure}
-    \item Màn hình đóng góp tình nguyện của bài toán (User) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.8\textwidth]{Ảnh chương 4/Tình nguyện User.png}
-    \end{figure}
-    \vspace{1cm}
-    \item Màn hình đóng góp tình nguyện của bài toán (Admin) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.78\textwidth]{Ảnh chương 4/Tình nguyện Admin.png}
+        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Khoản thu User 1.png}
     \end{figure}
     \item Màn hình quản lý tài khoản (Admin) :
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.78\textwidth]{Ảnh chương 4/Quản lý tài khoản Admin.png}
+        \includegraphics[width=0.75\textwidth]{Ảnh chương 4/Quản lý tài khoản Admin 1.png}
     \end{figure}
-    \item Màn hình thông tin gửi xe của bài toán (Admin) :
+    \item Màn hình sửa đổi thông tin tài khoản (Admin) :
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Gửi xe Admin.png}
+        \includegraphics[width=0.75\textwidth]{Ảnh chương 4/Sửa đổi tài khoản 1.png}
     \end{figure}
-    \item Màn hình lịch sử thu phí gửi xe của bài toán (Admin) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Lịch sử thu phí Admin.png}
-    \end{figure}
-    \vspace{1cm}
-    \item Màn hình thông tin gửi xe của bài toán (User) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Gửi xe User.png}
-    \end{figure}
-    \item Màn hình thông báo của bài toán (Admin) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Thông báo Admin.png}
-    \end{figure}
-    \item Màn hình chi tiết thông báo của bài toán (Admin) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Chi tiết thông báo.png}
-    \end{figure}
-    \item Màn hình thêm thông báo của bài toán (Admin) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Thêm thông báo Admin.png}
-    \end{figure}
-    \item Màn hình thông báo của bài toán (User) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Thông báo User.png}
-    \end{figure}
-    \item Màn hình chi tiết thông báo của bài toán (User) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Chi tiết thông báo.png}
-    \end{figure}
-    \vspace{3cm}
     \item Màn hình cài đặt (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Cài đặt Admin.png}
+        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Đổi mật khẩu Admin 1.png}
     \end{figure}
+    \vspace{3cm}
     \item Màn hình cài đặt (User):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Cài đặt User.png}
+        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Đổi mật khẩu User 1.png}
     \end{figure}
 \end{itemize}
 \newpage
@@ -798,12 +690,10 @@
         \textbf{Mục đích} & \textbf{Công cụ} & \textbf{Địa chỉ URL} \\
         \hline
         IDE Lập trình & IntelliJ IDEA & https://lp.jetbrains.com\\
-        &Visual Studio Code & https://code.visualstudio.com\\
         \hline
         Thư viện & Java Spring Boot & https://spspring.io\\
-         & Java Scripts & https://www.javascript.com\\
+         & Java Scripts & https://www.javascript.com/\\
          & HTML, CSS & \\
-         & MySQL connector & https://www.mysql.com\\
         \hline
     \end{tabular}
 \end{center}
@@ -822,7 +712,7 @@ Giảm thiểu khối lượng công việc thủ công thông qua việc ứng 
     \item \textbf{Đảm bảo minh bạch và chính xác}:
 Các dữ liệu cư dân, khoản phí và lịch sử giao dịch đều được lưu trữ rõ ràng, dễ dàng truy xuất và kiểm tra.
     \item \textbf{Tăng trải nghiệm người dùng}:
-Cư dân có thể dễ dàng tra cứu thông tin tài khoản, thanh toán và quản lý có thể cập nhật hồ sơ một cách nhanh chóng, chính xác.
+Cư dân có thể dễ dàng tra cứu thông tin tài khoản, thanh toán và cập nhật hồ sơ một cách nhanh chóng, chính xác.
 \end{enumerate}
  \textbf{Chức năng nổi bật}
 \begin{enumerate}
@@ -836,158 +726,122 @@ Hỗ trợ quản lý dữ liệu cư dân lớn nhờ tính năng phân trang v
     \item \textbf{Bảo mật thông tin}:
 Sử dụng mã hóa mật khẩu với công nghệ tiên tiến (BCrypt), đảm bảo dữ liệu người dùng được bảo vệ tốt nhất.
 \end{enumerate}
- \textbf{Kết quả đạt được}\\
-Chương trình giúp nâng cao hiệu quả quản lý, tối ưu hóa quy trình thu phí và mang lại sự hài lòng cho cư dân cũng như đội ngũ quản lý.
+ \textbf{Kết quả kỳ vọng}\\
+Chương trình giúp nâng cao hiệu quả quản lý, tối ưu hóa quy trình thu phí và mang lại sự hài lòng cho cư dân cũng như đội ngũ quản lý. Đây là một bước tiến quan trọng hướng tới quản lý thông minh và bền vững trong thời đại công nghệ số.
 
 \subsection{Giao diện minh hoạ các chức năng của chương trình}
 
 Thiết kế giao diện thực tế cho bài toán:
 \begin{itemize}
-    \item Giao diện đăng nhập của bài toán :
+    \item Màn hình giao diện đăng nhập của bài toán :
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Đăng nhập 1.png}
+        \includegraphics[width=1\textwidth]{Ảnh chương 4/Login.png}
     \end{figure}
-    \vspace{10cm}
-    \item Màn hình chính của bài toán (Admin) :
+    \vspace{7cm}
+    \item Màn hình chính của bài toán :
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Màn hình chính 1.png}
+        \includegraphics[width=1\textwidth]{Ảnh chương 4/Home Admin.png}
     \end{figure}
+    \vspace{1cm}
     \item Màn hình hộ khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Hộ khẩu 1.png}
+        \includegraphics[width=1\textwidth]{Ảnh chương 4/Thông tin hộ khẩu Admin.png}
     \end{figure}
-    \newpage
+    \vspace{4cm}
     \item Màn hình hộ khẩu của bài toán (User):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Hộ khẩu 2.png}
+        \includegraphics[width=1\textwidth]{Ảnh chương 4/Thông tin hộ khẩu User.png}
     \end{figure}
+    \vspace{1cm}
     \item Màn hình xem thông tin chi tiết hộ khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Chi tiết hộ khẩu 1.png}
+        \includegraphics[width=1\textwidth]{Ảnh chương 4/Thông tin hộ khẩu Admin.png}
     \end{figure}
-    \newpage
+    \vspace{5cm}
     \item Màn hình thêm hộ khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Thêm hộ khẩu 1.png}
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 4/Thêm hộ khẩu Admin.png}
     \end{figure}
-    \item Màn hình chuyển chủ hộ khẩu của bài toán (Admin):
+    \item Màn hình chuyển hộ khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Chuyển chủ hộ 1.png}
+        \includegraphics[width=0.9\textwidth]{Ảnh chương 4/Chuyển hộ khẩu Admin.png}
     \end{figure}
-    \newpage
     \item Màn hình nhân khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Nhân khẩu 1.png}
+        \includegraphics[width=0.8\textwidth]{Ảnh chương 4/Admin dân cư.png}
     \end{figure}
     \item Màn hình đăng ký nhân khẩu của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Thêm nhân khẩu 1.png}
+        \includegraphics[width=1\textwidth]{Ảnh chương 4/Thêm cư dân admin.png}
     \end{figure}
-    \newpage
+    \vspace{1cm}
     \item Màn hình thông tin dân cư của bài toán (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Chi tiết nhân khẩu 1.png}
+        \includegraphics[width=1\textwidth]{Ảnh chương 4/Thông tin cư dân Admin.png}
     \end{figure}
+    \vspace{4cm}
     \item Màn hình thông tin dân cư của bài toán (User):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Cư dân 2.png}
+        \includegraphics[width=1\textwidth]{Ảnh chương 4/Thông tin cư dân User.png}
     \end{figure}
-    \newpage
-    \item Màn hình thu phí của bài toán (User) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Thu phí 2.png}
-    \end{figure}
+    \vspace{2cm}
     \item Màn hình thu phí của bài toán (Admin) :
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Thu phí 1.png}
+        \includegraphics[width=1\textwidth]{Ảnh chương 4/Thông tin thu phí Admin.png}
     \end{figure}
-    \newpage
-    \item Màn hình đóng góp tình nguyện của bài toán (User) :
+    \vspace{3cm}
+    \item Màn hình thu phí của bài toán (User) :
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Tình nguyện 2.png}
+        \includegraphics[width=1\textwidth]{Ảnh chương 4/Thông tin thu phí User.png}
     \end{figure}
-    \vspace{1cm}
-    \item Màn hình đóng góp tình nguyện của bài toán (Admin) :
+    \vspace{2cm}
+    \item Màn hình khoản đóng góp tự nguyện của bài toán (Admin) :
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Tình nguyện 1.png}
+        \includegraphics[width=1\textwidth]{Ảnh chương 4/Tình nguyện Admin.png}
     \end{figure}
-    \newpage
+    \vspace{2cm}
+    \item Màn hình khoản đóng góp tự nguyện của bài toán (User) :
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{Ảnh chương 4/Tình nguyện User.png}
+    \end{figure}
+    \vspace{2cm}
     \item Màn hình quản lý tài khoản (Admin) :
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Quản lý tài khoản 1.png}
+        \includegraphics[width=1\textwidth]{Ảnh chương 4/Quản lý tài khoản Admin.png}
     \end{figure}
-    \item Màn hình thông tin gửi xe của bài toán (Admin) :
+    \vspace{2cm}
+    \item Màn hình sửa đổi thông tin tài khoản (Admin) :
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Gửi xe 1.png}
-    \end{figure}
-    \newpage
-    \item Màn hình lịch sử thu phí gửi xe của bài toán (Admin) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Lịch sử gửi xe 1.png}
+        \includegraphics[width=1\textwidth]{Ảnh chương 4/Sửa đổi tài khoản Admin.png}
     \end{figure}
     \vspace{1cm}
-    \item Màn hình thông tin gửi xe của bài toán (User) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Gửi xe 2.png}
-    \end{figure}
-    \newpage
-    \item Màn hình thông báo của bài toán (Admin) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Thông báo 1.png}
-    \end{figure}
-    \item Màn hình chi tiết thông báo của bài toán (Admin) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Chi tiết thông báo 1.png}
-    \end{figure}
-    \newpage
-    \item Màn hình thêm thông báo của bài toán (Admin) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Thêm thông báo 1.png}
-    \end{figure}
-    \item Màn hình thông báo của bài toán (User) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Thông báo 2.png}
-    \end{figure}
-    \newpage
-    \item Màn hình chi tiết thông báo của bài toán (User) :
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Chi tiết thông báo 1.png}
-    \end{figure}
-
     \item Màn hình cài đặt (Admin):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Cài đặt 1.png}
+        \includegraphics[width=1\textwidth]{Ảnh chương 4/Màn hình đổi mật khẩu Admin.png}
     \end{figure}
-    \newpage
+    \vspace{3cm}
     \item Màn hình cài đặt (User):
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Ảnh chương 4/Cài đặt 2.png}
+        \includegraphics[width=1\textwidth]{Ảnh chương 4/Màn hình đổi mật khẩu User.png}
     \end{figure}
 \end{itemize}
 \newpage
@@ -998,76 +852,62 @@ Thiết kế giao diện thực tế cho bài toán:
 \setcounter{section}{6}
 \setcounter{subsection}{0}
 \subsection{Kiểm thử các chức năng đã thực hiện}
-\subsubsection{Kiểm thử cho chức năng đăng nhập}
-\begin{itemize}
-    \item Chức năng đăng nhập :
-    \begin{figure}[H]
-        \centering
-    \includegraphics[width=1\textwidth]{Kiểm thử/Kiểm thử đăng nhập.png}
-    \end{figure}
-\end{itemize}
 \subsubsection{Kiểm thử cho chức năng quản lý nhân khẩu}
 \begin{itemize}
     \item Chức năng thêm mới nhân khẩu
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/Kiểm thử thêm nhân khẩu.png}
+        \includegraphics[width=1\textwidth]{Kiểm thử nhân khẩu/Screenshot 2024-12-13 235715.png}
     \end{figure}
     \item Chức năng xóa nhân khẩu:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT xóa nhân khẩu.png}
+        \includegraphics[width=1\textwidth]{Kiểm thử nhân khẩu/Screenshot 2024-12-13 235722.png}
     \end{figure}
-    \newpage
     \item Chức năng sửa nhân khẩu:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT sửa nhân khẩu.png}
+        \includegraphics[width=1\textwidth]{Kiểm thử nhân khẩu/Screenshot 2024-12-13 235731.png}
     \end{figure}
+    \vspace{2cm}
     \item Chức năng tìm kiếm nhân khẩu:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT tìm hộ khẩu.png}
+        \includegraphics[width=1\textwidth]{Kiểm thử nhân khẩu/Screenshot 2024-12-13 235737.png}
     \end{figure}
     \item Chức năng xem thông tin nhân khẩu:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT hiển thị thông tin chi tiết nhân khẩu.png}
+        \includegraphics[width=1\textwidth]{Kiểm thử nhân khẩu/Screenshot 2024-12-13 235745.png}
     \end{figure}
 \end{itemize}
-\newpage
 \subsubsection{Kiểm thử cho chức năng quản lý hộ khẩu}
 \begin{itemize}
     \item Chức năng thêm mới hộ khẩu
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT thêm hộ khẩu.png}
+        \includegraphics[width=1\textwidth]{Kiểm thử hộ khẩu/Screenshot 2024-12-14 001936.png}
     \end{figure}
     \item Chức năng xóa hộ khẩu:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT xóa hộ khẩu.png}
+        \includegraphics[width=1\textwidth]{Kiểm thử hộ khẩu/Screenshot 2024-12-14 001941.png}
     \end{figure}
+    \vspace{1cm}
     \item Chức năng xem thông tin hộ khẩu:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT xem thông tin hộ.png}
+        \includegraphics[width=1\textwidth]{Kiểm thử hộ khẩu/Screenshot 2024-12-14 001946.png}
     \end{figure}
     \item Chức năng tìm kiếm hộ khẩu:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT tìm hộ khẩu.png}
+        \includegraphics[width=1\textwidth]{Kiểm thử hộ khẩu/Screenshot 2024-12-14 001954.png}
     \end{figure}
-    \newpage
-    \item Chức năng chuyển chủ hộ khẩu:
+    \item Chức năng chuyển hộ khẩu:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT sửa chủ hộ.png}
-    \end{figure}
-    \item Chức năng sửa thông tin hộ khẩu:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/Kt sửa thông tin hộ.png}
+        \includegraphics[width=1\textwidth]{Kiểm thử hộ khẩu/Screenshot 2024-12-14 002001.png}
     \end{figure}
 \end{itemize}
 \subsubsection{Kiểm thử cho chức năng quản lý khoản thu tự nguyện}
@@ -1075,144 +915,43 @@ Thiết kế giao diện thực tế cho bài toán:
     \item Chức năng tìm kiếm khoản thu:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/Kt tìm kiếm khoản thu.png}
-    \end{figure}
-
-    \item Chức năng xóa khoản thu:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT xóa khoản thu.png}
-    \end{figure}
-    \newpage
-    \item Chức năng thêm khoản thu:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT thêm khoản thu.png}
-    \end{figure}
-    \item Chức năng xem chi tiết khoản thu:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT chi tiết khoản thu.png}
-    \end{figure}    
-\end{itemize}
-\subsubsection{Kiểm thử cho chức năng quản lý khoản thu bắt buộc}
-\begin{itemize}
-    \item Chức năng tìm kiếm khoản thu:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/Kt tìm kiếm khoản thu.png}
-    \end{figure}
-    \item Chức năng xóa khoản thu:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT xóa khoản thu.png}
-    \end{figure}
-    \newpage
-    \item Chức năng sửa khoản thu:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT sửa khoản thu.png}
-    \end{figure}
-    \item Chức năng thêm khoản thu:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT thêm khoản thu.png}
-    \end{figure}
-    \item Chức năng xem chi tiết khoản thu:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT chi tiết khoản thu.png}
-    \end{figure}    
-\end{itemize}
-\subsection{Kiểm thử chức năng quản lý gửi xe}
-\begin{itemize}
-    \item Chức năng tìm kiếm khoản thu:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/Kt tìm kiếm khoản thu.png}
+        \includegraphics[width=1\textwidth]{Kiểm thử phí tình nguyện/Screenshot 2024-12-14 002438.png}
     \end{figure}
     \vspace{2cm}
     \item Chức năng xóa khoản thu:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT xóa khoản thu.png}
-    \end{figure}
-    \item Chức năng sửa khoản thu:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT sửa khoản thu.png}
+        \includegraphics[width=1\textwidth]{Kiểm thử phí tình nguyện/Screenshot 2024-12-14 002443.png}
     \end{figure}
     \item Chức năng thêm khoản thu:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT thêm phsi gửi xe.png}
-    \end{figure}
-    \item Chức năng xem chi tiết khoản thu:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT chi tiết khoản thu.png}
-    \end{figure}    
-\end{itemize}
-\newpage
-\subsection{Kiểm thử chức năng thông báo}
-\begin{itemize}
-    \item Chức năng tìm kiếm thông báo:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/Kt tìm kiếm khoản thu.png}
-    \end{figure}
-    \item Chức năng thêm thông báo:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT thêm thông báo.png}
-    \end{figure}
-    \item Chức năng xem chi tiết thông báo:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT chi tiết thông báo.png}
-    \end{figure}    
-\end{itemize}
-\subsection{Kiểm thử chức năng quản lý tài khoản}
-\begin{itemize}
-    \item Chức năng xóa tài khoản:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT xóa khoản thu.png}
-    \end{figure}
-    \newpage
-    \item Chức năng tìm kiếm tài khoản:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/Kt tìm kiếm khoản thu.png}
-    \end{figure}
-    
-    \item Chức năng sửa tài khoản:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT sửa tài khoản.png}
-    \end{figure}
-    \item Chức năng thêm tài khoản:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT thêm tài khoản.png}
+        \includegraphics[width=1\textwidth]{Kiểm thử phí tình nguyện/Screenshot 2024-12-14 002453.png}
     \end{figure}
 \end{itemize}
-\newpage
-\subsection{Kiểm thử chức năng cài đặt}
+\subsubsection{Kiểm thử cho chức năng quản lý khoản thu bắt buộc}
 \begin{itemize}
-    \item Chức năng đổi mật khẩu:
+    \item Chức năng thêm mới khoản thu :
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/Kiểm thử đổi mk.png}
-    \end{figure}   
-\end{itemize}
-\subsection{Kiểm thử chức năng đăng xuất}
-\begin{itemize}
-    \item Chức năng đăng xuất:
+        \includegraphics[width=1\textwidth]{Kiểm thử phí bắt buộc/Screenshot 2024-12-14 002802.png}
+    \end{figure}
+    \item Chức năng cập nhật khoản thu:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{Kiểm thử/KT đăng xuất.png}
-    \end{figure}   
+        \includegraphics[width=1\textwidth]{Kiểm thử phí bắt buộc/Screenshot 2024-12-14 002808.png}
+    \end{figure}
+    \vspace{1cm}
+    \item Chức năng xóa khoản thu:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{Kiểm thử phí bắt buộc/Screenshot 2024-12-14 002812.png}
+    \end{figure}
+    \item Chức năng tìm kiếm khoản thu:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{Kiểm thử phí bắt buộc/Screenshot 2024-12-14 002822.png}
+    \end{figure}
 \end{itemize}
 \subsubsection{Kiểm thử yêu cầu phi chức năng}
 \begin{itemize}
