@@ -1,0 +1,33 @@
+\definecolor{lightblue}{HTML}{b3c5e6}
+\definecolor{blueL}{HTML}{4371c3}
+\newcommand{\setwhite}{\textcolor{white}}
+
+\newcommand{\describetable}[2]
+{
+    \textit{#1}
+    \vspace{-0.8cm}
+    \begin{center}
+        \begin{tabular}{|p{3cm}|p{2.5cm}|p{2cm}|p{2cm}|p{2.5cm}|c|}
+            \hline
+            \cellcolor{blueL}{\setwhite{Tên trường}} & 
+            \cellcolor{blueL}{\setwhite{\makecell[c]{Kiểu dữ liệu}}} & \cellcolor{blueL}{\setwhite{Kích thước}} & 
+            \cellcolor{blueL}{\setwhite{Ràng buộc}} \newline 
+            \cellcolor{blueL}{\setwhite{toàn vẹn}} & 
+            \cellcolor{blueL}{\setwhite{\makecell[c]{Khuôn dạng}}} & \cellcolor{blueL}{\setwhite{\makecell[c]{Ghi chú}}} \\
+            \hline
+            #2 
+        \end{tabular}
+    \end{center}
+    \vspace{0.5cm}
+}
+
+\newcommand{\getRowWithColor}[7]
+{
+    \cellcolor{#7}{\setlength{\spaceskip}{0.2em}#1} & 
+    \cellcolor{#7}{\setlength{\spaceskip}{0.2em}#2} & 
+    \cellcolor{#7}{\setlength{\spaceskip}{0.2em}#3} & 
+    \cellcolor{#7}{\setlength{\spaceskip}{0.2em}#4} & 
+    \cellcolor{#7}{\setlength{\spaceskip}{0.2em}#5} & 
+    \cellcolor{#7}{\setlength{\spaceskip}{0.2em}#6} \\
+    \hline
+}

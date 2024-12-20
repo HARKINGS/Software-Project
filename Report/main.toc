@@ -1,0 +1,56 @@
+\contentsline {section}{MỤC LỤC}{1}{section*.2}%
+\contentsline {section}{LỜI NÓI ĐẦU}{2}{section*.3}%
+\contentsline {section}{PHÂN CÔNG THÀNH VIÊN TRONG NHÓM}{3}{section*.4}%
+\contentsline {section}{CHƯƠNG 1. KHẢO SÁT BÀI TOÁN}{4}{section*.5}%
+\contentsline {subsection}{\numberline {1.1}Mô tả yêu cầu bài toán}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Khảo sát bài toán}{5}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Xác định thông tin cơ bản cho nghiệp vụ của bài toán}{8}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Xây dựng biểu đồ mô tả nghiệp vụ và phân cấp chức năng}{9}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Xây dựng kế hoạch dự án đơn giản}{11}{subsection.1.5}%
+\contentsline {section}{CHƯƠNG 2. ĐẶC TẢ YÊU CẦU BÀI TOÁN}{12}{section*.15}%
+\contentsline {subsection}{\numberline {2.1}Giới thiệu chung}{12}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Biểu đồ use case}{13}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Biểu đồ use case tổng quan}{13}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Biểu đồ use case phân rã mức 2}{14}{subsubsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.3}Đặc tả use case}{16}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Các yêu cầu phi chức năng}{27}{subsection.2.4}%
+\contentsline {section}{CHƯƠNG 3. PHÂN TÍCH YÊU CẦU}{28}{section*.44}%
+\contentsline {subsection}{\numberline {3.1}Xác định các lớp phân tích}{28}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Xây dựng biểu đồ trình tự}{48}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Xây dựng biểu đồ lớp phân tích}{72}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Xây dựng biểu đồ thực thể liên kết (ERD)}{74}{subsection.3.4}%
+\contentsline {section}{CHƯƠNG 4. THIẾT KẾ CHƯƠNG TRÌNH}{76}{section*.117}%
+\contentsline {subsection}{\numberline {4.1}Thiết kế kiến trúc}{76}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Thiết kế cơ sở dữ liệu}{76}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Thiết kế chi tiết các gói}{77}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Thiết kế chi tiết lớp}{82}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Sơ đồ lớp chi tiết}{86}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Thiết kế giao diện}{90}{subsection.4.6}%
+\contentsline {section}{CHƯƠNG 5. XÂY DỰNG CHƯƠNG TRÌNH MINH HỌA}{116}{section*.176}%
+\contentsline {subsection}{\numberline {5.1}Thư viện và công cụ sử dụng}{116}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Kết quả chương trình minh họa}{116}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Giao diện minh hoạ các chức năng của chương trình}{117}{subsection.5.3}%
+\contentsline {section}{CHƯƠNG 6. KIỂM THỬ CHƯƠNG TRÌNH}{128}{figure.caption.195}%
+\contentsline {subsection}{\numberline {6.1}Kiểm thử các chức năng đã thực hiện}{128}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Kiểm thử cho chức năng đăng nhập}{128}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}Kiểm thử cho chức năng quản lý nhân khẩu}{128}{subsubsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.3}Kiểm thử cho chức năng quản lý hộ khẩu}{130}{subsubsection.6.1.3}%
+\contentsline {subsubsection}{\numberline {6.1.4}Kiểm thử cho chức năng quản lý khoản thu tự nguyện}{131}{subsubsection.6.1.4}%
+\contentsline {subsubsection}{\numberline {6.1.5}Kiểm thử cho chức năng quản lý khoản thu bắt buộc}{132}{subsubsection.6.1.5}%
+\contentsline {subsection}{\numberline {6.2}Kiểm thử chức năng quản lý gửi xe}{133}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Kiểm thử chức năng thông báo}{135}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Kiểm thử chức năng quản lý tài khoản}{135}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Kiểm thử chức năng cài đặt}{137}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Kiểm thử chức năng đăng xuất}{137}{subsection.6.6}%
+\contentsline {subsubsection}{\numberline {6.6.1}Kiểm thử yêu cầu phi chức năng}{137}{subsubsection.6.6.1}%
+\contentsline {section}{CHƯƠNG 7. HƯỚNG DẪN CÀI ĐẶT VÀ SỬ DỤNG}{138}{section*.231}%
+\contentsline {subsection}{\numberline {7.1}Hướng dẫn cài đặt}{138}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Đối tượng, phạm vi sử dụng}{138}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Xác định các yêu cầu cài đặt}{138}{subsection.7.3}%
+\contentsline {subsubsection}{\numberline {7.3.1}\textbf {Yêu cầu phần mềm}:}{138}{subsubsection.7.3.1}%
+\contentsline {subsubsection}{\numberline {7.3.2}\textbf {Yêu cầu phần cứng}:}{138}{subsubsection.7.3.2}%
+\contentsline {subsection}{\numberline {7.4}Hướng dẫn chi tiết các bước cài đặt}{139}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}Hướng dẫn sử dụng phần mềm}{140}{subsection.7.5}%
+\contentsline {section}{KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN}{141}{section*.232}%
+\contentsline {section}{TÀI LIỆU THAM KHẢO}{142}{section*.233}%
+\contentsline {section}{PHỤ LỤC}{143}{section*.234}%
