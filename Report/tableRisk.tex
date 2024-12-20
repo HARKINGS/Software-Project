@@ -1,0 +1,27 @@
+\newcommand{\tableRiskManager}[0]
+{ 
+    \getimg{Bản kế hoạch đơn giản cho dự án:}{}{Ảnh Chương 1/Bản kế hoạch.png}{}
+    \textit{Bản quản lý các rủi do đơn giản trong quá trình thực hiện dự án:}
+    
+    \begin{table}[H]
+        \centering
+        \arrayrulecolor{black} % Màu đường kẻ ngăn cách
+        \resizebox{\textwidth}{!}
+        {
+            \begin{tabular}{|m{1.5cm}|m{2cm}|m{2cm}|m{2cm}|m{2cm}|m{2cm}|}
+                \hline
+                \rule[-1cm]{}{2cm} \multirow{2}{\parbox{1.5cm}{\RaggedRight Công việc / Hoạt động}} & 
+                \multicolumn{3}{c|}{Rủi ro} & 
+                \multicolumn{2}{c|}{Quản lý rủi ro}
+                \\
+                \cline{2-6}
+                 & \makecell{Mối nguy} & \makecell{Rủi ro} & \makecell{Mức độ} & \makecell{Chiến lược} & \makecell{Biện pháp} \\ 
+                \hline
+                Thống kê, ghi & Bị mất dữ liệu & {\setlength{\spaceskip}{0.2em}Không có dữ liệu phòng bị} & Trung bình & Phòng tránh & Sao lưu dữ liệu \\
+                \hline
+                Nhập số tiền nộp & {\setlength{\spaceskip}{0.2em}Nhập sai dữ liệu} & & Thấp & & {\setlength{\spaceskip}{0.5em}Thường xuyên kiểm tra lại} \\
+                \hline
+            \end{tabular}
+        }
+    \end{table}
+}
