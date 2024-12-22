@@ -1,0 +1,63 @@
+\newcommand{\feeInfo}[1]
+{
+    \renewcommand{\arraystretch}{1.5} % Tăng khoảng cách giữa các dòng trong bảng
+    \begin{table}[!h]
+    \centering
+    \arrayrulecolor{#1} % Màu đường kẻ ngăn cách
+    \begin{tabular}{|c|p{3cm}|p{5cm}|p{4cm}|}
+        \hline
+        \multicolumn{2}{|c|}{\cellcolor{lightaqua}\textbf{Input}} & 
+        \cellcolor{lightaqua}\makecell[c]{\textbf{Process}} & 
+        \cellcolor{lightaqua}\makecell[c]{\textbf{Output}}  \\
+        \hline
+        \multirow{5}{*}{Phí bắt buộc} & Số hộ gia đình & \multirow{5}{*}{{\parbox{5cm}{\RaggedRight Tính toán số tiền nộp của mỗi hộ gia đình}}} & 
+        \multirow{11}{*}{\parbox{4cm}{\RaggedRight Số tiền mà mỗi hộ gia đình đã nộp.Tổng số tiền cả khu phố. Số hộ gia đình chưa nộp phí. Số loại phí mà mỗi hộ gia đình đã nộp. Số tiền còn nợ. (Các nghiệp vụ liên quan như: thêm, sửa, xóa, thống kê,in ấn giấy tờ,…)}}
+        \\
+        \cline{2-2}
+         & Địa chỉ & & \\
+        \cline{2-2}
+         & Hộ tên chủ hộ & & \\
+        \cline{2-2} 
+         & Số nhân khẩu & & \\
+        \cline{1-3}
+         & Ngày nộp & & \\
+        \cline{2-2}
+        \multirow{5}{*}{Phí tự nguyện} & Số hộ gia đình & \multirow{5}{*}{\parbox{5cm}{\RaggedRight Tổng số tiền thu được trong từng đợt. Số hộ nộp tiền. Thống kê danh sách (sắp xếp theo số tiền, số lần nộp,..)}} & \\
+        \cline{2-2} 
+        & Địa chỉ & & \\
+        \cline{2-2} 
+        & Hộ tên chủ hộ & & \\
+        \cline{2-2} 
+        & {\setlength{\spaceskip}{0.5em}Đợt nộp (Từ thiện, ủng hộ lũ lụt, khuyến học, ...)} & & \\
+        \cline{2-2}  
+        & Số tiền & & \\
+        \cline{2-2} 
+        & Ngày nộp & & \\
+        \hline   
+    \end{tabular}
+\end{table}
+}
+
+\newcommand{\BFDInfo}[0]
+{
+    \begin{table}[!h]
+        \centering
+        \resizebox{\textwidth}{!}
+        {
+            \begin{tabular}{|m{3cm}|m{5cm}|m{5cm}|}
+                \hline
+                \rowcolor{lightaqua}
+                \makecell[c]{\textbf{Tên chức năng}} & 
+                \makecell[c]{\textbf{Mô tả}} & 
+                \setlength{\spaceskip}{0.3em}\textbf{Đánh giá khả năng thực hiện (nhân lực, thời gian, công nghệ, môi trường)} \\
+                \hline
+                \textbf{Lập danh sách} & Lập danh sách các hộ gia đình, danh sách thu tiền đóng góp tự nguyện, bắt buộc,... & Cao \\
+                \hline
+                \textbf{Thống kê} & Thống kê số tiền thu, tổng số tiền thu, tổng số hộ nộp,... & Cao \\
+                \hline
+                \textbf{Tra cứu} & Hỗ trợ tra cứu thông tin về danh sách nộp tiền dễ dàng hơn & Cao \\
+                \hline
+            \end{tabular}
+        }
+    \end{table}
+}
